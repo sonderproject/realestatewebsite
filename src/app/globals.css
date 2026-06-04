@@ -43,15 +43,16 @@ body {
   color: #F7F5F2;
 }
 
-/* Spinning globe — seamless horizontal scroll of a doubled map texture */
-@keyframes globe-rotate {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* Globe: slow panoramic drift on a single image — no seam */
+@keyframes globe-drift {
+  0%   { background-position: 25% center; }
+  50%  { background-position: 75% center; }
+  100% { background-position: 25% center; }
 }
-.globe-track {
-  animation: globe-rotate 38s linear infinite;
-  will-change: transform;
+.globe-drift {
+  animation: globe-drift 28s ease-in-out infinite;
+  will-change: background-position;
 }
 @media (prefers-reduced-motion: reduce) {
-  .globe-track { animation: none; }
+  .globe-drift { animation: none; background-position: center center; }
 }
