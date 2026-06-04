@@ -51,7 +51,7 @@ export default function HeroSection() {
           style={{
             scale,
             y: imageY,
-            backgroundImage: "url('/media/real-estate-image.jpg')",
+            backgroundImage: "url('/media/hero.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}

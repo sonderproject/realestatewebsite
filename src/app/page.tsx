@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
+import GlobeSection from "@/components/GlobeSection";
 import ServicesSection from "@/components/ServicesSection";
 import CredibilitySection from "@/components/CredibilitySection";
 import FinalCTA from "@/components/FinalCTA";
@@ -49,7 +50,11 @@ export default function HomePage() {
       {/* 2 — Services: clean editorial list layout */}
       <ServicesSection />
 
-      {/* 3 — Credibility: stats + testimonials + value prop */}
+      {/* 3 — Globe: image zooms in, becomes a spinning Earth, pulls back
+              into a computer screen, then the page continues */}
+      <GlobeSection />
+
+      {/* 4 — Credibility: stats + testimonials + value prop */}
       <CredibilitySection />
 
       {/* 4 — Final CTA: close the sale */}

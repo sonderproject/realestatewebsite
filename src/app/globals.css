@@ -42,3 +42,16 @@ body {
   background: rgba(200, 169, 110, 0.2);
   color: #F7F5F2;
 }
+
+/* Spinning globe — seamless horizontal scroll of a doubled map texture */
+@keyframes globe-rotate {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.globe-track {
+  animation: globe-rotate 38s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .globe-track { animation: none; }
+}
