@@ -1,9 +1,51 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useScroll, useTransform, useSpring, motion } from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
 import * as THREE from "three";
+
+// Detect whether the browser can actually create a WebGL context.
+// Some devices/browsers (or low-memory mobiles) can't, and forcing a
+// Canvas there crashes the tab. We render a static fallback instead.
+function isWebGLAvailable(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch {
+    return false;
+  }
+}
+
+// Static, dependency-free version of the section — used when WebGL is
+// unavailable or the 3D scene errors. Keeps the page intact.
+function StaticFallback() {
+  return (
+    <section
+      id="experience"
+      className="relative w-full h-screen flex flex-col items-center justify-center bg-obsidian overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-obsidian to-charcoal" />
+      <div className="relative z-10 text-center px-8">
+        <p className="text-gold text-xs tracking-[0.35em] uppercase mb-4 font-light">
+          Curated Living
+        </p>
+        <p
+          className="text-warm-100 text-4xl md:text-5xl font-light leading-tight"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          Spaces Designed
+          <br />
+          <em>for Intention</em>
+        </p>
+      </div>
+    </section>
+  );
+}
 
 // Camera rig that responds to scroll position
 function CameraRig({ scrollProgress }: { scrollProgress: React.MutableRefObject<number> }) {
@@ -166,11 +208,17 @@ function Lighting() {
 export default function CinematicScroll() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollProgress = useRef(0);
+  const [webglOk, setWebglOk] = useState<boolean | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
+
+  // Check WebGL support once mounted on the client.
+  useEffect(() => {
+    setWebglOk(isWebGLAvailable());
+  }, []);
 
   // Keep a mutable ref in sync with framer-motion's scroll value
   useEffect(() => {
@@ -178,6 +226,14 @@ export default function CinematicScroll() {
       scrollProgress.current = v;
     });
   }, [scrollYProgress]);
+
+  // Until we know (or if WebGL is unsupported), avoid mounting the Canvas.
+  if (webglOk === false) {
+    return <StaticFallback />;
+  }
+  if (webglOk === null) {
+    return <div className="w-full bg-obsidian" style={{ height: "300vh" }} />;
+  }
 
   return (
     <section

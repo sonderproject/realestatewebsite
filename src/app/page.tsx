@@ -7,6 +7,7 @@ import ImageZoomSection from "@/components/ImageZoomSection";
 import ServicesSection from "@/components/ServicesSection";
 import CredibilitySection from "@/components/CredibilitySection";
 import FinalCTA from "@/components/FinalCTA";
+import SafeBoundary from "@/components/SafeBoundary";
 
 // React Three Fiber requires client-side rendering only
 const CinematicScroll = dynamic(() => import("@/components/CinematicScroll"), {
@@ -15,6 +16,26 @@ const CinematicScroll = dynamic(() => import("@/components/CinematicScroll"), {
     <div className="w-full bg-obsidian" style={{ height: "300vh" }} />
   ),
 });
+
+// Shown if the 3D scene fails for any reason — keeps the page alive.
+const CinematicFallback = (
+  <section className="relative w-full h-screen flex flex-col items-center justify-center bg-obsidian overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-obsidian to-charcoal" />
+    <div className="relative z-10 text-center px-8">
+      <p className="text-gold text-xs tracking-[0.35em] uppercase mb-4 font-light">
+        Curated Living
+      </p>
+      <p
+        className="text-warm-100 text-4xl md:text-5xl font-light leading-tight"
+        style={{ fontFamily: "var(--font-display)" }}
+      >
+        Spaces Designed
+        <br />
+        <em>for Intention</em>
+      </p>
+    </div>
+  </section>
+);
 
 export default function HomePage() {
   // Lenis smooth scroll setup
@@ -57,7 +78,9 @@ export default function HomePage() {
       <HeroSection />
 
       {/* 2 — Cinematic 3D scroll: camera moves through architectural scene */}
-      <CinematicScroll />
+      <SafeBoundary fallback={CinematicFallback}>
+        <CinematicScroll />
+      </SafeBoundary>
 
       {/* 3 — Image zoom: provided coastal aerial zooms in, panels reveal */}
       <ImageZoomSection />
