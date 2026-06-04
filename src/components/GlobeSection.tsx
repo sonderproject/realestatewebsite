@@ -2,8 +2,53 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import type { MotionValue } from "framer-motion";
 
-const GLOBE_SRC = "/media/globe.jpg";
+// Swap these paths once the new photos are uploaded
+const GLOBE_1_SRC = "/media/globe.jpg";
+const GLOBE_2_SRC = "/media/globe.jpg"; // → /media/globe-2.jpg
+const GLOBE_3_SRC = "/media/globe.jpg"; // → /media/globe-3.jpg
+
+const GLOBE_SIZE = "42vmin";
+
+function SphereShading({ opacity }: { opacity: MotionValue<number> }) {
+  return (
+    <>
+      {/* Limb shadow — darkens the edges into a ball */}
+      <motion.div
+        style={{
+          opacity,
+          background:
+            "radial-gradient(circle at 50% 50%, transparent 48%, rgba(3,6,10,0.94) 100%)",
+        }}
+        className="absolute inset-0 pointer-events-none"
+      />
+      {/* Specular highlight */}
+      <motion.div
+        style={{
+          opacity,
+          background:
+            "radial-gradient(circle at 32% 26%, rgba(255,255,255,0.36) 0%, transparent 40%)",
+        }}
+        className="absolute inset-0 pointer-events-none"
+      />
+    </>
+  );
+}
+
+function GlobeTexture({ src }: { src: string }) {
+  return (
+    <div
+      className="globe-drift absolute inset-0"
+      style={{
+        backgroundImage: `url('${src}')`,
+        backgroundSize: "165% auto",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center center",
+      }}
+    />
+  );
+}
 
 export default function GlobeSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -12,37 +57,72 @@ export default function GlobeSection() {
     offset: ["start start", "end start"],
   });
 
-  // Phase timeline (500vh):
-  //  0.00–0.25  flat image zooms in, "Global Reach" intro caption
-  //  0.25–0.55  corners round to sphere, space backdrop appears
-  //  0.55–0.68  full spinning globe holds
-  //  0.68–0.86  sphere expands to fill screen (scale up, radius → 0, dark overlay fades in)
-  //  0.86–1.00  full-screen coastal backdrop, info section appears
+  // ── Phase timeline (500vh) ──────────────────────────────────────────────
+  //  0.00–0.30  Flat coastal image zooms in → "Global Reach" caption
+  //  0.30–0.46  Corners round to sphere, space backdrop fades in
+  //  0.46–0.62  Globe 1 slides LEFT off screen, Globe 2 enters from RIGHT
+  //  0.62–0.76  Globe 2 slides LEFT off screen, Globe 3 enters from RIGHT
+  //  0.76–0.92  Globe 3 (centered) expands to fill screen
+  //  0.92–1.00  Full-screen coastal image — info section
+  // ───────────────────────────────────────────────────────────────────────
 
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.22, 0.56, 0.66, 0.88],
-    [1.1, 1.55, 1.0, 1.0, 3.4]
-  );
-  const radius = useTransform(
-    scrollYProgress,
-    [0.24, 0.46, 0.66, 0.82],
-    ["3%", "50%", "50%", "0%"]
-  );
+  // Space backdrop
   const spaceOpacity = useTransform(
     scrollYProgress,
-    [0.22, 0.44, 0.66, 0.84],
+    [0.22, 0.42, 0.84, 0.96],
     [0, 1, 1, 0]
   );
-  const glowOpacity = useTransform(
+
+  // Shared sphere shading — reaches full at 0.48 and holds
+  const sphereShading = useTransform(scrollYProgress, [0.30, 0.48], [0, 1]);
+
+  // ── Globe 1: hero zoom → sphere → slide left ──
+  const g1Scale = useTransform(scrollYProgress, [0, 0.22, 0.42], [1.1, 1.55, 1.0]);
+  const g1Radius = useTransform(scrollYProgress, [0.24, 0.44], ["3%", "50%"]);
+  const g1X = useTransform(scrollYProgress, [0.44, 0.64], [0, -700]);
+  const g1Opacity = useTransform(scrollYProgress, [0.46, 0.60], [1, 0]);
+  // Glow tied to Globe 1 — follows its position and fades with it
+  const g1GlowOpacity = useTransform(
     scrollYProgress,
-    [0.30, 0.48, 0.62, 0.78],
+    [0.30, 0.48, 0.50, 0.62],
     [0, 1, 1, 0]
   );
-  const sphereShadow = useTransform(scrollYProgress, [0.30, 0.50], [0, 1]);
-  const overlayOpacity = useTransform(scrollYProgress, [0.66, 0.84], [0, 1]);
-  const infoOpacity = useTransform(scrollYProgress, [0.82, 0.93], [0, 1]);
-  const infoY = useTransform(scrollYProgress, [0.82, 0.93], [32, 0]);
+
+  // ── Globe 2: slides in from right → holds → slides left ──
+  const g2Scale = useTransform(scrollYProgress, [0.46, 0.56], [0.7, 1.0]);
+  const g2X = useTransform(
+    scrollYProgress,
+    [0.46, 0.56, 0.63, 0.78],
+    [700, 0, 0, -700]
+  );
+  const g2Opacity = useTransform(
+    scrollYProgress,
+    [0.46, 0.55, 0.64, 0.76],
+    [0, 1, 1, 0]
+  );
+
+  // ── Globe 3: slides in from right → expands to fill screen ──
+  const g3X = useTransform(scrollYProgress, [0.63, 0.76], [700, 0]);
+  const g3Scale = useTransform(
+    scrollYProgress,
+    [0.63, 0.76, 0.93],
+    [0.7, 1.0, 6.4]
+  );
+  const g3Opacity = useTransform(scrollYProgress, [0.63, 0.74], [0, 1]);
+  const g3Radius = useTransform(
+    scrollYProgress,
+    [0.63, 0.76, 0.91],
+    ["50%", "50%", "0%"]
+  );
+
+  // Dark overlay inside Globe 3 (readability as it fills the screen)
+  const overlayOpacity = useTransform(scrollYProgress, [0.82, 0.94], [0, 1]);
+
+  // Info text above Globe 3
+  const infoOpacity = useTransform(scrollYProgress, [0.91, 0.97], [0, 1]);
+  const infoY = useTransform(scrollYProgress, [0.91, 0.97], [28, 0]);
+
+  // Intro caption
   const intro = useTransform(
     scrollYProgress,
     [0.02, 0.12, 0.20, 0.30],
@@ -53,66 +133,82 @@ export default function GlobeSection() {
     <section ref={ref} className="relative bg-obsidian" style={{ height: "500vh" }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
 
-        {/* Deep-space backdrop — fades in during sphere phase, out during expansion */}
+        {/* Deep-space backdrop */}
         <motion.div style={{ opacity: spaceOpacity }} className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#0b1e2e_0%,#060606_72%)]" />
         </motion.div>
 
-        {/* Atmospheric glow ring behind the globe */}
+        {/* Atmospheric glow — follows Globe 1 */}
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
           <motion.div
             style={{
-              opacity: glowOpacity,
-              scale,
-              width: "82vmin",
-              height: "82vmin",
+              opacity: g1GlowOpacity,
+              scale: g1Scale,
+              x: g1X,
+              width: GLOBE_SIZE,
+              height: GLOBE_SIZE,
               boxShadow:
-                "0 0 80px 20px rgba(120,170,220,0.32), inset 0 0 50px rgba(150,195,235,0.18)",
+                "0 0 80px 22px rgba(120,170,220,0.32), inset 0 0 50px rgba(150,195,235,0.18)",
             }}
             className="rounded-full"
           />
         </div>
 
-        {/* Globe / image */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center">
+        {/* ── Globe 1 ── */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
           <motion.div
-            style={{ scale, borderRadius: radius, width: "82vmin", height: "82vmin" }}
+            style={{
+              scale: g1Scale,
+              x: g1X,
+              opacity: g1Opacity,
+              borderRadius: g1Radius,
+              width: GLOBE_SIZE,
+              height: GLOBE_SIZE,
+            }}
             className="relative overflow-hidden bg-[#0c2733]"
           >
-            {/* Single drifting image — no seam */}
-            <div
-              className="globe-drift absolute inset-0"
-              style={{
-                backgroundImage: `url('${GLOBE_SRC}')`,
-                backgroundSize: "165% auto",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center center",
-              }}
-            />
+            <GlobeTexture src={GLOBE_1_SRC} />
+            <SphereShading opacity={sphereShading} />
+          </motion.div>
+        </div>
 
-            {/* Spherical limb shadow */}
-            <motion.div
-              style={{
-                opacity: sphereShadow,
-                background:
-                  "radial-gradient(circle at 50% 50%, transparent 48%, rgba(3,6,10,0.94) 100%)",
-              }}
-              className="absolute inset-0 pointer-events-none"
-            />
-            {/* Specular highlight */}
-            <motion.div
-              style={{
-                opacity: sphereShadow,
-                background:
-                  "radial-gradient(circle at 32% 26%, rgba(255,255,255,0.36) 0%, transparent 40%)",
-              }}
-              className="absolute inset-0 pointer-events-none"
-            />
+        {/* ── Globe 2 ── */}
+        <div className="absolute inset-0 z-[21] flex items-center justify-center pointer-events-none">
+          <motion.div
+            style={{
+              scale: g2Scale,
+              x: g2X,
+              opacity: g2Opacity,
+              borderRadius: "50%",
+              width: GLOBE_SIZE,
+              height: GLOBE_SIZE,
+            }}
+            className="relative overflow-hidden bg-[#0c2733]"
+          >
+            <GlobeTexture src={GLOBE_2_SRC} />
+            <SphereShading opacity={sphereShading} />
+          </motion.div>
+        </div>
 
-            {/* Darkening overlay for info-section readability */}
+        {/* ── Globe 3 — expands to fill screen then shows info ── */}
+        <div className="absolute inset-0 z-[22] flex items-center justify-center pointer-events-none">
+          <motion.div
+            style={{
+              scale: g3Scale,
+              x: g3X,
+              opacity: g3Opacity,
+              borderRadius: g3Radius,
+              width: GLOBE_SIZE,
+              height: GLOBE_SIZE,
+            }}
+            className="relative overflow-hidden bg-[#0c2733]"
+          >
+            <GlobeTexture src={GLOBE_3_SRC} />
+            <SphereShading opacity={sphereShading} />
+            {/* Readability overlay fades in as globe fills screen */}
             <motion.div
               style={{ opacity: overlayOpacity }}
-              className="absolute inset-0 bg-obsidian/68 pointer-events-none"
+              className="absolute inset-0 bg-obsidian/65 pointer-events-none"
             />
           </motion.div>
         </div>
@@ -135,7 +231,7 @@ export default function GlobeSection() {
           </motion.div>
         </div>
 
-        {/* Info section — appears over the full-screen coastal image */}
+        {/* Info section over the expanded Globe 3 */}
         <div className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none">
           <motion.div
             style={{ opacity: infoOpacity, y: infoY }}
@@ -153,7 +249,6 @@ export default function GlobeSection() {
               <em>at your fingertips.</em>
             </h2>
 
-            {/* Stats */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20 mb-14">
               {[
                 { value: "$2.4B", label: "In Transactions" },
