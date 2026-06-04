@@ -30,13 +30,13 @@ export default function CredibilitySection() {
   const inView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <section ref={ref} className="bg-charcoal py-32 px-8 md:px-20 overflow-hidden">
+    <section ref={ref} className="bg-ocean-dark py-32 px-8 md:px-20 overflow-hidden">
       {/* Stats */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8 }}
-        className="grid grid-cols-2 md:grid-cols-4 gap-px bg-warm-700/20 mb-24"
+        className="grid grid-cols-2 md:grid-cols-4 gap-px bg-ocean-light/15 mb-24"
       >
         {stats.map(({ value, label }, i) => (
           <motion.div
@@ -44,7 +44,7 @@ export default function CredibilitySection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 * i }}
-            className="bg-charcoal py-12 px-8 text-center"
+            className="bg-ocean-dark py-12 px-8 text-center"
           >
             <p
               className="text-4xl md:text-5xl text-gold font-light mb-3"
@@ -52,7 +52,7 @@ export default function CredibilitySection() {
             >
               {value}
             </p>
-            <p className="text-warm-500 text-[10px] tracking-[0.3em] uppercase font-light">
+            <p className="text-ocean-light/70 text-[10px] tracking-[0.3em] uppercase font-light">
               {label}
             </p>
           </motion.div>
@@ -87,7 +87,7 @@ export default function CredibilitySection() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 + 0.15 * i }}
-            className="border border-warm-700/30 p-10 relative"
+            className="border border-ocean-light/20 p-10 relative"
           >
             {/* Decorative quotemark */}
             <span
@@ -96,12 +96,12 @@ export default function CredibilitySection() {
             >
               "
             </span>
-            <p className="text-warm-200 text-base font-light leading-relaxed mb-8 mt-4 relative z-10">
+            <p className="text-warm-100 text-base font-light leading-relaxed mb-8 mt-4 relative z-10">
               {quote}
             </p>
-            <div className="border-t border-warm-700/30 pt-6">
-              <p className="text-warm-100 text-sm font-light">{name}</p>
-              <p className="text-warm-500 text-xs tracking-[0.2em] uppercase mt-1">
+            <div className="border-t border-ocean-light/20 pt-6">
+              <p className="text-warm-50 text-sm font-light">{name}</p>
+              <p className="text-ocean-light/60 text-xs tracking-[0.2em] uppercase mt-1">
                 {location}
               </p>
             </div>
@@ -114,7 +114,7 @@ export default function CredibilitySection() {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9, delay: 0.7 }}
-        className="mt-24 border border-warm-700/30 p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+        className="mt-24 border border-ocean-light/20 p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
       >
         <div className="max-w-xl">
           <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-light">
@@ -137,7 +137,7 @@ export default function CredibilitySection() {
           ].map((item) => (
             <div key={item} className="flex items-center gap-3">
               <span className="w-4 h-px bg-gold" />
-              <span className="text-warm-300 text-xs font-light tracking-wide">
+              <span className="text-warm-200 text-xs font-light tracking-wide">
                 {item}
               </span>
             </div>

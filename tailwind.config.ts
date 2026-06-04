@@ -29,6 +29,19 @@ export default {
           light: "#DFC28A",
           dark: "#A8893E",
         },
+        sand: {
+          50: "#FDFAF6",
+          100: "#F8F2E8",
+          200: "#EFE0C8",
+          300: "#DFC8A0",
+        },
+        ocean: {
+          deep: "#091824",
+          dark: "#0D2538",
+          DEFAULT: "#164060",
+          mid: "#255E80",
+          light: "#4A8FA8",
+        },
       },
       fontFamily: {
         display: ["var(--font-display)", "serif"],

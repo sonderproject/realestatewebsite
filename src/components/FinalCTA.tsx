@@ -13,19 +13,22 @@ export default function FinalCTA() {
       id="contact"
       className="relative bg-obsidian py-40 px-8 md:px-20 overflow-hidden"
     >
-      {/* Background texture overlay */}
+      {/* Subtle ocean-diagonal texture */}
       <div
-        className="absolute inset-0 opacity-[0.025]"
+        className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `repeating-linear-gradient(
-            0deg,
+            -55deg,
             transparent,
-            transparent 80px,
-            rgba(200,169,110,0.5) 80px,
-            rgba(200,169,110,0.5) 81px
+            transparent 60px,
+            rgba(74,143,168,0.6) 60px,
+            rgba(74,143,168,0.6) 61px
           )`,
         }}
       />
+
+      {/* Top gradient: bleeds in from the ocean section above */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-ocean-dark/40 to-transparent" />
 
       {/* Large background word */}
       <div
@@ -33,7 +36,7 @@ export default function FinalCTA() {
         aria-hidden
       >
         <span
-          className="text-[20vw] font-light text-warm-800/10 whitespace-nowrap"
+          className="text-[20vw] font-light text-ocean/8 whitespace-nowrap"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Meridian
@@ -105,7 +108,7 @@ export default function FinalCTA() {
             { label: "Office", value: "La Jolla, San Diego CA" },
           ].map(({ label, value }) => (
             <div key={label} className="text-center">
-              <p className="text-warm-600 text-[10px] tracking-[0.3em] uppercase mb-1">
+              <p className="text-ocean-light/50 text-[10px] tracking-[0.3em] uppercase mb-1">
                 {label}
               </p>
               <p className="text-warm-300 text-sm font-light">{value}</p>

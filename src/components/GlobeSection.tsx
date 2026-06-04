@@ -33,7 +33,7 @@ export default function GlobeSection() {
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
         {/* Deep-space backdrop, appears once in orbit */}
         <motion.div style={{ opacity: space }} className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#0b1018_0%,#060606_72%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#0b1e2e_0%,#060606_72%)]" />
         </motion.div>
 
         {/* Atmospheric glow behind the globe */}
