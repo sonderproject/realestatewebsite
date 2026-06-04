@@ -3,13 +3,19 @@
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// The video finishes playing by the time the pinned section unpins.
-// (sectionHeight 400vh, sticky 100vh -> unpins around 300/400 = 0.75)
+const FRAME_COUNT = 96;
+// Video finishes by the time the pinned section unpins (400vh / 100vh sticky).
 const PIN_FRACTION = 0.75;
+
+const framePath = (set: "desktop" | "mobile", i: number) =>
+  `/media/hero-frames/${set}/frame-${String(i + 1).padStart(4, "0")}.jpg`;
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const frameRef = useRef(0);
+  const rafRef = useRef(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -21,63 +27,90 @@ export default function HeroSection() {
   const textY = useTransform(scrollYProgress, [0, 0.18], [0, -30]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
-  // Drive video playback from scroll position (scrubbing), eased for smoothness.
+  // Draw a frame to the canvas with object-fit: cover behaviour.
+  const draw = (idx: number) => {
+    const canvas = canvasRef.current;
+    const img = imagesRef.current[idx];
+    if (!canvas || !img || !img.complete || !img.naturalWidth) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const ir = img.naturalWidth / img.naturalHeight;
+    const cr = cw / ch;
+    let dw: number, dh: number, dx: number, dy: number;
+    if (cr > ir) {
+      dw = cw;
+      dh = cw / ir;
+      dx = 0;
+      dy = (ch - dh) / 2;
+    } else {
+      dh = ch;
+      dw = ch * ir;
+      dx = (cw - dw) / 2;
+      dy = 0;
+    }
+    ctx.drawImage(img, dx, dy, dw, dh);
+  };
+
+  // Preload the right frame set for the device + keep the canvas sized.
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const set: "desktop" | "mobile" =
+      window.innerWidth <= 768 ? "mobile" : "desktop";
 
-    video.pause();
-    let raf = 0;
-    let target = 0;
+    const imgs: HTMLImageElement[] = [];
+    for (let i = 0; i < FRAME_COUNT; i++) {
+      const img = new Image();
+      img.src = framePath(set, i);
+      if (i === 0) img.onload = () => draw(frameRef.current);
+      imgs.push(img);
+    }
+    imagesRef.current = imgs;
 
-    const tick = () => {
-      const d = video.duration;
-      if (d && !Number.isNaN(d)) {
-        const cur = video.currentTime;
-        const diff = target - cur;
-        if (Math.abs(diff) > 0.001) {
-          video.currentTime = cur + diff * 0.15;
-        }
-      }
-      raf = requestAnimationFrame(tick);
+    const canvas = canvasRef.current;
+    const resize = () => {
+      if (!canvas) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      draw(frameRef.current);
     };
+    resize();
+    window.addEventListener("resize", resize);
 
-    const unsub = scrollYProgress.on("change", (v) => {
-      const d = video.duration;
-      if (d && !Number.isNaN(d)) {
-        target = Math.min(v / PIN_FRACTION, 1) * d;
-      }
-    });
-
-    raf = requestAnimationFrame(tick);
     return () => {
-      cancelAnimationFrame(raf);
-      unsub();
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(rafRef.current);
+      imgs.forEach((im) => (im.onload = null));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Map scroll position to a frame.
+  useEffect(() => {
+    const unsub = scrollYProgress.on("change", (v) => {
+      const p = Math.min(v / PIN_FRACTION, 1);
+      const idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(p * (FRAME_COUNT - 1))));
+      if (idx === frameRef.current) return;
+      frameRef.current = idx;
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => draw(idx));
+    });
+    return () => unsub();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollYProgress]);
 
   return (
     <section ref={sectionRef} className="relative" style={{ height: "400vh" }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
-        {/* Sunset gradient fallback */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#e9a87a] via-[#7c5a6b] to-[#0a0a09]" />
+        {/* Poster shown until the first frame is ready */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/media/hero-poster.jpg')" }}
+        />
 
-        {/*
-          ─────────────────────────────────────────────
-          Hero video, scrubbed by scroll position.
-          Not autoplaying — its currentTime tracks the scroll.
-          ─────────────────────────────────────────────
-        */}
-        <video
-          ref={videoRef}
-          className="absolute inset-0 w-full h-full object-cover"
-          muted
-          playsInline
-          preload="auto"
-          poster="/media/hero-poster.jpg"
-        >
-          <source src="/media/hero.mp4" type="video/mp4" />
-        </video>
+        {/* Scroll-driven frame canvas */}
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
         {/* Cinematic gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/90" />
