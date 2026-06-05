@@ -4,10 +4,10 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 
-// Swap these paths once the new photos are uploaded
-const GLOBE_1_SRC = "/media/globe.jpg";
-const GLOBE_2_SRC = "/media/globe.jpg"; // → /media/globe-2.jpg
-const GLOBE_3_SRC = "/media/globe.jpg"; // → /media/globe-3.jpg
+// Three coastal aerials, one per globe in the carousel
+const GLOBE_1_SRC = "/media/globe.jpg";   // Ocean Beach pier at sunset
+const GLOBE_2_SRC = "/media/globe-2.jpg"; // hillside coastal neighborhood
+const GLOBE_3_SRC = "/media/globe-3.jpg"; // downtown San Diego, golden hour
 
 const GLOBE_SIZE = "42vmin";
 
