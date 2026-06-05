@@ -4,12 +4,10 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const PROJECT_TYPES = [
-  "Agent website",
-  "Brokerage platform",
-  "Listing / IDX portal",
-  "Property management site",
-  "Apartment community site",
-  "Brand & other",
+  "Agent Plan — $197/mo",
+  "Apartment Plan — $497/mo",
+  "Broker / Company Plan — $997/mo",
+  "Not sure — help me choose",
 ];
 
 type Status = "idle" | "submitting" | "success" | "error";
