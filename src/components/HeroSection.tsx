@@ -17,6 +17,7 @@ const framePath = (set: "desktop" | "mobile", i: number) =>
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const posterRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const frameRef = useRef(0);
   const rafRef = useRef(0);
@@ -61,6 +62,15 @@ export default function HeroSection() {
   useEffect(() => {
     const set: "desktop" | "mobile" =
       window.innerWidth <= 768 ? "mobile" : "desktop";
+
+    // Use the portrait poster on mobile so first paint matches the frames.
+    if (posterRef.current) {
+      const poster =
+        set === "mobile"
+          ? "/media/hero-poster-mobile.jpg"
+          : "/media/hero-poster.jpg";
+      posterRef.current.style.backgroundImage = `url('${poster}')`;
+    }
 
     const imgs: HTMLImageElement[] = [];
     for (let i = 0; i < FRAME_COUNT; i++) {
@@ -108,8 +118,9 @@ export default function HeroSection() {
     // ~2s of scroll to play through, then a short release.
     <section ref={sectionRef} className="relative" style={{ height: "230vh" }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
-        {/* Poster shown until the first frame is ready */}
+        {/* Poster shown until the first frame is ready (set per device) */}
         <div
+          ref={posterRef}
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/media/hero-poster.jpg')" }}
         />
