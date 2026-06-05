@@ -79,7 +79,7 @@ export default function GlobeSection() {
     offset: ["start start", "end start"],
   });
 
-  // ── Phase timeline (500vh) ──────────────────────────────────────────────
+  // ── Phase timeline (350vh) ──────────────────────────────────────────────
   //  0.00–0.30  Flat coastal image zooms in → "Global Reach" caption
   //  0.30–0.46  Corners round to sphere, space backdrop fades in
   //  0.46–0.62  Globe 1 slides LEFT off screen, Globe 2 enters from RIGHT
@@ -169,7 +169,7 @@ export default function GlobeSection() {
   const dots = [dot1, dot2, dot3];
 
   return (
-    <section ref={ref} className="relative bg-obsidian" style={{ height: "500vh" }}>
+    <section ref={ref} className="relative bg-obsidian" style={{ height: "350vh" }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
 
         {/* Deep-space backdrop + drifting starfield */}
