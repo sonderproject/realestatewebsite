@@ -333,20 +333,23 @@ export default function GlobeSection() {
               <em className="text-gold-light font-normal">where stakes are high.</em>
             </h2>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 mb-10 md:mb-12">
+            <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-4 mb-9 md:mb-11 max-w-2xl mx-auto">
               {[
                 { value: "120+", label: "Websites Launched" },
                 { value: "40+", label: "Agents & Brokerages" },
                 { value: "3×", label: "Avg. Lead Increase" },
               ].map(({ value, label }) => (
-                <div key={label} className="text-center">
+                <div
+                  key={label}
+                  className="flex-1 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md px-5 py-5 text-center"
+                >
                   <p
-                    className="text-2xl md:text-3xl lg:text-4xl text-gold font-light mb-1"
+                    className="text-2xl md:text-3xl lg:text-4xl text-gold-light font-medium mb-1"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {value}
                   </p>
-                  <p className="text-warm-300 text-[10px] tracking-[0.3em] uppercase font-light">
+                  <p className="text-warm-300 text-[10px] tracking-[0.2em] uppercase font-medium">
                     {label}
                   </p>
                 </div>
