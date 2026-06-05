@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import GlobeSection from "@/components/GlobeSection";
 import ServicesSection from "@/components/ServicesSection";
-import WorkSection from "@/components/WorkSection";
 import ProcessSection from "@/components/ProcessSection";
 import PricingSection from "@/components/PricingSection";
 import CredibilitySection from "@/components/CredibilitySection";
@@ -67,22 +66,19 @@ export default function HomePage() {
       {/* 2 — Services: what we do */}
       <ServicesSection />
 
-      {/* 3 — Work: portfolio proof (fixes the #work links) */}
-      <WorkSection />
-
-      {/* 4 — Globe: animated "your market" interlude */}
+      {/* 3 — Globe: animated "your market" interlude */}
       <GlobeSection />
 
-      {/* 5 — Process: how a project runs, first call to launch */}
+      {/* 4 — Process: how a project runs, first call to launch */}
       <ProcessSection />
 
-      {/* 6 — Credibility: stats + testimonials + value prop */}
+      {/* 5 — Credibility: stats + testimonials + value prop */}
       <CredibilitySection />
 
-      {/* 7 — Pricing: packages that scale */}
+      {/* 6 — Pricing: packages that scale */}
       <PricingSection />
 
-      {/* 8 — Contact: lead-capture form + footer */}
+      {/* 7 — Contact: lead-capture form + footer */}
       <FinalCTA />
     </main>
   );

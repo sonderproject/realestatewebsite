@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const LINKS = ["Work", "Services", "About", "Contact"];
+const LINKS = ["Services", "Pricing", "Contact"];
 
 export default function Navbar() {
   // Once the user scrolls past the very top, the bar frosts over and the

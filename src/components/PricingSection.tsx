@@ -175,7 +175,7 @@ export default function PricingSection() {
                 className="text-warm-50 text-xl font-light"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Every plan includes an AI assistant.
+                Add an AI assistant to any plan.
               </p>
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function PricingSection() {
           {/* Badge */}
           <div className="shrink-0">
             <span className="inline-block rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
-              Included in all plans
+              Optional Add-on
             </span>
           </div>
         </div>
@@ -250,17 +250,22 @@ export default function PricingSection() {
               )}
             </div>
 
-            {/* AI feature highlight */}
+            {/* AI add-on highlight */}
             <div
-              className={`flex items-start gap-2.5 rounded-xl px-3.5 py-3 mb-5 ${
+              className={`rounded-xl px-3.5 py-3 mb-5 ${
                 tier.featured
                   ? "bg-white/10 border border-white/20"
                   : "bg-ocean-deep/5 border border-gold/20"
               }`}
             >
-              <span className={`text-xs mt-0.5 shrink-0 ${tier.featured ? "text-gold-light" : "text-gold-dark"}`}>
-                ✦
-              </span>
+              <div className="flex items-center justify-between gap-2 mb-1.5">
+                <span className={`flex items-center gap-1.5 text-[10px] tracking-[0.18em] uppercase font-semibold ${tier.featured ? "text-gold-light" : "text-gold-dark"}`}>
+                  <span className="text-xs">✦</span> AI Assistant
+                </span>
+                <span className={`text-[9px] tracking-[0.15em] uppercase rounded-full px-2 py-0.5 ${tier.featured ? "bg-white/15 text-surf-50" : "bg-gold-dark/10 text-gold-dark"}`}>
+                  Add-on
+                </span>
+              </div>
               <p className={`text-xs font-light leading-snug ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
                 {tier.aiFeature}
               </p>

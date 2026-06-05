@@ -183,10 +183,10 @@ export default function HeroSection() {
               className="flex items-center gap-6"
             >
               <a
-                href="#work"
+                href="#pricing"
                 className="glass-btn-accent group text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium"
               >
-                See Our Work
+                View Plans
               </a>
               <a
                 href="#services"
