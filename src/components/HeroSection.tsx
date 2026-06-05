@@ -128,16 +128,16 @@ export default function HeroSection() {
               className="text-warm-50 text-xl tracking-[0.25em] uppercase font-light"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Meridian
+              Sonder
             </span>
             <span className="w-px h-4 bg-gold/60 mx-1" />
             <span className="text-warm-300 text-xs tracking-[0.3em] uppercase font-light">
-              Properties
+              Studio
             </span>
           </div>
 
           <div className="hidden md:flex items-center gap-10">
-            {["Listings", "Services", "About", "Contact"].map((item) => (
+            {["Work", "Services", "About", "Contact"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -152,7 +152,7 @@ export default function HeroSection() {
             href="#contact"
             className="hidden md:block border border-gold/40 text-gold text-xs tracking-[0.2em] uppercase px-6 py-3 hover:bg-gold/10 transition-all duration-300"
           >
-            Schedule a Call
+            Get a Quote
           </a>
         </motion.nav>
 
@@ -168,7 +168,7 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 0.6 }}
               className="text-gold text-xs tracking-[0.4em] uppercase mb-6 font-light"
             >
-              Luxury Coastal Properties
+              Web Design for Real Estate
             </motion.p>
 
             <motion.h1
@@ -178,7 +178,7 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.9] mb-5 md:mb-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Modern Living.
+              Your Digital Presence.
               <br />
               <em className="italic text-warm-200">Elevated.</em>
             </motion.h1>
@@ -189,8 +189,8 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.1 }}
               className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10"
             >
-              Luxury real estate deserves a digital experience as refined as the homes
-              themselves. Designed for buyers who expect more.
+              We build premium websites and digital experiences for real estate agents,
+              brokerages, and property companies. What you&apos;re looking at is our work.
             </motion.p>
 
             <motion.div
@@ -200,10 +200,10 @@ export default function HeroSection() {
               className="flex items-center gap-6"
             >
               <a
-                href="#listings"
+                href="#work"
                 className="group relative bg-gold text-obsidian text-xs tracking-[0.3em] uppercase px-10 py-4 font-medium hover:bg-gold-light transition-all duration-300"
               >
-                Explore Properties
+                See Our Work
               </a>
               <a
                 href="#services"

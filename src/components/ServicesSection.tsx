@@ -6,38 +6,38 @@ import { motion, useInView } from "framer-motion";
 const services = [
   {
     number: "01",
-    title: "Acquisition",
-    subtitle: "Buying",
+    title: "Agent Websites",
+    subtitle: "Custom Sites",
     description:
-      "Exclusive access to off-market properties. Precision representation for buyers who won't settle for the standard market.",
+      "Bespoke digital homes for solo agents and teams. Built to convert first-time visitors into scheduled consultations.",
   },
   {
     number: "02",
-    title: "Disposition",
-    subtitle: "Selling",
+    title: "Brokerage Platforms",
+    subtitle: "Company Sites",
     description:
-      "Property marketing built for attention, trust, and action. We position your home to command — not compete.",
+      "Full-scale web platforms for brokerages and management companies. Designed to showcase agents, inventory, and brand authority.",
   },
   {
     number: "03",
-    title: "Luxury Portfolio",
-    subtitle: "Premium Listings",
+    title: "Property Portals",
+    subtitle: "Listing Systems",
     description:
-      "White-glove service for estates, penthouses, and coastal properties. Every listing treated as a singular event.",
+      "Custom-built property search and listing portals. Your brand, your data, your experience — no third-party template.",
   },
   {
     number: "04",
-    title: "Capital Strategy",
-    subtitle: "Investment",
+    title: "Brand Identity",
+    subtitle: "Visual Design",
     description:
-      "Data-driven acquisition for investors building long-term wealth through premium coastal real estate.",
+      "Logos, color systems, and brand guidelines built for agents and companies stepping up their market presence.",
   },
   {
     number: "05",
-    title: "Relocation",
-    subtitle: "Transition Services",
+    title: "Marketing Systems",
+    subtitle: "Growth Tools",
     description:
-      "Comprehensive support for executives and families relocating to Southern California's most desirable markets.",
+      "Landing pages, email sequences, and lead capture systems engineered to fill your pipeline and nurture prospects.",
   },
 ];
 
@@ -62,13 +62,13 @@ export default function ServicesSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-light text-obsidian leading-tight max-w-xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Services Built for
+            Built for Real Estate
             <br />
-            <em>Discerning Clients</em>
+            <em>Professionals</em>
           </h2>
           <p className="text-warm-500 text-sm font-light max-w-sm leading-relaxed md:text-right">
-            Every service we offer is purpose-built for the upper tier of the market.
-            No volume plays. No diluted attention.
+            Every service purpose-built to help you attract clients, close deals,
+            and own your market online.
           </p>
         </div>
       </motion.div>

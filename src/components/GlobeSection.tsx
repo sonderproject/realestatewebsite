@@ -17,19 +17,19 @@ const PLACES = [
     index: "01",
     name: "Ocean Beach",
     coords: "32.74° N  117.25° W",
-    tag: "Where the coastline begins.",
+    tag: "Your market, beautifully presented.",
   },
   {
     index: "02",
     name: "La Jolla Heights",
     coords: "32.84° N  117.27° W",
-    tag: "Hillside estates above the bay.",
+    tag: "Listings that convert at first sight.",
   },
   {
     index: "03",
     name: "Downtown San Diego",
     coords: "32.71° N  117.16° W",
-    tag: "The skyline, at golden hour.",
+    tag: "Digital presence that commands attention.",
   },
 ];
 
@@ -301,7 +301,7 @@ export default function GlobeSection() {
         <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
           <motion.div style={{ opacity: intro }} className="text-center px-8">
             <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-light">
-              Global Reach
+              Your Market
             </p>
             <h2
               className="text-4xl md:text-6xl font-light text-warm-50"
@@ -310,7 +310,7 @@ export default function GlobeSection() {
                 textShadow: "0 2px 30px rgba(0,0,0,0.7)",
               }}
             >
-              A World of Opportunity
+              Your City. Your Brand.
             </h2>
           </motion.div>
         </div>
@@ -322,22 +322,22 @@ export default function GlobeSection() {
             className="text-center px-8 max-w-4xl w-full"
           >
             <p className="text-gold text-xs tracking-[0.4em] uppercase mb-6 font-light">
-              One Platform
+              One Agency
             </p>
             <h2
               className="text-3xl md:text-5xl font-light text-warm-50 mb-8 md:mb-10 leading-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              The world&apos;s finest coastlines,
+              Built for the markets
               <br />
-              <em>at your fingertips.</em>
+              <em>where stakes are high.</em>
             </h2>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 mb-10 md:mb-12">
               {[
-                { value: "$2.4B", label: "In Transactions" },
-                { value: "340+", label: "Properties Placed" },
-                { value: "97%", label: "List-to-Sale Ratio" },
+                { value: "120+", label: "Websites Launched" },
+                { value: "40+", label: "Agents & Brokerages" },
+                { value: "3×", label: "Avg. Lead Increase" },
               ].map(({ value, label }) => (
                 <div key={label} className="text-center">
                   <p
@@ -357,7 +357,7 @@ export default function GlobeSection() {
               href="#contact"
               className="pointer-events-auto inline-block border border-gold/50 text-gold text-xs tracking-[0.3em] uppercase px-10 py-4 hover:bg-gold/10 transition-all duration-300"
             >
-              Begin Your Search
+              Book a Consultation
             </a>
           </motion.div>
         </div>

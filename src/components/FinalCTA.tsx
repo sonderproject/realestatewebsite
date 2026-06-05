@@ -39,7 +39,7 @@ export default function FinalCTA() {
           className="text-[22vw] font-light text-ocean/5 whitespace-nowrap"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Meridian
+          Sonder
         </span>
       </div>
 
@@ -50,7 +50,7 @@ export default function FinalCTA() {
           transition={{ duration: 0.8 }}
           className="text-gold text-xs tracking-[0.4em] uppercase mb-6 font-light"
         >
-          Begin Your Search
+          Start Your Project
         </motion.p>
 
         <motion.h2
@@ -60,9 +60,9 @@ export default function FinalCTA() {
           className="text-4xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.95] mb-6 md:mb-10"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Your next chapter
+          Your market deserves
           <br />
-          <em className="text-warm-200">starts with one call.</em>
+          <em className="text-warm-200">better than a template.</em>
         </motion.h2>
 
         <motion.p
@@ -71,8 +71,8 @@ export default function FinalCTA() {
           transition={{ duration: 0.9, delay: 0.3 }}
           className="text-warm-400 text-sm font-light max-w-lg mx-auto leading-relaxed mb-8 md:mb-12"
         >
-          We work with a limited number of clients each quarter to ensure every
-          transaction receives the attention it deserves. Reserve your consultation today.
+          We work with a limited number of clients each quarter to make sure every
+          project gets the attention it deserves. Book your free consultation today.
         </motion.p>
 
         <motion.div
@@ -82,16 +82,16 @@ export default function FinalCTA() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
         >
           <a
-            href="mailto:hello@meridianproperties.com"
+            href="mailto:hello@sonderstudio.com"
             className="bg-gold text-obsidian text-xs tracking-[0.3em] uppercase px-10 py-4 font-medium hover:bg-gold-light transition-all duration-300 w-full sm:w-auto text-center"
           >
-            Schedule Consultation
+            Book a Free Consultation
           </a>
           <a
-            href="#listings"
+            href="#work"
             className="border border-warm-600 text-warm-300 text-xs tracking-[0.3em] uppercase px-8 py-4 hover:border-gold hover:text-gold transition-all duration-300 w-full sm:w-auto text-center"
           >
-            Browse Listings
+            See Our Work
           </a>
         </motion.div>
 
@@ -104,7 +104,7 @@ export default function FinalCTA() {
         >
           {[
             { label: "Phone", value: "+1 (619) 555-0100" },
-            { label: "Email", value: "hello@meridianproperties.com" },
+            { label: "Email", value: "hello@sonderstudio.com" },
             { label: "Office", value: "La Jolla, San Diego CA" },
           ].map(({ label, value }) => (
             <div key={label} className="text-center">
@@ -125,17 +125,16 @@ export default function FinalCTA() {
         className="relative z-10 mt-14 md:mt-20 pt-7 md:pt-10 border-t border-warm-700/20 flex flex-col md:flex-row items-center justify-between gap-3"
       >
         <p className="text-warm-600 text-xs font-light tracking-wider">
-          © 2025 Meridian Properties. All rights reserved.
+          © 2025 Sonder Studio. All rights reserved.
         </p>
         <p className="text-warm-700 text-[10px] tracking-[0.2em] uppercase">
-          Designed by{" "}
           <a
             href="https://sonderproject.com"
             className="text-warm-500 hover:text-gold transition-colors duration-300"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Sonder Project
+            sonderproject.com
           </a>
         </p>
       </motion.div>

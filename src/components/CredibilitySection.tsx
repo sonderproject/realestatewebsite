@@ -4,24 +4,24 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: "$2.4B", label: "In Transactions Closed" },
-  { value: "14", label: "Years in Coastal Markets" },
-  { value: "340+", label: "Luxury Properties Placed" },
-  { value: "97%", label: "List-to-Sale Ratio" },
+  { value: "120+", label: "Websites Launched" },
+  { value: "5", label: "Years in Real Estate Web" },
+  { value: "40+", label: "Agents & Brokerages Served" },
+  { value: "3×", label: "Average Lead Generation Lift" },
 ];
 
 const testimonials = [
   {
     quote:
-      "Meridian didn't just find us a home. They understood what we were building — a life, a legacy. The attention to detail was extraordinary.",
-    name: "James & Caroline W.",
-    location: "La Jolla, CA",
+      "Sonder Studio didn't just build us a website. They built us a brand. Our inquiry volume doubled within 60 days of launching — the quality of leads is night and day.",
+    name: "Marcus T.",
+    location: "Brokerage Owner, San Diego CA",
   },
   {
     quote:
-      "Our oceanfront listing sold in 11 days at 104% of asking. The marketing was unlike anything I'd seen in this market.",
-    name: "David R.",
-    location: "Del Mar, CA",
+      "I was embarrassed by my old site. Now I send every prospect there first. It sets the tone before I even pick up the phone. Worth every dollar.",
+    name: "Rachel N.",
+    location: "Independent Agent, La Jolla CA",
   },
 ];
 
@@ -67,15 +67,15 @@ export default function CredibilitySection() {
         className="mb-8 md:mb-12 max-w-2xl"
       >
         <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-light">
-          Client Perspective
+          Client Results
         </p>
         <h2
           className="text-3xl md:text-4xl lg:text-5xl font-light text-warm-50 leading-tight"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Trust is not claimed.
+          Results are not promised.
           <br />
-          <em>It is demonstrated.</em>
+          <em>They are built.</em>
         </h2>
       </motion.div>
 
@@ -117,22 +117,22 @@ export default function CredibilitySection() {
       >
         <div className="max-w-xl">
           <p className="text-gold text-xs tracking-[0.4em] uppercase mb-3 font-light">
-            Why Meridian
+            Why Sonder Studio
           </p>
           <p
             className="text-warm-50 text-2xl md:text-3xl lg:text-4xl font-light leading-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Property marketing built for
+            Web design built for
             <em> attention, trust, and action.</em>
           </p>
         </div>
         <div className="flex flex-col gap-3 min-w-fit">
           {[
-            "Bespoke market analysis",
-            "Off-market access network",
-            "Dedicated buyer representation",
-            "Full-service luxury staging",
+            "Custom-designed, never templated",
+            "Built for lead generation from day one",
+            "Full-stack: design, dev, and copy",
+            "Ongoing support and iteration",
           ].map((item) => (
             <div key={item} className="flex items-center gap-3">
               <span className="w-4 h-px bg-gold shrink-0" />
