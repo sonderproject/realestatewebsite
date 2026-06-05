@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import GlobeSection from "@/components/GlobeSection";
 import ServicesSection from "@/components/ServicesSection";
+import WorkSection from "@/components/WorkSection";
+import ProcessSection from "@/components/ProcessSection";
+import PricingSection from "@/components/PricingSection";
 import CredibilitySection from "@/components/CredibilitySection";
 import FinalCTA from "@/components/FinalCTA";
 
@@ -57,17 +60,25 @@ export default function HomePage() {
       {/* 1 — Hero: coastal footage that scrubs frame-by-frame as you scroll */}
       <HeroSection />
 
-      {/* 2 — Services: clean editorial list layout */}
+      {/* 2 — Services: what we do */}
       <ServicesSection />
 
-      {/* 3 — Globe: image zooms in, becomes a spinning Earth, pulls back
-              into a computer screen, then the page continues */}
+      {/* 3 — Work: portfolio proof (fixes the #work links) */}
+      <WorkSection />
+
+      {/* 4 — Globe: animated "your market" interlude */}
       <GlobeSection />
 
-      {/* 4 — Credibility: stats + testimonials + value prop */}
+      {/* 5 — Process: how a project runs, first call to launch */}
+      <ProcessSection />
+
+      {/* 6 — Credibility: stats + testimonials + value prop */}
       <CredibilitySection />
 
-      {/* 4 — Final CTA: close the sale */}
+      {/* 7 — Pricing: packages that scale */}
+      <PricingSection />
+
+      {/* 8 — Contact: lead-capture form + footer */}
       <FinalCTA />
     </main>
   );
