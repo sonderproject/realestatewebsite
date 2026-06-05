@@ -39,6 +39,8 @@ export default function HeroSection() {
     if (!canvas || !img || !img.complete || !img.naturalWidth) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
     const cw = canvas.width;
     const ch = canvas.height;
     const ir = img.naturalWidth / img.naturalHeight;
@@ -84,7 +86,10 @@ export default function HeroSection() {
     const canvas = canvasRef.current;
     const resize = () => {
       if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Render at the device's full pixel density on mobile (capped at 3) so a
+      // high-DPI phone isn't softened by a second browser upscale of the canvas.
+      const cap = set === "mobile" ? 3 : 2;
+      const dpr = Math.min(window.devicePixelRatio || 1, cap);
       canvas.width = Math.round(window.innerWidth * dpr);
       canvas.height = Math.round(window.innerHeight * dpr);
       draw(frameRef.current);
