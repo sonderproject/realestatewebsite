@@ -11,6 +11,28 @@ const GLOBE_3_SRC = "/media/globe-3.jpg"; // downtown San Diego, golden hour
 
 const GLOBE_SIZE = "42vmin";
 
+// One real coastline per globe — used for the floating captions + rail
+const PLACES = [
+  {
+    index: "01",
+    name: "Ocean Beach",
+    coords: "32.74° N  117.25° W",
+    tag: "Where the coastline begins.",
+  },
+  {
+    index: "02",
+    name: "La Jolla Heights",
+    coords: "32.84° N  117.27° W",
+    tag: "Hillside estates above the bay.",
+  },
+  {
+    index: "03",
+    name: "Downtown San Diego",
+    coords: "32.71° N  117.16° W",
+    tag: "The skyline, at golden hour.",
+  },
+];
+
 function SphereShading({ opacity }: { opacity: MotionValue<number> }) {
   return (
     <>
@@ -129,13 +151,31 @@ export default function GlobeSection() {
     [0, 1, 1, 0]
   );
 
+  // ── Per-globe location captions — each fades in as its globe centers ──
+  const cap1 = useTransform(scrollYProgress, [0.30, 0.36, 0.44, 0.50], [0, 1, 1, 0]);
+  const cap2 = useTransform(scrollYProgress, [0.50, 0.57, 0.63, 0.70], [0, 1, 1, 0]);
+  const cap3 = useTransform(scrollYProgress, [0.70, 0.77, 0.81, 0.86], [0, 1, 1, 0]);
+  const captions = [cap1, cap2, cap3];
+  const capY1 = useTransform(scrollYProgress, [0.30, 0.36], [18, 0]);
+  const capY2 = useTransform(scrollYProgress, [0.50, 0.57], [18, 0]);
+  const capY3 = useTransform(scrollYProgress, [0.70, 0.77], [18, 0]);
+  const capYs = [capY1, capY2, capY3];
+
+  // ── Left progress rail — active dot brightens for its globe ──
+  const railOpacity = useTransform(scrollYProgress, [0.28, 0.34, 0.82, 0.88], [0, 1, 1, 0]);
+  const dot1 = useTransform(scrollYProgress, [0.30, 0.36, 0.46, 0.50], [0.25, 1, 1, 0.25]);
+  const dot2 = useTransform(scrollYProgress, [0.50, 0.57, 0.63, 0.70], [0.25, 1, 1, 0.25]);
+  const dot3 = useTransform(scrollYProgress, [0.70, 0.77, 0.83, 0.87], [0.25, 1, 1, 0.25]);
+  const dots = [dot1, dot2, dot3];
+
   return (
     <section ref={ref} className="relative bg-obsidian" style={{ height: "500vh" }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
 
-        {/* Deep-space backdrop */}
+        {/* Deep-space backdrop + drifting starfield */}
         <motion.div style={{ opacity: spaceOpacity }} className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#0b1e2e_0%,#060606_72%)]" />
+          <div className="starfield absolute inset-0" />
         </motion.div>
 
         {/* Atmospheric glow — follows Globe 1 */}
@@ -211,6 +251,50 @@ export default function GlobeSection() {
               className="absolute inset-0 bg-obsidian/65 pointer-events-none"
             />
           </motion.div>
+        </div>
+
+        {/* Left progress rail — 01 / 02 / 03 */}
+        <motion.div
+          style={{ opacity: railOpacity }}
+          className="absolute left-5 md:left-10 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-5 pointer-events-none"
+        >
+          {dots.map((op, i) => (
+            <motion.div key={i} style={{ opacity: op }} className="flex flex-col items-center gap-5">
+              <span
+                className="text-warm-50 text-[10px] tracking-[0.3em] font-light"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {PLACES[i].index}
+              </span>
+              {i < PLACES.length - 1 && <span className="w-px h-8 bg-gold/40" />}
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Per-globe location captions — float below each globe */}
+        <div className="absolute inset-x-0 bottom-[13vh] z-30 flex justify-center pointer-events-none">
+          <div className="relative w-full max-w-md h-24">
+            {PLACES.map((place, i) => (
+              <motion.div
+                key={place.name}
+                style={{ opacity: captions[i], y: capYs[i] }}
+                className="absolute inset-x-0 text-center px-6"
+              >
+                <p className="text-gold text-[10px] tracking-[0.45em] uppercase mb-2 font-light">
+                  {place.coords}
+                </p>
+                <h3
+                  className="text-2xl md:text-3xl font-light text-warm-50 mb-1"
+                  style={{ fontFamily: "var(--font-display)", textShadow: "0 2px 24px rgba(0,0,0,0.7)" }}
+                >
+                  {place.name}
+                </h3>
+                <p className="text-warm-300 text-xs font-light italic tracking-wide">
+                  {place.tag}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Intro caption */}
