@@ -137,45 +137,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-obsidian/40 via-transparent to-transparent" />
 
-        {/* Navigation */}
-        <motion.nav
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-5 py-5 md:px-10 md:py-8"
-        >
-          <div className="flex items-center gap-2">
-            <span
-              className="text-warm-50 text-xl tracking-[0.25em] uppercase font-light"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Sonder
-            </span>
-            <span className="w-px h-4 bg-gold/60 mx-1" />
-            <span className="text-warm-300 text-xs tracking-[0.3em] uppercase font-light">
-              Studio
-            </span>
-          </div>
-
-          <div className="hidden md:flex items-center gap-10">
-            {["Work", "Services", "About", "Contact"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-warm-200 text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-              >
-                {item}
-              </a>
-            ))}
-          </div>
-
-          <a
-            href="#contact"
-            className="glass-btn hidden md:block text-warm-50 text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
-          >
-            Get a Quote
-          </a>
-        </motion.nav>
+        {/* Navigation lives in the fixed <Navbar /> (rendered at page level) */}
 
         {/* Hero content — fades as the footage plays */}
         <motion.div

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import GlobeSection from "@/components/GlobeSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -57,6 +58,9 @@ export default function HomePage() {
 
   return (
     <main className="bg-obsidian">
+      {/* Fixed nav: transparent over the hero, frosts to glass on scroll */}
+      <Navbar />
+
       {/* 1 — Hero: coastal footage that scrubs frame-by-frame as you scroll */}
       <HeroSection />
 
