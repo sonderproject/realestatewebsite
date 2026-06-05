@@ -10,6 +10,7 @@ const services = [
     subtitle: "Custom Sites",
     description:
       "Bespoke digital homes for solo agents and teams. Built to convert first-time visitors into scheduled consultations.",
+    isNew: false,
   },
   {
     number: "02",
@@ -17,6 +18,7 @@ const services = [
     subtitle: "Company Sites",
     description:
       "Full-scale web platforms for brokerages and management companies. Designed to showcase agents, inventory, and brand authority.",
+    isNew: false,
   },
   {
     number: "03",
@@ -24,6 +26,7 @@ const services = [
     subtitle: "Listing Systems",
     description:
       "Custom-built property search and listing portals. Your brand, your data, your experience — no third-party template.",
+    isNew: false,
   },
   {
     number: "04",
@@ -31,6 +34,7 @@ const services = [
     subtitle: "Visual Design",
     description:
       "Logos, color systems, and brand guidelines built for agents and companies stepping up their market presence.",
+    isNew: false,
   },
   {
     number: "05",
@@ -38,6 +42,15 @@ const services = [
     subtitle: "Growth Tools",
     description:
       "Landing pages, email sequences, and lead capture systems engineered to fill your pipeline and nurture prospects.",
+    isNew: false,
+  },
+  {
+    number: "06",
+    title: "AI Lead Assistant",
+    subtitle: "24 / 7 Intelligence",
+    description:
+      "A custom AI assistant trained on your listings, FAQs, and market area — embedded directly in your site. It qualifies leads, answers buyer and renter questions, and books showings while you sleep.",
+    isNew: true,
   },
 ];
 
@@ -92,13 +105,27 @@ export default function ServicesSection() {
               <div className="flex-1 flex flex-col md:flex-row md:gap-8">
                 {/* Title block */}
                 <div className="shrink-0 md:w-52 lg:w-64">
-                  <p className="text-warm-400 text-[10px] tracking-[0.3em] uppercase mb-1">
-                    {service.subtitle}
-                  </p>
+                  <div className="flex items-center gap-2 mb-1">
+                    <p className="text-warm-400 text-[10px] tracking-[0.3em] uppercase">
+                      {service.subtitle}
+                    </p>
+                    {service.isNew && (
+                      <span className="rounded-full bg-gold-dark/10 border border-gold-dark/30 px-2 py-0.5 text-[9px] tracking-[0.2em] uppercase text-gold-dark font-semibold">
+                        New
+                      </span>
+                    )}
+                  </div>
                   <h3
-                    className="text-obsidian text-xl md:text-2xl lg:text-3xl font-light group-hover:text-gold-dark transition-colors duration-500"
+                    className={`text-xl md:text-2xl lg:text-3xl font-light transition-colors duration-500 ${
+                      service.isNew
+                        ? "text-gold-dark group-hover:text-gold"
+                        : "text-obsidian group-hover:text-gold-dark"
+                    }`}
                     style={{ fontFamily: "var(--font-display)" }}
                   >
+                    {service.isNew && (
+                      <span className="mr-2 text-base align-middle">✦</span>
+                    )}
                     {service.title}
                   </h3>
                 </div>

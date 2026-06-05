@@ -35,6 +35,7 @@ const tiers = [
     setupLabel: "one-time setup",
     featured: false,
     badge: null,
+    aiFeature: "AI assistant qualifies leads & books showings 24/7",
     features: [
       "Custom single-page agent site",
       "Mobile-first, sub-2s load time",
@@ -54,6 +55,7 @@ const tiers = [
     setupLabel: "one-time setup",
     featured: true,
     badge: "Most Popular",
+    aiFeature: "AI leasing assistant answers availability & books tours 24/7",
     features: [
       "Multi-page community site",
       "Live vacancy & floor plan updates",
@@ -73,6 +75,7 @@ const tiers = [
     setupLabel: "full website design",
     featured: false,
     badge: null,
+    aiFeature: "AI assistant handles lead routing, FAQs & agent recruitment 24/7",
     features: [
       "Full multi-page website build included",
       "Agent roster — profiles kept current",
@@ -122,7 +125,7 @@ export default function PricingSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 0.15 }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-sand-200 rounded-2xl overflow-hidden border border-sand-200 mb-10 md:mb-14"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-sand-200 rounded-2xl overflow-hidden border border-sand-200 mb-8 md:mb-10"
       >
         {WHY_RETAINER.map((r) => (
           <div key={r.title} className="bg-white p-6 md:p-7 flex flex-col gap-2">
@@ -133,6 +136,70 @@ export default function PricingSection() {
         ))}
       </motion.div>
 
+      {/* AI era callout strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.28 }}
+        className="relative rounded-2xl overflow-hidden mb-8 md:mb-12"
+        style={{
+          background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
+        }}
+      >
+        {/* Subtle grid texture */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        {/* Glow orb */}
+        <div
+          className="absolute -right-16 -top-16 w-64 h-64 rounded-full opacity-20"
+          style={{ background: "radial-gradient(circle, #3E9BD4 0%, transparent 70%)" }}
+        />
+
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 p-6 md:p-8">
+          {/* Icon + label */}
+          <div className="flex items-center gap-4 shrink-0">
+            <div className="flex items-center justify-center w-11 h-11 rounded-2xl border border-gold/30 bg-gold/10 text-gold text-xl">
+              ✦
+            </div>
+            <div>
+              <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-light mb-0.5">
+                Built for the AI Era
+              </p>
+              <p
+                className="text-warm-50 text-xl font-light"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Every plan includes an AI assistant.
+              </p>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="hidden md:block w-px self-stretch bg-white/10" />
+
+          {/* Body */}
+          <p className="text-warm-400 text-sm font-light leading-relaxed flex-1">
+            While you&apos;re showing a home or closing a deal, your AI handles the
+            conversation — qualifying leads, answering buyer and renter questions,
+            and booking appointments around the clock. Trained on your listings,
+            your market, your voice.
+          </p>
+
+          {/* Badge */}
+          <div className="shrink-0">
+            <span className="inline-block rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
+              Included in all plans
+            </span>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Tier cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-stretch">
         {tiers.map((tier, i) => (
@@ -140,7 +207,7 @@ export default function PricingSection() {
             key={tier.name}
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.25 + 0.1 * i }}
+            transition={{ duration: 0.7, delay: 0.38 + 0.1 * i }}
             className={`relative rounded-3xl p-7 md:p-8 flex flex-col ${
               tier.featured
                 ? "bg-gradient-to-br from-surf-600 to-ocean text-white shadow-xl shadow-surf-600/25 md:-translate-y-3"
@@ -183,6 +250,22 @@ export default function PricingSection() {
               )}
             </div>
 
+            {/* AI feature highlight */}
+            <div
+              className={`flex items-start gap-2.5 rounded-xl px-3.5 py-3 mb-5 ${
+                tier.featured
+                  ? "bg-white/10 border border-white/20"
+                  : "bg-ocean-deep/5 border border-gold/20"
+              }`}
+            >
+              <span className={`text-xs mt-0.5 shrink-0 ${tier.featured ? "text-gold-light" : "text-gold-dark"}`}>
+                ✦
+              </span>
+              <p className={`text-xs font-light leading-snug ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
+                {tier.aiFeature}
+              </p>
+            </div>
+
             <ul className="flex flex-col gap-3 mb-8 flex-1">
               {tier.features.map((f) => (
                 <li key={f} className="flex items-start gap-3">
@@ -213,7 +296,7 @@ export default function PricingSection() {
       <motion.p
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.55 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
         className="text-warm-400 text-xs font-light text-center mt-8"
       >
         No long-term contracts. Cancel anytime. Not sure which plan fits?{" "}
