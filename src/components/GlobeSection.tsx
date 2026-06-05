@@ -330,7 +330,7 @@ export default function GlobeSection() {
             >
               Built for the markets
               <br />
-              <em>where stakes are high.</em>
+              <em className="text-gold-light font-normal">where stakes are high.</em>
             </h2>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 mb-10 md:mb-12">
@@ -355,7 +355,7 @@ export default function GlobeSection() {
 
             <a
               href="#contact"
-              className="pointer-events-auto inline-block border border-gold/50 text-gold text-xs tracking-[0.3em] uppercase px-10 py-4 hover:bg-gold/10 transition-all duration-300"
+              className="pointer-events-auto inline-block bg-gold text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium hover:bg-gold-light transition-all duration-300 shadow-xl shadow-gold/30"
             >
               Book a Consultation
             </a>

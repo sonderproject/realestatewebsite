@@ -46,13 +46,13 @@ export default function ServicesSection() {
   const inView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <section ref={ref} id="services" className="bg-sand-100 py-14 px-5 md:py-24 md:px-16">
+    <section ref={ref} id="services" className="bg-sand-50 py-12 px-5 md:py-20 md:px-16">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="mb-8 md:mb-14"
+        className="mb-7 md:mb-11"
       >
         <p className="text-gold-dark text-xs tracking-[0.4em] uppercase mb-4 font-light">
           What We Do
@@ -64,7 +64,7 @@ export default function ServicesSection() {
           >
             Built for Real Estate
             <br />
-            <em>Professionals</em>
+            <em className="text-gold-dark">Professionals</em>
           </h2>
           <p className="text-warm-500 text-sm font-light max-w-sm leading-relaxed md:text-right">
             Every service purpose-built to help you attract clients, close deals,
@@ -74,14 +74,14 @@ export default function ServicesSection() {
       </motion.div>
 
       {/* Service list */}
-      <div className="border-t border-warm-300/60">
+      <div className="border-t border-sand-300/70">
         {services.map((service, i) => (
           <motion.div
             key={service.number}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08 * i }}
-            className="group border-b border-warm-300/60 py-6 md:py-9 cursor-default hover:bg-sand-200/50 transition-colors duration-500 px-1"
+            className="group border-b border-sand-300/70 py-5 md:py-7 cursor-default hover:bg-sand-100 transition-colors duration-300 rounded-xl px-3 md:px-5"
           >
             <div className="flex gap-4 items-start">
               {/* Number */}

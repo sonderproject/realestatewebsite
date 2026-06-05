@@ -11,7 +11,7 @@ export default function FinalCTA() {
     <section
       ref={ref}
       id="contact"
-      className="relative bg-obsidian py-20 px-5 md:py-32 md:px-16 overflow-hidden"
+      className="relative bg-gradient-to-b from-ocean-deep via-obsidian to-obsidian py-16 px-5 md:py-28 md:px-16 overflow-hidden"
     >
       {/* Subtle ocean-diagonal texture */}
       <div
@@ -62,7 +62,7 @@ export default function FinalCTA() {
         >
           Your market deserves
           <br />
-          <em className="text-warm-200">better than a template.</em>
+          <em className="text-gold-light font-normal">better than a template.</em>
         </motion.h2>
 
         <motion.p
@@ -83,13 +83,13 @@ export default function FinalCTA() {
         >
           <a
             href="mailto:hello@sonderstudio.com"
-            className="bg-gold text-obsidian text-xs tracking-[0.3em] uppercase px-10 py-4 font-medium hover:bg-gold-light transition-all duration-300 w-full sm:w-auto text-center"
+            className="bg-gold text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium hover:bg-gold-light transition-all duration-300 shadow-xl shadow-gold/25 w-full sm:w-auto text-center"
           >
             Book a Free Consultation
           </a>
           <a
             href="#work"
-            className="border border-warm-600 text-warm-300 text-xs tracking-[0.3em] uppercase px-8 py-4 hover:border-gold hover:text-gold transition-all duration-300 w-full sm:w-auto text-center"
+            className="border border-white/25 text-warm-200 text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 hover:border-gold hover:text-gold transition-all duration-300 w-full sm:w-auto text-center"
           >
             See Our Work
           </a>

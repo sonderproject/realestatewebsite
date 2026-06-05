@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Meridian Properties — Luxury Real Estate",
-  description: "Premium real estate experiences designed for buyers who expect more.",
+  title: "Sonder Studio — Premium Web Design for Real Estate",
+  description:
+    "We design and build premium websites and digital experiences for real estate agents, brokerages, and property companies.",
 };
 
 export default function RootLayout({

@@ -150,7 +150,7 @@ export default function HeroSection() {
 
           <a
             href="#contact"
-            className="hidden md:block border border-gold/40 text-gold text-xs tracking-[0.2em] uppercase px-6 py-3 hover:bg-gold/10 transition-all duration-300"
+            className="hidden md:block bg-gold text-white text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium hover:bg-gold-light transition-all duration-300 shadow-lg shadow-gold/20"
           >
             Get a Quote
           </a>
@@ -180,7 +180,7 @@ export default function HeroSection() {
             >
               Your Digital Presence.
               <br />
-              <em className="italic text-warm-200">Elevated.</em>
+              <em className="text-gold-light font-normal">Elevated.</em>
             </motion.h1>
 
             <motion.p
@@ -201,7 +201,7 @@ export default function HeroSection() {
             >
               <a
                 href="#work"
-                className="group relative bg-gold text-obsidian text-xs tracking-[0.3em] uppercase px-10 py-4 font-medium hover:bg-gold-light transition-all duration-300"
+                className="group relative bg-gold text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium hover:bg-gold-light transition-all duration-300 shadow-xl shadow-gold/25"
               >
                 See Our Work
               </a>
