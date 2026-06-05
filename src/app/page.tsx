@@ -13,6 +13,16 @@ export default function HomePage() {
     let lenis: unknown;
 
     async function initLenis() {
+      // Skip Lenis on touch devices. Its RAF wheel-smoothing fights native
+      // touch momentum and desyncs the scroll position that the hero frame
+      // scrub + globe carousel read via useScroll — which breaks those
+      // scroll-driven animations on mobile. Native touch scroll is already
+      // smooth and Framer tracks it reliably.
+      const isTouch =
+        typeof window !== "undefined" &&
+        window.matchMedia("(pointer: coarse)").matches;
+      if (isTouch) return;
+
       try {
         const LenisModule = await import("lenis");
         const Lenis = LenisModule.default;
