@@ -171,7 +171,7 @@ export default function FinalCTA() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="w-full bg-gold text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-4 font-medium hover:bg-gold-light transition-all duration-300 shadow-xl shadow-gold/25 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="glass-btn-accent w-full text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-4 font-medium disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {status === "submitting" ? "Sending…" : "Book a Free Consultation"}
               </button>

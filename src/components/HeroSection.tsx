@@ -171,7 +171,7 @@ export default function HeroSection() {
 
           <a
             href="#contact"
-            className="hidden md:block bg-gold text-white text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium hover:bg-gold-light transition-all duration-300 shadow-lg shadow-gold/20"
+            className="glass-btn hidden md:block text-warm-50 text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
           >
             Get a Quote
           </a>
@@ -222,7 +222,7 @@ export default function HeroSection() {
             >
               <a
                 href="#work"
-                className="group relative bg-gold text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium hover:bg-gold-light transition-all duration-300 shadow-xl shadow-gold/25"
+                className="glass-btn-accent group text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium"
               >
                 See Our Work
               </a>

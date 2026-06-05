@@ -358,7 +358,7 @@ export default function GlobeSection() {
 
             <a
               href="#contact"
-              className="pointer-events-auto inline-block bg-gold text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium hover:bg-gold-light transition-all duration-300 shadow-xl shadow-gold/30"
+              className="glass-btn-accent pointer-events-auto inline-block text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium"
             >
               Book a Consultation
             </a>

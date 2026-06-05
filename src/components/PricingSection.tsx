@@ -134,10 +134,10 @@ export default function PricingSection() {
 
             <a
               href="#contact"
-              className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center transition-all duration-300 ${
+              className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center ${
                 tier.featured
-                  ? "bg-white text-surf-700 hover:bg-surf-50"
-                  : "bg-gold text-white hover:bg-gold-light shadow-lg shadow-gold/20"
+                  ? "glass-btn text-white"
+                  : "glass-btn-accent text-white"
               }`}
             >
               Get Started
