@@ -54,7 +54,7 @@ export default function HomePage() {
 
   return (
     <main className="bg-obsidian">
-      {/* 1 — Hero: pinned coastal image that zooms as you scroll, then releases */}
+      {/* 1 — Hero: coastal footage that scrubs frame-by-frame as you scroll */}
       <HeroSection />
 
       {/* 2 — Services: clean editorial list layout */}

@@ -3,18 +3,14 @@
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-const FRAME_COUNT = 96;
-// Video finishes by the time the pinned section unpins (400vh / 100vh sticky).
-const PIN_FRACTION = 0.75;
-
-const framePath = (set: "desktop" | "mobile", i: number) =>
-  `/media/hero-frames/${set}/frame-${String(i + 1).padStart(4, "0")}.jpg`;
+// Fraction of the pinned scroll over which the footage plays start→end.
+// The remaining scroll releases the pin. Lower section height = shorter scrub.
+const PIN_FRACTION = 0.85;
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const frameRef = useRef(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const durationRef = useRef(0);
   const rafRef = useRef(0);
 
   const { scrollYProgress } = useScroll({
@@ -22,95 +18,68 @@ export default function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  // Hero text fades out shortly after you start scrolling so the footage shows.
-  const textOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.18], [0, -30]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+  // Text fades out as you scroll past; the footage scrubs underneath.
+  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 0.4], [0, -40]);
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
 
-  // Draw a frame to the canvas with object-fit: cover behaviour.
-  const draw = (idx: number) => {
-    const canvas = canvasRef.current;
-    const img = imagesRef.current[idx];
-    if (!canvas || !img || !img.complete || !img.naturalWidth) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const cw = canvas.width;
-    const ch = canvas.height;
-    const ir = img.naturalWidth / img.naturalHeight;
-    const cr = cw / ch;
-    let dw: number, dh: number, dx: number, dy: number;
-    if (cr > ir) {
-      dw = cw;
-      dh = cw / ir;
-      dx = 0;
-      dy = (ch - dh) / 2;
-    } else {
-      dh = ch;
-      dw = ch * ir;
-      dx = (cw - dw) / 2;
-      dy = 0;
-    }
-    ctx.drawImage(img, dx, dy, dw, dh);
-  };
-
-  // Preload the right frame set for the device + keep the canvas sized.
+  // Prime the video so frame-accurate seeking works (incl. mobile Safari).
   useEffect(() => {
-    const set: "desktop" | "mobile" =
-      window.innerWidth <= 768 ? "mobile" : "desktop";
+    const video = videoRef.current;
+    if (!video) return;
 
-    const imgs: HTMLImageElement[] = [];
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new Image();
-      img.src = framePath(set, i);
-      if (i === 0) img.onload = () => draw(frameRef.current);
-      imgs.push(img);
-    }
-    imagesRef.current = imgs;
-
-    const canvas = canvasRef.current;
-    const resize = () => {
-      if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.round(window.innerWidth * dpr);
-      canvas.height = Math.round(window.innerHeight * dpr);
-      draw(frameRef.current);
+    const onMeta = () => {
+      durationRef.current = video.duration || 0;
     };
-    resize();
-    window.addEventListener("resize", resize);
+    video.addEventListener("loadedmetadata", onMeta);
+
+    // A muted, inline play()→pause() decodes the first frames so currentTime
+    // seeks render immediately instead of showing the poster while buffering.
+    const prime = () => {
+      video.play().then(() => video.pause()).catch(() => {});
+    };
+    video.addEventListener("loadeddata", prime, { once: true });
 
     return () => {
-      window.removeEventListener("resize", resize);
+      video.removeEventListener("loadedmetadata", onMeta);
+      video.removeEventListener("loadeddata", prime);
       cancelAnimationFrame(rafRef.current);
-      imgs.forEach((im) => (im.onload = null));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Map scroll position to a frame.
+  // Map scroll position → video time.
   useEffect(() => {
     const unsub = scrollYProgress.on("change", (v) => {
+      const video = videoRef.current;
+      const duration = durationRef.current;
+      if (!video || !duration) return;
       const p = Math.min(v / PIN_FRACTION, 1);
-      const idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(p * (FRAME_COUNT - 1))));
-      if (idx === frameRef.current) return;
-      frameRef.current = idx;
+      const time = p * duration;
       cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => draw(idx));
+      rafRef.current = requestAnimationFrame(() => {
+        // fastSeek is cheaper on mobile when available
+        if (typeof video.fastSeek === "function") video.fastSeek(time);
+        else video.currentTime = time;
+      });
     });
     return () => unsub();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollYProgress]);
 
   return (
-    <section ref={sectionRef} className="relative" style={{ height: "400vh" }}>
+    // ~2s of scroll to play through, then a short release.
+    <section ref={sectionRef} className="relative" style={{ height: "230vh" }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
-        {/* Poster shown until the first frame is ready */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/media/hero-poster.jpg')" }}
+        {/* Scroll-scrubbed footage */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/media/hero.mp4"
+          poster="/media/hero-poster.jpg"
+          muted
+          playsInline
+          preload="auto"
         />
-
-        {/* Scroll-driven frame canvas */}
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
         {/* Cinematic gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/90" />
@@ -216,7 +185,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Scroll-to-play hint */}
+        {/* Scroll hint */}
         <motion.div
           style={{ opacity: hintOpacity }}
           className="absolute bottom-6 right-5 md:right-10 z-20 flex flex-col items-center gap-3"
