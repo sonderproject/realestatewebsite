@@ -46,20 +46,20 @@ export default function ServicesSection() {
   const inView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <section ref={ref} id="services" className="bg-sand-100 py-32 px-8 md:px-20">
+    <section ref={ref} id="services" className="bg-sand-100 py-14 px-5 md:py-24 md:px-16">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="mb-20"
+        className="mb-8 md:mb-14"
       >
-        <p className="text-gold-dark text-xs tracking-[0.4em] uppercase mb-5 font-light">
+        <p className="text-gold-dark text-xs tracking-[0.4em] uppercase mb-4 font-light">
           What We Do
         </p>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <h2
-            className="text-5xl md:text-6xl font-light text-obsidian leading-tight max-w-xl"
+            className="text-4xl md:text-5xl lg:text-6xl font-light text-obsidian leading-tight max-w-xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Services Built for
@@ -81,30 +81,39 @@ export default function ServicesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08 * i }}
-            className="group border-b border-warm-300/60 py-8 md:py-10 grid grid-cols-12 gap-4 items-start cursor-default hover:bg-sand-200/50 transition-colors duration-500 px-2"
+            className="group border-b border-warm-300/60 py-6 md:py-9 cursor-default hover:bg-sand-200/50 transition-colors duration-500 px-1"
           >
-            <span className="col-span-2 md:col-span-1 text-warm-400 text-xs font-light tracking-wider pt-1">
-              {service.number}
-            </span>
-            <div className="col-span-5 md:col-span-3">
-              <p className="text-warm-400 text-[10px] tracking-[0.3em] uppercase mb-1">
-                {service.subtitle}
-              </p>
-              <h3
-                className="text-obsidian text-2xl md:text-3xl font-light group-hover:text-gold-dark transition-colors duration-500"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {service.title}
-              </h3>
-            </div>
-            <p className="col-span-5 md:col-span-6 text-warm-500 text-sm font-light leading-relaxed pt-1">
-              {service.description}
-            </p>
-            <div className="hidden md:flex col-span-2 justify-end items-center pt-2">
-              <span className="w-0 group-hover:w-8 h-px bg-gold transition-all duration-500 inline-block" />
-              <span className="text-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-xs ml-2">
-                →
+            <div className="flex gap-4 items-start">
+              {/* Number */}
+              <span className="text-warm-400 text-xs font-light tracking-wider mt-[3px] shrink-0 w-6">
+                {service.number}
               </span>
+              {/* Content */}
+              <div className="flex-1 flex flex-col md:flex-row md:gap-8">
+                {/* Title block */}
+                <div className="shrink-0 md:w-52 lg:w-64">
+                  <p className="text-warm-400 text-[10px] tracking-[0.3em] uppercase mb-1">
+                    {service.subtitle}
+                  </p>
+                  <h3
+                    className="text-obsidian text-xl md:text-2xl lg:text-3xl font-light group-hover:text-gold-dark transition-colors duration-500"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {service.title}
+                  </h3>
+                </div>
+                {/* Description */}
+                <p className="text-warm-500 text-sm font-light leading-relaxed mt-2 md:mt-0 md:flex-1 md:pt-px">
+                  {service.description}
+                </p>
+                {/* Arrow — desktop only */}
+                <div className="hidden md:flex items-center gap-2 shrink-0 mt-[2px]">
+                  <span className="w-0 group-hover:w-8 h-px bg-gold transition-all duration-500 inline-block" />
+                  <span className="text-gold opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-xs">
+                    →
+                  </span>
+                </div>
+              </div>
             </div>
           </motion.div>
         ))}

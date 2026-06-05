@@ -11,7 +11,7 @@ export default function FinalCTA() {
     <section
       ref={ref}
       id="contact"
-      className="relative bg-obsidian py-40 px-8 md:px-20 overflow-hidden"
+      className="relative bg-obsidian py-20 px-5 md:py-32 md:px-16 overflow-hidden"
     >
       {/* Subtle ocean-diagonal texture */}
       <div
@@ -28,7 +28,7 @@ export default function FinalCTA() {
       />
 
       {/* Top gradient: bleeds in from the ocean section above */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-ocean-dark/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-ocean-dark/40 to-transparent" />
 
       {/* Large background word */}
       <div
@@ -36,7 +36,7 @@ export default function FinalCTA() {
         aria-hidden
       >
         <span
-          className="text-[20vw] font-light text-ocean/8 whitespace-nowrap"
+          className="text-[22vw] font-light text-ocean/5 whitespace-nowrap"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Meridian
@@ -48,7 +48,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-gold text-xs tracking-[0.4em] uppercase mb-8 font-light"
+          className="text-gold text-xs tracking-[0.4em] uppercase mb-6 font-light"
         >
           Begin Your Search
         </motion.p>
@@ -57,7 +57,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.15 }}
-          className="text-5xl md:text-7xl font-light text-warm-50 leading-[0.95] mb-10"
+          className="text-4xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.95] mb-6 md:mb-10"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Your next chapter
@@ -69,7 +69,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.3 }}
-          className="text-warm-400 text-sm font-light max-w-lg mx-auto leading-relaxed mb-14"
+          className="text-warm-400 text-sm font-light max-w-lg mx-auto leading-relaxed mb-8 md:mb-12"
         >
           We work with a limited number of clients each quarter to ensure every
           transaction receives the attention it deserves. Reserve your consultation today.
@@ -79,17 +79,17 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.45 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
         >
           <a
             href="mailto:hello@meridianproperties.com"
-            className="bg-gold text-obsidian text-xs tracking-[0.3em] uppercase px-12 py-5 font-medium hover:bg-gold-light transition-all duration-300 w-full sm:w-auto text-center"
+            className="bg-gold text-obsidian text-xs tracking-[0.3em] uppercase px-10 py-4 font-medium hover:bg-gold-light transition-all duration-300 w-full sm:w-auto text-center"
           >
             Schedule Consultation
           </a>
           <a
             href="#listings"
-            className="border border-warm-600 text-warm-300 text-xs tracking-[0.3em] uppercase px-10 py-5 hover:border-gold hover:text-gold transition-all duration-300 w-full sm:w-auto text-center"
+            className="border border-warm-600 text-warm-300 text-xs tracking-[0.3em] uppercase px-8 py-4 hover:border-gold hover:text-gold transition-all duration-300 w-full sm:w-auto text-center"
           >
             Browse Listings
           </a>
@@ -100,7 +100,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.9, delay: 0.65 }}
-          className="mt-20 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16"
+          className="mt-10 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16"
         >
           {[
             { label: "Phone", value: "+1 (619) 555-0100" },
@@ -122,7 +122,7 @@ export default function FinalCTA() {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.9, delay: 0.8 }}
-        className="relative z-10 mt-32 pt-10 border-t border-warm-700/20 flex flex-col md:flex-row items-center justify-between gap-4"
+        className="relative z-10 mt-14 md:mt-20 pt-7 md:pt-10 border-t border-warm-700/20 flex flex-col md:flex-row items-center justify-between gap-3"
       >
         <p className="text-warm-600 text-xs font-light tracking-wider">
           © 2025 Meridian Properties. All rights reserved.

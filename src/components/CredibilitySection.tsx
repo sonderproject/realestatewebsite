@@ -30,13 +30,13 @@ export default function CredibilitySection() {
   const inView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <section ref={ref} className="bg-ocean-dark py-32 px-8 md:px-20 overflow-hidden">
+    <section ref={ref} className="bg-ocean-dark py-14 px-5 md:py-24 md:px-16 overflow-hidden">
       {/* Stats */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8 }}
-        className="grid grid-cols-2 md:grid-cols-4 gap-px bg-ocean-light/15 mb-24"
+        className="grid grid-cols-2 md:grid-cols-4 gap-px bg-ocean-light/15 mb-10 md:mb-16"
       >
         {stats.map(({ value, label }, i) => (
           <motion.div
@@ -44,10 +44,10 @@ export default function CredibilitySection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 * i }}
-            className="bg-ocean-dark py-12 px-8 text-center"
+            className="bg-ocean-dark py-8 px-5 md:py-10 md:px-8 text-center"
           >
             <p
-              className="text-4xl md:text-5xl text-gold font-light mb-3"
+              className="text-3xl md:text-4xl lg:text-5xl text-gold font-light mb-2"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {value}
@@ -64,13 +64,13 @@ export default function CredibilitySection() {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9, delay: 0.3 }}
-        className="mb-16 max-w-2xl"
+        className="mb-8 md:mb-12 max-w-2xl"
       >
-        <p className="text-gold text-xs tracking-[0.4em] uppercase mb-5 font-light">
+        <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-light">
           Client Perspective
         </p>
         <h2
-          className="text-4xl md:text-5xl font-light text-warm-50 leading-tight"
+          className="text-3xl md:text-4xl lg:text-5xl font-light text-warm-50 leading-tight"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Trust is not claimed.
@@ -80,26 +80,25 @@ export default function CredibilitySection() {
       </motion.div>
 
       {/* Testimonials */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         {testimonials.map(({ quote, name, location }, i) => (
           <motion.div
             key={name}
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 + 0.15 * i }}
-            className="border border-ocean-light/20 p-10 relative"
+            className="border border-ocean-light/20 p-5 md:p-8 relative"
           >
-            {/* Decorative quotemark */}
             <span
-              className="absolute top-6 left-8 text-6xl text-gold/20 font-light leading-none select-none"
+              className="absolute top-4 left-5 text-5xl text-gold/20 font-light leading-none select-none"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              "
+              &ldquo;
             </span>
-            <p className="text-warm-100 text-base font-light leading-relaxed mb-8 mt-4 relative z-10">
+            <p className="text-warm-100 text-sm font-light leading-relaxed mb-6 mt-3 relative z-10">
               {quote}
             </p>
-            <div className="border-t border-ocean-light/20 pt-6">
+            <div className="border-t border-ocean-light/20 pt-4">
               <p className="text-warm-50 text-sm font-light">{name}</p>
               <p className="text-ocean-light/60 text-xs tracking-[0.2em] uppercase mt-1">
                 {location}
@@ -114,21 +113,21 @@ export default function CredibilitySection() {
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9, delay: 0.7 }}
-        className="mt-24 border border-ocean-light/20 p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+        className="mt-10 md:mt-16 border border-ocean-light/20 p-6 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
       >
         <div className="max-w-xl">
-          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-light">
+          <p className="text-gold text-xs tracking-[0.4em] uppercase mb-3 font-light">
             Why Meridian
           </p>
           <p
-            className="text-warm-50 text-3xl md:text-4xl font-light leading-tight"
+            className="text-warm-50 text-2xl md:text-3xl lg:text-4xl font-light leading-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Property marketing built for
             <em> attention, trust, and action.</em>
           </p>
         </div>
-        <div className="flex flex-col gap-4 min-w-fit">
+        <div className="flex flex-col gap-3 min-w-fit">
           {[
             "Bespoke market analysis",
             "Off-market access network",
@@ -136,7 +135,7 @@ export default function CredibilitySection() {
             "Full-service luxury staging",
           ].map((item) => (
             <div key={item} className="flex items-center gap-3">
-              <span className="w-4 h-px bg-gold" />
+              <span className="w-4 h-px bg-gold shrink-0" />
               <span className="text-warm-200 text-xs font-light tracking-wide">
                 {item}
               </span>

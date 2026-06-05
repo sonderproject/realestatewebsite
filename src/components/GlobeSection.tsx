@@ -241,7 +241,7 @@ export default function GlobeSection() {
               One Platform
             </p>
             <h2
-              className="text-4xl md:text-6xl font-light text-warm-50 mb-12 leading-tight"
+              className="text-3xl md:text-5xl font-light text-warm-50 mb-8 md:mb-10 leading-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
               The world&apos;s finest coastlines,
@@ -249,7 +249,7 @@ export default function GlobeSection() {
               <em>at your fingertips.</em>
             </h2>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20 mb-14">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 mb-10 md:mb-12">
               {[
                 { value: "$2.4B", label: "In Transactions" },
                 { value: "340+", label: "Properties Placed" },
@@ -257,7 +257,7 @@ export default function GlobeSection() {
               ].map(({ value, label }) => (
                 <div key={label} className="text-center">
                   <p
-                    className="text-3xl md:text-4xl text-gold font-light mb-1"
+                    className="text-2xl md:text-3xl lg:text-4xl text-gold font-light mb-1"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {value}

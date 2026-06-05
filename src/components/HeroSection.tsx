@@ -121,7 +121,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-10 py-8"
+          className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-5 py-5 md:px-10 md:py-8"
         >
           <div className="flex items-center gap-2">
             <span
@@ -159,7 +159,7 @@ export default function HeroSection() {
         {/* Hero content — fades as the footage plays */}
         <motion.div
           style={{ opacity: textOpacity, y: textY }}
-          className="absolute inset-0 z-10 flex flex-col justify-end pb-24 px-10 md:px-20"
+          className="absolute inset-0 z-10 flex flex-col justify-end pb-14 px-5 md:pb-20 md:px-16"
         >
           <div className="max-w-4xl">
             <motion.p
@@ -175,7 +175,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.8 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-light text-warm-50 leading-[0.9] mb-8"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.9] mb-5 md:mb-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Modern Living.
@@ -187,7 +187,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.1 }}
-              className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-xl leading-relaxed mb-12"
+              className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10"
             >
               Luxury real estate deserves a digital experience as refined as the homes
               themselves. Designed for buyers who expect more.
@@ -219,7 +219,7 @@ export default function HeroSection() {
         {/* Scroll-to-play hint */}
         <motion.div
           style={{ opacity: hintOpacity }}
-          className="absolute bottom-8 right-10 z-20 flex flex-col items-center gap-3"
+          className="absolute bottom-6 right-5 md:right-10 z-20 flex flex-col items-center gap-3"
         >
           <span className="text-warm-400 text-[10px] tracking-[0.4em] uppercase rotate-90 origin-center">
             Scroll
