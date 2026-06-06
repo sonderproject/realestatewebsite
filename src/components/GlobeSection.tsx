@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 
 const GLOBE_1_SRC = "/media/globe.jpg";
@@ -72,9 +72,19 @@ function GlobeTexture({ src }: { src: string }) {
 
 export default function GlobeSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: rawProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
+  });
+
+  // Smooth the raw scroll progress with a spring. Every globe motion below
+  // reads from this instead of the raw value, so the whole sequence eases
+  // fluidly rather than tracking scroll 1:1 (which feels steppy/jittery,
+  // especially on mobile and trackpads).
+  const scrollYProgress = useSpring(rawProgress, {
+    stiffness: 70,
+    damping: 26,
+    restDelta: 0.0005,
   });
 
   // ── Lightbox state ────────────────────────────────────────────────────
@@ -257,6 +267,7 @@ export default function GlobeSection() {
                 borderRadius: g1Radius,
                 width: GLOBE_SIZE,
                 height: GLOBE_SIZE,
+                willChange: "transform, opacity",
               }}
               className={`${globeBase} pointer-events-auto`}
               onClick={() => setExpanded(0)}
@@ -279,6 +290,7 @@ export default function GlobeSection() {
                 borderRadius: "50%",
                 width: GLOBE_SIZE,
                 height: GLOBE_SIZE,
+                willChange: "transform, opacity",
               }}
               className={`${globeBase} pointer-events-auto`}
               onClick={() => setExpanded(1)}
@@ -301,6 +313,7 @@ export default function GlobeSection() {
                 borderRadius: g3Radius,
                 width: GLOBE_SIZE,
                 height: GLOBE_SIZE,
+                willChange: "transform, opacity",
               }}
               className={`${globeBase} pointer-events-auto`}
               onClick={() => setExpanded(2)}
