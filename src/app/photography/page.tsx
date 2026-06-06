@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import FinalCTA from "@/components/FinalCTA";
@@ -85,33 +86,33 @@ const TIERS = [
   {
     name: "Essential",
     audience: "Single-family homes up to 2,500 sq ft",
-    price: "$349",
+    price: "$399",
     note: "per shoot",
     featured: false,
     badge: null,
     features: [
-      "14 HDR photos — minimum guaranteed",
+      "25 HDR photos (minimum, guaranteed)",
       "Interior & exterior coverage",
+      "AI-generated 3D virtual tour included",
       "Professional color grading & editing",
-      "MLS-ready + web-optimized file sizes",
+      "MLS-ready + web-optimized files",
       "Branded online gallery & download",
-      "48-hour standard delivery",
+      "48-hour delivery",
       "Licensed, insured photographer",
     ],
   },
   {
     name: "Signature",
     audience: "Listings up to 4,500 sq ft",
-    price: "$699",
+    price: "$799",
     note: "per shoot",
     featured: true,
     badge: "Most Popular",
     features: [
-      "25+ HDR photos",
-      "FAA-licensed drone — 8 aerial stills",
-      "Drone aerial video clip (60 sec)",
+      "35+ HDR photos",
+      "FAA-licensed drone — 8 aerial stills + 60-sec drone video clip",
       "Twilight exterior shot",
-      "2-minute cinematic walkthrough video",
+      "AI-generated 3D virtual tour included",
       "MLS, web & social media edits",
       "24-hour priority delivery",
       "Licensed, insured photographer",
@@ -120,14 +121,14 @@ const TIERS = [
   {
     name: "Cinematic",
     audience: "Luxury & high-value properties",
-    price: "$1,199",
+    price: "$1,499",
     note: "per shoot",
     featured: false,
     badge: null,
     features: [
-      "40+ HDR photos",
+      "50+ HDR photos",
       "Full drone session — stills & 4K video",
-      "Matterport 3D virtual tour",
+      "AI-generated 3D virtual tour included",
       "3–5 min cinematic listing film",
       "Virtual staging — up to 3 rooms",
       "2D floor plan diagram",
@@ -136,6 +137,16 @@ const TIERS = [
       "Licensed, insured photographer",
     ],
   },
+];
+
+const ADDONS = [
+  { name: "2D Floor Plan", price: "$75" },
+  { name: "3D Floor Plan", price: "$125" },
+  { name: "Twilight Exterior", price: "$175" },
+  { name: "Additional Drone Video", price: "$250" },
+  { name: "Cinematic Listing Film", price: "$450" },
+  { name: "Virtual Staging", price: "$45/image" },
+  { name: "Rush Delivery", price: "$150" },
 ];
 
 // ── Section components ────────────────────────────────────────────────────
@@ -508,7 +519,7 @@ function PackagesPhotography() {
                   className="text-5xl font-light text-white"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  $1,997
+                  $2,997
                 </span>
                 <span className="text-surf-200 text-sm pb-1.5">/ month</span>
               </div>
@@ -536,17 +547,16 @@ function PackagesPhotography() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3">
                 {[
                   "4 full photo shoots per month",
-                  "Unlimited editing revisions",
                   "Drone included on every shoot",
-                  "Priority 24-hr scheduling",
-                  "1 Matterport 3D tour per month",
+                  "AI 3D tour on every shoot",
+                  "2 editing revision rounds per shoot",
                   "1 cinematic listing video per month",
                   "Virtual staging — up to 3 rooms/shoot",
-                  "Quarterly agent brand shoot",
+                  "Priority 24-hr scheduling",
                   "Dedicated photographer assigned",
-                  "Dedicated account manager",
-                  "Same-day rush at no extra charge",
+                  "Quarterly agent brand shoot",
                   "Unused shoots roll over (1 month)",
+                  "Rush delivery available as paid add-on",
                 ].map((f) => (
                   <div key={f} className="flex items-start gap-3">
                     <span className="text-gold text-sm mt-0.5 shrink-0">✦</span>
@@ -652,6 +662,120 @@ function ProcessPhotography() {
   );
 }
 
+function AddOnsPhotography() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.1 });
+
+  return (
+    <section ref={ref} className="bg-sand-50 py-12 px-5 md:py-20 md:px-16">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.9 }}
+        className="mb-8 md:mb-12 max-w-2xl"
+      >
+        <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
+          Add-Ons
+        </p>
+        <h2
+          className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05] mb-3"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          À la carte extras.
+          <br />
+          <em className="text-gold-dark">Add to any package.</em>
+        </h2>
+        <p className="text-warm-500 text-sm font-light leading-relaxed">
+          Build the perfect shoot. Every add-on can be bundled with any package
+          above or a Partner retainer.
+        </p>
+      </motion.div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sand-200 rounded-2xl overflow-hidden border border-sand-200">
+        {ADDONS.map((addon, i) => (
+          <motion.div
+            key={addon.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.05 * i }}
+            className="bg-white px-6 py-6 md:px-7 md:py-7 flex items-center justify-between gap-4"
+          >
+            <span className="text-obsidian text-base md:text-lg font-light">
+              {addon.name}
+            </span>
+            <span
+              className="text-gold-dark text-lg md:text-xl font-medium shrink-0"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {addon.price}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BundleOffer() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.2 });
+
+  return (
+    <section ref={ref} className="bg-obsidian px-5 py-12 md:px-16 md:py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.9 }}
+        className="relative rounded-3xl overflow-hidden"
+        style={{
+          background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
+        }}
+      >
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+        />
+        {/* Glow orb */}
+        <div
+          className="absolute -left-20 -bottom-24 w-80 h-80 rounded-full opacity-15"
+          style={{ background: "radial-gradient(circle, #3E9BD4 0%, transparent 70%)" }}
+        />
+
+        <div className="relative z-10 px-7 py-12 md:px-16 md:py-16 text-center max-w-3xl mx-auto">
+          <p className="text-gold text-[10px] md:text-xs tracking-[0.35em] uppercase font-light mb-5">
+            Bundle & Save
+          </p>
+          <h2
+            className="text-3xl md:text-5xl font-light text-warm-50 leading-tight mb-6"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            One studio.
+            <br />
+            <em className="text-gold-light font-normal">Both sides of your listing.</em>
+          </h2>
+          <p className="text-warm-300 text-sm md:text-base font-light leading-relaxed mb-9 max-w-xl mx-auto">
+            Sonder Studio designs premium real estate websites. Book any
+            photography package and get{" "}
+            <strong className="text-warm-50 font-medium">30% off your website setup fee</strong>{" "}
+            — your listings and your digital presence, handled by one team.
+          </p>
+          <Link
+            href="/"
+            className="glass-btn-accent inline-block text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium"
+          >
+            See Web Design Plans
+          </Link>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
 // ── Page ──────────────────────────────────────────────────────────────────
 
 export default function PhotographyPage() {
@@ -662,7 +786,9 @@ export default function PhotographyPage() {
       <ServicesPhotography />
       <StatsPhotography />
       <PackagesPhotography />
+      <AddOnsPhotography />
       <ProcessPhotography />
+      <BundleOffer />
       <FinalCTA />
     </main>
   );
