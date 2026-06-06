@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const LINKS = ["Services", "Pricing", "Contact"];
@@ -88,6 +89,17 @@ export default function Navbar() {
               {item}
             </a>
           ))}
+          {/* Cross-page link to the photography studio */}
+          <Link
+            href="/photography"
+            className="flex items-center gap-2 text-gold-light text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
+            </span>
+            Photography
+          </Link>
         </div>
 
         <a

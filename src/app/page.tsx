@@ -8,6 +8,7 @@ import ServicesSection from "@/components/ServicesSection";
 import ProcessSection from "@/components/ProcessSection";
 import PricingSection from "@/components/PricingSection";
 import CredibilitySection from "@/components/CredibilitySection";
+import PhotographyPromo from "@/components/PhotographyPromo";
 import FinalCTA from "@/components/FinalCTA";
 
 export default function HomePage() {
@@ -87,7 +88,10 @@ export default function HomePage() {
       {/* 6 — Pricing: packages that scale */}
       <PricingSection />
 
-      {/* 7 — Contact: lead-capture form + footer */}
+      {/* 7 — Photography: cross-sell to the Sonder Photography studio */}
+      <PhotographyPromo />
+
+      {/* 8 — Contact: lead-capture form + footer */}
       <FinalCTA />
     </main>
   );
