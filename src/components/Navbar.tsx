@@ -63,7 +63,9 @@ export default function Navbar() {
 
       {/* Content */}
       <div className="relative flex items-center justify-between px-5 md:px-10">
-        <a href="#" className="flex items-center gap-2">
+        {/* Plain anchor: navigates to the homepage from any sub-page, and
+            triggers a full refresh when already on the homepage. */}
+        <a href="/" className="flex items-center gap-2">
           <span
             className="text-warm-50 text-xl tracking-[0.25em] uppercase font-light"
             style={{ fontFamily: "var(--font-display)" }}

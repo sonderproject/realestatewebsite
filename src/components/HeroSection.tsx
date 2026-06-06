@@ -146,14 +146,20 @@ export default function HeroSection() {
           className="absolute inset-0 z-10 flex flex-col justify-end pb-14 px-5 md:pb-20 md:px-16"
         >
           <div className="max-w-4xl">
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6 }}
-              className="text-gold text-xs tracking-[0.4em] uppercase mb-6 font-light"
+              className="inline-flex items-center gap-2.5 mb-6 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md px-4 py-2 shadow-lg shadow-gold/10"
             >
-              Web Design for Real Estate
-            </motion.p>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
+              </span>
+              <span className="text-gold-light text-[11px] md:text-xs tracking-[0.3em] uppercase font-semibold">
+                Web Design for Real Estate
+              </span>
+            </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
