@@ -313,7 +313,10 @@ export default function GlobeSection() {
                 borderRadius: g3Radius,
                 width: GLOBE_SIZE,
                 height: GLOBE_SIZE,
-                willChange: "transform, opacity",
+                // NOTE: deliberately no will-change here. Globe 3 scales 6.4×
+                // to fill the screen; a cached GPU layer would rasterize it at
+                // the small base size and upscale the blurry texture. Letting
+                // the browser re-rasterize keeps the expanded image crisp.
               }}
               className={`${globeBase} pointer-events-auto`}
               onClick={() => setExpanded(2)}

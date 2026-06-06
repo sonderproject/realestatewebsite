@@ -30,10 +30,13 @@ export default function HomePage() {
         const LenisModule = await import("lenis");
         const Lenis = LenisModule.default;
         lenis = new Lenis({
-          duration: 1.4,
-          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          // lerp gives frame-rate-independent smoothing — a consistent silky
+          // glide across the whole site. Lower = floatier/smoother.
+          lerp: 0.085,
           orientation: "vertical",
           smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 1.5,
         });
 
         function raf(time: number) {

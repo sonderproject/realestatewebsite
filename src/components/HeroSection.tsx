@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 // HD frames extracted from the hero clip. Canvas frame-scrubbing is the
 // smoothest scroll technique — it draws pre-decoded images with no video
@@ -28,10 +28,19 @@ export default function HeroSection() {
     offset: ["start start", "end start"],
   });
 
+  // Spring-smoothed progress for the overlay UI so the text/hint ease out
+  // fluidly. The frame scrub below stays on the raw value so frames track
+  // scroll instantly (springing it would make the footage feel laggy).
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   // Hero text fades out shortly after you start scrolling so the footage shows.
-  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.4], [0, -40]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+  const textOpacity = useTransform(smoothProgress, [0, 0.4], [1, 0]);
+  const textY = useTransform(smoothProgress, [0, 0.4], [0, -40]);
+  const hintOpacity = useTransform(smoothProgress, [0, 0.12], [1, 0]);
 
   // Draw a frame to the canvas with object-fit: cover behaviour.
   const draw = (idx: number) => {
