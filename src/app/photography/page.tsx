@@ -14,8 +14,8 @@ const SERVICES = [
     title: "Hi-Res Property Photography",
     subtitle: "Interiors & Exteriors",
     description:
-      "Every package starts at 14 professionally edited HDR photos — minimum, guaranteed. Wide-angle lenses, natural light optimization, and color grading that makes rooms feel exactly the size they are. Delivered MLS-ready.",
-    tag: "14 photos min.",
+      "Every package starts at 25 professionally edited HDR photos — minimum, guaranteed. Wide-angle lenses, natural light optimization, and color grading that makes rooms feel exactly the size they are. Delivered MLS-ready.",
+    tag: "25 photos min.",
   },
   {
     number: "02",
@@ -76,7 +76,7 @@ const SERVICES = [
 ];
 
 const STATS = [
-  { value: "14+", label: "Photos, every package" },
+  { value: "25+", label: "Photos, every package" },
   { value: "24 hr", label: "Rush turnaround option" },
   { value: "4K", label: "Resolution, every shoot" },
   { value: "FAA", label: "Licensed drone pilots" },
@@ -211,7 +211,7 @@ function HeroPhotography() {
           >
             Premium property photography, FAA-licensed drone aerials, Matterport
             3D tours, and cinematic listing films for agents and brokerages across
-            San Diego. 14 photos minimum, every package. Delivered fast.
+            San Diego. 25 photos minimum, every package. Delivered fast.
           </motion.p>
 
           <motion.div
@@ -406,7 +406,7 @@ function PackagesPhotography() {
           <em className="text-gold-dark">No surprises.</em>
         </h2>
         <p className="text-warm-500 text-sm font-light leading-relaxed">
-          Every package includes a minimum of <strong className="font-medium text-obsidian">14 professionally edited photos</strong> — guaranteed. Licensed, insured photographer on every shoot.
+          Every package includes a minimum of <strong className="font-medium text-obsidian">25 professionally edited photos</strong> — guaranteed. Licensed, insured photographer on every shoot.
         </p>
       </motion.div>
 
