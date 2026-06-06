@@ -41,6 +41,12 @@ export default function HomePage() {
           requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
+
+        // Allow other components to pause/resume Lenis via custom events
+        const onPause = () => (lenis as { stop: () => void }).stop();
+        const onResume = () => (lenis as { start: () => void }).start();
+        window.addEventListener("sonder:scroll-lock", onPause);
+        window.addEventListener("sonder:scroll-unlock", onResume);
       } catch {
         // Lenis unavailable — native scroll works fine
       }
