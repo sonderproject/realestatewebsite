@@ -5,100 +5,135 @@ import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import FinalCTA from "@/components/FinalCTA";
 
-// ── Placeholder data — swap in real content later ─────────────────────────
+// ── Data ──────────────────────────────────────────────────────────────────
 
 const SERVICES = [
   {
     number: "01",
-    title: "Property Photography",
+    title: "Hi-Res Property Photography",
     subtitle: "Interiors & Exteriors",
     description:
-      "HDR-processed stills that make every room feel larger, brighter, and more inviting — shot to MLS specs and delivered same day.",
+      "Every package starts at 14 professionally edited HDR photos — minimum, guaranteed. Wide-angle lenses, natural light optimization, and color grading that makes rooms feel exactly the size they are. Delivered MLS-ready.",
+    tag: "14 photos min.",
   },
   {
     number: "02",
-    title: "Aerial & Drone",
-    subtitle: "FAA-Licensed Pilots",
+    title: "Aerial Drone Photography",
+    subtitle: "FAA-Licensed · 4K",
     description:
-      "Licensed drone photography for lot boundaries, neighborhood context, and the kind of sweeping shots that stop the scroll.",
+      "Licensed drone pilots capturing lot lines, neighborhood context, ocean views, and the sweeping aerials that stop buyers mid-scroll. 4K stills and video. Full compliance with FAA Part 107.",
+    tag: null,
   },
   {
     number: "03",
-    title: "Virtual Tours",
-    subtitle: "Immersive 3D",
+    title: "3D Virtual Tours",
+    subtitle: "Matterport-Powered",
     description:
-      "Matterport-compatible 3D walkthroughs that let buyers tour from anywhere, at any hour, on any device.",
+      "Interactive 3D walkthroughs buyers can navigate from their couch — on any device, at any hour. Reduces wasted showings, increases time on listing, and gives out-of-market buyers the confidence to make offers.",
+    tag: null,
   },
   {
     number: "04",
-    title: "Twilight & Golden Hour",
-    subtitle: "Elevated Listings",
+    title: "Cinematic Video Walkthroughs",
+    subtitle: "Listing Films",
     description:
-      "Dusk shoots that transform an ordinary exterior into a warm, luminous first impression buyers won't forget.",
+      "Stabilized 4K video with licensed music, smooth transitions, and motion graphics — edited for MLS, Instagram Reels, YouTube, and your brokerage site. Short-form and long-form versions included.",
+    tag: null,
   },
   {
     number: "05",
-    title: "Video Walkthroughs",
-    subtitle: "Cinematic Film",
+    title: "Twilight & Golden Hour",
+    subtitle: "Dusk Shoots",
     description:
-      "Short-form listing videos edited for Instagram Reels, YouTube, and your MLS — complete with music and motion graphics.",
+      "The single most effective upgrade for curb appeal. Warm interior light spilling out against a painted sky — the exterior shot that makes buyers save the listing and schedule the showing.",
+    tag: null,
   },
   {
     number: "06",
-    title: "Agent Headshots",
+    title: "Virtual Staging",
+    subtitle: "Furnished. Digitally.",
+    description:
+      "Empty rooms cost you offers. Our virtual staging team furnishes any space with photorealistic furniture in 24 hours — at a fraction of the cost of physical staging, with no move-in risk.",
+    tag: null,
+  },
+  {
+    number: "07",
+    title: "Floor Plans",
+    subtitle: "2D & 3D Digital",
+    description:
+      "Accurate, to-scale floor plan diagrams that let buyers understand flow and space before they walk through the door. Available in 2D schematic or rendered 3D format.",
+    tag: null,
+  },
+  {
+    number: "08",
+    title: "Agent & Team Headshots",
     subtitle: "Personal Branding",
     description:
-      "On-location or studio headshots that match your brand palette and look great on every screen, from LinkedIn to yard signs.",
+      "On-location or in our studio. Multiple outfit changes, natural and lifestyle shots, retouched and color-matched to your brand palette. Looks great everywhere — LinkedIn, yard signs, the MLS, your website.",
+    tag: null,
   },
 ];
 
 const STATS = [
-  { value: "500+", label: "Properties Shot" },
-  { value: "48 hr", label: "Standard Turnaround" },
-  { value: "4K", label: "Resolution Delivered" },
-  { value: "100%", label: "Satisfaction Guarantee" },
+  { value: "14+", label: "Photos, every package" },
+  { value: "24 hr", label: "Rush turnaround option" },
+  { value: "4K", label: "Resolution, every shoot" },
+  { value: "FAA", label: "Licensed drone pilots" },
 ];
 
-const PACKAGES = [
+const TIERS = [
   {
     name: "Essential",
-    audience: "For single listings",
-    price: "$299",
-    note: "starting at",
+    audience: "Single-family homes up to 2,500 sq ft",
+    price: "$349",
+    note: "per shoot",
     featured: false,
+    badge: null,
     features: [
-      "25 edited HDR photos",
-      "MLS-ready file sizes",
-      "Same-day delivery option",
-      "Online gallery & download",
+      "14 HDR photos — minimum guaranteed",
+      "Interior & exterior coverage",
+      "Professional color grading & editing",
+      "MLS-ready + web-optimized file sizes",
+      "Branded online gallery & download",
+      "48-hour standard delivery",
+      "Licensed, insured photographer",
     ],
   },
   {
     name: "Signature",
-    audience: "For premium listings",
-    price: "$549",
-    note: "starting at",
+    audience: "Listings up to 4,500 sq ft",
+    price: "$699",
+    note: "per shoot",
     featured: true,
+    badge: "Most Popular",
     features: [
-      "50 edited HDR photos",
-      "Drone aerial (5 images)",
-      "2-minute video walkthrough",
+      "25+ HDR photos",
+      "FAA-licensed drone — 8 aerial stills",
+      "Drone aerial video clip (60 sec)",
       "Twilight exterior shot",
-      "Online gallery & download",
+      "2-minute cinematic walkthrough video",
+      "MLS, web & social media edits",
+      "24-hour priority delivery",
+      "Licensed, insured photographer",
     ],
   },
   {
     name: "Cinematic",
-    audience: "For luxury properties",
-    price: "Custom",
-    note: "tailored to scope",
+    audience: "Luxury & high-value properties",
+    price: "$1,199",
+    note: "per shoot",
     featured: false,
+    badge: null,
     features: [
-      "Unlimited HDR photos",
-      "Full drone session",
-      "Cinematic listing film",
-      "Matterport 3D tour",
-      "Priority 24-hr turnaround",
+      "40+ HDR photos",
+      "Full drone session — stills & 4K video",
+      "Matterport 3D virtual tour",
+      "3–5 min cinematic listing film",
+      "Virtual staging — up to 3 rooms",
+      "2D floor plan diagram",
+      "Twilight exterior shoot",
+      "Same-day rush delivery available",
+      "Licensed, insured photographer",
     ],
   },
 ];
@@ -108,7 +143,6 @@ const PACKAGES = [
 function HeroPhotography() {
   return (
     <section className="relative bg-obsidian overflow-hidden" style={{ minHeight: "100vh" }}>
-      {/* Background gradient standing in for a real photo */}
       <div
         className="absolute inset-0"
         style={{
@@ -116,7 +150,6 @@ function HeroPhotography() {
             "linear-gradient(135deg, #071726 0%, #0B2236 40%, #143A57 70%, #071726 100%)",
         }}
       />
-      {/* Subtle grid texture */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -125,20 +158,27 @@ function HeroPhotography() {
           backgroundSize: "60px 60px",
         }}
       />
-      {/* Cinematic overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-transparent to-obsidian/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-obsidian/50 via-transparent to-transparent" />
 
       <div className="relative z-10 flex flex-col justify-end pb-16 px-5 md:pb-24 md:px-16 pt-32">
         <div className="max-w-4xl">
-          <motion.p
+
+          {/* Eye-catching badge — mirrors the homepage hero treatment */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-gold text-xs tracking-[0.4em] uppercase mb-6 font-light"
+            className="inline-flex items-center gap-2.5 mb-6 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md px-4 py-2 shadow-lg shadow-gold/10"
           >
-            Real Estate Photography
-          </motion.p>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
+            </span>
+            <span className="text-gold-light text-[11px] md:text-xs tracking-[0.3em] uppercase font-semibold">
+              Real Estate Photography
+            </span>
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -158,9 +198,9 @@ function HeroPhotography() {
             transition={{ duration: 1, delay: 0.95 }}
             className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10"
           >
-            Premium property photography, drone aerials, and cinematic video for
-            real estate agents and brokerages across San Diego. Delivered fast.
-            Built to convert.
+            Premium property photography, FAA-licensed drone aerials, Matterport
+            3D tours, and cinematic listing films for agents and brokerages across
+            San Diego. 14 photos minimum, every package. Delivered fast.
           </motion.p>
 
           <motion.div
@@ -202,7 +242,7 @@ function ServicesPhotography() {
         className="mb-7 md:mb-11"
       >
         <p className="text-gold-dark text-xs tracking-[0.4em] uppercase mb-4 font-light">
-          What We Shoot
+          What We Offer
         </p>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <h2
@@ -214,8 +254,8 @@ function ServicesPhotography() {
             <em className="text-gold-dark">Every property type.</em>
           </h2>
           <p className="text-warm-500 text-sm font-light max-w-sm leading-relaxed md:text-right">
-            From single-family homes to luxury high-rises — we cover every visual
-            format your listing needs to compete.
+            From starter condos to oceanfront estates — every visual format your
+            listing needs to compete in today&apos;s market.
           </p>
         </div>
       </motion.div>
@@ -226,7 +266,7 @@ function ServicesPhotography() {
             key={service.number}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.08 * i }}
+            transition={{ duration: 0.7, delay: 0.06 * i }}
             className="group border-b border-sand-300/70 py-5 md:py-7 cursor-default hover:bg-sand-100 transition-colors duration-300 rounded-xl px-3 md:px-5"
           >
             <div className="flex gap-4 items-start">
@@ -235,9 +275,16 @@ function ServicesPhotography() {
               </span>
               <div className="flex-1 flex flex-col md:flex-row md:gap-8">
                 <div className="shrink-0 md:w-52 lg:w-64">
-                  <p className="text-warm-400 text-[10px] tracking-[0.3em] uppercase mb-1">
-                    {service.subtitle}
-                  </p>
+                  <div className="flex items-center gap-2 mb-1">
+                    <p className="text-warm-400 text-[10px] tracking-[0.3em] uppercase">
+                      {service.subtitle}
+                    </p>
+                    {service.tag && (
+                      <span className="rounded-full bg-gold-dark/10 border border-gold-dark/30 px-2 py-0.5 text-[9px] tracking-[0.15em] uppercase text-gold-dark font-semibold">
+                        {service.tag}
+                      </span>
+                    )}
+                  </div>
                   <h3
                     className="text-obsidian text-xl md:text-2xl lg:text-3xl font-light group-hover:text-gold-dark transition-colors duration-500"
                     style={{ fontFamily: "var(--font-display)" }}
@@ -293,9 +340,9 @@ function StatsPhotography() {
           className="text-3xl md:text-5xl font-light text-warm-50 leading-tight"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Photography that
+          Visuals that close deals.
           <br />
-          <em className="text-gold-light font-normal">moves properties.</em>
+          <em className="text-gold-light font-normal">Not just fill galleries.</em>
         </h2>
       </motion.div>
 
@@ -326,7 +373,7 @@ function StatsPhotography() {
 
 function PackagesPhotography() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const inView = useInView(ref, { once: true, amount: 0.05 });
 
   return (
     <section ref={ref} id="packages" className="bg-white py-12 px-5 md:py-20 md:px-16">
@@ -334,67 +381,71 @@ function PackagesPhotography() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="mb-8 md:mb-14 max-w-2xl"
+        className="mb-3 md:mb-5 max-w-2xl"
       >
         <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
           Packages
         </p>
         <h2
-          className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05]"
+          className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05] mb-3"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Transparent pricing.
           <br />
           <em className="text-gold-dark">No surprises.</em>
         </h2>
+        <p className="text-warm-500 text-sm font-light leading-relaxed">
+          Every package includes a minimum of <strong className="font-medium text-obsidian">14 professionally edited photos</strong> — guaranteed. Licensed, insured photographer on every shoot.
+        </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-stretch">
-        {PACKAGES.map((pkg, i) => (
+      {/* 3 tier cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-stretch mt-10 md:mt-14">
+        {TIERS.map((tier, i) => (
           <motion.div
-            key={pkg.name}
+            key={tier.name}
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 * i }}
+            transition={{ duration: 0.7, delay: 0.1 + 0.1 * i }}
             className={`relative rounded-3xl p-7 md:p-8 flex flex-col ${
-              pkg.featured
+              tier.featured
                 ? "bg-gradient-to-br from-surf-600 to-ocean text-white shadow-xl shadow-surf-600/25 md:-translate-y-3"
                 : "bg-sand-50 border border-sand-200 text-obsidian"
             }`}
           >
-            {pkg.featured && (
+            {tier.badge && (
               <span className="absolute top-5 right-5 rounded-full bg-white/90 px-3 py-1 text-[10px] tracking-[0.2em] uppercase text-surf-700 font-semibold">
-                Most Popular
+                {tier.badge}
               </span>
             )}
 
             <h3
-              className={`text-2xl font-medium mb-0.5 ${pkg.featured ? "text-white" : "text-obsidian"}`}
+              className={`text-2xl font-medium mb-0.5 ${tier.featured ? "text-white" : "text-obsidian"}`}
               style={{ fontFamily: "var(--font-display)" }}
             >
-              {pkg.name}
+              {tier.name}
             </h3>
-            <p className={`text-xs tracking-[0.12em] uppercase mb-5 ${pkg.featured ? "text-surf-100" : "text-warm-500"}`}>
-              {pkg.audience}
+            <p className={`text-xs tracking-[0.12em] uppercase mb-5 ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
+              {tier.audience}
             </p>
 
             <div className="mb-6">
               <span
-                className={`text-4xl font-light ${pkg.featured ? "text-white" : "text-obsidian"}`}
+                className={`text-4xl font-light ${tier.featured ? "text-white" : "text-obsidian"}`}
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                {pkg.price}
+                {tier.price}
               </span>
-              <span className={`ml-2 text-xs ${pkg.featured ? "text-surf-100" : "text-warm-400"}`}>
-                {pkg.note}
+              <span className={`ml-2 text-xs ${tier.featured ? "text-surf-100" : "text-warm-400"}`}>
+                {tier.note}
               </span>
             </div>
 
             <ul className="flex flex-col gap-3 mb-8 flex-1">
-              {pkg.features.map((f) => (
+              {tier.features.map((f) => (
                 <li key={f} className="flex items-start gap-3">
-                  <span className={`mt-0.5 shrink-0 ${pkg.featured ? "text-surf-100" : "text-gold-dark"}`}>✓</span>
-                  <span className={`text-sm font-light ${pkg.featured ? "text-surf-50" : "text-warm-600"}`}>{f}</span>
+                  <span className={`mt-0.5 shrink-0 text-sm ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>✓</span>
+                  <span className={`text-sm font-light ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>{f}</span>
                 </li>
               ))}
             </ul>
@@ -402,7 +453,7 @@ function PackagesPhotography() {
             <a
               href="#contact"
               className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center ${
-                pkg.featured ? "glass-btn text-white" : "glass-btn-accent text-white"
+                tier.featured ? "glass-btn text-white" : "glass-btn-accent text-white"
               }`}
             >
               Book Now
@@ -411,14 +462,111 @@ function PackagesPhotography() {
         ))}
       </div>
 
+      {/* Partner tier — full-width, monthly relationship */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.45 }}
+        className="relative rounded-3xl overflow-hidden mt-5 md:mt-6"
+        style={{
+          background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
+        }}
+      >
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        {/* Glow orb */}
+        <div
+          className="absolute -right-20 -top-20 w-72 h-72 rounded-full opacity-15"
+          style={{ background: "radial-gradient(circle, #3E9BD4 0%, transparent 70%)" }}
+        />
+
+        <div className="relative z-10 p-7 md:p-10">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16">
+            {/* Left — name + price */}
+            <div className="shrink-0 lg:w-64 mb-7 lg:mb-0">
+              <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-light mb-2">
+                Monthly Retainer
+              </p>
+              <h3
+                className="text-3xl md:text-4xl font-light text-warm-50 mb-2"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Partner
+              </h3>
+              <p className="text-surf-200 text-xs tracking-[0.12em] uppercase mb-6">
+                Your dedicated visual team
+              </p>
+              <div className="flex items-end gap-2 mb-1">
+                <span
+                  className="text-5xl font-light text-white"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  $1,997
+                </span>
+                <span className="text-surf-200 text-sm pb-1.5">/ month</span>
+              </div>
+              <p className="text-surf-300 text-xs font-light">
+                4 full shoots included · cancel anytime
+              </p>
+
+              <a
+                href="#contact"
+                className="glass-btn-accent inline-block mt-7 text-white text-xs tracking-[0.2em] uppercase rounded-full px-7 py-3.5 font-medium"
+              >
+                Become a Partner
+              </a>
+            </div>
+
+            {/* Divider */}
+            <div className="hidden lg:block w-px self-stretch bg-white/10" />
+
+            {/* Right — features grid */}
+            <div className="flex-1">
+              <p className="text-warm-300 text-sm font-light leading-relaxed mb-6 max-w-lg">
+                For agents and brokerages who list consistently — one flat monthly fee
+                replaces per-shoot invoicing. We become your in-house visual team.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-3">
+                {[
+                  "4 full photo shoots per month",
+                  "Unlimited editing revisions",
+                  "Drone included on every shoot",
+                  "Priority 24-hr scheduling",
+                  "1 Matterport 3D tour per month",
+                  "1 cinematic listing video per month",
+                  "Virtual staging — up to 3 rooms/shoot",
+                  "Quarterly agent brand shoot",
+                  "Dedicated photographer assigned",
+                  "Dedicated account manager",
+                  "Same-day rush at no extra charge",
+                  "Unused shoots roll over (1 month)",
+                ].map((f) => (
+                  <div key={f} className="flex items-start gap-3">
+                    <span className="text-gold text-sm mt-0.5 shrink-0">✦</span>
+                    <span className="text-surf-50 text-sm font-light">{f}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       <motion.p
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.4 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
         className="text-warm-400 text-xs font-light text-center mt-8"
       >
-        All packages include a licensed, insured photographer.{" "}
-        <a href="#contact" className="text-gold-dark hover:underline">Contact us</a> for volume pricing or monthly retainer rates.
+        All shoots include a licensed, insured photographer. Need a custom scope?{" "}
+        <a href="#contact" className="text-gold-dark hover:underline">Talk to us.</a>
       </motion.p>
     </section>
   );
@@ -429,10 +577,30 @@ function ProcessPhotography() {
   const inView = useInView(ref, { once: true, amount: 0.2 });
 
   const steps = [
-    { number: "01", title: "Book Online", description: "Choose a package, pick a date, and confirm in under two minutes. We handle the rest." },
-    { number: "02", title: "We Shoot", description: "Our photographer arrives on time, stages the shots, and captures every angle you need." },
-    { number: "03", title: "We Edit", description: "HDR processing, color grading, and retouching — all done in-house to a consistent standard." },
-    { number: "04", title: "You Deliver", description: "Download your gallery within 48 hours and upload straight to MLS, your website, or social." },
+    {
+      number: "01",
+      title: "Book Online",
+      description:
+        "Choose a package, pick a date, and confirm in under two minutes. We send a confirmation with everything you need to prepare the property.",
+    },
+    {
+      number: "02",
+      title: "We Shoot",
+      description:
+        "Our photographer arrives on time, stages each shot for maximum impact, and captures every angle — indoors, outdoors, and aerial.",
+    },
+    {
+      number: "03",
+      title: "We Edit",
+      description:
+        "HDR processing, color grading, sky replacement if needed, and retouching — all done in-house to a consistent, premium standard.",
+    },
+    {
+      number: "04",
+      title: "You List",
+      description:
+        "Download your full gallery within 48 hours (or 24 on Signature/Cinematic) and upload straight to MLS, your site, or social. Done.",
+    },
   ];
 
   return (
@@ -443,7 +611,9 @@ function ProcessPhotography() {
         transition={{ duration: 0.9 }}
         className="mb-8 md:mb-14 max-w-2xl"
       >
-        <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">How It Works</p>
+        <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
+          How It Works
+        </p>
         <h2
           className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05]"
           style={{ fontFamily: "var(--font-display)" }}
@@ -469,8 +639,12 @@ function ProcessPhotography() {
             >
               {step.number}
             </span>
-            <h3 className="text-obsidian text-lg md:text-xl font-medium mb-2">{step.title}</h3>
-            <p className="text-warm-500 text-sm font-light leading-relaxed">{step.description}</p>
+            <h3 className="text-obsidian text-lg md:text-xl font-medium mb-2">
+              {step.title}
+            </h3>
+            <p className="text-warm-500 text-sm font-light leading-relaxed">
+              {step.description}
+            </p>
           </motion.div>
         ))}
       </div>
