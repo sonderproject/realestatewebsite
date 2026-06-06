@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -195,6 +196,13 @@ export default function HeroSection() {
                 Our Services
                 <span className="w-8 h-px bg-current inline-block" />
               </a>
+              <Link
+                href="/photography"
+                className="text-warm-400 text-xs tracking-[0.3em] uppercase hover:text-gold transition-colors duration-300 flex items-center gap-3"
+              >
+                Sonder Photography
+                <span className="w-8 h-px bg-current inline-block" />
+              </Link>
             </motion.div>
           </div>
         </motion.div>
