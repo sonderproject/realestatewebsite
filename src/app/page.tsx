@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import GlobeSection from "@/components/GlobeSection";
 import ServicesSection from "@/components/ServicesSection";
+import AIAssistantFeature from "@/components/AIAssistantFeature";
 import ProcessSection from "@/components/ProcessSection";
 import PricingSection from "@/components/PricingSection";
 import CredibilitySection from "@/components/CredibilitySection";
@@ -76,7 +77,10 @@ export default function HomePage() {
       {/* 2 — Services: what we do */}
       <ServicesSection />
 
-      {/* 3 — Globe: animated "your market" interlude */}
+      {/* 3 — AI Lead Assistant: flagship differentiator spotlight */}
+      <AIAssistantFeature />
+
+      {/* 4 — Globe: animated "your market" interlude */}
       <GlobeSection />
 
       {/* 4 — Process: how a project runs, first call to launch */}
