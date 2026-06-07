@@ -3,13 +3,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-const stats = [
-  { value: "120+", label: "Websites Launched" },
-  { value: "5", label: "Years in Real Estate Web" },
-  { value: "40+", label: "Agents & Brokerages Served" },
-  { value: "3×", label: "Average Lead Generation Lift" },
-];
-
 const testimonials = [
   {
     quote:
@@ -31,39 +24,11 @@ export default function CredibilitySection() {
 
   return (
     <section ref={ref} className="bg-sand-50 py-12 px-5 md:py-20 md:px-16 overflow-hidden">
-      {/* Stats — clean rounded cards */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.8 }}
-        className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10 md:mb-14"
-      >
-        {stats.map(({ value, label }, i) => (
-          <motion.div
-            key={label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.08 * i }}
-            className="bg-white rounded-2xl border border-sand-200 py-7 px-5 md:py-9 md:px-6 text-center shadow-sm"
-          >
-            <p
-              className="text-3xl md:text-4xl lg:text-5xl text-gold-dark font-medium mb-1.5"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {value}
-            </p>
-            <p className="text-warm-500 text-[10px] md:text-[11px] tracking-[0.18em] uppercase font-medium">
-              {label}
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
-
       {/* Section header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.9, delay: 0.3 }}
+        transition={{ duration: 0.9 }}
         className="mb-7 md:mb-10 max-w-2xl"
       >
         <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">

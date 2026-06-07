@@ -56,8 +56,8 @@ export default function PhotographyPromo() {
             <em className="text-gold-light font-normal">Photo, drone & 3D.</em>
           </h2>
           <p className="text-warm-300 text-sm md:text-base font-light leading-relaxed mb-9 max-w-xl mx-auto">
-            Premium property photography, FAA-licensed drone aerials, Matterport
-            3D tours, and cinematic listing films. Book any package and get{" "}
+            Premium property photography, FAA-licensed drone aerials,
+            AI-generated 3D tours, and cinematic listing films. Book any package and get{" "}
             <strong className="text-warm-50 font-medium">30% off your website setup fee</strong>{" "}
             — one studio for both sides of your listing.
           </p>

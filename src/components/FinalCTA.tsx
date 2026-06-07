@@ -91,12 +91,12 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.45 }}
-          className="rounded-2xl overflow-hidden shadow-2xl shadow-black/50 mb-12 md:mb-16"
+          className="rounded-2xl overflow-hidden shadow-2xl shadow-black/50 mb-12 md:mb-16 h-[640px] md:h-[720px]"
         >
           <Cal
             namespace="sonder-studio"
             calLink="dante-valentino/sonder-studio"
-            style={{ width: "100%", minHeight: "650px" }}
+            style={{ width: "100%", height: "100%", overflow: "scroll" }}
             config={{ layout: "month_view" }}
           />
         </motion.div>

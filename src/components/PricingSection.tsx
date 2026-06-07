@@ -35,6 +35,7 @@ const tiers = [
     setupLabel: "one-time setup",
     featured: false,
     badge: null,
+    aiPrice: "$97",
     aiFeature: "AI assistant qualifies leads & books showings 24/7",
     features: [
       "Custom single-page agent site",
@@ -55,6 +56,7 @@ const tiers = [
     setupLabel: "one-time setup",
     featured: true,
     badge: "Most Popular",
+    aiPrice: "$147",
     aiFeature: "AI leasing assistant answers availability & books tours 24/7",
     features: [
       "Multi-page community site",
@@ -72,9 +74,10 @@ const tiers = [
     audience: "Brokerages & management companies",
     monthly: "$997",
     setup: "$2,997",
-    setupLabel: "full website design",
+    setupLabel: "one-time setup",
     featured: false,
     badge: null,
+    aiPrice: "$197",
     aiFeature: "AI assistant handles lead routing, FAQs & agent recruitment 24/7",
     features: [
       "Full multi-page website build included",
@@ -263,11 +266,14 @@ export default function PricingSection() {
                   <span className="text-xs">✦</span> AI Assistant
                 </span>
                 <span className={`text-[9px] tracking-[0.15em] uppercase rounded-full px-2 py-0.5 ${tier.featured ? "bg-white/15 text-surf-50" : "bg-gold-dark/10 text-gold-dark"}`}>
-                  Add-on
+                  Add-on +{tier.aiPrice}/mo
                 </span>
               </div>
               <p className={`text-xs font-light leading-snug ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
                 {tier.aiFeature}
+              </p>
+              <p className={`text-[10px] font-light mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-400"}`}>
+                + $497 one-time setup
               </p>
             </div>
 
