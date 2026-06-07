@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -59,88 +59,138 @@ const FEATURES = [
 // ── Section components ──────────────────────────────────────────────────────
 
 function Hero() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-driven cinematic hero: the skyline slowly zooms and darkens while
+  // the copy eases up and out as you scroll — the same "plays on scroll" feel
+  // as the homepage hero, driven by the uploaded still rather than video frames.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  // Spring-smooth the raw progress so the motion glides instead of tracking
+  // every scroll tick rigidly.
+  const p = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  const imageScale = useTransform(p, [0, 1], [1.05, 1.22]);
+  const imageY = useTransform(p, [0, 1], ["0%", "10%"]);
+  const overlayOpacity = useTransform(p, [0, 1], [0.5, 0.92]);
+  const contentOpacity = useTransform(p, [0, 0.55], [1, 0]);
+  const contentY = useTransform(p, [0, 0.55], [0, -60]);
+  const hintOpacity = useTransform(p, [0, 0.12], [1, 0]);
+
   return (
-    <section className="relative bg-obsidian overflow-hidden">
-      {/* Dark-ocean gradient base — same treatment as the homepage AI block */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(135deg, #071726 0%, #0B2236 40%, #143A57 70%, #071726 100%)",
-        }}
-      />
-      {/* Subtle grid texture */}
-      <div
-        className="absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-      {/* Glow orb */}
-      <div
-        className="absolute -right-24 -top-24 w-96 h-96 rounded-full opacity-15"
-        style={{ background: "radial-gradient(circle, #3E9BD4 0%, transparent 70%)" }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-obsidian/40 via-transparent to-obsidian/90" />
+    // Tall section so there's scroll distance to drive the motion; the inner
+    // layer pins to the viewport while the page scrolls past it.
+    <section ref={sectionRef} className="relative bg-obsidian" style={{ height: "200vh" }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Skyline image — parallax zoom */}
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={{ scale: imageScale, y: imageY }}
+        >
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/media/ai-hero.jpg')" }}
+          />
+        </motion.div>
 
-      <div className="relative z-10 px-5 md:px-16 pt-24 pb-16 md:pt-44 md:pb-28">
-        <div className="max-w-4xl">
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="inline-flex items-center gap-2.5 mb-6 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md px-4 py-2 shadow-lg shadow-gold/10"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
-            </span>
-            <span className="text-gold-light text-[11px] md:text-xs tracking-[0.3em] uppercase font-semibold">
-              Sonder AI Lead Assistant
-            </span>
-          </motion.div>
+        {/* Ocean-tinted darkening overlay — deepens as you scroll for legibility */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            opacity: overlayOpacity,
+            background:
+              "linear-gradient(135deg, rgba(7,23,38,0.95) 0%, rgba(11,34,54,0.7) 45%, rgba(20,58,87,0.55) 100%)",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/95" />
+        {/* Subtle grid texture for brand consistency */}
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
+        />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.6 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.95] mb-6 md:mb-8"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Every missed message is a{" "}
-            <em className="text-gold-light font-normal">lead going to someone else.</em>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.85 }}
-            className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-2xl leading-relaxed mb-8 md:mb-10"
-          >
-            Buyers and renters don&apos;t wait. They ask at midnight, between
-            showings, on weekends — and whoever answers first wins the deal. The
-            Sonder AI Lead Assistant is a custom AI, trained on your listings and
-            your market, that answers every visitor instantly, qualifies them, and
-            books showings 24/7. You stop losing leads to slow replies.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.1 }}
-          >
-            <Link
-              href="/#pricing"
-              className="glass-btn-accent inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium"
+        {/* Hero content — eases out as the footage zooms */}
+        <motion.div
+          style={{ opacity: contentOpacity, y: contentY }}
+          className="absolute inset-0 z-10 flex flex-col justify-end px-5 pb-16 md:px-16 md:pb-24"
+        >
+          <div className="max-w-4xl">
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="inline-flex items-center gap-2.5 mb-6 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md px-4 py-2 shadow-lg shadow-gold/10"
             >
-              See Pricing
-              <span className="w-6 h-px bg-current inline-block" />
-            </Link>
-          </motion.div>
-        </div>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
+              </span>
+              <span className="text-gold-light text-[11px] md:text-xs tracking-[0.3em] uppercase font-semibold">
+                Sonder AI Lead Assistant
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.6 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.95] mb-6 md:mb-8"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Every missed message is a{" "}
+              <em className="text-gold-light font-normal">lead going to someone else.</em>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.85 }}
+              className="text-warm-200 text-sm md:text-base font-light tracking-wide max-w-2xl leading-relaxed mb-8 md:mb-10"
+            >
+              Buyers and renters don&apos;t wait. They ask at midnight, between
+              showings, on weekends — and whoever answers first wins the deal. The
+              Sonder AI Lead Assistant is a custom AI, trained on your listings and
+              your market, that answers every visitor instantly, qualifies them, and
+              books showings 24/7. You stop losing leads to slow replies.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.1 }}
+            >
+              <Link
+                href="/#pricing"
+                className="glass-btn-accent inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium"
+              >
+                See Pricing
+                <span className="w-6 h-px bg-current inline-block" />
+              </Link>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Scroll hint */}
+        <motion.div
+          style={{ opacity: hintOpacity }}
+          className="absolute bottom-6 right-5 md:right-10 z-20 flex flex-col items-center gap-3"
+        >
+          <span className="text-warm-300 text-[10px] tracking-[0.4em] uppercase rotate-90 origin-center">
+            Scroll
+          </span>
+          <div className="w-px h-16 bg-gradient-to-b from-warm-300 to-transparent" />
+        </motion.div>
       </div>
     </section>
   );
