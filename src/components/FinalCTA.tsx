@@ -198,28 +198,6 @@ export default function FinalCTA() {
           ))}
         </motion.div>
       </div>
-
-      {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.9, delay: 0.8 }}
-        className="relative z-10 mt-14 md:mt-20 pt-7 md:pt-10 border-t border-warm-700/20 flex flex-col md:flex-row items-center justify-between gap-3"
-      >
-        <p className="text-warm-600 text-xs font-light tracking-wider">
-          © 2025 Sonder Studio. All rights reserved.
-        </p>
-        <p className="text-warm-700 text-[10px] tracking-[0.2em] uppercase">
-          <a
-            href="https://sonderproject.com"
-            className="text-warm-500 hover:text-gold transition-colors duration-300"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            sonderproject.com
-          </a>
-        </p>
-      </motion.div>
     </section>
   );
 }

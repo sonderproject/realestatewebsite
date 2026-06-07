@@ -11,6 +11,7 @@ import PricingSection from "@/components/PricingSection";
 import CredibilitySection from "@/components/CredibilitySection";
 import PhotographyPromo from "@/components/PhotographyPromo";
 import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   // Lenis smooth scroll setup
@@ -95,8 +96,11 @@ export default function HomePage() {
       {/* 7 — Photography: cross-sell to the Sonder Photography studio */}
       <PhotographyPromo />
 
-      {/* 8 — Contact: lead-capture form + footer */}
+      {/* 8 — Contact: lead-capture form */}
       <FinalCTA />
+
+      {/* 9 — Footer */}
+      <Footer />
     </main>
   );
 }

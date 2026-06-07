@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
 
 // ── Data ──────────────────────────────────────────────────────────────────
 
@@ -790,6 +791,7 @@ export default function PhotographyPage() {
       <ProcessPhotography />
       <BundleOffer />
       <FinalCTA />
+      <Footer />
     </main>
   );
 }
