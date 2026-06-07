@@ -6,7 +6,12 @@ import { motion, useInView } from "framer-motion";
 
 export default function FinalCTA() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const inView = useInView(ref, { once: true, amount: 0.05 });
+
+  // Own ref so the animation fires when THIS block enters the viewport,
+  // not when the top of the 1000px+ section does.
+  const secondaryRef = useRef<HTMLDivElement>(null);
+  const secondaryInView = useInView(secondaryRef, { once: true, amount: 0 });
 
   useEffect(() => {
     (async function () {
@@ -86,26 +91,32 @@ export default function FinalCTA() {
           Book a free intro call — we&apos;ll scope your site and answer anything.
         </motion.p>
 
-        {/* Primary: Cal.com inline embed */}
+        {/* Primary: Cal.com inline embed
+            min-h instead of fixed h so it auto-expands on mobile.
+            No overflow:scroll on the Cal component — that traps touch
+            scroll on iOS and prevents users from scrolling past the embed. */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.45 }}
-          className="rounded-2xl overflow-hidden shadow-2xl shadow-black/50 mb-12 md:mb-16 h-[640px] md:h-[720px]"
+          className="rounded-2xl overflow-hidden shadow-2xl shadow-black/50 mb-12 md:mb-16 min-h-[600px] md:min-h-[720px]"
         >
           <Cal
             namespace="sonder-studio"
             calLink="dante-valentino/sonder-studio"
-            style={{ width: "100%", height: "100%", overflow: "scroll" }}
+            style={{ width: "100%", height: "100%" }}
             config={{ layout: "month_view" }}
           />
         </motion.div>
 
-        {/* Secondary: Ready to start now */}
+        {/* Secondary: Ready to start now
+            Uses its own inView ref (amount:0) so the animation triggers
+            the moment this block scrolls into view on any screen size. */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.65 }}
+          ref={secondaryRef}
+          initial={{ opacity: 0, y: 16 }}
+          animate={secondaryInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
           className="text-center border-t border-white/10 pt-10 md:pt-12"
         >
           <p
