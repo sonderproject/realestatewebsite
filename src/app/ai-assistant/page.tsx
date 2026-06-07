@@ -238,39 +238,57 @@ function WhatItDoes() {
   const inView = useInView(ref, { once: true, amount: 0.15 });
 
   return (
-    <section ref={ref} className="bg-sand-50 py-12 px-5 md:py-20 md:px-16">
+    <section
+      ref={ref}
+      className="relative bg-obsidian py-12 px-5 md:py-20 md:px-16 overflow-hidden"
+    >
+      {/* Background photo */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/media/ai-assistant-bg.jpg')" }}
+      />
+      {/* Ocean-tinted overlay keeps the light skyline readable behind text */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(7,23,38,0.92) 0%, rgba(11,34,54,0.82) 45%, rgba(20,58,87,0.78) 100%)",
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-transparent to-obsidian/80" />
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="mb-8 md:mb-12 max-w-2xl"
+        className="relative z-10 mb-8 md:mb-12 max-w-2xl"
       >
-        <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
+        <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
           What It Does
         </p>
         <h2
-          className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05]"
+          className="text-3xl md:text-4xl lg:text-5xl font-light text-warm-50 leading-[1.05]"
           style={{ fontFamily: "var(--font-display)" }}
         >
           A full-time team member
           <br />
-          <em className="text-gold-dark">that never clocks out.</em>
+          <em className="text-gold-light font-normal">that never clocks out.</em>
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sand-200 rounded-2xl overflow-hidden border border-sand-200">
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
         {FEATURES.map((feature, i) => (
           <motion.div
             key={feature.text}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.06 * i }}
-            className="bg-white p-7 md:p-8 flex flex-col gap-4"
+            className="rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md p-7 md:p-8 flex flex-col gap-4"
           >
-            <div className="flex items-center justify-center w-11 h-11 rounded-2xl border border-gold-dark/20 bg-gold-dark/5 text-gold-dark text-lg">
+            <div className="flex items-center justify-center w-11 h-11 rounded-2xl border border-gold/30 bg-gold/10 text-gold text-lg">
               {feature.icon}
             </div>
-            <p className="text-warm-600 text-sm md:text-[15px] font-light leading-relaxed">
+            <p className="text-warm-200 text-sm md:text-[15px] font-light leading-relaxed">
               {feature.text}
             </p>
           </motion.div>
