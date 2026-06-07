@@ -85,7 +85,7 @@ export default function AIAssistantFeature() {
           </div>
 
           {/* Supporting points */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-14 mb-10 md:mb-14">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-14 mb-10 md:mb-14">
             {POINTS.map((point, i) => (
               <motion.div
                 key={point.label}

@@ -196,7 +196,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.3 }}
-              className="flex items-center gap-6"
+              className="flex flex-wrap items-center gap-x-6 gap-y-4"
             >
               <a
                 href="#pricing"

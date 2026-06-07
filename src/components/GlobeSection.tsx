@@ -539,7 +539,7 @@ export default function GlobeSection() {
                     e.stopPropagation();
                     setExpanded((p) => (p !== null ? p + 1 : p));
                   }}
-                  className="absolute bottom-24 right-4 flex flex-col items-center gap-1 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white hover:bg-white/20 transition-colors active:scale-95"
+                  className="absolute bottom-[7.5rem] md:bottom-24 right-4 flex flex-col items-center gap-1 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white hover:bg-white/20 transition-colors active:scale-95"
                   aria-label="Next"
                 >
                   <span className="text-[9px] tracking-widest uppercase opacity-70">Next</span>

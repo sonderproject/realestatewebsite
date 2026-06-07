@@ -172,7 +172,7 @@ function HeroPhotography() {
       <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-transparent to-obsidian/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-obsidian/50 via-transparent to-transparent" />
 
-      <div className="relative z-10 flex flex-col justify-end pb-16 px-5 md:pb-24 md:px-16 pt-32">
+      <div className="relative z-10 flex flex-col justify-end pb-16 px-5 md:pb-24 md:px-16 pt-24 md:pt-32">
         <div className="max-w-4xl">
 
           {/* Eye-catching badge — mirrors the homepage hero treatment */}
