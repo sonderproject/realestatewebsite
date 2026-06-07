@@ -89,7 +89,7 @@ export default function Navbar() {
           </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-7">
           {LINKS.map((item) => (
             <a
               key={item}
@@ -99,7 +99,17 @@ export default function Navbar() {
               {item}
             </a>
           ))}
-          {/* Cross-page link to the photography studio */}
+          {/* Cross-page links — pulsing dot flags these as live products */}
+          <Link
+            href="/ai-assistant"
+            className="flex items-center gap-2 text-gold-light text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
+            </span>
+            AI Assistant
+          </Link>
           <Link
             href="/photography"
             className="flex items-center gap-2 text-gold-light text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
@@ -174,7 +184,18 @@ export default function Navbar() {
                   {item}
                 </a>
               ))}
-              {/* Cross-page link to the photography studio */}
+              {/* Cross-page links */}
+              <Link
+                href="/ai-assistant"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-2.5 border-b border-white/5 py-4 text-gold-light text-sm tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
+              >
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
+                </span>
+                AI Assistant
+              </Link>
               <Link
                 href="/photography"
                 onClick={() => setMenuOpen(false)}

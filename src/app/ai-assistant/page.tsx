@@ -85,7 +85,7 @@ function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-obsidian/40 via-transparent to-obsidian/90" />
 
-      <div className="relative z-10 px-5 md:px-16 pt-32 pb-16 md:pt-44 md:pb-28">
+      <div className="relative z-10 px-5 md:px-16 pt-24 pb-16 md:pt-44 md:pb-28">
         <div className="max-w-4xl">
           {/* Eyebrow */}
           <motion.div
