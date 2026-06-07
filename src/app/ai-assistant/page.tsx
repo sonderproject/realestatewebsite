@@ -95,7 +95,7 @@ function Hero() {
         >
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/media/ai-hero.jpg')" }}
+            style={{ backgroundImage: "url('/media/pexels-rdne-8231167.jpg')" }}
           />
         </motion.div>
 
