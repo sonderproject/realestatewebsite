@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
 // Site-wide footer. Extracted so every page (home, photography, ai-assistant)
@@ -17,9 +18,20 @@ export default function Footer() {
         transition={{ duration: 0.9 }}
         className="mx-auto max-w-6xl pt-7 md:pt-10 border-t border-warm-700/20 flex flex-col md:flex-row items-center justify-between gap-3"
       >
-        <p className="text-warm-600 text-xs font-light tracking-wider">
-          © 2026 Sonder Studio. All rights reserved.
-        </p>
+        <div className="flex items-center gap-2.5">
+          <span className="relative block h-6 w-6 shrink-0 opacity-80">
+            <Image
+              src="/media/logo-mark.png"
+              alt="Sonder Studio"
+              fill
+              sizes="24px"
+              className="object-contain"
+            />
+          </span>
+          <p className="text-warm-600 text-xs font-light tracking-wider">
+            © 2026 Sonder Studio. All rights reserved.
+          </p>
+        </div>
         <p className="text-warm-700 text-[10px] tracking-[0.2em] uppercase">
           <a
             href="https://sonderstudio.space"

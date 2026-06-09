@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -76,7 +77,17 @@ export default function Navbar() {
       <div className="relative flex items-center justify-between px-5 md:px-10">
         {/* Plain anchor: navigates to the homepage from any sub-page, and
             triggers a full refresh when already on the homepage. */}
-        <a href="/" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2.5 group">
+          <span className="relative block h-8 w-8 md:h-9 md:w-9 shrink-0 transition-transform duration-500 group-hover:scale-105">
+            <Image
+              src="/media/logo-mark.png"
+              alt="Sonder Studio"
+              fill
+              priority
+              sizes="36px"
+              className="object-contain"
+            />
+          </span>
           <span
             className="text-warm-50 text-xl tracking-[0.25em] uppercase font-light"
             style={{ fontFamily: "var(--font-display)" }}
