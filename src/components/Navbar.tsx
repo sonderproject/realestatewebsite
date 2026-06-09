@@ -127,7 +127,7 @@ export default function Navbar() {
             href="#contact"
             className="glass-btn text-warm-50 text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
           >
-            Get a Quote
+            Book a Call
           </a>
           <Link
             href="/get-started"
@@ -229,7 +229,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="glass-btn text-warm-50 text-xs tracking-[0.2em] uppercase rounded-full px-6 py-3.5 font-medium text-center"
                 >
-                  Get a Quote
+                  Book a Call
                 </a>
               </div>
             </div>
