@@ -1,13 +1,11 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import type { MotionValue } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 
 const GLOBE_1_SRC = "/media/globe.jpg";
 const GLOBE_2_SRC = "/media/globe-2.jpg";
 const GLOBE_3_SRC = "/media/globe-3.jpg";
-const GLOBE_SIZE = "42vmin";
 
 const PLACES = [
   {
@@ -33,66 +31,41 @@ const PLACES = [
   },
 ];
 
-function SphereShading({ opacity }: { opacity: MotionValue<number> }) {
-  return (
-    <>
-      <motion.div
-        style={{
-          opacity,
-          background:
-            "radial-gradient(circle at 50% 50%, transparent 48%, rgba(3,6,10,0.94) 100%)",
-        }}
-        className="absolute inset-0 pointer-events-none"
-      />
-      <motion.div
-        style={{
-          opacity,
-          background:
-            "radial-gradient(circle at 32% 26%, rgba(255,255,255,0.36) 0%, transparent 40%)",
-        }}
-        className="absolute inset-0 pointer-events-none"
-      />
-    </>
-  );
-}
+// Auto-advance cadence (ms). Matches the progress-bar CSS duration below.
+const ADVANCE_MS = 5200;
 
-function GlobeTexture({ src }: { src: string }) {
-  return (
-    <div
-      className="globe-drift absolute inset-0"
-      style={{
-        backgroundImage: `url('${src}')`,
-        backgroundSize: "165% auto",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-      }}
-    />
-  );
-}
+const STATS = [
+  { value: "120+", label: "Websites Launched" },
+  { value: "40+", label: "Agents & Brokerages" },
+  { value: "3×", label: "Avg. Lead Increase" },
+];
 
 export default function GlobeSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: rawProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.15 });
 
-  // Smooth the raw scroll progress with a spring. Every globe motion below
-  // reads from this instead of the raw value, so the whole sequence eases
-  // fluidly rather than tracking scroll 1:1 (which feels steppy/jittery,
-  // especially on mobile and trackpads).
-  const scrollYProgress = useSpring(rawProgress, {
-    stiffness: 70,
-    damping: 26,
-    restDelta: 0.0005,
-  });
-
-  // ── Lightbox state ────────────────────────────────────────────────────
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   const [expanded, setExpanded] = useState<number | null>(null);
 
+  const place = PLACES[active];
+  const frozen = paused || expanded !== null;
+
+  // Auto-advance through the locations. Re-arms on every change, so a manual
+  // selection also resets the timer. Pauses on hover or while the lightbox is
+  // open. No scroll hijacking — the section lives in normal document flow.
+  useEffect(() => {
+    if (frozen) return;
+    const id = setTimeout(
+      () => setActive((p) => (p + 1) % PLACES.length),
+      ADVANCE_MS
+    );
+    return () => clearTimeout(id);
+  }, [active, frozen]);
+
+  // ── Lightbox ──────────────────────────────────────────────────────────
   const closeExpanded = useCallback(() => setExpanded(null), []);
 
-  // Keyboard navigation for lightbox
   useEffect(() => {
     if (expanded === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -106,354 +79,235 @@ export default function GlobeSection() {
     return () => window.removeEventListener("keydown", onKey);
   }, [expanded, closeExpanded]);
 
-  // ── 1.5 s scroll lock when Globe 3 fully expands ─────────────────────
-  useEffect(() => {
-    let locked = false;
-    let lockTimer: ReturnType<typeof setTimeout> | null = null;
-
-    const prevent = (e: Event) => { e.preventDefault(); };
-
-    const lock = () => {
-      if (locked) return;
-      locked = true;
-      // Pause Lenis on desktop
-      window.dispatchEvent(new CustomEvent("sonder:scroll-lock"));
-      // Block native wheel + touch scroll (mobile + trackpad)
-      window.addEventListener("wheel", prevent, { passive: false });
-      window.addEventListener("touchmove", prevent, { passive: false });
-
-      lockTimer = setTimeout(() => {
-        unlock();
-      }, 1500);
-    };
-
-    const unlock = () => {
-      window.removeEventListener("wheel", prevent);
-      window.removeEventListener("touchmove", prevent);
-      window.dispatchEvent(new CustomEvent("sonder:scroll-unlock"));
-      if (lockTimer) { clearTimeout(lockTimer); lockTimer = null; }
-    };
-
-    const unsub = scrollYProgress.on("change", (v) => {
-      if (v >= 0.88) lock();
-      // Reset so lock fires again if user scrolls back up then down
-      if (v < 0.78) { locked = false; }
-    });
-
-    return () => {
-      unsub();
-      unlock();
-    };
-  }, [scrollYProgress]);
-
-  // ── Phase timeline (350vh) ────────────────────────────────────────────
-  //  0.00–0.30  Flat coastal image zooms in → intro caption
-  //  0.30–0.46  Corners round to sphere, space backdrop fades in
-  //  0.46–0.64  Globe 1 slides UP off screen, Globe 2 rises from below
-  //  0.63–0.78  Globe 2 slides UP off screen, Globe 3 rises from below
-  //  0.76–0.93  Globe 3 (centered) expands to fill screen
-  //  0.91–1.00  Full-screen coastal image — info section
-  // ─────────────────────────────────────────────────────────────────────
-
-  const spaceOpacity = useTransform(
-    scrollYProgress,
-    [0.22, 0.42, 0.84, 0.96],
-    [0, 1, 1, 0]
-  );
-  const sphereShading = useTransform(scrollYProgress, [0.30, 0.48], [0, 1]);
-
-  // Globe 1 — zooms in, rounds, slides UP
-  const g1Scale = useTransform(scrollYProgress, [0, 0.22, 0.42], [1.1, 1.55, 1.0]);
-  const g1Radius = useTransform(scrollYProgress, [0.24, 0.44], ["3%", "50%"]);
-  const g1Y = useTransform(scrollYProgress, [0.44, 0.62], [0, -800]);
-  const g1Opacity = useTransform(scrollYProgress, [0.46, 0.60], [1, 0]);
-  const g1GlowOpacity = useTransform(
-    scrollYProgress,
-    [0.30, 0.48, 0.50, 0.62],
-    [0, 1, 1, 0]
-  );
-
-  // Globe 2 — rises from below, slides UP
-  const g2Scale = useTransform(scrollYProgress, [0.46, 0.56], [0.7, 1.0]);
-  const g2Y = useTransform(
-    scrollYProgress,
-    [0.46, 0.56, 0.63, 0.76],
-    [800, 0, 0, -800]
-  );
-  const g2Opacity = useTransform(
-    scrollYProgress,
-    [0.46, 0.55, 0.64, 0.76],
-    [0, 1, 1, 0]
-  );
-
-  // Globe 3 — rises from below, expands to fill screen
-  const g3Y = useTransform(scrollYProgress, [0.63, 0.76], [800, 0]);
-  const g3Scale = useTransform(
-    scrollYProgress,
-    [0.63, 0.76, 0.93],
-    [0.7, 1.0, 6.4]
-  );
-  const g3Opacity = useTransform(scrollYProgress, [0.63, 0.74], [0, 1]);
-  const g3Radius = useTransform(
-    scrollYProgress,
-    [0.63, 0.76, 0.91],
-    ["50%", "50%", "0%"]
-  );
-  const overlayOpacity = useTransform(scrollYProgress, [0.82, 0.94], [0, 1]);
-
-  const infoOpacity = useTransform(scrollYProgress, [0.91, 0.97], [0, 1]);
-  const infoY = useTransform(scrollYProgress, [0.91, 0.97], [28, 0]);
-
-  const intro = useTransform(
-    scrollYProgress,
-    [0.02, 0.12, 0.20, 0.30],
-    [0, 1, 1, 0]
-  );
-
-  // Per-globe captions
-  const cap1 = useTransform(scrollYProgress, [0.30, 0.36, 0.44, 0.50], [0, 1, 1, 0]);
-  const cap2 = useTransform(scrollYProgress, [0.50, 0.57, 0.63, 0.70], [0, 1, 1, 0]);
-  const cap3 = useTransform(scrollYProgress, [0.70, 0.77, 0.81, 0.86], [0, 1, 1, 0]);
-  const captions = [cap1, cap2, cap3];
-  const capY1 = useTransform(scrollYProgress, [0.30, 0.36], [18, 0]);
-  const capY2 = useTransform(scrollYProgress, [0.50, 0.57], [18, 0]);
-  const capY3 = useTransform(scrollYProgress, [0.70, 0.77], [18, 0]);
-  const capYs = [capY1, capY2, capY3];
-
-  // Progress rail — now vertical (01 top, 03 bottom matches downward flow)
-  const railOpacity = useTransform(scrollYProgress, [0.28, 0.34, 0.82, 0.88], [0, 1, 1, 0]);
-  const dot1 = useTransform(scrollYProgress, [0.30, 0.36, 0.46, 0.50], [0.25, 1, 1, 0.25]);
-  const dot2 = useTransform(scrollYProgress, [0.50, 0.57, 0.63, 0.70], [0.25, 1, 1, 0.25]);
-  const dot3 = useTransform(scrollYProgress, [0.70, 0.77, 0.83, 0.87], [0.25, 1, 1, 0.25]);
-  const dots = [dot1, dot2, dot3];
-
-  // Shared expand-hint hover class (only visible when shading makes sphere clear)
-  const globeBase = "relative overflow-hidden bg-[#0c2733] cursor-pointer select-none";
-
   return (
     <>
-      <section ref={ref} className="relative bg-obsidian" style={{ height: "350vh" }}>
-        <div className="sticky top-0 h-screen w-full overflow-hidden bg-obsidian">
+      <section
+        ref={ref}
+        className="relative bg-obsidian overflow-hidden px-5 py-16 md:px-16 md:py-24"
+      >
+        {/* Signature brand atmosphere — drifting aurora + faint starfield */}
+        <div className="aurora opacity-40" />
+        <div className="starfield absolute inset-0 opacity-[0.25] pointer-events-none" />
 
-          {/* Deep-space backdrop */}
-          <motion.div style={{ opacity: spaceOpacity }} className="absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#0b1e2e_0%,#060606_72%)]" />
-            <div className="starfield absolute inset-0" />
-          </motion.div>
-
-          {/* Atmospheric glow — tracks Globe 1 vertically */}
-          <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-            <motion.div
-              style={{
-                opacity: g1GlowOpacity,
-                scale: g1Scale,
-                y: g1Y,
-                width: GLOBE_SIZE,
-                height: GLOBE_SIZE,
-                boxShadow:
-                  "0 0 80px 22px rgba(120,170,220,0.32), inset 0 0 50px rgba(150,195,235,0.18)",
-              }}
-              className="rounded-full"
-            />
-          </div>
-
-          {/* ── Globe 1 ── */}
-          <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-            <motion.div
-              style={{
-                scale: g1Scale,
-                y: g1Y,
-                opacity: g1Opacity,
-                borderRadius: g1Radius,
-                width: GLOBE_SIZE,
-                height: GLOBE_SIZE,
-                willChange: "transform, opacity",
-              }}
-              className={`${globeBase} pointer-events-auto`}
-              onClick={() => setExpanded(0)}
-              role="button"
-              aria-label="Expand Ocean Beach image"
-            >
-              <GlobeTexture src={GLOBE_1_SRC} />
-              <SphereShading opacity={sphereShading} />
-              <ExpandHint />
-            </motion.div>
-          </div>
-
-          {/* ── Globe 2 ── */}
-          <div className="absolute inset-0 z-[21] flex items-center justify-center pointer-events-none">
-            <motion.div
-              style={{
-                scale: g2Scale,
-                y: g2Y,
-                opacity: g2Opacity,
-                borderRadius: "50%",
-                width: GLOBE_SIZE,
-                height: GLOBE_SIZE,
-                willChange: "transform, opacity",
-              }}
-              className={`${globeBase} pointer-events-auto`}
-              onClick={() => setExpanded(1)}
-              role="button"
-              aria-label="Expand La Jolla Heights image"
-            >
-              <GlobeTexture src={GLOBE_2_SRC} />
-              <SphereShading opacity={sphereShading} />
-              <ExpandHint />
-            </motion.div>
-          </div>
-
-          {/* ── Globe 3 — expands to fill screen ── */}
-          <div className="absolute inset-0 z-[22] flex items-center justify-center pointer-events-none">
-            <motion.div
-              style={{
-                scale: g3Scale,
-                y: g3Y,
-                opacity: g3Opacity,
-                borderRadius: g3Radius,
-                width: GLOBE_SIZE,
-                height: GLOBE_SIZE,
-                // NOTE: deliberately no will-change here. Globe 3 scales 6.4×
-                // to fill the screen; a cached GPU layer would rasterize it at
-                // the small base size and upscale the blurry texture. Letting
-                // the browser re-rasterize keeps the expanded image crisp.
-              }}
-              className={`${globeBase} pointer-events-auto`}
-              onClick={() => setExpanded(2)}
-              role="button"
-              aria-label="Expand Downtown San Diego image"
-            >
-              <GlobeTexture src={GLOBE_3_SRC} />
-              <SphereShading opacity={sphereShading} />
-              {/* Readability overlay as globe fills screen */}
-              <motion.div
-                style={{ opacity: overlayOpacity }}
-                className="absolute inset-0 bg-obsidian/65 pointer-events-none"
-              />
-              <ExpandHint />
-            </motion.div>
-          </div>
-
-          {/* Left progress rail */}
+        <div className="relative z-10 max-w-6xl mx-auto">
+          {/* Header */}
           <motion.div
-            style={{ opacity: railOpacity }}
-            className="absolute left-5 md:left-10 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-5 pointer-events-none"
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9 }}
+            className="mb-8 md:mb-12 max-w-2xl"
           >
-            {dots.map((op, i) => (
-              <motion.div
-                key={i}
-                style={{ opacity: op }}
-                className="flex flex-col items-center gap-5"
-              >
-                <span
-                  className="text-warm-50 text-[10px] tracking-[0.3em] font-light"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {PLACES[i].index}
-                </span>
-                {i < PLACES.length - 1 && (
-                  <span className="w-px h-8 bg-gold/40" />
-                )}
-              </motion.div>
-            ))}
+            <p className="text-gold text-[10px] md:text-xs tracking-[0.4em] uppercase mb-4 font-medium">
+              Your Market
+            </p>
+            <h2
+              className="text-3xl md:text-4xl lg:text-5xl font-light text-warm-50 leading-[1.05]"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Your city. <em className="text-gold-light font-normal">Your brand.</em>
+            </h2>
+            <p className="text-warm-400 text-sm md:text-base font-light leading-relaxed mt-4 max-w-lg">
+              From the coast to downtown, we build the digital presence that wins
+              the neighborhoods you work. Every market, beautifully presented.
+            </p>
           </motion.div>
 
-          {/* Per-globe location captions */}
-          <div className="absolute inset-x-0 bottom-[13vh] z-30 flex justify-center pointer-events-none">
-            <div className="relative w-full max-w-md h-24">
-              {PLACES.map((place, i) => (
-                <motion.div
-                  key={place.name}
-                  style={{ opacity: captions[i], y: capYs[i] }}
-                  className="absolute inset-x-0 text-center px-6"
-                >
-                  <p className="text-gold text-[10px] tracking-[0.45em] uppercase mb-2 font-light">
-                    {place.coords}
-                  </p>
-                  <h3
-                    className="text-2xl md:text-3xl font-light text-warm-50 mb-1"
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      textShadow: "0 2px 24px rgba(0,0,0,0.7)",
-                    }}
-                  >
-                    {place.name}
-                  </h3>
-                  <p className="text-warm-300 text-xs font-light italic tracking-wide">
-                    {place.tag}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Intro caption */}
-          <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
-            <motion.div style={{ opacity: intro }} className="text-center px-8">
-              <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4 font-light">
-                Your Market
-              </p>
-              <h2
-                className="text-4xl md:text-6xl font-light text-warm-50"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  textShadow: "0 2px 30px rgba(0,0,0,0.7)",
-                }}
-              >
-                Your City. Your Brand.
-              </h2>
-            </motion.div>
-          </div>
-
-          {/* Info over expanded Globe 3 */}
-          <div className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none">
-            <motion.div
-              style={{ opacity: infoOpacity, y: infoY }}
-              className="text-center px-6 max-w-4xl w-full"
+          {/* Interactive location gallery */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.15 }}
+            className="grid lg:grid-cols-[1.55fr_1fr] gap-4 md:gap-6"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {/* ── Feature image ── */}
+            <div
+              className="group relative rounded-3xl overflow-hidden h-[46vh] sm:h-[54vh] lg:h-[62vh] bg-[#0c2733] cursor-pointer"
+              onClick={() => setExpanded(active)}
+              role="button"
+              aria-label={`Expand ${place.name} image`}
             >
-              <p className="text-gold text-xs tracking-[0.4em] uppercase mb-6 font-light">
-                One Agency
-              </p>
-              <h2
-                className="text-3xl md:text-5xl font-light text-warm-50 mb-8 md:mb-10 leading-tight"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Built for the markets
-                <br />
-                <em className="text-gold-light font-normal">where stakes are high.</em>
-              </h2>
-
-              <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-4 mb-9 md:mb-11 max-w-2xl mx-auto">
-                {[
-                  { value: "120+", label: "Websites Launched" },
-                  { value: "40+", label: "Agents & Brokerages" },
-                  { value: "3×", label: "Avg. Lead Increase" },
-                ].map(({ value, label }) => (
-                  <div
-                    key={label}
-                    className="flex-1 rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md px-5 py-5 text-center"
-                  >
-                    <p
-                      className="text-2xl md:text-3xl lg:text-4xl text-gold-light font-medium mb-1"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {value}
-                    </p>
-                    <p className="text-warm-300 text-[10px] tracking-[0.2em] uppercase font-medium">
-                      {label}
-                    </p>
-                  </div>
-                ))}
+              {/* Auto-advance progress bar */}
+              <div className="absolute top-0 inset-x-0 h-[3px] bg-white/10 z-30">
+                <div
+                  key={active}
+                  className="h-full bg-gold"
+                  style={{
+                    animation: `gallery-progress ${ADVANCE_MS}ms linear forwards`,
+                    animationPlayState: frozen ? "paused" : "running",
+                  }}
+                />
               </div>
 
-              <a
-                href="#contact"
-                className="glass-btn-accent pointer-events-auto inline-block text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium"
+              {/* Crossfading images with a slow Ken Burns drift */}
+              <AnimatePresence>
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  <div
+                    className="kenburns absolute inset-0"
+                    style={{ backgroundImage: `url('${place.src}')` }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Legibility gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-obsidian/15 to-obsidian/10 pointer-events-none" />
+
+              {/* Ghost numeral — editorial signature */}
+              <span
+                className="absolute top-3 left-5 text-[5rem] md:text-[7rem] leading-none font-light text-white/10 select-none pointer-events-none"
+                style={{ fontFamily: "var(--font-display)" }}
               >
-                Book a Consultation
-              </a>
-            </motion.div>
-          </div>
+                {place.index}
+              </span>
+
+              {/* View hint */}
+              <span className="absolute top-5 right-5 z-20 flex items-center gap-1.5 bg-black/40 text-white text-[10px] tracking-[0.2em] uppercase rounded-full px-3 py-1.5 backdrop-blur-sm border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                  <path
+                    d="M1 10L10 1M10 1H5M10 1v5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                View
+              </span>
+
+              {/* Live caption — animates on each location change */}
+              <div className="absolute inset-x-0 bottom-0 z-20 p-6 md:p-8 pointer-events-none">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active}
+                    initial={{ opacity: 0, y: 14 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <p className="text-gold text-[10px] md:text-[11px] tracking-[0.4em] uppercase mb-2 font-light">
+                      {place.coords}
+                    </p>
+                    <h3
+                      className="text-2xl md:text-4xl font-light text-warm-50 mb-1"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        textShadow: "0 2px 24px rgba(0,0,0,0.6)",
+                      }}
+                    >
+                      {place.name}
+                    </h3>
+                    <p className="text-warm-300 text-xs md:text-sm font-light italic tracking-wide">
+                      {place.tag}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* ── Location selector ── */}
+            <div className="flex flex-col gap-3">
+              {PLACES.map((p, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={p.name}
+                    onClick={() => setActive(i)}
+                    className={`group relative text-left rounded-2xl border px-5 py-4 md:px-6 md:py-5 transition-all duration-300 ${
+                      isActive
+                        ? "border-gold/40 bg-white/[0.06]"
+                        : "border-white/[0.07] bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/15"
+                    }`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <span
+                        className={`text-base md:text-lg font-light tabular-nums leading-none mt-0.5 transition-colors duration-300 ${
+                          isActive ? "text-gold" : "text-warm-500 group-hover:text-warm-300"
+                        }`}
+                        style={{ fontFamily: "var(--font-display)" }}
+                      >
+                        {p.index}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <h3
+                          className={`text-lg md:text-xl font-light transition-colors duration-300 ${
+                            isActive ? "text-warm-50" : "text-warm-300 group-hover:text-warm-100"
+                          }`}
+                          style={{ fontFamily: "var(--font-display)" }}
+                        >
+                          {p.name}
+                        </h3>
+                        <p
+                          className={`text-[10px] tracking-[0.25em] uppercase mt-1 transition-colors duration-300 ${
+                            isActive ? "text-gold/80" : "text-warm-600"
+                          }`}
+                        >
+                          {p.coords}
+                        </p>
+                        {/* Tag reveals on the active row */}
+                        <div
+                          className={`grid transition-all duration-400 ${
+                            isActive ? "grid-rows-[1fr] opacity-100 mt-2" : "grid-rows-[0fr] opacity-0"
+                          }`}
+                        >
+                          <p className="overflow-hidden text-warm-400 text-xs font-light italic leading-relaxed">
+                            {p.tag}
+                          </p>
+                        </div>
+                      </div>
+                      {/* Active marker */}
+                      <span
+                        className={`mt-1 h-2 w-2 rounded-full shrink-0 transition-all duration-300 ${
+                          isActive ? "bg-gold scale-100" : "bg-white/15 scale-75 group-hover:bg-white/30"
+                        }`}
+                      />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Stats + CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="mt-10 md:mt-14 flex flex-col lg:flex-row lg:items-center justify-between gap-8"
+          >
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 flex-1 max-w-2xl">
+              {STATS.map(({ value, label }) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-md px-4 py-5 text-center"
+                >
+                  <p
+                    className="text-2xl md:text-3xl lg:text-4xl text-gold-light font-medium mb-1"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {value}
+                  </p>
+                  <p className="text-warm-400 text-[10px] tracking-[0.18em] uppercase font-medium leading-tight">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="#contact"
+              className="glass-btn-accent inline-block text-center text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium shrink-0"
+            >
+              Book a Consultation
+            </a>
+          </motion.div>
         </div>
       </section>
 
@@ -469,7 +323,7 @@ export default function GlobeSection() {
             style={{ backgroundColor: "rgba(4,8,14,0.92)" }}
             onClick={closeExpanded}
           >
-            {/* Backdrop blur layer */}
+            {/* Backdrop blur */}
             <div
               className="absolute inset-0"
               style={{
@@ -489,7 +343,6 @@ export default function GlobeSection() {
               style={{ width: "min(90vw, 860px)", height: "min(80vh, 560px)" }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Photo */}
               <div
                 className="absolute inset-0"
                 style={{
@@ -499,7 +352,6 @@ export default function GlobeSection() {
                 }}
               />
 
-              {/* Bottom caption */}
               <div className="absolute inset-x-0 bottom-0 px-6 py-7 bg-gradient-to-t from-black/85 via-black/40 to-transparent">
                 <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-1 font-light">
                   {PLACES[expanded].coords}
@@ -515,7 +367,7 @@ export default function GlobeSection() {
                 </p>
               </div>
 
-              {/* Prev — swipe up metaphor */}
+              {/* Prev */}
               {expanded > 0 && (
                 <button
                   onClick={(e) => {
@@ -526,13 +378,21 @@ export default function GlobeSection() {
                   aria-label="Previous"
                 >
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 12V4M4 8l4-4 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M8 12V4M4 8l4-4 4 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
-                  <span className="text-[9px] tracking-widest uppercase opacity-70">Prev</span>
+                  <span className="text-[9px] tracking-widest uppercase opacity-70">
+                    Prev
+                  </span>
                 </button>
               )}
 
-              {/* Next — swipe down metaphor */}
+              {/* Next */}
               {expanded < PLACES.length - 1 && (
                 <button
                   onClick={(e) => {
@@ -542,9 +402,17 @@ export default function GlobeSection() {
                   className="absolute bottom-[7.5rem] md:bottom-24 right-4 flex flex-col items-center gap-1 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white hover:bg-white/20 transition-colors active:scale-95"
                   aria-label="Next"
                 >
-                  <span className="text-[9px] tracking-widest uppercase opacity-70">Next</span>
+                  <span className="text-[9px] tracking-widest uppercase opacity-70">
+                    Next
+                  </span>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 4v8M4 8l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M8 4v8M4 8l4 4 4-4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
               )}
@@ -557,16 +425,24 @@ export default function GlobeSection() {
               aria-label="Close"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path
+                  d="M1 1l12 12M13 1L1 13"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
               </svg>
             </button>
 
-            {/* Dot indicator */}
+            {/* Dots */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2.5">
               {PLACES.map((_, i) => (
                 <button
                   key={i}
-                  onClick={(e) => { e.stopPropagation(); setExpanded(i); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setExpanded(i);
+                  }}
                   className={`rounded-full transition-all duration-300 ${
                     i === expanded
                       ? "w-5 h-2 bg-gold"
@@ -580,19 +456,5 @@ export default function GlobeSection() {
         )}
       </AnimatePresence>
     </>
-  );
-}
-
-// Small expand-hint overlay shown on hover / focus
-function ExpandHint() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 focus-within:opacity-100 transition-opacity duration-200 pointer-events-none">
-      <span className="flex items-center gap-1.5 bg-black/50 text-white text-[10px] tracking-[0.2em] uppercase rounded-full px-3 py-1.5 backdrop-blur-sm border border-white/20">
-        <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-          <path d="M1 10L10 1M10 1H5M10 1v5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        View
-      </span>
-    </div>
   );
 }

@@ -164,6 +164,26 @@ em {
   .globe-drift { animation: none; background-position: center center; }
 }
 
+/* Location gallery: slow Ken Burns drift on the active feature image */
+@keyframes kenburns {
+  0%   { transform: scale(1.02) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1%); }
+}
+.kenburns {
+  background-size: cover;
+  background-position: center;
+  animation: kenburns 9s ease-out forwards;
+  will-change: transform;
+}
+/* Location gallery: auto-advance progress bar fill */
+@keyframes gallery-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kenburns { animation: none; transform: none; }
+}
+
 /* ───────────────────────────────────────────────────────────────────────
    SIGNATURE SYSTEM — the distinctive, recurring brand language
    ─────────────────────────────────────────────────────────────────────── */

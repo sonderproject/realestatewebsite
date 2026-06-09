@@ -8,11 +8,11 @@ import ServicesSection from "@/components/ServicesSection";
 import AIAssistantFeature from "@/components/AIAssistantFeature";
 
 // Below-fold sections — code-split so their JS only downloads after the
-// above-fold content is interactive. GlobeSection gets a height placeholder
-// matching its scroll-pin height (350vh) to prevent layout shift.
+// above-fold content is interactive. GlobeSection gets a min-height
+// placeholder to reduce layout shift while its chunk loads.
 const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
   ssr: false,
-  loading: () => <div style={{ height: "350vh" }} className="bg-obsidian" />,
+  loading: () => <div className="min-h-screen bg-obsidian" />,
 });
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const CredibilitySection = dynamic(() => import("@/components/CredibilitySection"));
@@ -89,7 +89,7 @@ export default function HomePage() {
       {/* 3 — AI Lead Assistant: flagship differentiator spotlight */}
       <AIAssistantFeature />
 
-      {/* 4 — Globe: animated "your market" interlude */}
+      {/* 4 — Market: interactive San Diego location gallery */}
       <GlobeSection />
 
       {/* 4 — Process: how a project runs, first call to launch */}
