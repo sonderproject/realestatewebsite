@@ -122,12 +122,20 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <a
-          href="#contact"
-          className="glass-btn hidden md:block text-warm-50 text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
-        >
-          Get a Quote
-        </a>
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="#contact"
+            className="glass-btn text-warm-50 text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
+          >
+            Get a Quote
+          </a>
+          <Link
+            href="/get-started"
+            className="glass-btn-accent text-white text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
+          >
+            Get Started
+          </Link>
+        </div>
 
         {/* Mobile hamburger / close toggle */}
         <button
@@ -208,13 +216,22 @@ export default function Navbar() {
                 Photography
               </Link>
 
-              <a
-                href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="glass-btn-accent mt-5 text-white text-xs tracking-[0.2em] uppercase rounded-full px-6 py-3.5 font-medium text-center"
-              >
-                Get a Quote
-              </a>
+              <div className="flex flex-col gap-3 mt-5">
+                <Link
+                  href="/get-started"
+                  onClick={() => setMenuOpen(false)}
+                  className="glass-btn-accent text-white text-xs tracking-[0.2em] uppercase rounded-full px-6 py-3.5 font-medium text-center"
+                >
+                  Get Started →
+                </Link>
+                <a
+                  href="#contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="glass-btn text-warm-50 text-xs tracking-[0.2em] uppercase rounded-full px-6 py-3.5 font-medium text-center"
+                >
+                  Get a Quote
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

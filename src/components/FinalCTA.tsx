@@ -129,13 +129,13 @@ export default function FinalCTA() {
             Already know what you need?
           </p>
           <p className="text-warm-500 text-sm font-light mb-6 max-w-xs mx-auto leading-relaxed">
-            Configure your plan and get started instantly.
+            Configure your plan and get started instantly — no call needed.
           </p>
           <a
-            href="/#pricing"
-            className="glass-btn inline-block text-warm-50 text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
+            href="/get-started"
+            className="glass-btn-accent inline-block text-white text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
           >
-            Build Your Plan
+            Get Started Now →
           </a>
         </motion.div>
       </div>
