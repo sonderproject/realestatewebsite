@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* --font-display and --font-body are injected by next/font via the <html>
+   class in layout.tsx. These fallbacks apply only if the font hasn't loaded. */
 :root {
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-display: system-ui, sans-serif;
+  --font-body: system-ui, sans-serif;
 }
 
 html {

@@ -1,17 +1,25 @@
 "use client";
 
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import GlobeSection from "@/components/GlobeSection";
 import ServicesSection from "@/components/ServicesSection";
 import AIAssistantFeature from "@/components/AIAssistantFeature";
-import ProcessSection from "@/components/ProcessSection";
-import PricingSection from "@/components/PricingSection";
-import CredibilitySection from "@/components/CredibilitySection";
-import PhotographyPromo from "@/components/PhotographyPromo";
-import FinalCTA from "@/components/FinalCTA";
-import Footer from "@/components/Footer";
+
+// Below-fold sections — code-split so their JS only downloads after the
+// above-fold content is interactive. GlobeSection gets a height placeholder
+// matching its scroll-pin height (350vh) to prevent layout shift.
+const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
+  ssr: false,
+  loading: () => <div style={{ height: "350vh" }} className="bg-obsidian" />,
+});
+const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const CredibilitySection = dynamic(() => import("@/components/CredibilitySection"));
+const PricingSection = dynamic(() => import("@/components/PricingSection"));
+const PhotographyPromo = dynamic(() => import("@/components/PhotographyPromo"));
+const FinalCTA = dynamic(() => import("@/components/FinalCTA"), { ssr: false });
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function HomePage() {
   // Lenis smooth scroll setup
