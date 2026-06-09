@@ -248,17 +248,33 @@ em {
   to   { transform: scaleX(1); }
 }
 
-/* Animated gradient text — for signature accent words. */
+/* Holographic iridescent text — diagonal sweep of white + cool spectrum. */
 .text-shimmer {
-  background: linear-gradient(100deg, #62B4E6 0%, #FECA57 45%, #3E9BD4 70%, #62B4E6 100%);
-  background-size: 220% auto;
+  background: linear-gradient(
+    135deg,
+    #ffffff  0%,
+    #a8d8f8  8%,
+    #48dbfb 16%,
+    #a29bfe 24%,
+    #fd79a8 31%,
+    #ffffff 38%,
+    #74c7f0 46%,
+    #0984e3 54%,
+    #6c5ce7 61%,
+    #00cec9 68%,
+    #ffffff 75%,
+    #74b9ff 83%,
+    #c8a4f8 91%,
+    #ffffff 100%
+  );
+  background-size: 300% auto;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 6s linear infinite;
+  animation: shimmer 3.5s linear infinite;
 }
 @keyframes shimmer {
-  to { background-position: 220% center; }
+  to { background-position: 300% center; }
 }
 @media (prefers-reduced-motion: reduce) {
   .text-shimmer { animation: none; }
