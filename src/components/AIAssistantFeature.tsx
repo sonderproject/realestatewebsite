@@ -37,10 +37,10 @@ export default function AIAssistantFeature() {
         transition={{ duration: 0.9 }}
         className="relative rounded-3xl overflow-hidden bg-obsidian"
       >
-        {/* Dusk skyline — sets the after-hours, "while you sleep" mood */}
+        {/* Waterfront property at golden hour — premium real estate backdrop */}
         <Image
-          src="/media/sonder-edge-skyline.jpg"
-          alt="City skyline at dusk"
+          src="/media/sonder-edge-waterfront.jpg"
+          alt="Waterfront property at golden hour"
           fill
           sizes="(max-width: 768px) 100vw, 90vw"
           className="object-cover object-center"
