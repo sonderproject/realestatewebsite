@@ -88,7 +88,15 @@ export default function HeroSection() {
     for (let i = 0; i < FRAME_COUNT; i++) {
       const img = new Image();
       img.src = framePath(set, i);
-      if (i === 0) img.onload = () => draw(frameRef.current);
+      if (i === 0)
+        img.onload = () => {
+          draw(frameRef.current);
+          // Fade the canvas in over the poster so the switch is invisible
+          if (canvasRef.current) {
+            canvasRef.current.style.transition = "opacity 0.4s ease";
+            canvasRef.current.style.opacity = "1";
+          }
+        };
       imgs.push(img);
     }
     imagesRef.current = imgs;
@@ -140,8 +148,8 @@ export default function HeroSection() {
           style={{ backgroundImage: "url('/media/hero-poster.jpg')" }}
         />
 
-        {/* Scroll-driven frame canvas */}
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+        {/* Scroll-driven frame canvas — starts hidden, fades in once frame 0 is ready */}
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ opacity: 0 }} />
 
         {/* Cinematic gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/90" />

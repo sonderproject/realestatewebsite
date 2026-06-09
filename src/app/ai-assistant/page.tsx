@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useInView, useScroll, useTransform, useSpring } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -93,10 +94,15 @@ function Hero() {
           className="absolute inset-0 will-change-transform"
           style={{ scale: imageScale, y: imageY }}
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundColor: '#071726', backgroundImage: "url('/media/pexels-rdne-8231167.jpg')" }}
-          />
+          <div className="absolute inset-0" style={{ backgroundColor: '#071726' }}>
+            <Image
+              src="/media/pexels-rdne-8231167.jpg"
+              alt=""
+              fill
+              priority
+              className="object-cover object-center"
+            />
+          </div>
         </motion.div>
 
         {/* Ocean-tinted darkening overlay — deepens as you scroll for legibility */}
