@@ -200,9 +200,9 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.9] mb-5 md:mb-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Real Estate Websites
+              Win More Listings.
               <br />
-              <em className="text-shimmer font-normal">That Win Clients.</em>
+              <em className="text-shimmer font-normal">Close More Deals.</em>
             </motion.h1>
 
             <motion.p
