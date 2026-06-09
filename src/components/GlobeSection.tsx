@@ -253,7 +253,7 @@ export default function GlobeSection() {
                         </p>
                         {/* Tag reveals on the active row */}
                         <div
-                          className={`grid transition-all duration-400 ${
+                          className={`grid transition-all duration-300 ${
                             isActive ? "grid-rows-[1fr] opacity-100 mt-2" : "grid-rows-[0fr] opacity-0"
                           }`}
                         >
@@ -303,7 +303,7 @@ export default function GlobeSection() {
 
             <a
               href="#contact"
-              className="glass-btn-accent inline-block text-center text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium shrink-0"
+              className="glass-btn-accent block w-full lg:w-auto text-center text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium shrink-0"
             >
               Book a Consultation
             </a>
