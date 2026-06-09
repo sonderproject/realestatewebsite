@@ -43,8 +43,8 @@ const TIERS = [
   {
     name: "Apartment",
     audience: "Apartment communities",
-    monthly: 497,
-    setup: "$1,497",
+    monthly: 697,
+    setup: "$1,997",
     featured: true,
     badge: "Most Popular",
     ai: { price: 147, label: "AI leasing assistant answers availability & books tours 24/7" },
@@ -65,8 +65,8 @@ const TIERS = [
   {
     name: "Broker / Co.",
     audience: "Brokerages & management companies",
-    monthly: 997,
-    setup: "$2,997",
+    monthly: 1497,
+    setup: "$3,997",
     featured: false,
     badge: null,
     ai: { price: 197, label: "AI assistant handles lead routing, FAQs & agent recruitment 24/7" },

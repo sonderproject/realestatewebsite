@@ -30,8 +30,8 @@ const tiers = [
   {
     name: "Apartment",
     audience: "Apartment communities",
-    monthly: "$497",
-    setup: "$1,497",
+    monthly: "$697",
+    setup: "$1,997",
     setupLabel: "one-time setup",
     featured: true,
     badge: "Most Popular",
@@ -52,8 +52,8 @@ const tiers = [
   {
     name: "Broker / Co.",
     audience: "Brokerages & management companies",
-    monthly: "$997",
-    setup: "$2,997",
+    monthly: "$1,497",
+    setup: "$3,997",
     setupLabel: "one-time setup",
     featured: false,
     badge: null,
