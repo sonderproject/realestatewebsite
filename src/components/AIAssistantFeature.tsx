@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 
@@ -34,13 +35,26 @@ export default function AIAssistantFeature() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="relative rounded-3xl overflow-hidden"
-        style={{
-          background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
-        }}
+        className="relative rounded-3xl overflow-hidden bg-obsidian"
       >
-        {/* Living aurora — drifting brand light */}
-        <div className="aurora" />
+        {/* Dusk skyline — sets the after-hours, "while you sleep" mood */}
+        <Image
+          src="/media/sonder-edge-skyline.jpg"
+          alt="City skyline at dusk"
+          fill
+          sizes="(max-width: 768px) 100vw, 90vw"
+          className="object-cover object-center"
+        />
+        {/* Brand-tinted scrim so the copy stays legible over the photo */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(115deg, rgba(7,23,38,0.94) 0%, rgba(20,58,87,0.80) 55%, rgba(11,34,54,0.94) 100%)",
+          }}
+        />
+        {/* Living aurora — drifting brand light over the image */}
+        <div className="aurora opacity-70" />
         {/* Subtle grid texture over the aurora */}
         <div
           className="absolute inset-0 opacity-[0.05]"
