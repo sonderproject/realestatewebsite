@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 
@@ -17,22 +18,21 @@ export default function PhotographyPromo() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="relative rounded-3xl overflow-hidden"
-        style={{
-          background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
-        }}
+        className="relative rounded-3xl overflow-hidden bg-obsidian"
       >
-        {/* Living aurora — drifting brand light */}
-        <div className="aurora" />
-        {/* Subtle grid over the aurora */}
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
-            backgroundSize: "44px 44px",
-          }}
+        {/* Drone aerial — our own listing photography on display */}
+        <Image
+          src="/media/photography-aerial.jpg"
+          alt="Aerial drone photograph of a residential community and pool"
+          fill
+          sizes="(max-width: 768px) 100vw, 90vw"
+          className="object-cover object-center"
         />
+        {/* Cinematic scrim so the copy stays legible over the photo */}
+        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/85 to-obsidian/55" />
+        <div className="absolute inset-0 bg-obsidian/30" />
+        {/* Living aurora — drifting brand light over the image */}
+        <div className="aurora opacity-60" />
 
         <div className="relative z-10 px-7 py-12 md:px-16 md:py-16 text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2.5 mb-6 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md px-4 py-2">
@@ -53,8 +53,9 @@ export default function PhotographyPromo() {
             <em className="text-gold-light font-normal">Photo, drone & 3D.</em>
           </h2>
           <p className="text-warm-300 text-sm md:text-base font-light leading-relaxed mb-9 max-w-xl mx-auto">
-            Premium property photography, FAA-licensed drone aerials,
-            AI-generated 3D tours, and cinematic listing films. Book any package and get{" "}
+            This aerial? <strong className="text-warm-50 font-medium">Ours.</strong> Premium
+            property photography, FAA-licensed drone aerials, AI-generated 3D tours, and
+            cinematic listing films. Book any package and get{" "}
             <strong className="text-warm-50 font-medium">30% off your website setup fee</strong>{" "}
             — one studio for both sides of your listing.
           </p>
