@@ -79,8 +79,8 @@ export default function HeroSection() {
     if (posterRef.current) {
       const poster =
         set === "mobile"
-          ? "/media/hero-poster-mobile.jpg"
-          : "/media/hero-poster.jpg";
+          ? "/media/hero-poster-mobile-v2.jpg"
+          : "/media/hero-poster-v2.jpg";
       posterRef.current.style.backgroundImage = `url('${poster}')`;
     }
 
@@ -145,7 +145,7 @@ export default function HeroSection() {
         <div
           ref={posterRef}
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/media/hero-poster.jpg')" }}
+          style={{ backgroundImage: "url('/media/hero-poster-v2.jpg')" }}
         />
 
         {/* Scroll-driven frame canvas — starts hidden, fades in once frame 0 is ready */}
