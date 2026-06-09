@@ -189,7 +189,7 @@ export default function HeroSection() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
               </span>
               <span className="text-gold-light text-[11px] md:text-xs tracking-[0.3em] uppercase font-semibold">
-                Web Design for Real Estate
+                Real Estate Web Design Agency · San Diego
               </span>
             </motion.div>
 
@@ -200,9 +200,9 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.9] mb-5 md:mb-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Your Digital Presence.
+              Real Estate Websites
               <br />
-              <em className="text-shimmer font-normal">Elevated.</em>
+              <em className="text-shimmer font-normal">That Win Clients.</em>
             </motion.h1>
 
             <motion.p
@@ -211,8 +211,8 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.1 }}
               className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10"
             >
-              Premium websites with IDX integration, AI lead tools, and digital
-              experiences for real estate agents, brokerages, and property companies.
+              Custom IDX websites, AI lead assistants, and real estate photography —
+              built and managed for agents, apartment communities, and brokerages.
             </motion.p>
 
             <motion.div
