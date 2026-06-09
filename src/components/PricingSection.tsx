@@ -7,22 +7,22 @@ const WHY_RETAINER = [
   {
     icon: "↑",
     title: "Google rewards fresh sites",
-    body: "Agents and properties that update content consistently rank higher. Static sites drift down — maintained ones climb.",
+    body: "Sites updated often rank higher. Static ones drift down — maintained ones climb.",
   },
   {
     icon: "⟳",
     title: "Your market changes monthly",
-    body: "New listings, sold properties, price shifts, seasonal campaigns — your site needs to reflect reality or it hurts your credibility.",
+    body: "New listings, price shifts, seasonal campaigns — your site should reflect reality.",
   },
   {
     icon: "⚡",
     title: "We handle every update",
-    body: "Photos, copy, listings, bio changes, new reviews — you send it, we publish it. Zero tech work on your end.",
+    body: "Photos, copy, listings, reviews — you send it, we publish it. Zero tech work for you.",
   },
   {
     icon: "⬡",
-    title: "Hosting, security & uptime included",
-    body: "No separate bills for servers, SSL, or maintenance. One flat fee keeps everything running and protected.",
+    title: "Hosting & security included",
+    body: "No separate bills for servers, SSL, or maintenance. One flat fee covers it all.",
   },
 ];
 
@@ -188,10 +188,9 @@ export default function PricingSection() {
 
           {/* Body */}
           <p className="text-warm-400 text-sm font-light leading-relaxed flex-1">
-            While you&apos;re showing a home or closing a deal, your AI handles the
-            conversation — qualifying leads, answering buyer and renter questions,
-            and booking appointments around the clock. Trained on your listings,
-            your market, your voice.
+            While you&apos;re showing a home, your AI handles the conversation —
+            qualifying leads, answering questions, and booking appointments around
+            the clock. Trained on your listings, your market, your voice.
           </p>
 
           {/* Badge */}

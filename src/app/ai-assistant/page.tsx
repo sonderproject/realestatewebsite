@@ -162,13 +162,12 @@ function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.85 }}
-              className="text-warm-200 text-sm md:text-base font-light tracking-wide max-w-2xl leading-relaxed mb-8 md:mb-10"
+              className="text-warm-200 text-base md:text-lg font-light tracking-wide max-w-2xl leading-relaxed mb-8 md:mb-10"
             >
-              Buyers and renters don&apos;t wait. They ask at midnight, between
-              showings, on weekends — and whoever answers first wins the deal. The
-              Sonder AI Lead Assistant is a custom AI, trained on your listings and
-              your market, that answers every visitor instantly, qualifies them, and
-              books showings 24/7. You stop losing leads to slow replies.
+              Buyers and renters don&apos;t wait. They message at midnight, between
+              showings, on weekends — and whoever replies first wins the deal.
+              Our AI answers every visitor instantly, qualifies them, and books
+              showings 24/7. Trained on your listings and your market.
             </motion.p>
 
             <motion.div
@@ -226,10 +225,10 @@ function Problem() {
           <em className="text-gold-dark">first five minutes.</em>
         </h2>
         <p className="text-warm-500 text-base md:text-lg font-light leading-relaxed">
-          The data is brutal: a lead that isn&apos;t answered fast goes cold and
-          moves on. But you can&apos;t be on your phone at 2am, mid-showing, or on
-          your day off. Your website goes quiet exactly when prospects are most
-          curious — and that silence costs you commissions.
+          A lead that isn&apos;t answered fast goes cold and moves on. But you
+          can&apos;t be on your phone at 2am, mid-showing, or on your day off — so
+          your site goes quiet exactly when buyers are most curious. That silence
+          costs you commissions.
         </p>
       </motion.div>
     </section>

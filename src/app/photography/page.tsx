@@ -15,7 +15,7 @@ const SERVICES = [
     title: "Hi-Res Property Photography",
     subtitle: "Interiors & Exteriors",
     description:
-      "Every package starts at 25 professionally edited HDR photos — minimum, guaranteed. Wide-angle lenses, natural light optimization, and color grading that makes rooms feel exactly the size they are. Delivered MLS-ready.",
+      "Every package starts at 25 edited HDR photos — minimum, guaranteed. Wide-angle lenses and color grading that make rooms feel their true size. Delivered MLS-ready.",
     tag: "25 photos min.",
   },
   {
@@ -29,9 +29,9 @@ const SERVICES = [
   {
     number: "03",
     title: "3D Virtual Tours",
-    subtitle: "Matterport-Powered",
+    subtitle: "AI-Generated",
     description:
-      "Interactive 3D walkthroughs buyers can navigate from their couch — on any device, at any hour. Reduces wasted showings, increases time on listing, and gives out-of-market buyers the confidence to make offers.",
+      "Interactive 3D walkthroughs buyers can navigate from their couch, on any device. Fewer wasted showings, more time on your listing, and the confidence for out-of-market buyers to make offers.",
     tag: null,
   },
   {
@@ -39,7 +39,7 @@ const SERVICES = [
     title: "Cinematic Video Walkthroughs",
     subtitle: "Listing Films",
     description:
-      "Stabilized 4K video with licensed music, smooth transitions, and motion graphics — edited for MLS, Instagram Reels, YouTube, and your brokerage site. Short-form and long-form versions included.",
+      "Stabilized 4K video with licensed music and motion graphics — edited for MLS, Instagram Reels, and your site. Short and long versions included.",
     tag: null,
   },
   {
@@ -55,7 +55,7 @@ const SERVICES = [
     title: "Virtual Staging",
     subtitle: "Furnished. Digitally.",
     description:
-      "Empty rooms cost you offers. Our virtual staging team furnishes any space with photorealistic furniture in 24 hours — at a fraction of the cost of physical staging, with no move-in risk.",
+      "Empty rooms cost you offers. We furnish any space with photorealistic furniture in 24 hours — a fraction of the cost of physical staging, with no move-in risk.",
     tag: null,
   },
   {
@@ -71,7 +71,7 @@ const SERVICES = [
     title: "Agent & Team Headshots",
     subtitle: "Personal Branding",
     description:
-      "On-location or in our studio. Multiple outfit changes, natural and lifestyle shots, retouched and color-matched to your brand palette. Looks great everywhere — LinkedIn, yard signs, the MLS, your website.",
+      "On-location or in studio. Multiple looks, retouched and color-matched to your brand. Looks great everywhere — LinkedIn, yard signs, the MLS, your site.",
     tag: null,
   },
 ];
@@ -210,7 +210,7 @@ function HeroPhotography() {
             transition={{ duration: 1, delay: 0.95 }}
             className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10"
           >
-            Premium property photography, FAA-licensed drone aerials, Matterport
+            Premium property photography, FAA-licensed drone aerials, AI-generated
             3D tours, and cinematic listing films for agents and brokerages across
             San Diego. 25 photos minimum, every package. Delivered fast.
           </motion.p>

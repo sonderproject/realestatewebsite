@@ -75,12 +75,11 @@ export default function AIAssistantFeature() {
               Never lose a lead to a{" "}
               <em className="text-gold-light font-normal">missed message</em> again.
             </h2>
-            <p className="text-warm-300 text-sm md:text-base font-light leading-relaxed">
-              Your site gets visitors at every hour. Most agents answer in the
-              morning — after the lead&apos;s already moved on. Our AI Lead Assistant
-              works the moment they land: it answers buyer and renter questions,
-              qualifies serious prospects, and books showings around the clock.
-              Trained on your listings, your market, your voice.
+            <p className="text-warm-300 text-base md:text-lg font-light leading-relaxed">
+              Visitors come at all hours. Most agents reply the next
+              morning — once the lead is gone. Our AI answers the second
+              they land: it qualifies buyers and renters, and books showings
+              around the clock. Trained on your listings, your market, your voice.
             </p>
           </div>
 

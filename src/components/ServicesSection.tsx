@@ -9,7 +9,7 @@ const services = [
     title: "Agent Websites",
     subtitle: "Custom Sites",
     description:
-      "Bespoke digital homes for solo agents and teams. Built to convert first-time visitors into scheduled consultations.",
+      "Custom sites for solo agents and teams — built to turn visitors into booked consultations.",
     isNew: false,
   },
   {
@@ -17,7 +17,7 @@ const services = [
     title: "Brokerage Platforms",
     subtitle: "Company Sites",
     description:
-      "Full-scale web platforms for brokerages and management companies. Designed to showcase agents, inventory, and brand authority.",
+      "Full-scale platforms for brokerages — showcasing your agents, inventory, and brand authority.",
     isNew: false,
   },
   {
@@ -25,7 +25,7 @@ const services = [
     title: "Property Portals",
     subtitle: "Listing Systems",
     description:
-      "Custom-built property search and listing portals. Your brand, your data, your experience — no third-party template.",
+      "Custom search and listing portals. Your brand, your data — no third-party template.",
     isNew: false,
   },
   {
@@ -33,7 +33,7 @@ const services = [
     title: "Brand Identity",
     subtitle: "Visual Design",
     description:
-      "Logos, color systems, and brand guidelines built for agents and companies stepping up their market presence.",
+      "Logos, color systems, and brand guidelines for agents stepping up their presence.",
     isNew: false,
   },
   {
@@ -41,7 +41,7 @@ const services = [
     title: "Marketing Systems",
     subtitle: "Growth Tools",
     description:
-      "Landing pages, email sequences, and lead capture systems engineered to fill your pipeline and nurture prospects.",
+      "Landing pages, email sequences, and lead capture built to fill your pipeline.",
     isNew: false,
   },
   {
@@ -49,7 +49,7 @@ const services = [
     title: "AI Lead Assistant",
     subtitle: "24 / 7 Intelligence",
     description:
-      "A custom AI assistant trained on your listings, FAQs, and market area — embedded directly in your site. It qualifies leads, answers buyer and renter questions, and books showings while you sleep.",
+      "A custom AI, trained on your listings, that answers questions and books showings while you sleep.",
     isNew: true,
   },
 ];
@@ -94,7 +94,11 @@ export default function ServicesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08 * i }}
-            className="group border-b border-sand-300/70 py-5 md:py-7 cursor-default hover:bg-sand-100 transition-colors duration-300 rounded-xl px-3 md:px-5"
+            className={`group border-b border-sand-300/70 py-5 md:py-7 cursor-default transition-colors duration-300 rounded-xl px-3 md:px-5 ${
+              service.isNew
+                ? "bg-gold-dark/[0.04] hover:bg-gold-dark/[0.07]"
+                : "hover:bg-sand-100"
+            }`}
           >
             <div className="flex gap-4 items-start">
               {/* Number */}
