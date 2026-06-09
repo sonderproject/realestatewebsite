@@ -271,7 +271,7 @@ em {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 3.5s linear infinite;
+  animation: shimmer 9s linear infinite;
 }
 @keyframes shimmer {
   to { background-position: 300% center; }
