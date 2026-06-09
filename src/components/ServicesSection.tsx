@@ -4,53 +4,93 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 
-const services = [
+// Bold keyword highlighter — makes key phrases stand out without feeling
+// like a marketing bullet list. Used inline inside service descriptions.
+function Kw({ children }: { children: React.ReactNode }) {
+  return (
+    <strong className="font-semibold text-obsidian">{children}</strong>
+  );
+}
+
+const services: Array<{
+  number: string;
+  title: string;
+  subtitle: string;
+  description: React.ReactNode;
+  isNew: boolean;
+}> = [
   {
     number: "01",
     title: "Agent Websites",
     subtitle: "Custom Sites",
-    description:
-      "Custom sites for solo agents and teams — built to turn visitors into booked consultations.",
+    description: (
+      <>
+        Custom sites for solo agents — with <Kw>IDX property search</Kw>,{" "}
+        <Kw>lead capture</Kw>, and a design built to turn visitors into{" "}
+        booked consultations.
+      </>
+    ),
     isNew: false,
   },
   {
     number: "02",
     title: "Brokerage Platforms",
     subtitle: "Company Sites",
-    description:
-      "Full-scale platforms for brokerages — showcasing your agents, inventory, and brand authority.",
+    description: (
+      <>
+        Full-scale platforms for brokerages — <Kw>MLS-synced listings</Kw>,
+        agent rosters, and the brand authority that wins market share.
+      </>
+    ),
     isNew: false,
   },
   {
     number: "03",
     title: "Property Portals",
     subtitle: "Listing Systems",
-    description:
-      "Custom search and listing portals. Your brand, your data — no third-party template.",
+    description: (
+      <>
+        <Kw>IDX-powered</Kw> property portals built on your brand — your
+        search, your data, no Zillow or third-party templates.
+      </>
+    ),
     isNew: false,
   },
   {
     number: "04",
     title: "Brand Identity",
     subtitle: "Visual Design",
-    description:
-      "Logos, color systems, and brand guidelines for agents stepping up their presence.",
+    description: (
+      <>
+        Logos, <Kw>color systems</Kw>, and brand guidelines that make you
+        the recognizable name in your market.
+      </>
+    ),
     isNew: false,
   },
   {
     number: "05",
     title: "Marketing Systems",
     subtitle: "Growth Tools",
-    description:
-      "Landing pages, email sequences, and lead capture built to fill your pipeline.",
+    description: (
+      <>
+        <Kw>Landing pages</Kw>, email sequences, and lead capture engineered
+        to fill your pipeline and close more deals.
+      </>
+    ),
     isNew: false,
   },
   {
     number: "06",
     title: "AI Lead Assistant",
     subtitle: "24 / 7 Intelligence",
-    description:
-      "A custom AI, trained on your listings, that answers questions and books showings while you sleep.",
+    description: (
+      <>
+        A custom AI trained on your <Kw>MLS listings</Kw> and market —
+        qualifies leads, answers questions, and books showings{" "}
+        <Kw>24/7 while you sleep</Kw>.
+      </>
+    ),
     isNew: true,
   },
 ];
@@ -81,8 +121,8 @@ export default function ServicesSection() {
             <em className="text-gold-dark">Professionals</em>
           </h2>
           <p className="text-warm-500 text-sm font-light max-w-sm leading-relaxed md:text-right">
-            Every service purpose-built to help you attract clients, close deals,
-            and own your market online.
+            IDX integration, lead generation, and premium design — every service
+            purpose-built to grow your real estate business online.
           </p>
         </div>
       </motion.div>
@@ -113,6 +153,7 @@ export default function ServicesSection() {
               >
                 {service.number}
               </span>
+
               {/* Content */}
               <div className="flex-1 flex flex-col md:flex-row md:gap-8">
                 {/* Title block */}
@@ -141,10 +182,12 @@ export default function ServicesSection() {
                     {service.title}
                   </h3>
                 </div>
-                {/* Description */}
+
+                {/* Description — with bolded keyword phrases */}
                 <p className="text-warm-500 text-sm font-light leading-relaxed mt-2 md:mt-0 md:flex-1 md:pt-px">
                   {service.description}
                 </p>
+
                 {/* Arrow — desktop only */}
                 <div className="hidden md:flex items-center gap-2 shrink-0 mt-[2px]">
                   <span className="w-0 group-hover:w-8 h-px bg-gold transition-all duration-500 inline-block" />

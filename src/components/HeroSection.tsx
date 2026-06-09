@@ -211,8 +211,9 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.1 }}
               className="text-warm-300 text-sm md:text-base font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10"
             >
-              We build premium websites and digital experiences for real estate agents,
-              brokerages, and property companies. What you&apos;re looking at is our work.
+              Premium websites with IDX integration, AI lead tools, and digital
+              experiences for real estate agents, brokerages, and property companies.
+              What you&apos;re looking at is our work.
             </motion.p>
 
             <motion.div

@@ -73,10 +73,10 @@ export default function AIAssistantFeature() {
               <em className="text-gold-light font-normal">missed message</em> again.
             </h2>
             <p className="text-warm-300 text-base md:text-lg font-light leading-relaxed">
-              Visitors come at all hours. Most agents reply the next
-              morning — once the lead is gone. Our AI answers the second
-              they land: it qualifies buyers and renters, and books showings
-              around the clock. Trained on your listings, your market, your voice.
+              Visitors come at all hours. Most agents reply the next morning —
+              once the lead is gone. Our AI is trained on your MLS listings and
+              market area, so it answers the second they land: qualifies buyers
+              and renters, and books showings around the clock.
             </p>
           </div>
 
