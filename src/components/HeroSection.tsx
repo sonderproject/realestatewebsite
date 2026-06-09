@@ -213,7 +213,6 @@ export default function HeroSection() {
             >
               Premium websites with IDX integration, AI lead tools, and digital
               experiences for real estate agents, brokerages, and property companies.
-              What you&apos;re looking at is our work.
             </motion.p>
 
             <motion.div

@@ -4,29 +4,6 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 
-const WHY_RETAINER = [
-  {
-    icon: "◎",
-    title: "One deal. Six years covered.",
-    body: "The average San Diego commission is $15,000+. The Agent plan is $2,364/year. One extra closed deal from your website pays for over six years of service. This isn't an expense — it's your highest-ROI marketing spend.",
-  },
-  {
-    icon: "⊘",
-    title: "Exclusive leads. Not Zillow's shared ones.",
-    body: "Zillow sells your market to 3–5 competing agents at once, at $500–$2,000/month. Every lead that comes through your Sonder website goes to you and only you. Same budget — zero competition.",
-  },
-  {
-    icon: "◷",
-    title: "Capturing leads at 2am. While you sleep.",
-    body: "78% of buyers hire the first agent who responds. You can't be on call every hour — but your website can. AI-powered lead capture pre-qualifies inquiries around the clock so you wake up to warm leads, not missed ones.",
-  },
-  {
-    icon: "↑",
-    title: "Compounds over time. Unlike a one-time site.",
-    body: "A site you pay for once starts aging the day it launches. Monthly content, SEO updates, and fresh listings build domain authority that competitors can't replicate overnight. The longer you stay, the wider your lead.",
-  },
-];
-
 const tiers = [
   {
     name: "Agent",
@@ -110,7 +87,7 @@ export default function PricingSection() {
         transition={{ duration: 0.9 }}
         className="mb-8 md:mb-12 max-w-2xl"
       >
-        <SectionLabel index="06" tone="light" className="mb-4">
+        <SectionLabel index="05" tone="light" className="mb-4">
           Retainer Plans
         </SectionLabel>
         <h2
@@ -122,31 +99,8 @@ export default function PricingSection() {
           <em className="text-gold-dark">your best salesperson.</em>
         </h2>
         <p className="text-warm-500 text-sm md:text-base font-light leading-relaxed max-w-xl">
-          Most agent sites are digital business cards — pretty, but passive.
-          Ours generate leads, rank on Google, and close while you sleep.
-          Here&apos;s why the retainer model is the only one that works.
+          The average San Diego commission is $15,000+. The Agent plan is $2,364/year — one extra closed deal covers six years.
         </p>
-      </motion.div>
-
-      {/* Why retainer — 4 hard-hitting reasons */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.15 }}
-        className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-sand-200 rounded-2xl overflow-hidden border border-sand-200 mb-8 md:mb-10"
-      >
-        {WHY_RETAINER.map((r) => (
-          <div key={r.title} className="group bg-white p-7 md:p-8 flex flex-col gap-3 hover:bg-sand-50 transition-colors duration-300">
-            <span className="text-gold-dark text-xl">{r.icon}</span>
-            <h4
-              className="text-obsidian text-base md:text-lg font-medium leading-snug"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {r.title}
-            </h4>
-            <p className="text-warm-500 text-sm font-light leading-relaxed">{r.body}</p>
-          </div>
-        ))}
       </motion.div>
 
       {/* ROI math callout — makes the decision feel obvious */}
@@ -189,56 +143,6 @@ export default function PricingSection() {
           One extra deal closed through your website pays for over <span className="text-warm-200 font-medium">6 years</span> of the Agent plan.
           The question isn&apos;t whether you can afford it — it&apos;s how many deals you&apos;re leaving on the table right now.
         </p>
-      </motion.div>
-
-      {/* AI era callout strip */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.32 }}
-        className="relative rounded-2xl overflow-hidden mb-8 md:mb-12"
-        style={{
-          background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
-        }}
-      >
-        <div className="aurora" />
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 p-6 md:p-8">
-          <div className="flex items-center gap-4 shrink-0">
-            <div className="flex items-center justify-center w-11 h-11 rounded-2xl border border-gold/30 bg-gold/10 text-gold text-xl">
-              ✦
-            </div>
-            <div>
-              <p className="text-gold text-[10px] tracking-[0.35em] uppercase font-light mb-0.5">
-                Built for the AI Era
-              </p>
-              <p
-                className="text-warm-50 text-xl font-light"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Add an AI assistant to any plan.
-              </p>
-            </div>
-          </div>
-          <div className="hidden md:block w-px self-stretch bg-white/10" />
-          <p className="text-warm-400 text-sm font-light leading-relaxed flex-1">
-            While you&apos;re showing a home, your AI handles the conversation —
-            qualifying leads, answering questions, and booking appointments around
-            the clock. Trained on your MLS listings, your market, your voice.
-          </p>
-          <div className="shrink-0">
-            <span className="inline-block rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
-              Optional Add-on
-            </span>
-          </div>
-        </div>
       </motion.div>
 
       {/* Tier cards */}

@@ -86,9 +86,7 @@ const services: Array<{
     subtitle: "24 / 7 Intelligence",
     description: (
       <>
-        A custom AI trained on your <Kw>MLS listings</Kw> and market —
-        qualifies leads, answers questions, and books showings{" "}
-        <Kw>24/7 while you sleep</Kw>.
+        A custom AI trained on your <Kw>MLS listings</Kw> that qualifies leads and books showings <Kw>24/7</Kw>.
       </>
     ),
     isNew: true,

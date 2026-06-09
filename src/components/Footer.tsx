@@ -22,12 +22,12 @@ export default function Footer() {
         </p>
         <p className="text-warm-700 text-[10px] tracking-[0.2em] uppercase">
           <a
-            href="https://sonderproject.com"
+            href="https://sonderstudio.space"
             className="text-warm-500 hover:text-gold transition-colors duration-300"
             target="_blank"
             rel="noopener noreferrer"
           >
-            sonderproject.com
+            sonderstudio.space
           </a>
         </p>
       </motion.div>
