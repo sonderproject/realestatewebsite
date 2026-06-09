@@ -6,24 +6,24 @@ import SectionLabel from "./SectionLabel";
 
 const WHY_RETAINER = [
   {
+    icon: "◎",
+    title: "One deal. Six years covered.",
+    body: "The average San Diego commission is $15,000+. The Agent plan is $2,364/year. One extra closed deal from your website pays for over six years of service. This isn't an expense — it's your highest-ROI marketing spend.",
+  },
+  {
+    icon: "⊘",
+    title: "Exclusive leads. Not Zillow's shared ones.",
+    body: "Zillow sells your market to 3–5 competing agents at once, at $500–$2,000/month. Every lead that comes through your Sonder website goes to you and only you. Same budget — zero competition.",
+  },
+  {
+    icon: "◷",
+    title: "Capturing leads at 2am. While you sleep.",
+    body: "78% of buyers hire the first agent who responds. You can't be on call every hour — but your website can. AI-powered lead capture pre-qualifies inquiries around the clock so you wake up to warm leads, not missed ones.",
+  },
+  {
     icon: "↑",
-    title: "Google rewards fresh sites",
-    body: "Sites updated often rank higher. Static ones drift down — maintained ones climb.",
-  },
-  {
-    icon: "⟳",
-    title: "Your market changes monthly",
-    body: "New listings, price shifts, seasonal campaigns — your site should reflect reality.",
-  },
-  {
-    icon: "⚡",
-    title: "We handle every update",
-    body: "Photos, copy, listings, reviews — you send it, we publish it. Zero tech work for you.",
-  },
-  {
-    icon: "⬡",
-    title: "Hosting & security included",
-    body: "No separate bills for servers, SSL, or maintenance. One flat fee covers it all.",
+    title: "Compounds over time. Unlike a one-time site.",
+    body: "A site you pay for once starts aging the day it launches. Monthly content, SEO updates, and fresh listings build domain authority that competitors can't replicate overnight. The longer you stay, the wider your lead.",
   },
 ];
 
@@ -38,11 +38,12 @@ const tiers = [
     badge: null,
     aiPrice: "$97",
     aiFeature: "AI assistant qualifies leads & books showings 24/7",
+    roi: "1 closed deal → 6+ years covered",
     features: [
       "Custom single-page agent site",
-      "Mobile-first, sub-2s load time",
+      "IDX property search integrated",
       "Monthly listing highlights updated",
-      "Lead capture form → your inbox or CRM",
+      "Lead capture → your inbox or CRM",
       "SEO tune-up every month",
       "Headshot, bio & testimonial updates",
       "Google Business Profile management",
@@ -59,6 +60,7 @@ const tiers = [
     badge: "Most Popular",
     aiPrice: "$147",
     aiFeature: "AI leasing assistant answers availability & books tours 24/7",
+    roi: "1 lease-up campaign → months covered",
     features: [
       "Multi-page community site",
       "Live vacancy & floor plan updates",
@@ -80,6 +82,7 @@ const tiers = [
     badge: null,
     aiPrice: "$197",
     aiFeature: "AI assistant handles lead routing, FAQs & agent recruitment 24/7",
+    roi: "1 recruited agent → immediate ROI",
     features: [
       "Full multi-page website build included",
       "Agent roster — profiles kept current",
@@ -95,7 +98,7 @@ const tiers = [
 
 export default function PricingSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const inView = useInView(ref, { once: true, amount: 0.05 });
 
   return (
     <section ref={ref} id="pricing" className="bg-white py-12 px-5 md:py-20 md:px-16">
@@ -114,45 +117,91 @@ export default function PricingSection() {
           className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05] mb-4"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          One flat fee.
+          Your website should be
           <br />
-          <em className="text-gold-dark">Everything handled.</em>
+          <em className="text-gold-dark">your best salesperson.</em>
         </h2>
-        <p className="text-warm-500 text-sm font-light leading-relaxed max-w-xl">
-          Your website isn&apos;t a one-time purchase — it&apos;s a live marketing tool.
-          We keep it fresh, fast, and converting every single month.
+        <p className="text-warm-500 text-sm md:text-base font-light leading-relaxed max-w-xl">
+          Most agent sites are digital business cards — pretty, but passive.
+          Ours generate leads, rank on Google, and close while you sleep.
+          Here&apos;s why the retainer model is the only one that works.
         </p>
       </motion.div>
 
-      {/* Why retainer — 4 reasons */}
+      {/* Why retainer — 4 hard-hitting reasons */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 0.15 }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-sand-200 rounded-2xl overflow-hidden border border-sand-200 mb-8 md:mb-10"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-sand-200 rounded-2xl overflow-hidden border border-sand-200 mb-8 md:mb-10"
       >
         {WHY_RETAINER.map((r) => (
-          <div key={r.title} className="bg-white p-6 md:p-7 flex flex-col gap-2">
-            <span className="text-gold-dark text-lg font-light">{r.icon}</span>
-            <h4 className="text-obsidian text-sm font-medium leading-snug">{r.title}</h4>
-            <p className="text-warm-500 text-xs font-light leading-relaxed">{r.body}</p>
+          <div key={r.title} className="group bg-white p-7 md:p-8 flex flex-col gap-3 hover:bg-sand-50 transition-colors duration-300">
+            <span className="text-gold-dark text-xl">{r.icon}</span>
+            <h4
+              className="text-obsidian text-base md:text-lg font-medium leading-snug"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {r.title}
+            </h4>
+            <p className="text-warm-500 text-sm font-light leading-relaxed">{r.body}</p>
           </div>
         ))}
+      </motion.div>
+
+      {/* ROI math callout — makes the decision feel obvious */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.25 }}
+        className="relative rounded-2xl overflow-hidden mb-8 md:mb-10 bg-obsidian px-7 py-8 md:px-12 md:py-10"
+      >
+        <div className="aurora opacity-60" />
+        <div className="relative z-10 flex flex-col sm:flex-row items-stretch">
+          {[
+            { value: "$15K+", label: "Avg. SD commission" },
+            { value: "$2,364", label: "Agent plan / year" },
+            { value: "< 1 deal", label: "To break even" },
+          ].map(({ value, label }, i) => (
+            <div key={label} className="flex-1 flex items-center">
+              {/* Divider between stats */}
+              {i > 0 && (
+                <span
+                  aria-hidden
+                  className="hidden sm:block w-px self-stretch bg-white/10 mx-2"
+                />
+              )}
+              <div className="flex-1 flex flex-col items-center text-center py-3 sm:py-0">
+                <span
+                  className="text-3xl md:text-4xl font-light text-warm-50 mb-1"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {value}
+                </span>
+                <span className="text-warm-400 text-xs tracking-[0.2em] uppercase font-light">
+                  {label}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="relative z-10 text-warm-400 text-xs text-center mt-6 font-light leading-relaxed max-w-lg mx-auto">
+          One extra deal closed through your website pays for over <span className="text-warm-200 font-medium">6 years</span> of the Agent plan.
+          The question isn&apos;t whether you can afford it — it&apos;s how many deals you&apos;re leaving on the table right now.
+        </p>
       </motion.div>
 
       {/* AI era callout strip */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.28 }}
+        transition={{ duration: 0.8, delay: 0.32 }}
         className="relative rounded-2xl overflow-hidden mb-8 md:mb-12"
         style={{
           background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
         }}
       >
-        {/* Living aurora */}
         <div className="aurora" />
-        {/* Subtle grid texture over the aurora */}
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{
@@ -161,9 +210,7 @@ export default function PricingSection() {
             backgroundSize: "40px 40px",
           }}
         />
-
         <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 p-6 md:p-8">
-          {/* Icon + label */}
           <div className="flex items-center gap-4 shrink-0">
             <div className="flex items-center justify-center w-11 h-11 rounded-2xl border border-gold/30 bg-gold/10 text-gold text-xl">
               ✦
@@ -180,18 +227,12 @@ export default function PricingSection() {
               </p>
             </div>
           </div>
-
-          {/* Divider */}
           <div className="hidden md:block w-px self-stretch bg-white/10" />
-
-          {/* Body */}
           <p className="text-warm-400 text-sm font-light leading-relaxed flex-1">
             While you&apos;re showing a home, your AI handles the conversation —
             qualifying leads, answering questions, and booking appointments around
-            the clock. Trained on your listings, your market, your voice.
+            the clock. Trained on your MLS listings, your market, your voice.
           </p>
-
-          {/* Badge */}
           <div className="shrink-0">
             <span className="inline-block rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-[10px] tracking-[0.25em] uppercase text-gold font-medium">
               Optional Add-on
@@ -207,7 +248,7 @@ export default function PricingSection() {
             key={tier.name}
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.38 + 0.1 * i }}
+            transition={{ duration: 0.7, delay: 0.42 + 0.1 * i }}
             className={`relative rounded-3xl p-7 md:p-8 flex flex-col ${
               tier.featured
                 ? "bg-gradient-to-br from-surf-600 to-ocean text-white shadow-xl shadow-surf-600/25 md:-translate-y-3"
@@ -226,8 +267,13 @@ export default function PricingSection() {
             >
               {tier.name}
             </h3>
-            <p className={`text-xs tracking-[0.12em] uppercase mb-5 ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
+            <p className={`text-xs tracking-[0.12em] uppercase mb-4 ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
               {tier.audience}
+            </p>
+
+            {/* ROI hint */}
+            <p className={`text-[11px] font-medium mb-5 ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
+              ↗ {tier.roi}
             </p>
 
             {/* Pricing block */}

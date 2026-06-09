@@ -74,37 +74,73 @@ export default function CredibilitySection() {
         ))}
       </div>
 
-      {/* Value proposition — azure feature panel (Google-style color pop) */}
+      {/* Value proposition — hard differentiators, not generic agency claims */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9, delay: 0.7 }}
-        className="mt-10 md:mt-14 rounded-3xl bg-gradient-to-br from-surf-600 to-ocean p-7 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 shadow-lg shadow-surf-600/20"
+        className="mt-10 md:mt-14 rounded-3xl bg-obsidian overflow-hidden shadow-xl"
       >
-        <div className="max-w-xl">
-          <p className="text-surf-100 text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
-            Why Sonder Studio
-          </p>
-          <p
-            className="text-white text-2xl md:text-3xl lg:text-4xl font-light leading-tight"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Web design built for
-            <em className="text-surf-100"> attention, trust, and action.</em>
-          </p>
+        {/* Top: headline + context */}
+        <div className="relative px-7 py-8 md:px-12 md:pt-12 md:pb-10 border-b border-white/[0.07]">
+          <div className="aurora opacity-50" />
+          <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-3 font-medium">
+                Why Sonder Studio
+              </p>
+              <p
+                className="text-white text-2xl md:text-3xl lg:text-4xl font-light leading-tight max-w-lg"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Real estate is the only industry
+                <em className="text-gold-light"> we work in.</em>
+              </p>
+            </div>
+            <p className="text-warm-400 text-sm font-light leading-relaxed max-w-xs md:text-right">
+              We don&apos;t build websites for restaurants, dentists, or everyone else.
+              We know this industry — and it shows in the results.
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col gap-3 min-w-fit">
+
+        {/* Bottom: 4 specific differentiators */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.05]">
           {[
-            "Custom-designed, never templated",
-            "Built for lead generation from day one",
-            "Full-stack: design, dev, and copy",
-            "Ongoing support and iteration",
-          ].map((item) => (
-            <div key={item} className="flex items-center gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-surf-200 shrink-0" />
-              <span className="text-surf-50 text-xs md:text-sm font-light tracking-wide">
-                {item}
-              </span>
+            {
+              stat: "IDX + MLS",
+              label: "on every build",
+              body: "Property search, live listing sync, and CRM integration are standard — not add-ons you haggle over.",
+            },
+            {
+              stat: "Sub-2s",
+              label: "mobile load time",
+              body: "Page speed is Google's #1 mobile ranking factor. We engineer for it, not just design around it.",
+            },
+            {
+              stat: "We write",
+              label: "the copy too",
+              body: "Most agencies hand you a template and ask you to fill it in. We write every headline, every CTA, every page.",
+            },
+            {
+              stat: "Month 1",
+              label: "to month 12+",
+              body: "We don't disappear after launch. Every month we push updates, track rankings, and make your site better.",
+            },
+          ].map(({ stat, label, body }) => (
+            <div key={stat} className="bg-obsidian px-7 py-7 md:px-8 md:py-8 flex flex-col gap-2 hover:bg-white/[0.03] transition-colors duration-300">
+              <div className="flex items-baseline gap-2 mb-1">
+                <span
+                  className="text-2xl md:text-3xl font-light text-warm-50"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {stat}
+                </span>
+                <span className="text-gold text-xs tracking-[0.2em] uppercase font-medium">
+                  {label}
+                </span>
+              </div>
+              <p className="text-warm-400 text-sm font-light leading-relaxed">{body}</p>
             </div>
           ))}
         </div>
