@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SectionLabel from "./SectionLabel";
 
 const testimonials = [
   {
@@ -31,9 +32,9 @@ export default function CredibilitySection() {
         transition={{ duration: 0.9 }}
         className="mb-7 md:mb-10 max-w-2xl"
       >
-        <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
+        <SectionLabel index="05" tone="light" className="mb-4">
           Client Results
-        </p>
+        </SectionLabel>
         <h2
           className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05]"
           style={{ fontFamily: "var(--font-display)" }}

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import Marquee from "@/components/Marquee";
 import ServicesSection from "@/components/ServicesSection";
 import AIAssistantFeature from "@/components/AIAssistantFeature";
 
@@ -82,6 +83,9 @@ export default function HomePage() {
 
       {/* 1 — Hero: coastal footage that scrubs frame-by-frame as you scroll */}
       <HeroSection />
+
+      {/* Signature keyword marquee — editorial brand statement */}
+      <Marquee />
 
       {/* 2 — Services: what we do */}
       <ServicesSection />

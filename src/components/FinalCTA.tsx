@@ -29,6 +29,9 @@ export default function FinalCTA() {
       id="contact"
       className="relative bg-gradient-to-b from-ocean-deep via-obsidian to-obsidian py-16 px-5 md:py-28 md:px-16 overflow-hidden"
     >
+      {/* Living aurora — ties the closing section to the signature dark panels */}
+      <div className="aurora opacity-70" />
+
       {/* Subtle ocean-diagonal texture */}
       <div
         className="absolute inset-0 opacity-[0.03]"

@@ -155,6 +155,21 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-obsidian/40 via-transparent to-transparent" />
 
+        {/* Signature cartographic meta rail — left edge, desktop only.
+            Ties the studio to its San Diego coastline through coordinates. */}
+        <motion.div
+          style={{ opacity: hintOpacity }}
+          className="hidden md:flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4"
+        >
+          <span className="text-warm-300 text-[10px] tracking-[0.35em] uppercase rotate-180 [writing-mode:vertical-rl]">
+            32.7157°N · 117.1611°W
+          </span>
+          <span className="w-px h-20 bg-gradient-to-b from-transparent via-gold/50 to-transparent" />
+          <span className="text-gold-light text-[10px] tracking-[0.35em] uppercase [writing-mode:vertical-rl]">
+            San Diego
+          </span>
+        </motion.div>
+
         {/* Navigation lives in the fixed <Navbar /> (rendered at page level) */}
 
         {/* Hero content — fades as the footage plays */}
@@ -187,7 +202,7 @@ export default function HeroSection() {
             >
               Your Digital Presence.
               <br />
-              <em className="text-gold-light font-normal">Elevated.</em>
+              <em className="text-shimmer font-normal">Elevated.</em>
             </motion.h1>
 
             <motion.p

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SectionLabel from "./SectionLabel";
 
 const WHY_RETAINER = [
   {
@@ -106,9 +107,9 @@ export default function PricingSection() {
         transition={{ duration: 0.9 }}
         className="mb-8 md:mb-12 max-w-2xl"
       >
-        <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
+        <SectionLabel index="06" tone="light" className="mb-4">
           Retainer Plans
-        </p>
+        </SectionLabel>
         <h2
           className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05] mb-4"
           style={{ fontFamily: "var(--font-display)" }}
@@ -149,19 +150,16 @@ export default function PricingSection() {
           background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
         }}
       >
-        {/* Subtle grid texture */}
+        {/* Living aurora */}
+        <div className="aurora" />
+        {/* Subtle grid texture over the aurora */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
             backgroundSize: "40px 40px",
           }}
-        />
-        {/* Glow orb */}
-        <div
-          className="absolute -right-16 -top-16 w-64 h-64 rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #3E9BD4 0%, transparent 70%)" }}
         />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-6 p-6 md:p-8">

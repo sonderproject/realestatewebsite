@@ -39,19 +39,16 @@ export default function AIAssistantFeature() {
           background: "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
         }}
       >
-        {/* Subtle grid texture */}
+        {/* Living aurora — drifting brand light */}
+        <div className="aurora" />
+        {/* Subtle grid texture over the aurora */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
               "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
             backgroundSize: "44px 44px",
           }}
-        />
-        {/* Glow orb */}
-        <div
-          className="absolute -right-20 -top-24 w-80 h-80 rounded-full opacity-15"
-          style={{ background: "radial-gradient(circle, #3E9BD4 0%, transparent 70%)" }}
         />
 
         <div className="relative z-10 p-7 md:p-12 lg:p-16">

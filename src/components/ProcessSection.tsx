@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SectionLabel from "./SectionLabel";
 
 const steps = [
   {
@@ -43,9 +44,9 @@ export default function ProcessSection() {
         transition={{ duration: 0.9 }}
         className="mb-8 md:mb-14 max-w-2xl"
       >
-        <p className="text-gold-dark text-xs tracking-[0.3em] uppercase mb-3 font-semibold">
+        <SectionLabel index="04" tone="light" className="mb-4">
           How It Works
-        </p>
+        </SectionLabel>
         <h2
           className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05]"
           style={{ fontFamily: "var(--font-display)" }}
@@ -64,18 +65,27 @@ export default function ProcessSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 * i }}
-            className="bg-white p-7 md:p-8 flex flex-col"
+            className="group relative bg-white p-7 md:p-8 flex flex-col overflow-hidden transition-colors duration-500 hover:bg-sand-50"
           >
+            {/* Top accent rule fills on hover */}
+            <span className="absolute top-0 left-0 h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-gold-dark to-gold transition-all duration-700 ease-out" />
+            {/* Oversized ghost numeral */}
             <span
-              className="text-gold-dark text-3xl md:text-4xl font-light mb-5"
+              className="absolute -top-3 -right-1 text-[5.5rem] md:text-[7rem] font-light leading-none text-sand-200/70 select-none pointer-events-none transition-colors duration-500 group-hover:text-gold/10"
               style={{ fontFamily: "var(--font-display)" }}
+              aria-hidden
             >
               {step.number}
             </span>
-            <h3 className="text-obsidian text-lg md:text-xl font-medium mb-2">
+            <span
+              className="relative text-gold-dark text-sm tracking-[0.25em] font-medium mb-5"
+            >
+              STEP {step.number}
+            </span>
+            <h3 className="relative text-obsidian text-lg md:text-xl font-medium mb-2">
               {step.title}
             </h3>
-            <p className="text-warm-500 text-sm font-light leading-relaxed">
+            <p className="relative text-warm-500 text-sm font-light leading-relaxed">
               {step.description}
             </p>
           </motion.div>

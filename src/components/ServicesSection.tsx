@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SectionLabel from "./SectionLabel";
 
 const services = [
   {
@@ -67,9 +68,9 @@ export default function ServicesSection() {
         transition={{ duration: 0.9 }}
         className="mb-7 md:mb-11"
       >
-        <p className="text-gold-dark text-xs tracking-[0.4em] uppercase mb-4 font-light">
+        <SectionLabel index="01" tone="light" className="mb-5">
           What We Do
-        </p>
+        </SectionLabel>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <h2
             className="text-4xl md:text-5xl lg:text-6xl font-light text-obsidian leading-tight max-w-xl"
@@ -100,9 +101,16 @@ export default function ServicesSection() {
                 : "hover:bg-sand-100"
             }`}
           >
-            <div className="flex gap-4 items-start">
-              {/* Number */}
-              <span className="text-warm-400 text-xs font-light tracking-wider mt-[3px] shrink-0 w-6">
+            <div className="flex gap-4 md:gap-6 items-start">
+              {/* Editorial numeral */}
+              <span
+                className={`text-2xl md:text-3xl font-light tabular-nums leading-none mt-1 shrink-0 w-9 md:w-12 transition-colors duration-500 ${
+                  service.isNew
+                    ? "text-gold-dark/70"
+                    : "text-warm-300 group-hover:text-gold-dark/60"
+                }`}
+                style={{ fontFamily: "var(--font-display)" }}
+              >
                 {service.number}
               </span>
               {/* Content */}
