@@ -37,33 +37,24 @@ export default function AIAssistantFeature() {
         transition={{ duration: 0.9 }}
         className="relative rounded-3xl overflow-hidden bg-obsidian"
       >
-        {/* Waterfront property at golden hour — premium real estate backdrop */}
+        {/* Same hero image as the AI assistant page */}
         <Image
-          src="/media/sonder-edge-waterfront.jpg"
-          alt="Waterfront property at golden hour"
+          src="/media/pexels-rdne-8231167.jpg"
+          alt="AI lead assistant for real estate"
           fill
           sizes="(max-width: 768px) 100vw, 90vw"
           className="object-cover object-center"
         />
-        {/* Brand-tinted scrim so the copy stays legible over the photo */}
+        {/* Lighter scrim — image-forward on the right, legible text on the left */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(115deg, rgba(7,23,38,0.94) 0%, rgba(20,58,87,0.80) 55%, rgba(11,34,54,0.94) 100%)",
+              "linear-gradient(115deg, rgba(7,23,38,0.88) 0%, rgba(20,58,87,0.50) 50%, rgba(11,34,54,0.35) 100%)",
           }}
         />
         {/* Living aurora — drifting brand light over the image */}
-        <div className="aurora opacity-70" />
-        {/* Subtle grid texture over the aurora */}
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
-            backgroundSize: "44px 44px",
-          }}
-        />
+        <div className="aurora opacity-40" />
 
         <div className="relative z-10 p-7 md:p-12 lg:p-16">
           {/* Eyebrow */}
