@@ -16,9 +16,9 @@ const tiers = [
     aiPrice: "$97",
     aiFeature: "AI assistant qualifies leads & books showings 24/7",
     roi: "1 closed deal → 6+ years covered",
+    idxAddon: { price: "$49", feature: "Live IDX property search & MLS listing sync on your site" },
     features: [
       "Custom single-page agent site",
-      "IDX property search integrated",
       "Monthly listing highlights updated",
       "Lead capture → your inbox or CRM",
       "SEO tune-up every month",
@@ -35,6 +35,7 @@ const tiers = [
     setupLabel: "one-time setup",
     featured: true,
     badge: "Most Popular",
+    idxAddon: null,
     aiPrice: "$147",
     aiFeature: "AI leasing assistant answers availability & books tours 24/7",
     roi: "1 lease-up campaign → months covered",
@@ -57,6 +58,7 @@ const tiers = [
     setupLabel: "one-time setup",
     featured: false,
     badge: null,
+    idxAddon: null,
     aiPrice: "$197",
     aiFeature: "AI assistant handles lead routing, FAQs & agent recruitment 24/7",
     roi: "1 recruited agent → immediate ROI",
@@ -223,6 +225,23 @@ export default function PricingSection() {
                 + $497 one-time setup
               </p>
             </div>
+
+            {/* IDX add-on — Agent plan only */}
+            {tier.idxAddon && (
+              <div className="rounded-xl px-3.5 py-3 mb-5 bg-ocean-deep/5 border border-gold/20">
+                <div className="flex items-center justify-between gap-2 mb-1.5">
+                  <span className="flex items-center gap-1.5 text-[10px] tracking-[0.18em] uppercase font-semibold text-gold-dark">
+                    <span className="text-xs">◈</span> IDX Property Search
+                  </span>
+                  <span className="text-[9px] tracking-[0.15em] uppercase rounded-full px-2 py-0.5 bg-gold-dark/10 text-gold-dark">
+                    Add-on +{tier.idxAddon.price}/mo
+                  </span>
+                </div>
+                <p className="text-xs font-light leading-snug text-warm-500">
+                  {tier.idxAddon.feature}
+                </p>
+              </div>
+            )}
 
             <ul className="flex flex-col gap-3 mb-8 flex-1">
               {tier.features.map((f) => (

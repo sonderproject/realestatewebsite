@@ -25,9 +25,9 @@ const services: Array<{
     subtitle: "Custom Sites",
     description: (
       <>
-        Custom sites for solo agents — with <Kw>IDX property search</Kw>,{" "}
-        <Kw>lead capture</Kw>, and a design built to turn visitors into{" "}
-        booked consultations.
+        Custom sites for solo agents — <Kw>lead capture</Kw> and{" "}
+        <Kw>conversion-focused design</Kw> that books consultations.{" "}
+        IDX property search available as an add-on.
       </>
     ),
     isNew: false,

@@ -43,9 +43,9 @@ export default function CredibilitySection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.05]">
           {[
             {
-              stat: "IDX + MLS",
-              label: "on every build",
-              body: "Property search, live listing sync, and CRM integration are standard — not add-ons you haggle over.",
+              stat: "Done-for-you",
+              label: "fully managed",
+              body: "We design, write, build, and maintain it — you never touch code. Not a DIY template you fill in yourself.",
             },
             {
               stat: "Sub-2s",

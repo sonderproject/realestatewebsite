@@ -211,10 +211,10 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.1 }}
               className="text-warm-100 text-base md:text-lg font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10 [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]"
             >
-              <span className="text-white font-medium">Custom IDX websites</span>,{" "}
-              <span className="text-white font-medium">AI lead assistants</span>, and{" "}
+              <span className="text-white font-medium">Custom websites</span>,{" "}
+              <span className="text-white font-medium">24/7 AI lead assistants</span>, and{" "}
               <span className="text-white font-medium">real estate photography</span> —
-              built and managed for agents, apartment communities, and brokerages.
+              designed and managed for agents, apartment communities, and brokerages.
             </motion.p>
 
             <motion.div
