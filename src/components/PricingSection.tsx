@@ -240,6 +240,9 @@ export default function PricingSection() {
                 <p className="text-xs font-light leading-snug text-warm-500">
                   {tier.idxAddon.feature}
                 </p>
+                <p className="text-[10px] font-light mt-1.5 text-warm-400">
+                  + $197 one-time setup
+                </p>
               </div>
             )}
 
