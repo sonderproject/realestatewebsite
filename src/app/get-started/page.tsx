@@ -11,6 +11,8 @@ import Footer from "@/components/Footer";
 // the products are created in the Stripe dashboard.
 const AGENT_LINK         = "STRIPE_LINK_PLACEHOLDER";
 const AGENT_AI_LINK      = "STRIPE_LINK_PLACEHOLDER";
+const AGENT_IDX_LINK     = "STRIPE_LINK_PLACEHOLDER";
+const AGENT_AI_IDX_LINK  = "STRIPE_LINK_PLACEHOLDER";
 const APARTMENT_LINK     = "STRIPE_LINK_PLACEHOLDER";
 const APARTMENT_AI_LINK  = "STRIPE_LINK_PLACEHOLDER";
 const BROKER_LINK        = "STRIPE_LINK_PLACEHOLDER";
@@ -25,13 +27,19 @@ const TIERS = [
     setup: "$497",
     featured: false,
     badge: null,
+    idx: {
+      price: 49,
+      setup: "$197",
+      label: "Live IDX property search & MLS listing sync on your site",
+      link: AGENT_IDX_LINK,
+      aiLink: AGENT_AI_IDX_LINK,
+    },
     ai: { price: 97, label: "AI assistant qualifies leads & books showings 24/7" },
     roi: "1 closed deal → 6+ years covered",
     link: AGENT_LINK,
     aiLink: AGENT_AI_LINK,
     features: [
       "Custom single-page agent site",
-      "IDX property search integrated",
       "Monthly listing highlights updated",
       "Lead capture → your inbox or CRM",
       "SEO tune-up every month",
@@ -47,6 +55,7 @@ const TIERS = [
     setup: "$1,997",
     featured: true,
     badge: "Most Popular",
+    idx: null,
     ai: { price: 147, label: "AI leasing assistant answers availability & books tours 24/7" },
     roi: "1 lease-up campaign → months covered",
     link: APARTMENT_LINK,
@@ -69,6 +78,7 @@ const TIERS = [
     setup: "$3,997",
     featured: false,
     badge: null,
+    idx: null,
     ai: { price: 197, label: "AI assistant handles lead routing, FAQs & agent recruitment 24/7" },
     roi: "1 recruited agent → immediate ROI",
     link: BROKER_LINK,
@@ -91,11 +101,11 @@ function formatPrice(n: number) {
 }
 
 export default function GetStartedPage() {
-  // Independent AI toggle per card (indexed to TIERS)
-  const [aiOn, setAiOn] = useState([false, false, false]);
+  const [aiOn, setAiOn]   = useState([false, false, false]);
+  const [idxOn, setIdxOn] = useState([false, false, false]);
 
-  const toggleAi = (i: number) =>
-    setAiOn((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
+  const toggleAi  = (i: number) => setAiOn((prev)  => prev.map((v, idx) => (idx === i ? !v : v)));
+  const toggleIdx = (i: number) => setIdxOn((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
 
   return (
     <div className="min-h-screen bg-obsidian">
@@ -121,13 +131,13 @@ export default function GetStartedPage() {
             Ready to get started?
           </h1>
           <p className="text-warm-400 text-sm md:text-base font-light leading-relaxed max-w-xl">
-            Pick your plan below. No call needed — you&apos;ll check out securely
-            through Stripe.{" "}
+            Pick your plan and add-ons below. You&apos;ll check out securely
+            through Stripe — no call needed.{" "}
             <Link
               href="/#contact"
               className="text-gold-light hover:text-gold underline underline-offset-2 transition-colors duration-200"
             >
-              Need to talk first? Book a call.
+              Have questions first? Book a call.
             </Link>
           </p>
         </motion.div>
@@ -137,9 +147,23 @@ export default function GetStartedPage() {
       <section className="px-5 pb-6 md:px-16 md:pb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-start md:items-stretch">
           {TIERS.map((tier, i) => {
-            const on = aiOn[i];
-            const displayMonthly = tier.monthly + (on ? tier.ai.price : 0);
-            const href = on ? tier.aiLink : tier.link;
+            const aiActive  = aiOn[i];
+            const idxActive = idxOn[i];
+            const idxPrice  = tier.idx?.price ?? 0;
+
+            const displayMonthly = tier.monthly
+              + (aiActive  ? tier.ai.price : 0)
+              + (idxActive ? idxPrice      : 0);
+
+            // 4-way Stripe link switch for Agent (idx × ai), 2-way for others
+            let href = tier.link;
+            if (tier.idx) {
+              href = idxActive
+                ? (aiActive ? tier.idx.aiLink : tier.idx.link)
+                : (aiActive ? tier.aiLink      : tier.link);
+            } else {
+              href = aiActive ? tier.aiLink : tier.link;
+            }
 
             return (
               <motion.div
@@ -176,7 +200,7 @@ export default function GetStartedPage() {
                   ↗ {tier.roi}
                 </p>
 
-                {/* Pricing — animates when AI is toggled */}
+                {/* Pricing — animates when add-ons are toggled */}
                 <div className="mb-6">
                   <div className="flex items-end gap-2">
                     <motion.span
@@ -195,6 +219,9 @@ export default function GetStartedPage() {
                   </div>
                   <p className={`text-xs mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-400"}`}>
                     + {tier.setup} one-time setup
+                    {idxActive && tier.idx && (
+                      <span> + {tier.idx.setup} IDX setup</span>
+                    )}
                   </p>
                 </div>
 
@@ -212,14 +239,60 @@ export default function GetStartedPage() {
                   ))}
                 </ul>
 
+                {/* IDX toggle — Agent only */}
+                {tier.idx && (
+                  <div
+                    className={`rounded-xl px-3.5 py-3 mb-3 ${
+                      idxActive
+                        ? "bg-gold-dark/10 border border-gold/30"
+                        : "bg-ocean-deep/5 border border-gold/15"
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleIdx(i)}
+                      className="w-full flex items-center justify-between gap-3 text-left"
+                      aria-pressed={idxActive}
+                    >
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <span className="text-xs text-gold-dark">◈</span>
+                        <div className="min-w-0">
+                          <p className="text-[11px] tracking-[0.15em] uppercase font-semibold leading-snug text-gold-dark">
+                            IDX Property Search
+                            <span className="ml-1.5 font-normal normal-case tracking-normal text-warm-500">
+                              +{formatPrice(tier.idx.price)}/mo
+                            </span>
+                          </p>
+                          <p className="text-[10px] font-light mt-0.5 leading-snug text-warm-500">
+                            {tier.idx.label}
+                          </p>
+                        </div>
+                      </div>
+                      {/* Pill toggle */}
+                      <div
+                        className={`relative shrink-0 h-6 w-11 rounded-full transition-colors duration-200 ${
+                          idxActive ? "bg-gold-dark" : "bg-sand-300"
+                        }`}
+                        aria-hidden
+                      >
+                        <span
+                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${
+                            idxActive ? "translate-x-5" : "translate-x-0.5"
+                          }`}
+                        />
+                      </div>
+                    </button>
+                  </div>
+                )}
+
                 {/* AI toggle */}
                 <div
                   className={`rounded-xl px-3.5 py-3 mb-5 ${
                     tier.featured
-                      ? on
+                      ? aiActive
                         ? "bg-white/15 border border-white/30"
                         : "bg-white/10 border border-white/20"
-                      : on
+                      : aiActive
                         ? "bg-gold-dark/10 border border-gold/30"
                         : "bg-ocean-deep/5 border border-gold/15"
                   }`}
@@ -228,7 +301,7 @@ export default function GetStartedPage() {
                     type="button"
                     onClick={() => toggleAi(i)}
                     className="w-full flex items-center justify-between gap-3 text-left"
-                    aria-pressed={on}
+                    aria-pressed={aiActive}
                   >
                     <div className="flex items-center gap-2 flex-1 min-w-0">
                       <span className={`text-xs ${tier.featured ? "text-gold-light" : "text-gold-dark"}`}>
@@ -246,23 +319,18 @@ export default function GetStartedPage() {
                         </p>
                       </div>
                     </div>
-
                     {/* Pill toggle */}
                     <div
                       className={`relative shrink-0 h-6 w-11 rounded-full transition-colors duration-200 ${
-                        on
-                          ? tier.featured
-                            ? "bg-gold"
-                            : "bg-gold-dark"
-                          : tier.featured
-                            ? "bg-white/20"
-                            : "bg-sand-300"
+                        aiActive
+                          ? tier.featured ? "bg-gold" : "bg-gold-dark"
+                          : tier.featured ? "bg-white/20" : "bg-sand-300"
                       }`}
                       aria-hidden
                     >
                       <span
                         className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${
-                          on ? "translate-x-5" : "translate-x-0.5"
+                          aiActive ? "translate-x-5" : "translate-x-0.5"
                         }`}
                       />
                     </div>
