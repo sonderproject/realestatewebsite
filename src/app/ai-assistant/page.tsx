@@ -61,7 +61,7 @@ function Hero() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.1 }}
               className="flex flex-wrap items-center gap-4">
               <Link href="/get-started" className="glass-btn-accent inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium">
-                Add to My Plan
+                Get Started
                 <span className="w-6 h-px bg-current inline-block" />
               </Link>
               <a href="#how-it-works" className="text-warm-300 text-xs tracking-[0.3em] uppercase hover:text-warm-50 transition-colors duration-300 flex items-center gap-3">
@@ -193,11 +193,11 @@ function WhatItDoes() {
       tags: ["Appointment Booking", "Property Search", "Market Insights"],
     },
     {
-      icon: "✦",
-      title: "Keeps Working",
-      headline: "No lead ever goes cold again.",
-      body: "Personalized follow-up, reactivation campaigns, and long-term nurturing — every contact stays warm until they're ready.",
-      tags: ["Automated Nurturing", "Lead Reactivation", "Relationship Tracking"],
+      icon: "◆",
+      title: "You Stay in Control",
+      headline: "Hot leads delivered to you instantly.",
+      body: "Every qualified lead triggers an instant alert — their name, score, and exactly what they asked. You decide when to step in and take over.",
+      tags: ["Instant Agent Alerts", "Lead Score Summary", "One-Tap Takeover"],
     },
   ];
 
@@ -420,12 +420,12 @@ function FinalCTASection() {
             <br /><em className="text-gold-light font-normal">already using AI.</em>
           </h2>
           <p className="text-warm-300 text-sm md:text-base font-light leading-relaxed mb-9 max-w-lg mx-auto">
-            Add the AI Lead Assistant to any Sonder plan. Setup in days.
+            The AI Lead Assistant is built into every Sonder plan. Setup in days.
             First response in seconds.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/get-started" className="glass-btn-accent inline-flex items-center gap-3 text-white text-xs tracking-[0.2em] uppercase rounded-full px-9 py-3.5 font-medium">
-              Add to My Plan
+              Get Started
               <span className="w-6 h-px bg-current inline-block" />
             </Link>
             <Link href="/#contact" className="text-warm-300 text-xs tracking-[0.3em] uppercase hover:text-warm-50 transition-colors duration-300 flex items-center gap-3">

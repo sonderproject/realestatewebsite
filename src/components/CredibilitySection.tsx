@@ -34,7 +34,7 @@ export default function CredibilitySection() {
             </div>
             <p className="text-warm-400 text-sm font-light leading-relaxed max-w-xs md:text-right">
               We don&apos;t build websites for restaurants, dentists, or everyone else.
-              We know this industry — and it shows in the results.
+              We know this industry — and it shows in the work.
             </p>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function CredibilitySection() {
             {
               stat: "Sub-2s",
               label: "mobile load time",
-              body: "Page speed is Google's #1 mobile ranking factor. We engineer for it, not just design around it.",
+              body: "A slow site loses visitors before they see a single listing. We engineer for speed — sub-2 second loads, not just a design that looks fast.",
             },
             {
               stat: "We write",
@@ -60,7 +60,7 @@ export default function CredibilitySection() {
             {
               stat: "Month 1",
               label: "to month 12+",
-              body: "We don't disappear after launch. Every month we push updates, track rankings, and make your site better.",
+              body: "We don't disappear after launch. Every month we push updates, refresh your content, and keep your site sharp as your business grows.",
             },
           ].map(({ stat, label, body }) => (
             <div key={stat} className="bg-obsidian px-7 py-7 md:px-8 md:py-8 flex flex-col gap-2 hover:bg-white/[0.03] transition-colors duration-300">

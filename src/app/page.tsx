@@ -16,6 +16,7 @@ const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
 });
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const CredibilitySection = dynamic(() => import("@/components/CredibilitySection"));
+const SamplesSection = dynamic(() => import("@/components/SamplesSection"));
 const PricingSection = dynamic(() => import("@/components/PricingSection"));
 const PhotographyPromo = dynamic(() => import("@/components/PhotographyPromo"));
 const FinalCTA = dynamic(() => import("@/components/FinalCTA"), { ssr: false });
@@ -83,22 +84,25 @@ export default function HomePage() {
       {/* 1 — Hero: coastal footage that scrubs frame-by-frame as you scroll */}
       <HeroSection />
 
-      {/* 2 — Services: what we do */}
-      <ServicesSection />
-
-      {/* 3 — AI Lead Assistant: flagship differentiator spotlight */}
+      {/* 2 — AI Lead Assistant: headline product spotlight */}
       <AIAssistantFeature />
+
+      {/* 3 — Services: full offering list, AI first */}
+      <ServicesSection />
 
       {/* 4 — Market: interactive San Diego location gallery */}
       <GlobeSection />
 
-      {/* 4 — Process: how a project runs, first call to launch */}
+      {/* 5 — Process: how a project runs, first call to launch */}
       <ProcessSection />
 
-      {/* 5 — Credibility: stats + testimonials + value prop */}
+      {/* 6 — Credibility: why Sonder Studio */}
       <CredibilitySection />
 
-      {/* 6 — Pricing: packages that scale */}
+      {/* 7 — Samples: reference builds to preview before buying */}
+      <SamplesSection />
+
+      {/* 8 — Pricing: packages */}
       <PricingSection />
 
       {/* 7 — Photography: cross-sell to the Sonder Photography studio */}

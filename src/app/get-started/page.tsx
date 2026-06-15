@@ -1,48 +1,33 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// ── Stripe Payment Links ────────────────────────────────────────────────
-// Replace each placeholder with the real Stripe Payment Link URL once
-// the products are created in the Stripe dashboard.
-const AGENT_LINK         = "STRIPE_LINK_PLACEHOLDER";
-const AGENT_AI_LINK      = "STRIPE_LINK_PLACEHOLDER";
-const AGENT_IDX_LINK     = "STRIPE_LINK_PLACEHOLDER";
-const AGENT_AI_IDX_LINK  = "STRIPE_LINK_PLACEHOLDER";
-const APARTMENT_LINK     = "STRIPE_LINK_PLACEHOLDER";
-const APARTMENT_AI_LINK  = "STRIPE_LINK_PLACEHOLDER";
-const BROKER_LINK        = "STRIPE_LINK_PLACEHOLDER";
-const BROKER_AI_LINK     = "STRIPE_LINK_PLACEHOLDER";
+// ── Stripe Payment Links ─────────────────────────────────────────────────
+// FLAG: Replace the placeholder below with the real Stripe Payment Link for
+// the Agent plan ($297/mo + $497 one-time setup, AI Lead Assistant included).
+// Apartment and Broker route to Book a Call — no Stripe links needed.
+const AGENT_LINK = "STRIPE_LINK_PLACEHOLDER";
 
-// ── Plan data ──────────────────────────────────────────────────────────
+// ── Plan data ─────────────────────────────────────────────────────────────
 const TIERS = [
   {
     name: "Agent",
     audience: "Solo agents & small teams",
-    monthly: 197,
+    monthly: "$297",
     setup: "$497",
     featured: false,
     badge: null,
-    idx: {
-      price: 49,
-      setup: "$197",
-      label: "Live IDX property search & MLS listing sync on your site",
-      link: AGENT_IDX_LINK,
-      aiLink: AGENT_AI_IDX_LINK,
-    },
-    ai: { price: 97, label: "AI assistant qualifies leads & books showings 24/7" },
-    roi: "1 closed deal → 6+ years covered",
-    link: AGENT_LINK,
-    aiLink: AGENT_AI_LINK,
+    roi: "1 closed deal → 4+ years covered",
+    checkout: true,
+    cta: { label: "Continue to Checkout →", href: AGENT_LINK },
     features: [
+      "AI Lead Assistant — captures, qualifies & books 24/7",
       "Custom single-page agent site",
-      "Monthly listing highlights updated",
+      "Monthly content & listing updates",
       "Lead capture → your inbox or CRM",
-      "SEO tune-up every month",
       "Headshot, bio & testimonial updates",
       "Google Business Profile management",
       "Hosting, SSL & uptime monitoring",
@@ -51,62 +36,48 @@ const TIERS = [
   {
     name: "Apartment",
     audience: "Apartment communities",
-    monthly: 697,
-    setup: "$1,997",
+    monthly: "$747",
+    setup: "$2,497",
     featured: true,
     badge: "Most Popular",
-    idx: null,
-    ai: { price: 147, label: "AI leasing assistant answers availability & books tours 24/7" },
     roi: "1 lease-up campaign → months covered",
-    link: APARTMENT_LINK,
-    aiLink: APARTMENT_AI_LINK,
+    checkout: false,
+    cta: { label: "Book a Call →", href: "/#contact" },
     features: [
+      "AI leasing assistant — answers availability & books tours 24/7",
       "Multi-page community site",
       "Live vacancy & floor plan updates",
       "High-converting tenant inquiry forms",
-      "Google ranking for local rent searches",
       "Move-in specials & promotions rotated",
       "Photo gallery & virtual tour integration",
-      "Monthly traffic & lead report",
+      "Monthly content updates",
       "Hosting, SSL & uptime monitoring",
     ],
   },
   {
     name: "Broker / Co.",
     audience: "Brokerages & management companies",
-    monthly: 1497,
-    setup: "$3,997",
+    monthly: "$1,747",
+    setup: "$4,997",
     featured: false,
     badge: null,
-    idx: null,
-    ai: { price: 197, label: "AI assistant handles lead routing, FAQs & agent recruitment 24/7" },
     roi: "1 recruited agent → immediate ROI",
-    link: BROKER_LINK,
-    aiLink: BROKER_AI_LINK,
+    checkout: false,
+    cta: { label: "Book a Call →", href: "/#contact" },
     features: [
+      "AI assistant — lead routing, FAQs & agent recruitment 24/7",
       "Full multi-page website build included",
       "Agent roster — profiles kept current",
       "IDX / MLS live listing sync",
       "CRM integration (kvCORE, Follow Up Boss…)",
       "Recruiting pages that attract top agents",
-      "Blog + market reports for long-term SEO",
       "Custom campaign landing pages quarterly",
       "Priority support — same-day response",
     ],
   },
 ];
 
-function formatPrice(n: number) {
-  return "$" + n.toLocaleString();
-}
-
 export default function GetStartedPage() {
-  const [aiOn, setAiOn]   = useState([false, false, false]);
-  const [idxOn, setIdxOn] = useState([false, false, false]);
-
-  const toggleAi  = (i: number) => setAiOn((prev)  => prev.map((v, idx) => (idx === i ? !v : v)));
-  const toggleIdx = (i: number) => setIdxOn((prev) => prev.map((v, idx) => (idx === i ? !v : v)));
-
   return (
     <div className="min-h-screen bg-obsidian">
       <Navbar />
@@ -131,13 +102,13 @@ export default function GetStartedPage() {
             Ready to get started?
           </h1>
           <p className="text-warm-400 text-sm md:text-base font-light leading-relaxed max-w-xl">
-            Pick your plan and add-ons below. You&apos;ll check out securely
-            through Stripe — no call needed.{" "}
+            The Agent plan checks out securely through Stripe — no call needed.
+            Apartment and Broker builds start with a call so we scope it right.{" "}
             <Link
               href="/#contact"
               className="text-gold-light hover:text-gold underline underline-offset-2 transition-colors duration-200"
             >
-              Have questions first? Book a call.
+              Have questions? Book a call.
             </Link>
           </p>
         </motion.div>
@@ -146,211 +117,98 @@ export default function GetStartedPage() {
       {/* ── Plan cards ───────────────────────────────────────────────── */}
       <section className="px-5 pb-6 md:px-16 md:pb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-start md:items-stretch">
-          {TIERS.map((tier, i) => {
-            const aiActive  = aiOn[i];
-            const idxActive = idxOn[i];
-            const idxPrice  = tier.idx?.price ?? 0;
+          {TIERS.map((tier, i) => (
+            <motion.div
+              key={tier.name}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 + 0.1 * i }}
+              className={`relative rounded-3xl p-7 md:p-8 flex flex-col ${
+                tier.featured
+                  ? "bg-gradient-to-br from-surf-600 to-ocean text-white shadow-xl shadow-surf-600/25 md:-translate-y-3"
+                  : "bg-sand-50 border border-sand-200 text-obsidian"
+              }`}
+            >
+              {/* Popular badge */}
+              {tier.badge && (
+                <span className="absolute top-5 right-5 rounded-full bg-white/90 px-3 py-1 text-[10px] tracking-[0.2em] uppercase text-surf-700 font-semibold">
+                  {tier.badge}
+                </span>
+              )}
 
-            const displayMonthly = tier.monthly
-              + (aiActive  ? tier.ai.price : 0)
-              + (idxActive ? idxPrice      : 0);
-
-            // 4-way Stripe link switch for Agent (idx × ai), 2-way for others
-            let href = tier.link;
-            if (tier.idx) {
-              href = idxActive
-                ? (aiActive ? tier.idx.aiLink : tier.idx.link)
-                : (aiActive ? tier.aiLink      : tier.link);
-            } else {
-              href = aiActive ? tier.aiLink : tier.link;
-            }
-
-            return (
-              <motion.div
-                key={tier.name}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 + 0.1 * i }}
-                className={`relative rounded-3xl p-7 md:p-8 flex flex-col ${
-                  tier.featured
-                    ? "bg-gradient-to-br from-surf-600 to-ocean text-white shadow-xl shadow-surf-600/25 md:-translate-y-3"
-                    : "bg-sand-50 border border-sand-200 text-obsidian"
-                }`}
+              {/* Name + audience */}
+              <h2
+                className={`text-2xl font-medium mb-0.5 ${tier.featured ? "text-white" : "text-obsidian"}`}
+                style={{ fontFamily: "var(--font-display)" }}
               >
-                {/* Popular badge */}
-                {tier.badge && (
-                  <span className="absolute top-5 right-5 rounded-full bg-white/90 px-3 py-1 text-[10px] tracking-[0.2em] uppercase text-surf-700 font-semibold">
-                    {tier.badge}
+                {tier.name}
+              </h2>
+              <p className={`text-xs tracking-[0.12em] uppercase mb-4 ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
+                {tier.audience}
+              </p>
+
+              {/* ROI hint */}
+              <p className={`text-[11px] font-medium mb-5 ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
+                ↗ {tier.roi}
+              </p>
+
+              {/* Pricing */}
+              <div className="mb-6">
+                <div className="flex items-end gap-2">
+                  <span
+                    className={`text-4xl font-light leading-none ${tier.featured ? "text-white" : "text-obsidian"}`}
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {tier.monthly}
                   </span>
-                )}
-
-                {/* Name + audience */}
-                <h2
-                  className={`text-2xl font-medium mb-0.5 ${tier.featured ? "text-white" : "text-obsidian"}`}
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {tier.name}
-                </h2>
-                <p className={`text-xs tracking-[0.12em] uppercase mb-4 ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
-                  {tier.audience}
+                  <span className={`text-xs pb-1 ${tier.featured ? "text-surf-100" : "text-warm-400"}`}>
+                    / month
+                  </span>
+                </div>
+                <p className={`text-xs mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-400"}`}>
+                  + {tier.setup} one-time setup
                 </p>
+              </div>
 
-                {/* ROI hint */}
-                <p className={`text-[11px] font-medium mb-5 ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
-                  ↗ {tier.roi}
-                </p>
-
-                {/* Pricing — animates when add-ons are toggled */}
-                <div className="mb-6">
-                  <div className="flex items-end gap-2">
-                    <motion.span
-                      key={displayMonthly}
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className={`text-4xl font-light leading-none ${tier.featured ? "text-white" : "text-obsidian"}`}
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {formatPrice(displayMonthly)}
-                    </motion.span>
-                    <span className={`text-xs pb-1 ${tier.featured ? "text-surf-100" : "text-warm-400"}`}>
-                      / month
+              {/* Feature list */}
+              <ul className="flex flex-col gap-3 mb-7 flex-1">
+                {tier.features.map((f) => (
+                  <li key={f} className="flex items-start gap-3">
+                    <span className={`mt-0.5 shrink-0 text-sm ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
+                      ✓
                     </span>
-                  </div>
-                  <p className={`text-xs mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-400"}`}>
-                    + {tier.setup} one-time setup
-                    {idxActive && tier.idx && (
-                      <span> + {tier.idx.setup} IDX setup</span>
-                    )}
-                  </p>
-                </div>
+                    <span className={`text-sm font-light ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
+                      {f}
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
-                {/* Feature list */}
-                <ul className="flex flex-col gap-3 mb-7 flex-1">
-                  {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3">
-                      <span className={`mt-0.5 shrink-0 text-sm ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
-                        ✓
-                      </span>
-                      <span className={`text-sm font-light ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
-                        {f}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* IDX toggle — Agent only */}
-                {tier.idx && (
-                  <div
-                    className={`rounded-xl px-3.5 py-3 mb-3 ${
-                      idxActive
-                        ? "bg-gold-dark/10 border border-gold/30"
-                        : "bg-ocean-deep/5 border border-gold/15"
-                    }`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => toggleIdx(i)}
-                      className="w-full flex items-center justify-between gap-3 text-left"
-                      aria-pressed={idxActive}
-                    >
-                      <div className="flex items-center gap-2 flex-1 min-w-0">
-                        <span className="text-xs text-gold-dark">◈</span>
-                        <div className="min-w-0">
-                          <p className="text-[11px] tracking-[0.15em] uppercase font-semibold leading-snug text-gold-dark">
-                            IDX Property Search
-                            <span className="ml-1.5 font-normal normal-case tracking-normal text-warm-500">
-                              +{formatPrice(tier.idx.price)}/mo
-                            </span>
-                          </p>
-                          <p className="text-[10px] font-light mt-0.5 leading-snug text-warm-500">
-                            {tier.idx.label}
-                          </p>
-                        </div>
-                      </div>
-                      {/* Pill toggle */}
-                      <div
-                        className={`relative shrink-0 h-6 w-11 rounded-full transition-colors duration-200 ${
-                          idxActive ? "bg-gold-dark" : "bg-sand-300"
-                        }`}
-                        aria-hidden
-                      >
-                        <span
-                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${
-                            idxActive ? "translate-x-5" : "translate-x-0.5"
-                          }`}
-                        />
-                      </div>
-                    </button>
-                  </div>
-                )}
-
-                {/* AI toggle */}
-                <div
-                  className={`rounded-xl px-3.5 py-3 mb-5 ${
-                    tier.featured
-                      ? aiActive
-                        ? "bg-white/15 border border-white/30"
-                        : "bg-white/10 border border-white/20"
-                      : aiActive
-                        ? "bg-gold-dark/10 border border-gold/30"
-                        : "bg-ocean-deep/5 border border-gold/15"
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => toggleAi(i)}
-                    className="w-full flex items-center justify-between gap-3 text-left"
-                    aria-pressed={aiActive}
-                  >
-                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                      <span className={`text-xs ${tier.featured ? "text-gold-light" : "text-gold-dark"}`}>
-                        ✦
-                      </span>
-                      <div className="min-w-0">
-                        <p className={`text-[11px] tracking-[0.15em] uppercase font-semibold leading-snug ${tier.featured ? "text-gold-light" : "text-gold-dark"}`}>
-                          AI Assistant
-                          <span className={`ml-1.5 font-normal normal-case tracking-normal ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
-                            +{formatPrice(tier.ai.price)}/mo
-                          </span>
-                        </p>
-                        <p className={`text-[10px] font-light mt-0.5 leading-snug ${tier.featured ? "text-surf-100/80" : "text-warm-500"}`}>
-                          {tier.ai.label}
-                        </p>
-                      </div>
-                    </div>
-                    {/* Pill toggle */}
-                    <div
-                      className={`relative shrink-0 h-6 w-11 rounded-full transition-colors duration-200 ${
-                        aiActive
-                          ? tier.featured ? "bg-gold" : "bg-gold-dark"
-                          : tier.featured ? "bg-white/20" : "bg-sand-300"
-                      }`}
-                      aria-hidden
-                    >
-                      <span
-                        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${
-                          aiActive ? "translate-x-5" : "translate-x-0.5"
-                        }`}
-                      />
-                    </div>
-                  </button>
-                </div>
-
-                {/* CTA */}
+              {/* CTA */}
+              {tier.checkout ? (
+                // Agent: Stripe checkout link
+                // FLAG: Wire AGENT_LINK to a real Stripe Payment Link before launch
                 <a
-                  href={href}
+                  href={tier.cta.href}
                   className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center transition-opacity duration-200 ${
-                    tier.featured
-                      ? "glass-btn text-white"
-                      : "glass-btn-accent text-white"
+                    tier.featured ? "glass-btn text-white" : "glass-btn-accent text-white"
                   }`}
                 >
-                  Continue to Checkout →
+                  {tier.cta.label}
                 </a>
-              </motion.div>
-            );
-          })}
+              ) : (
+                // Apartment / Broker: Book a Call
+                <Link
+                  href={tier.cta.href}
+                  className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center transition-opacity duration-200 ${
+                    tier.featured ? "glass-btn text-white" : "glass-btn-accent text-white"
+                  }`}
+                >
+                  {tier.cta.label}
+                </Link>
+              )}
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -361,7 +219,7 @@ export default function GetStartedPage() {
         transition={{ duration: 0.8, delay: 0.5 }}
         className="text-warm-500 text-xs font-light text-center px-5 pb-16 md:pb-20 leading-relaxed"
       >
-        Setup fee + first month billed today. Cancel the monthly anytime.{" "}
+        Agent plan: setup fee + first month billed today. Cancel the monthly anytime.{" "}
         <span className="inline-flex items-center gap-1.5">
           <svg
             width="11"

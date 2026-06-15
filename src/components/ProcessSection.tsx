@@ -21,7 +21,7 @@ const steps = [
     number: "03",
     title: "Build",
     description:
-      "We develop a fast, mobile-first site with the integrations you need — IDX, CRM, lead capture.",
+      "We develop a fast, mobile-first site with your AI assistant, lead capture, and the integrations your business runs on.",
   },
   {
     number: "04",

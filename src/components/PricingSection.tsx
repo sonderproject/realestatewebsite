@@ -8,20 +8,18 @@ const tiers = [
   {
     name: "Agent",
     audience: "Solo agents & small teams",
-    monthly: "$197",
+    monthly: "$297",
     setup: "$497",
     setupLabel: "one-time setup",
     featured: false,
     badge: null,
-    aiPrice: "$97",
-    aiFeature: "AI assistant qualifies leads & books showings 24/7",
-    roi: "1 closed deal → 6+ years covered",
-    idxAddon: { price: "$49", feature: "Live IDX property search & MLS listing sync on your site" },
+    roi: "1 closed deal → 4+ years covered",
+    cta: { label: "Get Started", href: "/get-started" },
     features: [
+      "AI Lead Assistant — captures, qualifies & books 24/7",
       "Custom single-page agent site",
-      "Monthly listing highlights updated",
+      "Monthly content & listing updates",
       "Lead capture → your inbox or CRM",
-      "SEO tune-up every month",
       "Headshot, bio & testimonial updates",
       "Google Business Profile management",
       "Hosting, SSL & uptime monitoring",
@@ -30,45 +28,41 @@ const tiers = [
   {
     name: "Apartment",
     audience: "Apartment communities",
-    monthly: "$697",
-    setup: "$1,997",
+    monthly: "$747",
+    setup: "$2,497",
     setupLabel: "one-time setup",
     featured: true,
     badge: "Most Popular",
-    idxAddon: null,
-    aiPrice: "$147",
-    aiFeature: "AI leasing assistant answers availability & books tours 24/7",
     roi: "1 lease-up campaign → months covered",
+    cta: { label: "Book a Call", href: "/#contact" },
     features: [
+      "AI leasing assistant — answers availability & books tours 24/7",
       "Multi-page community site",
       "Live vacancy & floor plan updates",
       "High-converting tenant inquiry forms",
-      "Google ranking for local rent searches",
       "Move-in specials & promotions rotated",
       "Photo gallery & virtual tour integration",
-      "Monthly traffic & lead report",
+      "Monthly content updates",
       "Hosting, SSL & uptime monitoring",
     ],
   },
   {
     name: "Broker / Co.",
     audience: "Brokerages & management companies",
-    monthly: "$1,497",
-    setup: "$3,997",
+    monthly: "$1,747",
+    setup: "$4,997",
     setupLabel: "one-time setup",
     featured: false,
     badge: null,
-    idxAddon: null,
-    aiPrice: "$197",
-    aiFeature: "AI assistant handles lead routing, FAQs & agent recruitment 24/7",
     roi: "1 recruited agent → immediate ROI",
+    cta: { label: "Book a Call", href: "/#contact" },
     features: [
+      "AI assistant — lead routing, FAQs & agent recruitment 24/7",
       "Full multi-page website build included",
       "Agent roster — profiles kept current",
       "IDX / MLS live listing sync",
       "CRM integration (kvCORE, Follow Up Boss…)",
       "Recruiting pages that attract top agents",
-      "Blog + market reports for long-term SEO",
       "Custom campaign landing pages quarterly",
       "Priority support — same-day response",
     ],
@@ -101,7 +95,7 @@ export default function PricingSection() {
           <em className="text-gold-dark">your best salesperson.</em>
         </h2>
         <p className="text-warm-500 text-sm md:text-base font-light leading-relaxed max-w-xl">
-          The average San Diego commission is $15,000+. The Agent plan is $2,364/year — one extra closed deal covers six years.
+          The average San Diego commission is $15,000+. The Agent plan is $3,564/year — one extra closed deal covers four years.
         </p>
       </motion.div>
 
@@ -116,7 +110,7 @@ export default function PricingSection() {
         <div className="relative z-10 flex flex-col sm:flex-row items-stretch">
           {[
             { value: "$15K+", label: "Avg. SD commission" },
-            { value: "$2,364", label: "Agent plan / year" },
+            { value: "$3,564", label: "Agent plan / year" },
             { value: "< 1 deal", label: "To break even" },
           ].map(({ value, label }, i) => (
             <div key={label} className="flex-1 flex items-center">
@@ -142,8 +136,8 @@ export default function PricingSection() {
           ))}
         </div>
         <p className="relative z-10 text-warm-400 text-xs text-center mt-6 font-light leading-relaxed max-w-lg mx-auto">
-          One extra deal closed through your website pays for over <span className="text-warm-200 font-medium">6 years</span> of the Agent plan.
-          The question isn&apos;t whether you can afford it — it&apos;s how many deals you&apos;re leaving on the table right now.
+          One extra deal closed through your website pays for over <span className="text-warm-200 font-medium">4 years</span> of the Agent plan.
+          The question isn&apos;t whether you can afford it — it&apos;s how many leads you&apos;re letting slip through right now.
         </p>
       </motion.div>
 
@@ -202,50 +196,6 @@ export default function PricingSection() {
               )}
             </div>
 
-            {/* AI add-on highlight */}
-            <div
-              className={`rounded-xl px-3.5 py-3 mb-5 ${
-                tier.featured
-                  ? "bg-white/10 border border-white/20"
-                  : "bg-ocean-deep/5 border border-gold/20"
-              }`}
-            >
-              <div className="flex items-center justify-between gap-2 mb-1.5">
-                <span className={`flex items-center gap-1.5 text-[10px] tracking-[0.18em] uppercase font-semibold ${tier.featured ? "text-gold-light" : "text-gold-dark"}`}>
-                  <span className="text-xs">✦</span> AI Assistant
-                </span>
-                <span className={`text-[9px] tracking-[0.15em] uppercase rounded-full px-2 py-0.5 ${tier.featured ? "bg-white/15 text-surf-50" : "bg-gold-dark/10 text-gold-dark"}`}>
-                  Add-on +{tier.aiPrice}/mo
-                </span>
-              </div>
-              <p className={`text-xs font-light leading-snug ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
-                {tier.aiFeature}
-              </p>
-              <p className={`text-[10px] font-light mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-400"}`}>
-                + $497 one-time setup
-              </p>
-            </div>
-
-            {/* IDX add-on — Agent plan only */}
-            {tier.idxAddon && (
-              <div className="rounded-xl px-3.5 py-3 mb-5 bg-ocean-deep/5 border border-gold/20">
-                <div className="flex items-center justify-between gap-2 mb-1.5">
-                  <span className="flex items-center gap-1.5 text-[10px] tracking-[0.18em] uppercase font-semibold text-gold-dark">
-                    <span className="text-xs">◈</span> IDX Property Search
-                  </span>
-                  <span className="text-[9px] tracking-[0.15em] uppercase rounded-full px-2 py-0.5 bg-gold-dark/10 text-gold-dark">
-                    Add-on +{tier.idxAddon.price}/mo
-                  </span>
-                </div>
-                <p className="text-xs font-light leading-snug text-warm-500">
-                  {tier.idxAddon.feature}
-                </p>
-                <p className="text-[10px] font-light mt-1.5 text-warm-400">
-                  + $197 one-time setup
-                </p>
-              </div>
-            )}
-
             <ul className="flex flex-col gap-3 mb-8 flex-1">
               {tier.features.map((f) => (
                 <li key={f} className="flex items-start gap-3">
@@ -260,14 +210,14 @@ export default function PricingSection() {
             </ul>
 
             <a
-              href="#contact"
+              href={tier.cta.href}
               className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center ${
                 tier.featured
                   ? "glass-btn text-white"
                   : "glass-btn-accent text-white"
               }`}
             >
-              Get Started
+              {tier.cta.label}
             </a>
           </motion.div>
         ))}

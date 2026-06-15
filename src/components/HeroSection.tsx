@@ -189,7 +189,7 @@ export default function HeroSection() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
               </span>
               <span className="text-gold-light text-[11px] md:text-xs tracking-[0.3em] uppercase font-semibold">
-                Real Estate Web Design Agency · San Diego
+                AI Lead Assistant + Premium Websites · San Diego
               </span>
             </motion.div>
 
@@ -211,10 +211,11 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.1 }}
               className="text-warm-100 text-base md:text-lg font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10 [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]"
             >
-              <span className="text-white font-medium">Custom websites</span>,{" "}
-              <span className="text-white font-medium">24/7 AI lead assistants</span>, and{" "}
-              <span className="text-white font-medium">real estate photography</span> —
-              designed and managed for agents, apartment communities, and brokerages.
+              You bring the traffic.{" "}
+              <span className="text-white font-medium">We make sure no lead slips through.</span>{" "}
+              A premium website with a built-in{" "}
+              <span className="text-white font-medium">AI lead assistant</span> that
+              captures, qualifies, and books 24/7 — for agents, apartment communities, and brokerages.
             </motion.p>
 
             <motion.div

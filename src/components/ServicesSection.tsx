@@ -21,19 +21,30 @@ const services: Array<{
 }> = [
   {
     number: "01",
+    title: "AI Lead Assistant",
+    subtitle: "24 / 7 Intelligence",
+    description: (
+      <>
+        A custom AI trained on your <Kw>listings and market</Kw> — captures,
+        qualifies, scores, and books leads <Kw>around the clock</Kw>. Included in every plan.
+      </>
+    ),
+    isNew: true,
+  },
+  {
+    number: "02",
     title: "Agent Websites",
     subtitle: "Custom Sites",
     description: (
       <>
         Custom sites for solo agents — <Kw>lead capture</Kw> and{" "}
-        <Kw>conversion-focused design</Kw> that books consultations.{" "}
-        IDX property search available as an add-on.
+        <Kw>conversion-focused design</Kw> that books consultations.
       </>
     ),
     isNew: false,
   },
   {
-    number: "02",
+    number: "03",
     title: "Brokerage Platforms",
     subtitle: "Company Sites",
     description: (
@@ -45,19 +56,19 @@ const services: Array<{
     isNew: false,
   },
   {
-    number: "03",
+    number: "04",
     title: "Property Portals",
     subtitle: "Listing Systems",
     description: (
       <>
-        <Kw>IDX-powered</Kw> property portals built on your brand — your
-        search, your data, no Zillow or third-party templates.
+        IDX-powered portals built on your brand — your search, your data,
+        no Zillow or third-party templates. Available on <Kw>Apartment and Broker</Kw> plans.
       </>
     ),
     isNew: false,
   },
   {
-    number: "04",
+    number: "05",
     title: "Brand Identity",
     subtitle: "Visual Design",
     description: (
@@ -69,27 +80,16 @@ const services: Array<{
     isNew: false,
   },
   {
-    number: "05",
-    title: "Marketing Systems",
-    subtitle: "Growth Tools",
+    number: "06",
+    title: "Conversion Tools",
+    subtitle: "Lead Capture",
     description: (
       <>
-        <Kw>Landing pages</Kw>, email sequences, and lead capture engineered
-        to fill your pipeline and close more deals.
+        <Kw>Landing pages</Kw> and lead capture built to convert the traffic
+        you&apos;re already driving — no ad spend or marketing retainer required.
       </>
     ),
     isNew: false,
-  },
-  {
-    number: "06",
-    title: "AI Lead Assistant",
-    subtitle: "24 / 7 Intelligence",
-    description: (
-      <>
-        A custom AI trained on your <Kw>MLS listings</Kw> that qualifies leads and books showings <Kw>24/7</Kw>.
-      </>
-    ),
-    isNew: true,
   },
 ];
 
@@ -119,8 +119,8 @@ export default function ServicesSection() {
             <em className="text-gold-dark">Professionals</em>
           </h2>
           <p className="text-warm-500 text-sm font-light max-w-sm leading-relaxed md:text-right">
-            IDX integration, lead generation, and premium design — every service
-            purpose-built to grow your real estate business online.
+            Premium websites and AI-powered lead capture — purpose-built for
+            agents, apartment communities, and brokerages.
           </p>
         </div>
       </motion.div>
