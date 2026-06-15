@@ -122,6 +122,40 @@ em {
   transform: translateY(-1px);
 }
 
+/* Dark-tinted glass — obsidian fill at low opacity, works on both light and
+   dark section backgrounds. Darker and more translucent than glass-btn-accent. */
+.glass-btn-dark {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 9, 0.62),
+    rgba(10, 10, 9, 0.42)
+  );
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.04),
+    0 8px 26px -8px rgba(0, 0, 0, 0.55);
+  transition: background 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, transform 0.3s ease;
+}
+.glass-btn-dark:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 9, 0.78),
+    rgba(10, 10, 9, 0.58)
+  );
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 32px -8px rgba(0, 0, 0, 0.65);
+  transform: translateY(-1px);
+}
+
 /* Eye-catching CTA: a glare streak sweeps across on a loop to draw the eye.
    Layered on top of .glass-btn / .glass-btn-accent — keeps the glass look. */
 .cta-shine {

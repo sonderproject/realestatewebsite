@@ -231,11 +231,7 @@ export default function PricingSection() {
 
             <a
               href={tier.cta.href}
-              className={`group cta-shine flex w-full items-center justify-center gap-2.5 rounded-full text-xs tracking-[0.2em] uppercase px-8 py-4 font-semibold text-center ${
-                tier.featured
-                  ? "glass-btn text-white"
-                  : "glass-btn-accent text-white"
-              }`}
+              className="group cta-shine glass-btn-dark flex w-full items-center justify-center gap-2.5 rounded-full text-xs tracking-[0.2em] uppercase px-8 py-4 font-semibold text-center text-white"
             >
               {tier.cta.label}
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
