@@ -11,8 +11,8 @@ const tiers = [
     monthly: "$297",
     setup: "$497",
     setupLabel: "one-time setup",
-    featured: false,
-    badge: null,
+    featured: true,
+    badge: "Most Popular",
     roi: "1 closed deal → 4+ years covered",
     cta: { label: "Get Started", href: "/get-started" },
     features: [
@@ -31,8 +31,8 @@ const tiers = [
     monthly: "$747",
     setup: "$2,497",
     setupLabel: "one-time setup",
-    featured: true,
-    badge: "Most Popular",
+    featured: false,
+    badge: null,
     roi: "1 lease-up campaign → months covered",
     cta: { label: "Book a Call", href: "/#contact" },
     features: [
@@ -211,13 +211,16 @@ export default function PricingSection() {
 
             <a
               href={tier.cta.href}
-              className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center ${
+              className={`group cta-shine inline-flex items-center justify-center gap-2.5 rounded-full text-xs tracking-[0.2em] uppercase px-8 py-4 font-semibold text-center ${
                 tier.featured
                   ? "glass-btn text-white"
                   : "glass-btn-accent text-white"
               }`}
             >
               {tier.cta.label}
+              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
             </a>
           </motion.div>
         ))}
