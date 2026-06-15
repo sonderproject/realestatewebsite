@@ -11,8 +11,7 @@ import SectionLabel from "@/components/SectionLabel";
 
 function HeroAgent() {
   return (
-    <section className="relative bg-obsidian overflow-hidden flex flex-col justify-end min-h-[85vh] md:min-h-screen pb-16 px-5 md:pb-24 md:px-16 pt-28 md:pt-36">
-      {/* Ocean-depth gradient */}
+    <section className="relative bg-obsidian overflow-hidden flex flex-col items-center justify-center text-center min-h-[85vh] md:min-h-screen px-5 md:px-16 pt-24 pb-16">
       <div
         className="absolute inset-0"
         style={{
@@ -20,7 +19,6 @@ function HeroAgent() {
             "linear-gradient(135deg, #071726 0%, #0B2236 40%, #143A57 70%, #071726 100%)",
         }}
       />
-      {/* Subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -32,13 +30,12 @@ function HeroAgent() {
       <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-transparent to-obsidian/90" />
       <div className="aurora opacity-50" />
 
-      <div className="relative z-10 max-w-4xl">
-        {/* Badge */}
+      <div className="relative z-10 max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="inline-flex items-center gap-2.5 mb-6 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md px-4 py-2"
+          className="inline-flex items-center gap-2.5 mb-8 rounded-full border border-gold/40 bg-gold/10 backdrop-blur-md px-4 py-2"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
@@ -49,7 +46,6 @@ function HeroAgent() {
           </span>
         </motion.div>
 
-        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,27 +58,25 @@ function HeroAgent() {
           <em className="text-gold-light font-normal">Working while you sleep.</em>
         </motion.h1>
 
-        {/* Subhead */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.85 }}
-          className="text-warm-300 text-sm md:text-base font-light leading-relaxed max-w-xl mb-9"
+          className="text-warm-300 text-sm md:text-base font-light leading-relaxed max-w-xl mx-auto mb-10"
         >
           The Agent plan gives you a premium real estate site and an AI assistant
           that answers leads, qualifies buyers, and books showings — 24/7.
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.05 }}
-          className="flex flex-wrap items-center gap-4"
+          className="flex flex-wrap items-center justify-center gap-4"
         >
           <Link
             href="/get-started"
-            className="glass-btn-accent text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium"
+            className="cta-shine glass-btn-accent text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-semibold"
           >
             Get Started — $297/mo
           </Link>
@@ -121,19 +115,20 @@ function InclusionsAgent() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="mb-10 md:mb-14"
+        className="flex justify-center mb-10 md:mb-14"
       >
         <SectionLabel index="01" tone="light">
           What&apos;s included
         </SectionLabel>
       </motion.div>
 
-      <ul className="max-w-2xl flex flex-col divide-y divide-sand-200">
+      {/* Centered list — container centered, text left-aligned within it */}
+      <ul className="max-w-xl mx-auto flex flex-col divide-y divide-sand-200">
         {INCLUSIONS.map((item, i) => (
           <motion.li
             key={item}
-            initial={{ opacity: 0, x: -16 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
+            initial={{ opacity: 0, y: 12 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.07 * i }}
             className="flex items-start gap-4 py-4 md:py-5"
           >
@@ -151,10 +146,7 @@ function InclusionsAgent() {
 // ── How the assistant works ───────────────────────────────────────────────
 
 const STEPS = [
-  {
-    number: "01",
-    title: "A lead lands on your site",
-  },
+  { number: "01", title: "A lead lands on your site" },
   {
     number: "02",
     title: "The assistant answers instantly — trained on your listings and market",
@@ -196,7 +188,7 @@ function HowItWorksAgent() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="relative z-10 mb-10 md:mb-14"
+        className="relative z-10 flex justify-center mb-10 md:mb-14"
       >
         <SectionLabel index="02" tone="dark">
           How it works
@@ -240,7 +232,7 @@ function DemoAgent() {
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.9 }}
-        className="mb-8 md:mb-10"
+        className="flex justify-center mb-8 md:mb-10"
       >
         <SectionLabel index="03" tone="light">
           See it live
@@ -275,60 +267,132 @@ function DemoAgent() {
 
 // ── Pricing Block ─────────────────────────────────────────────────────────
 
+const PLAN_CHIPS = [
+  "AI Lead Assistant",
+  "Custom agent site",
+  "Lead capture → inbox / CRM",
+  "Monthly updates",
+  "Hosting & SSL",
+];
+
 function PricingAgent() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section ref={ref} className="bg-sand-50 py-12 px-5 md:py-20 md:px-16">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.9 }}
-        className="mb-8 md:mb-10"
-      >
-        <SectionLabel index="04" tone="light">
-          Pricing
-        </SectionLabel>
-      </motion.div>
+    <section
+      ref={ref}
+      className="relative overflow-hidden py-16 px-5 md:py-28 md:px-16 text-center"
+      style={{
+        background:
+          "linear-gradient(135deg, #071726 0%, #0B2236 40%, #143A57 70%, #071726 100%)",
+      }}
+    >
+      <div
+        className="absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(98,180,230,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(98,180,230,0.6) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+      <div className="aurora opacity-65" />
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="max-w-sm"
-      >
-        <div className="rounded-3xl bg-white border border-sand-200 p-8 md:p-10 flex flex-col gap-6 shadow-sm">
-          {/* Price */}
-          <div>
-            <div className="flex items-end gap-2 mb-1.5">
-              <span
-                className="text-5xl font-light text-obsidian leading-none"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                $297
-              </span>
-              <span className="text-warm-600 text-sm pb-1">/ month</span>
-            </div>
-            <p className="text-warm-600 text-sm font-light">
-              + $497 one-time setup
-            </p>
-          </div>
+      <div className="relative z-10 max-w-2xl mx-auto">
+        {/* Section label */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="flex justify-center mb-8"
+        >
+          <SectionLabel index="04" tone="dark">
+            Pricing
+          </SectionLabel>
+        </motion.div>
 
-          {/* Policy */}
-          <p className="text-warm-600 text-sm font-light">
-            No long-term contracts. Cancel anytime.
-          </p>
+        {/* ROI line */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-gold text-xs tracking-[0.25em] uppercase font-semibold mb-10"
+        >
+          ↗ 1 closed deal → 4+ years covered
+        </motion.p>
 
-          {/* CTA */}
+        {/* Giant price */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className="mb-3 leading-none"
+        >
+          <span
+            className="text-[5.5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] font-light text-white leading-none tracking-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            $297
+          </span>
+          <span className="text-warm-300 text-xl md:text-2xl font-light ml-2">
+            /mo
+          </span>
+        </motion.div>
+
+        {/* Setup cost */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="text-warm-400 text-sm md:text-base font-light mb-12"
+        >
+          + $497 one-time setup
+        </motion.p>
+
+        {/* Feature chips */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="flex flex-wrap justify-center gap-2 mb-12"
+        >
+          {PLAN_CHIPS.map((chip) => (
+            <span
+              key={chip}
+              className="rounded-full border border-white/20 bg-white/[0.07] backdrop-blur-sm px-4 py-1.5 text-warm-200 text-xs font-light tracking-wide"
+            >
+              {chip}
+            </span>
+          ))}
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.55 }}
+        >
           <Link
             href="/get-started"
-            className="glass-btn-accent flex w-full items-center justify-center rounded-full text-xs tracking-[0.2em] uppercase px-8 py-4 font-semibold text-white"
+            className="cta-shine glass-btn-accent group inline-flex items-center justify-center gap-3 text-white text-sm tracking-[0.15em] uppercase rounded-full px-10 py-5 font-semibold"
           >
-            Get Started
+            Get Started — $297/mo
+            <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
           </Link>
-        </div>
-      </motion.div>
+        </motion.div>
+
+        {/* Policy */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="text-warm-500 text-xs font-light mt-7"
+        >
+          No long-term contracts. Cancel anytime.
+        </motion.p>
+      </div>
     </section>
   );
 }
@@ -351,7 +415,6 @@ function BundleAgent() {
             "linear-gradient(115deg, #071726 0%, #143A57 55%, #0B2236 100%)",
         }}
       >
-        {/* Subtle grid */}
         <div
           className="absolute inset-0 opacity-[0.07]"
           style={{
@@ -360,7 +423,6 @@ function BundleAgent() {
             backgroundSize: "44px 44px",
           }}
         />
-        {/* Glow orb */}
         <div
           className="absolute -left-20 -bottom-24 w-80 h-80 rounded-full opacity-15"
           style={{
