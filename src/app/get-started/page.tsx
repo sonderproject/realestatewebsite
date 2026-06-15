@@ -11,8 +11,21 @@ import Footer from "@/components/Footer";
 // Apartment and Broker route to Book a Call — no Stripe links needed.
 const AGENT_LINK = "STRIPE_LINK_PLACEHOLDER";
 
+type Feature = { bold: string; rest: string };
+
 // ── Plan data ─────────────────────────────────────────────────────────────
-const TIERS = [
+const TIERS: {
+  name: string;
+  audience: string;
+  monthly: string;
+  setup: string;
+  featured: boolean;
+  badge: string | null;
+  roi: string;
+  checkout: boolean;
+  cta: { label: string; href: string };
+  features: Feature[];
+}[] = [
   {
     name: "Agent",
     audience: "Solo agents & small teams",
@@ -24,13 +37,13 @@ const TIERS = [
     checkout: true,
     cta: { label: "Continue to Checkout →", href: AGENT_LINK },
     features: [
-      "AI Lead Assistant — captures, qualifies & books 24/7",
-      "Custom single-page agent site",
-      "Monthly content & listing updates",
-      "Lead capture → your inbox or CRM",
-      "Headshot, bio & testimonial updates",
-      "Google Business Profile management",
-      "Hosting, SSL & uptime monitoring",
+      { bold: "AI Lead Assistant", rest: " — captures, qualifies & books 24/7" },
+      { bold: "Custom single-page agent site", rest: "" },
+      { bold: "Monthly content & listing updates", rest: "" },
+      { bold: "Lead capture", rest: " → your inbox or CRM" },
+      { bold: "Headshot, bio & testimonials", rest: " updated anytime" },
+      { bold: "Google Business Profile", rest: " management" },
+      { bold: "Hosting, SSL & uptime monitoring", rest: "" },
     ],
   },
   {
@@ -44,13 +57,13 @@ const TIERS = [
     checkout: false,
     cta: { label: "Book a Call →", href: "/#contact" },
     features: [
-      "AI leasing assistant — answers availability, qualifies renters, books tours 24/7",
-      "Conversion-optimized floor-plan page (all plans displayed, assistant attached)",
-      "3D virtual tour of the community included",
-      "Send your monthly availability and your assistant stays current.",
-      "Occasional move-in special / promo updates included",
-      "Hosting, SSL & uptime monitoring",
-      "Monthly lead & traffic report",
+      { bold: "AI leasing assistant", rest: " — answers availability, qualifies renters & books tours 24/7" },
+      { bold: "Conversion-optimized floor-plan page", rest: " (all plans displayed, assistant attached)" },
+      { bold: "3D virtual tour", rest: " of the community included" },
+      { bold: "Monthly availability updates", rest: " — your assistant stays current" },
+      { bold: "Move-in specials & promos", rest: " updated as needed" },
+      { bold: "Hosting, SSL & uptime monitoring", rest: "" },
+      { bold: "Monthly lead & traffic report", rest: "" },
     ],
   },
   {
@@ -64,14 +77,14 @@ const TIERS = [
     checkout: false,
     cta: { label: "Book a Call →", href: "/#contact" },
     features: [
-      "AI assistant — lead routing, FAQs & agent recruitment 24/7",
-      "Full multi-page website build included",
-      "Agent roster — profiles kept current",
-      "IDX / MLS live listing sync",
-      "CRM integration (kvCORE, Follow Up Boss…)",
-      "Recruiting pages that attract top agents",
-      "Custom campaign landing pages quarterly",
-      "Priority support — same-day response",
+      { bold: "AI assistant", rest: " — lead routing, FAQs & agent recruitment 24/7" },
+      { bold: "Full multi-page website", rest: " build included" },
+      { bold: "Agent roster", rest: " — profiles kept current" },
+      { bold: "IDX / MLS", rest: " live listing sync" },
+      { bold: "CRM integration", rest: " (kvCORE, Follow Up Boss…)" },
+      { bold: "Recruiting pages", rest: " that attract top agents" },
+      { bold: "Custom campaign landing pages", rest: " quarterly" },
+      { bold: "Priority support", rest: " — same-day response" },
     ],
   },
 ];
@@ -142,12 +155,12 @@ export default function GetStartedPage() {
               >
                 {tier.name}
               </h2>
-              <p className={`text-xs tracking-[0.12em] uppercase mb-4 ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
+              <p className={`text-xs tracking-[0.12em] uppercase mb-4 ${tier.featured ? "text-surf-100" : "text-warm-600"}`}>
                 {tier.audience}
               </p>
 
               {/* ROI hint */}
-              <p className={`text-[11px] font-medium mb-5 ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
+              <p className={`text-[11px] font-semibold mb-5 ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
                 ↗ {tier.roi}
               </p>
 
@@ -160,24 +173,31 @@ export default function GetStartedPage() {
                   >
                     {tier.monthly}
                   </span>
-                  <span className={`text-xs pb-1 ${tier.featured ? "text-surf-100" : "text-warm-400"}`}>
+                  <span className={`text-xs pb-1 ${tier.featured ? "text-surf-100" : "text-warm-600"}`}>
                     / month
                   </span>
                 </div>
-                <p className={`text-xs mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-400"}`}>
+                <p className={`text-xs mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-600"}`}>
                   + {tier.setup} one-time setup
                 </p>
               </div>
 
-              {/* Feature list */}
+              {/* Feature list with highlighted key terms */}
               <ul className="flex flex-col gap-3 mb-7 flex-1">
                 {tier.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3">
-                    <span className={`mt-0.5 shrink-0 text-sm ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
+                  <li key={f.bold} className="flex items-start gap-3">
+                    <span className={`mt-0.5 shrink-0 text-sm ${tier.featured ? "text-white" : "text-gold-dark"}`}>
                       ✓
                     </span>
-                    <span className={`text-sm font-light ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
-                      {f}
+                    <span className="text-sm leading-snug">
+                      <span className={`font-semibold ${tier.featured ? "text-white" : "text-obsidian"}`}>
+                        {f.bold}
+                      </span>
+                      {f.rest && (
+                        <span className={`font-light ${tier.featured ? "text-surf-100" : "text-warm-700"}`}>
+                          {f.rest}
+                        </span>
+                      )}
                     </span>
                   </li>
                 ))}
@@ -189,7 +209,7 @@ export default function GetStartedPage() {
                 // FLAG: Wire AGENT_LINK to a real Stripe Payment Link before launch
                 <a
                   href={tier.cta.href}
-                  className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center transition-opacity duration-200 ${
+                  className={`flex w-full items-center justify-center rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center transition-opacity duration-200 ${
                     tier.featured ? "glass-btn text-white" : "glass-btn-accent text-white"
                   }`}
                 >
@@ -199,7 +219,7 @@ export default function GetStartedPage() {
                 // Apartment / Broker: Book a Call
                 <Link
                   href={tier.cta.href}
-                  className={`rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center transition-opacity duration-200 ${
+                  className={`flex w-full items-center justify-center rounded-full text-xs tracking-[0.2em] uppercase px-6 py-3.5 font-medium text-center transition-opacity duration-200 ${
                     tier.featured ? "glass-btn text-white" : "glass-btn-accent text-white"
                   }`}
                 >

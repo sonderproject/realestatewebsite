@@ -4,7 +4,20 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 
-const tiers = [
+type Feature = { bold: string; rest: string };
+
+const tiers: {
+  name: string;
+  audience: string;
+  monthly: string;
+  setup: string;
+  setupLabel: string;
+  featured: boolean;
+  badge: string | null;
+  roi: string;
+  cta: { label: string; href: string };
+  features: Feature[];
+}[] = [
   {
     name: "Agent",
     audience: "Solo agents & small teams",
@@ -16,13 +29,13 @@ const tiers = [
     roi: "1 closed deal → 4+ years covered",
     cta: { label: "Get Started", href: "/get-started" },
     features: [
-      "AI Lead Assistant — captures, qualifies & books 24/7",
-      "Custom single-page agent site",
-      "Monthly content & listing updates",
-      "Lead capture → your inbox or CRM",
-      "Headshot, bio & testimonial updates",
-      "Google Business Profile management",
-      "Hosting, SSL & uptime monitoring",
+      { bold: "AI Lead Assistant", rest: " — captures, qualifies & books 24/7" },
+      { bold: "Custom single-page agent site", rest: "" },
+      { bold: "Monthly content & listing updates", rest: "" },
+      { bold: "Lead capture", rest: " → your inbox or CRM" },
+      { bold: "Headshot, bio & testimonials", rest: " updated anytime" },
+      { bold: "Google Business Profile", rest: " management" },
+      { bold: "Hosting, SSL & uptime monitoring", rest: "" },
     ],
   },
   {
@@ -36,13 +49,13 @@ const tiers = [
     roi: "1 lease-up campaign → months covered",
     cta: { label: "Book a Call", href: "/#contact" },
     features: [
-      "AI leasing assistant — answers availability, qualifies renters, books tours 24/7",
-      "Conversion-optimized floor-plan page (all plans displayed, assistant attached)",
-      "3D virtual tour of the community included",
-      "Send your monthly availability and your assistant stays current.",
-      "Occasional move-in special / promo updates included",
-      "Hosting, SSL & uptime monitoring",
-      "Monthly lead & traffic report",
+      { bold: "AI leasing assistant", rest: " — answers availability, qualifies renters & books tours 24/7" },
+      { bold: "Conversion-optimized floor-plan page", rest: " (all plans displayed, assistant attached)" },
+      { bold: "3D virtual tour", rest: " of the community included" },
+      { bold: "Monthly availability updates", rest: " — your assistant stays current" },
+      { bold: "Move-in specials & promos", rest: " updated as needed" },
+      { bold: "Hosting, SSL & uptime monitoring", rest: "" },
+      { bold: "Monthly lead & traffic report", rest: "" },
     ],
   },
   {
@@ -56,14 +69,14 @@ const tiers = [
     roi: "1 recruited agent → immediate ROI",
     cta: { label: "Book a Call", href: "/#contact" },
     features: [
-      "AI assistant — lead routing, FAQs & agent recruitment 24/7",
-      "Full multi-page website build included",
-      "Agent roster — profiles kept current",
-      "IDX / MLS live listing sync",
-      "CRM integration (kvCORE, Follow Up Boss…)",
-      "Recruiting pages that attract top agents",
-      "Custom campaign landing pages quarterly",
-      "Priority support — same-day response",
+      { bold: "AI assistant", rest: " — lead routing, FAQs & agent recruitment 24/7" },
+      { bold: "Full multi-page website", rest: " build included" },
+      { bold: "Agent roster", rest: " — profiles kept current" },
+      { bold: "IDX / MLS", rest: " live listing sync" },
+      { bold: "CRM integration", rest: " (kvCORE, Follow Up Boss…)" },
+      { bold: "Recruiting pages", rest: " that attract top agents" },
+      { bold: "Custom campaign landing pages", rest: " quarterly" },
+      { bold: "Priority support", rest: " — same-day response" },
     ],
   },
 ];
@@ -93,12 +106,12 @@ export default function PricingSection() {
           <br />
           <em className="text-gold-dark">your best salesperson.</em>
         </h2>
-        <p className="text-warm-500 text-sm md:text-base font-light leading-relaxed max-w-xl">
+        <p className="text-warm-600 text-sm md:text-base font-light leading-relaxed max-w-xl">
           The average San Diego commission is $15,000+. The Agent plan is $3,564/year — one extra closed deal covers four years.
         </p>
       </motion.div>
 
-      {/* ROI math callout — makes the decision feel obvious */}
+      {/* ROI math callout */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -113,7 +126,6 @@ export default function PricingSection() {
             { value: "< 1 deal", label: "To break even" },
           ].map(({ value, label }, i) => (
             <div key={label} className="flex-1 flex items-center">
-              {/* Divider between stats */}
               {i > 0 && (
                 <span
                   aria-hidden
@@ -135,7 +147,8 @@ export default function PricingSection() {
           ))}
         </div>
         <p className="relative z-10 text-warm-400 text-xs text-center mt-6 font-light leading-relaxed max-w-lg mx-auto">
-          One extra deal closed through your website pays for over <span className="text-warm-200 font-medium">4 years</span> of the Agent plan.
+          One extra deal closed through your website pays for over{" "}
+          <span className="text-warm-200 font-medium">4 years</span> of the Agent plan.
           The question isn&apos;t whether you can afford it — it&apos;s how many leads you&apos;re letting slip through right now.
         </p>
       </motion.div>
@@ -166,12 +179,12 @@ export default function PricingSection() {
             >
               {tier.name}
             </h3>
-            <p className={`text-xs tracking-[0.12em] uppercase mb-4 ${tier.featured ? "text-surf-100" : "text-warm-500"}`}>
+            <p className={`text-xs tracking-[0.12em] uppercase mb-4 ${tier.featured ? "text-surf-100" : "text-warm-600"}`}>
               {tier.audience}
             </p>
 
             {/* ROI hint */}
-            <p className={`text-[11px] font-medium mb-5 ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
+            <p className={`text-[11px] font-semibold mb-5 ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
               ↗ {tier.roi}
             </p>
 
@@ -184,25 +197,33 @@ export default function PricingSection() {
                 >
                   {tier.monthly}
                 </span>
-                <span className={`text-xs pb-1 ${tier.featured ? "text-surf-100" : "text-warm-400"}`}>
+                <span className={`text-xs pb-1 ${tier.featured ? "text-surf-100" : "text-warm-600"}`}>
                   / month
                 </span>
               </div>
               {tier.setup && (
-                <p className={`text-xs mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-400"}`}>
+                <p className={`text-xs mt-1.5 ${tier.featured ? "text-surf-200" : "text-warm-600"}`}>
                   + {tier.setup} {tier.setupLabel}
                 </p>
               )}
             </div>
 
+            {/* Feature list with highlighted key terms */}
             <ul className="flex flex-col gap-3 mb-8 flex-1">
               {tier.features.map((f) => (
-                <li key={f} className="flex items-start gap-3">
-                  <span className={`mt-0.5 shrink-0 text-sm ${tier.featured ? "text-surf-100" : "text-gold-dark"}`}>
+                <li key={f.bold} className="flex items-start gap-3">
+                  <span className={`mt-0.5 shrink-0 text-sm ${tier.featured ? "text-white" : "text-gold-dark"}`}>
                     ✓
                   </span>
-                  <span className={`text-sm font-light ${tier.featured ? "text-surf-50" : "text-warm-600"}`}>
-                    {f}
+                  <span className="text-sm leading-snug">
+                    <span className={`font-semibold ${tier.featured ? "text-white" : "text-obsidian"}`}>
+                      {f.bold}
+                    </span>
+                    {f.rest && (
+                      <span className={`font-light ${tier.featured ? "text-surf-100" : "text-warm-700"}`}>
+                        {f.rest}
+                      </span>
+                    )}
                   </span>
                 </li>
               ))}
@@ -210,7 +231,7 @@ export default function PricingSection() {
 
             <a
               href={tier.cta.href}
-              className={`group cta-shine inline-flex items-center justify-center gap-2.5 rounded-full text-xs tracking-[0.2em] uppercase px-8 py-4 font-semibold text-center ${
+              className={`group cta-shine flex w-full items-center justify-center gap-2.5 rounded-full text-xs tracking-[0.2em] uppercase px-8 py-4 font-semibold text-center ${
                 tier.featured
                   ? "glass-btn text-white"
                   : "glass-btn-accent text-white"
@@ -229,7 +250,7 @@ export default function PricingSection() {
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.7 }}
-        className="text-warm-400 text-xs font-light text-center mt-8"
+        className="text-warm-600 text-xs font-light text-center mt-8"
       >
         No long-term contracts. Cancel anytime. Not sure which plan fits?{" "}
         <a href="#contact" className="text-gold-dark hover:underline">Book a free call</a> and we&apos;ll walk you through it.
