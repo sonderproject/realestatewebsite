@@ -27,7 +27,7 @@ const tiers: {
     featured: true,
     badge: "Most Popular",
     roi: "1 closed deal → 4+ years covered",
-    cta: { label: "Get Started", href: "/get-started" },
+    cta: { label: "Get Started", href: "/plans/agent" },
     features: [
       { bold: "AI Lead Assistant", rest: " — captures, qualifies & books 24/7" },
       { bold: "Custom single-page agent site", rest: "" },
