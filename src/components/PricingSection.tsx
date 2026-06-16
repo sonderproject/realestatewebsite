@@ -61,7 +61,7 @@ const tiers: {
   {
     name: "Broker / Co.",
     audience: "Brokerages & management companies",
-    monthly: "$1,747",
+    monthly: "$2,197",
     setup: "$4,997",
     setupLabel: "one-time setup",
     featured: false,
