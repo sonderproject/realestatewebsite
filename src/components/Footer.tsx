@@ -2,46 +2,91 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
+import { footer, site } from "@/config/site";
 
-// Site-wide footer. Extracted so every page (home, photography, ai-assistant)
-// shares the exact same closing bar without duplicating markup.
+// ── 8 — FOOTER ─────────────────────────────────────────────────────────────
+// dock.cool's multi-column footer, reskinned in Sonder navy. Brand + blurb on
+// the left, link columns from /src/config/site.ts on the right. Shared by every
+// page so the closing bar stays identical site-wide.
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const inView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <footer ref={ref} className="bg-obsidian px-5 md:px-16 pb-10 md:pb-14">
+    <footer ref={ref} className="border-t border-teal/10 bg-navy-deep px-5 pb-10 pt-14 md:px-8 md:pb-14 md:pt-20">
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.9 }}
-        className="mx-auto max-w-6xl pt-7 md:pt-10 border-t border-warm-700/20 flex flex-col md:flex-row items-center justify-between gap-3"
+        className="mx-auto max-w-6xl"
       >
-        <div className="flex items-center gap-2.5">
-          <span className="relative block h-6 w-6 shrink-0 opacity-80">
-            <Image
-              src="/media/logo-mark.png"
-              alt="Sonder Studio"
-              fill
-              sizes="24px"
-              className="object-contain"
-            />
-          </span>
-          <p className="text-warm-600 text-xs font-light tracking-wider">
-            © 2026 Sonder Studio. All rights reserved.
-          </p>
+        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+          {/* Brand + blurb */}
+          <div className="max-w-xs">
+            <Link href="/" className="flex items-center gap-2.5">
+              <span className="relative block h-8 w-8 shrink-0">
+                <Image
+                  src="/media/logo-mark.png"
+                  alt="Sonder Studio"
+                  fill
+                  sizes="32px"
+                  className="object-contain"
+                />
+              </span>
+              <span
+                className="text-xl font-light uppercase tracking-[0.25em] text-cream"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Sonder
+              </span>
+              <span className="mx-1 h-4 w-px bg-teal/40" />
+              <span className="text-xs font-light uppercase tracking-[0.3em] text-cream-faint">
+                Studio
+              </span>
+            </Link>
+            <p className="mt-5 text-sm font-light leading-relaxed text-cream-faint">
+              {footer.blurb}
+            </p>
+          </div>
+
+          {/* Link columns */}
+          {footer.columns.map((col) => (
+            <div key={col.title}>
+              <h4 className="mb-4 text-[10px] font-medium uppercase tracking-[0.25em] text-teal">
+                {col.title}
+              </h4>
+              <ul className="flex flex-col gap-2.5">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm font-light text-cream-dim transition-colors duration-300 hover:text-teal"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        <p className="text-warm-700 text-[10px] tracking-[0.2em] uppercase">
+
+        {/* Bottom bar */}
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-teal/10 pt-7 md:flex-row">
+          <p className="text-xs font-light tracking-wider text-cream-faint">
+            © 2026 {site.studio}. All rights reserved.
+          </p>
           <a
-            href="https://sonderstudio.space"
-            className="text-warm-500 hover:text-gold transition-colors duration-300"
+            href={site.url}
             target="_blank"
             rel="noopener noreferrer"
+            className="text-[10px] uppercase tracking-[0.2em] text-cream-faint transition-colors duration-300 hover:text-teal"
           >
-            sonderstudio.space
+            {site.domain}
           </a>
-        </p>
+        </div>
       </motion.div>
     </footer>
   );

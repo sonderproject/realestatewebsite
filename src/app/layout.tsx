@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import Opener from "@/components/Opener";
 
 // Self-hosted via next/font — no external Google Fonts request at runtime.
 // The variable prop wires these directly into the --font-display / --font-body
-// CSS custom properties already used site-wide.
-const outfit = Outfit({
+// CSS custom properties used site-wide.
+//
+// Fraunces (serif) drives every headline — the editorial Sonder voice.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
   variable: "--font-display",
   display: "swap",
 });
@@ -23,19 +26,20 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sonderstudio.space"),
   title: {
-    default: "Sonder Studio — Premium Web Design for Real Estate",
+    default: "Sonder Studio — Done-For-You Property Media for Real Estate",
     template: "%s — Sonder Studio",
   },
   description:
-    "We design and build premium websites and digital experiences for real estate agents, brokerages, and property companies.",
+    "We produce immersive 4D AI property tours and premium animated property pages that help real estate agents sell listings faster and capture buyer leads. Done for you, per property.",
   keywords: [
-    "real estate web design",
-    "real estate websites",
-    "IDX website",
-    "agent website",
-    "brokerage website",
-    "AI lead assistant",
-    "San Diego web design",
+    "4D AI property tour",
+    "real estate video",
+    "property landing page",
+    "virtual staging",
+    "real estate marketing",
+    "listing media",
+    "buyer lead capture",
+    "real estate agents",
   ],
   icons: {
     icon: "/icon.png",
@@ -44,9 +48,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Sonder Studio",
-    title: "Sonder Studio — Premium Web Design for Real Estate",
+    title: "Sonder Studio — Done-For-You Property Media",
     description:
-      "Premium websites and AI lead assistants for real estate agents, brokerages, and property companies.",
+      "Immersive 4D AI property tours and premium animated property pages that sell listings faster and capture buyer leads.",
     url: "https://sonderstudio.space",
     images: [
       { url: "/media/og-image.jpg", width: 1200, height: 630, alt: "Sonder Studio" },
@@ -54,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sonder Studio — Premium Web Design for Real Estate",
+    title: "Sonder Studio — Done-For-You Property Media",
     description:
-      "Premium websites and AI lead assistants for real estate agents, brokerages, and property companies.",
+      "Immersive 4D AI property tours and premium animated property pages that sell listings faster and capture buyer leads.",
     images: ["/media/og-image.jpg"],
   },
 };
@@ -67,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${inter.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <body>
         <Opener />
         {children}

@@ -1,17 +1,32 @@
 import { NextResponse } from "next/server";
 
+// Property-media intake handler. Receives a single-property, done-for-you
+// request from /get-started: agent contact, property address, photos link,
+// and the selected tier. Forwards to a webhook (CRM/Zapier/Slack) if one is
+// configured, otherwise logs it.
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { name, email, company, projectType, message } = data ?? {};
+    const {
+      agentName,
+      agentEmail,
+      agentPhone,
+      propertyAddress,
+      photosLink,
+      tier,
+      notes,
+    } = data ?? {};
 
-    if (!name || !email || !message) {
+    if (!agentName || !agentEmail || !propertyAddress) {
       return NextResponse.json(
-        { ok: false, error: "Please fill in your name, email, and a message." },
+        {
+          ok: false,
+          error: "Please add your name, email, and the property address.",
+        },
         { status: 400 }
       );
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email))) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(agentEmail))) {
       return NextResponse.json(
         { ok: false, error: "That email doesn't look right." },
         { status: 400 }
@@ -19,17 +34,20 @@ export async function POST(request: Request) {
     }
 
     const payload = {
-      name,
-      email,
-      company: company ?? "",
-      projectType: projectType ?? "",
-      message,
+      type: "property-media-intake",
+      agentName,
+      agentEmail,
+      agentPhone: agentPhone ?? "",
+      propertyAddress,
+      photosLink: photosLink ?? "",
+      tier: tier ?? "",
+      notes: notes ?? "",
       at: new Date().toISOString(),
     };
 
-    // If a webhook is configured (Zapier/Make/Slack/CRM), forward the lead there.
+    // If a webhook is configured (Zapier/Make/Slack/CRM), forward the intake.
     // Otherwise log it so it shows in server logs.
-    // TODO: wire up email (e.g. Resend) or your CRM to actually receive leads.
+    // TODO: wire up email (e.g. Resend) or your CRM to actually receive intakes.
     const webhook = process.env.CONTACT_WEBHOOK_URL;
     if (webhook) {
       await fetch(webhook, {
@@ -38,7 +56,7 @@ export async function POST(request: Request) {
         body: JSON.stringify(payload),
       }).catch(() => {});
     } else {
-      console.log("[contact] new lead", payload);
+      console.log("[intake] new property media request", payload);
     }
 
     return NextResponse.json({ ok: true });

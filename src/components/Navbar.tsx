@@ -5,13 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-const LINKS = ["Services", "Pricing", "Contact"];
+// Homepage section anchors.
+const LINKS = [
+  { label: "Products", href: "/#four-d-tour" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
+];
 
 export default function Navbar() {
-  // Once the user scrolls past the very top, the bar frosts over and the
-  // iridescent rainbow hairline fades in along its bottom edge.
+  // Once the user scrolls past the very top, the bar frosts over.
   const [scrolled, setScrolled] = useState(false);
-  // Mobile slide-down menu state.
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -21,7 +25,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll while the mobile menu is open.
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -35,7 +38,7 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.4 }}
       className={`fixed inset-x-0 top-0 z-50 transition-[padding] duration-500 ${
-        scrolled ? "py-3 md:py-4" : "py-5 md:py-8"
+        scrolled ? "py-3 md:py-4" : "py-5 md:py-7"
       }`}
     >
       {/* Frosted glass backdrop — fades in on scroll */}
@@ -45,40 +48,26 @@ export default function Navbar() {
         }`}
         style={{
           background:
-            "linear-gradient(180deg, rgba(10,10,9,0.55), rgba(10,10,9,0.18))",
+            "linear-gradient(180deg, rgba(10,25,41,0.7), rgba(10,25,41,0.25))",
           WebkitBackdropFilter: "blur(18px) saturate(170%)",
           backdropFilter: "blur(18px) saturate(170%)",
         }}
       />
-
-      {/* Rainbowish clear blur along the bottom border */}
-      <div
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[3px] transition-opacity duration-500 ${
-          scrolled ? "opacity-90" : "opacity-0"
-        }`}
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(255,107,107,0.85), rgba(254,202,87,0.85), rgba(72,219,251,0.85), rgba(159,122,234,0.85), rgba(84,160,255,0.85), rgba(255,107,107,0.85))",
-          filter: "blur(2.5px)",
-        }}
-      />
-      {/* Crisp top edge of the rainbow line for definition */}
+      {/* Teal hairline along the bottom edge */}
       <div
         className={`pointer-events-none absolute inset-x-0 bottom-0 h-px transition-opacity duration-500 ${
-          scrolled ? "opacity-60" : "opacity-0"
+          scrolled ? "opacity-100" : "opacity-0"
         }`}
         style={{
           background:
-            "linear-gradient(90deg, rgba(255,140,140,0.7), rgba(255,224,140,0.7), rgba(140,232,255,0.7), rgba(190,160,245,0.7), rgba(140,190,255,0.7))",
+            "linear-gradient(90deg, transparent, rgba(125,211,252,0.5), transparent)",
         }}
       />
 
       {/* Content */}
-      <div className="relative flex items-center justify-between px-5 md:px-10">
-        {/* Plain anchor: navigates to the homepage from any sub-page, and
-            triggers a full refresh when already on the homepage. */}
-        <a href="/" className="flex items-center gap-2.5 group">
-          <span className="relative block h-8 w-8 md:h-9 md:w-9 shrink-0 transition-transform duration-500 group-hover:scale-105">
+      <div className="relative flex items-center justify-between px-5 md:px-8">
+        <a href="/" className="group flex items-center gap-2.5">
+          <span className="relative block h-8 w-8 shrink-0 transition-transform duration-500 group-hover:scale-105 md:h-9 md:w-9">
             <Image
               src="/media/logo-mark.png"
               alt="Sonder Studio"
@@ -89,60 +78,39 @@ export default function Navbar() {
             />
           </span>
           <span
-            className="text-warm-50 text-xl tracking-[0.25em] uppercase font-light"
+            className="text-xl font-light uppercase tracking-[0.25em] text-cream"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Sonder
           </span>
-          <span className="w-px h-4 bg-gold/60 mx-1" />
-          <span className="text-warm-300 text-xs tracking-[0.3em] uppercase font-light">
+          <span className="mx-1 h-4 w-px bg-teal/50" />
+          <span className="text-xs font-light uppercase tracking-[0.3em] text-cream-faint">
             Studio
           </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden items-center gap-7 md:flex">
           {LINKS.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-warm-200 text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
+              key={item.label}
+              href={item.href}
+              className="text-xs uppercase tracking-[0.2em] text-cream-dim transition-colors duration-300 hover:text-teal"
             >
-              {item}
+              {item.label}
             </a>
           ))}
-          {/* Cross-page links — pulsing dot flags these as live products */}
-          <Link
-            href="/ai-assistant"
-            className="flex items-center gap-2 text-gold-light text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-            </span>
-            AI Assistant
-          </Link>
-          <Link
-            href="/photography"
-            className="flex items-center gap-2 text-gold-light text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-            </span>
-            Photography
-          </Link>
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden items-center gap-3 md:flex">
           <a
-            href="#contact"
-            className="glass-btn text-warm-50 text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
+            href="/#contact"
+            className="glass-btn rounded-full px-6 py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-cream"
           >
             Book a Call
           </a>
           <Link
             href="/get-started"
-            className="glass-btn-accent text-white text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
+            className="glass-btn-accent rounded-full px-6 py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-navy-deep"
           >
             Get Started
           </Link>
@@ -154,21 +122,21 @@ export default function Navbar() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden relative z-50 flex h-10 w-10 items-center justify-center rounded-full glass-btn"
+          className="glass-btn relative z-50 flex h-10 w-10 items-center justify-center rounded-full md:hidden"
         >
           <span className="relative block h-3.5 w-5">
             <span
-              className={`absolute left-0 block h-px w-5 bg-warm-50 transition-all duration-300 ${
+              className={`absolute left-0 block h-px w-5 bg-cream transition-all duration-300 ${
                 menuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
               }`}
             />
             <span
-              className={`absolute left-0 top-1/2 block h-px w-5 -translate-y-1/2 bg-warm-50 transition-opacity duration-300 ${
+              className={`absolute left-0 top-1/2 block h-px w-5 -translate-y-1/2 bg-cream transition-opacity duration-300 ${
                 menuOpen ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
-              className={`absolute left-0 block h-px w-5 bg-warm-50 transition-all duration-300 ${
+              className={`absolute left-0 block h-px w-5 bg-cream transition-all duration-300 ${
                 menuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
               }`}
             />
@@ -184,10 +152,10 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="md:hidden absolute inset-x-0 top-full mx-3 mt-2 rounded-3xl overflow-hidden border border-white/10"
+            className="absolute inset-x-0 top-full mx-3 mt-2 overflow-hidden rounded-3xl border border-teal/15 md:hidden"
             style={{
               background:
-                "linear-gradient(180deg, rgba(10,10,9,0.92), rgba(10,10,9,0.78))",
+                "linear-gradient(180deg, rgba(10,25,41,0.96), rgba(10,25,41,0.85))",
               WebkitBackdropFilter: "blur(22px) saturate(180%)",
               backdropFilter: "blur(22px) saturate(180%)",
             }}
@@ -195,50 +163,27 @@ export default function Navbar() {
             <div className="flex flex-col px-6 py-5">
               {LINKS.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={item.label}
+                  href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="border-b border-white/5 py-4 text-warm-100 text-sm tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
+                  className="border-b border-teal/10 py-4 text-sm uppercase tracking-[0.2em] text-cream-dim transition-colors duration-300 hover:text-teal"
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
-              {/* Cross-page links */}
-              <Link
-                href="/ai-assistant"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 border-b border-white/5 py-4 text-gold-light text-sm tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-                </span>
-                AI Assistant
-              </Link>
-              <Link
-                href="/photography"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 border-b border-white/5 py-4 text-gold-light text-sm tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-                </span>
-                Photography
-              </Link>
 
-              <div className="flex flex-col gap-3 mt-5">
+              <div className="mt-5 flex flex-col gap-3">
                 <Link
                   href="/get-started"
                   onClick={() => setMenuOpen(false)}
-                  className="glass-btn-accent text-white text-xs tracking-[0.2em] uppercase rounded-full px-6 py-3.5 font-medium text-center"
+                  className="glass-btn-accent rounded-full px-6 py-3.5 text-center text-xs font-medium uppercase tracking-[0.2em] text-navy-deep"
                 >
                   Get Started →
                 </Link>
                 <a
-                  href="#contact"
+                  href="/#contact"
                   onClick={() => setMenuOpen(false)}
-                  className="glass-btn text-warm-50 text-xs tracking-[0.2em] uppercase rounded-full px-6 py-3.5 font-medium text-center"
+                  className="glass-btn rounded-full px-6 py-3.5 text-center text-xs font-medium uppercase tracking-[0.2em] text-cream"
                 >
                   Book a Call
                 </a>

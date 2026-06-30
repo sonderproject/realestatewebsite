@@ -9,6 +9,29 @@ export default {
   theme: {
     extend: {
       colors: {
+        // ── Sonder skin (current homepage + core pages) ──────────────────
+        // Deep ocean navy bg, teal accent, cream text. Editorial, dark.
+        navy: {
+          DEFAULT: "#0a1929", // page background
+          deep: "#06121f",
+          900: "#0a1929",
+          800: "#0f2335",
+          700: "#16304a",
+          600: "#1a3a52", // secondary surface
+          500: "#244c6a",
+          400: "#356488",
+        },
+        teal: {
+          DEFAULT: "#7dd3fc", // accent
+          light: "#a9e2fd",
+          dark: "#4cb9ea",
+        },
+        cream: {
+          DEFAULT: "#f5f1ea", // primary text
+          dim: "#c9c4ba",
+          faint: "#8a93a0",
+        },
+        // ── Legacy tokens (kept so the /photography page still builds) ────
         obsidian: "#0A0A09",
         charcoal: "#141412",
         stone: "#1E1D1B",

@@ -4,35 +4,23 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ServicesSection from "@/components/ServicesSection";
-import AIAssistantFeature from "@/components/AIAssistantFeature";
+import FloatingShowcase from "@/components/FloatingShowcase";
 
 // Below-fold sections — code-split so their JS only downloads after the
-// above-fold content is interactive. GlobeSection gets a min-height
-// placeholder to reduce layout shift while its chunk loads.
-const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen bg-obsidian" />,
-});
-const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
-const CredibilitySection = dynamic(() => import("@/components/CredibilitySection"));
-const SamplesSection = dynamic(() => import("@/components/SamplesSection"));
+// above-fold hero is interactive.
+const PillCloud = dynamic(() => import("@/components/PillCloud"));
+const FeatureBlocks = dynamic(() => import("@/components/FeatureBlocks"));
 const PricingSection = dynamic(() => import("@/components/PricingSection"));
-const PhotographyPromo = dynamic(() => import("@/components/PhotographyPromo"));
+const FAQSection = dynamic(() => import("@/components/FAQSection"));
 const FinalCTA = dynamic(() => import("@/components/FinalCTA"), { ssr: false });
 const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function HomePage() {
-  // Lenis smooth scroll setup
+  // Lenis smooth scroll — desktop only (touch keeps native momentum).
   useEffect(() => {
     let lenis: unknown;
 
     async function initLenis() {
-      // Skip Lenis on touch devices. Its RAF wheel-smoothing fights native
-      // touch momentum and desyncs the scroll position that the hero frame
-      // scrub + globe carousel read via useScroll — which breaks those
-      // scroll-driven animations on mobile. Native touch scroll is already
-      // smooth and Framer tracks it reliably.
       const isTouch =
         typeof window !== "undefined" &&
         window.matchMedia("(pointer: coarse)").matches;
@@ -42,8 +30,6 @@ export default function HomePage() {
         const LenisModule = await import("lenis");
         const Lenis = LenisModule.default;
         lenis = new Lenis({
-          // lerp gives frame-rate-independent smoothing — a consistent silky
-          // glide across the whole site. Lower = floatier/smoother.
           lerp: 0.085,
           orientation: "vertical",
           smoothWheel: true,
@@ -57,7 +43,6 @@ export default function HomePage() {
         }
         requestAnimationFrame(raf);
 
-        // Allow other components to pause/resume Lenis via custom events
         const onPause = () => (lenis as { stop: () => void }).stop();
         const onResume = () => (lenis as { start: () => void }).start();
         window.addEventListener("sonder:scroll-lock", onPause);
@@ -77,41 +62,32 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="bg-obsidian">
+    <main className="bg-navy">
       {/* Fixed nav: transparent over the hero, frosts to glass on scroll */}
       <Navbar />
 
-      {/* 1 — Hero: coastal footage that scrubs frame-by-frame as you scroll */}
+      {/* 1 — Hero */}
       <HeroSection />
 
-      {/* 2 — AI Lead Assistant: headline product spotlight */}
-      <AIAssistantFeature />
+      {/* 2 — Floating showcase: 4D tour + animated property page placeholders */}
+      <FloatingShowcase />
 
-      {/* 3 — Services: full offering list, AI first */}
-      <ServicesSection />
+      {/* 3 — Pill cloud: "Everything to sell the listing" */}
+      <PillCloud />
 
-      {/* 4 — Market: interactive San Diego location gallery */}
-      <GlobeSection />
+      {/* 4 — Feature blocks: 4D Tour, Property Page, Virtual Staging, Everything Else */}
+      <FeatureBlocks />
 
-      {/* 5 — Process: how a project runs, first call to launch */}
-      <ProcessSection />
-
-      {/* 6 — Credibility: why Sonder Studio */}
-      <CredibilitySection />
-
-      {/* 7 — Samples: reference builds to preview before buying */}
-      <SamplesSection />
-
-      {/* 8 — Pricing: packages */}
+      {/* 5 — Pricing: Listing $497 · Flagship $997 (per property, one-time) */}
       <PricingSection />
 
-      {/* 7 — Photography: cross-sell to the Sonder Photography studio */}
-      <PhotographyPromo />
+      {/* 6 — FAQ accordion */}
+      <FAQSection />
 
-      {/* 8 — Contact: lead-capture form */}
+      {/* 7 — Booking / contact: Cal.com embed + intake nudge */}
       <FinalCTA />
 
-      {/* 9 — Footer */}
+      {/* 8 — Footer */}
       <Footer />
     </main>
   );
