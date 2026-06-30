@@ -7,7 +7,7 @@ import IntakeForm from "@/components/IntakeForm";
 export const metadata: Metadata = {
   title: "Get Started",
   description:
-    "Send us your property and we'll produce the media. Pick a package, share the address and photos, and we deliver — done for you in 48 hours.",
+    "Send us your property and we'll produce the media. Pick a package, share the address and photos, and we deliver — typically within 48 hours.",
 };
 
 export default function GetStartedPage() {
@@ -20,7 +20,7 @@ export default function GetStartedPage() {
         <div className="aurora opacity-40" />
         <div className="relative z-10 mx-auto max-w-2xl text-center">
           <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.4em] text-teal md:text-xs">
-            Done-for-you intake
+            Property intake
           </p>
           <h1
             className="mb-5 text-4xl font-light leading-[1.0] text-cream md:text-5xl lg:text-6xl"

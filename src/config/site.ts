@@ -20,19 +20,19 @@ export const site = {
   studio: "Sonder Studio",
   domain: "sonderstudio.space",
   url: "https://sonderstudio.space",
-  tagline: "Done-for-you property media that sells listings faster.",
+  tagline: "Premium property media that sells listings faster.",
   // Cal.com inline booking embed (kept from the previous build).
   cal: {
     namespace: "sonder-studio",
     link: "dante-valentino/sonder-studio",
   },
   turnaround: "48-hour turnaround",
-  promise: "Done for you",
+  promise: "We handle everything",
 } as const;
 
 // ── HERO ───────────────────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: "Done-for-you property media",
+  eyebrow: "Premium property media",
   // Fraunces serif headline. <em> spans are styled as the teal accent.
   headlineLead: "Turn any listing into an ",
   headlineEm: "immersive experience",
@@ -209,7 +209,7 @@ export interface PricingTier {
 }
 
 export const pricing = {
-  heading: "One property. One price. Done for you.",
+  heading: "One property. One price. Fully produced.",
   subhead:
     "Pick a package per listing. No subscriptions, no platform to learn — we deliver the media and you get back to selling.",
   note: "Prices are per property, billed once. Need volume pricing for a brokerage? Book a call.",
@@ -308,7 +308,7 @@ export const faqs: FaqItem[] = [
   },
   {
     q: "How is this different from hiring a stager and a videographer?",
-    a: "It's done for you, in one place, for one price. Virtual staging replaces costly physical staging — no furniture rental, no scheduling — and you get the tour, the page, the photos, the description, and the social cutdowns as a single package instead of coordinating multiple vendors.",
+    a: "It's all handled in one place, for one price. Virtual staging replaces costly physical staging — no furniture rental, no scheduling — and you get the tour, the page, the photos, the description, and the social cutdowns as a single package instead of coordinating multiple vendors.",
   },
   {
     q: "Do you work with brokerages and teams?",
@@ -328,7 +328,7 @@ export interface FooterColumn {
 
 export const footer = {
   blurb:
-    "Done-for-you property media. Immersive 4D AI tours and premium animated property pages that help agents sell listings faster and capture buyer leads.",
+    "Premium property media. Immersive 4D AI tours and premium animated property pages that help agents sell listings faster and capture buyer leads.",
   columns: [
     {
       title: "Products",

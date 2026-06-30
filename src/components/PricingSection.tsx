@@ -103,7 +103,7 @@ export default function PricingSection() {
 
               {/* TODO(stripe): tier.stripePriceId is a placeholder (null). Wire
                   the real Stripe Price ID / checkout before launch. For now the
-                  CTA routes to the done-for-you intake at /get-started. */}
+                  CTA routes to the property intake at /get-started. */}
               <Link
                 href={tier.cta.href}
                 className={`mt-8 flex w-full items-center justify-center rounded-full px-6 py-3.5 text-xs font-medium uppercase tracking-[0.18em] ${

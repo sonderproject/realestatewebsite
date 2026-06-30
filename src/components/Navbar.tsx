@@ -53,14 +53,25 @@ export default function Navbar() {
           backdropFilter: "blur(18px) saturate(170%)",
         }}
       />
-      {/* Teal hairline along the bottom edge */}
+      {/* Rainbowish clear blur along the bottom border */}
       <div
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-px transition-opacity duration-500 ${
-          scrolled ? "opacity-100" : "opacity-0"
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[3px] transition-opacity duration-500 ${
+          scrolled ? "opacity-90" : "opacity-0"
         }`}
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(125,211,252,0.5), transparent)",
+            "linear-gradient(90deg, rgba(255,107,107,0.85), rgba(254,202,87,0.85), rgba(72,219,251,0.85), rgba(159,122,234,0.85), rgba(84,160,255,0.85), rgba(255,107,107,0.85))",
+          filter: "blur(2.5px)",
+        }}
+      />
+      {/* Crisp top edge of the rainbow line for definition */}
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-px transition-opacity duration-500 ${
+          scrolled ? "opacity-60" : "opacity-0"
+        }`}
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(255,140,140,0.7), rgba(255,224,140,0.7), rgba(140,232,255,0.7), rgba(190,160,245,0.7), rgba(140,190,255,0.7))",
         }}
       />
 

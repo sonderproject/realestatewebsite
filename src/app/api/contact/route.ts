@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Property-media intake handler. Receives a single-property, done-for-you
+// Property-media intake handler. Receives a single-property media
 // request from /get-started: agent contact, property address, photos link,
 // and the selected tier. Forwards to a webhook (CRM/Zapier/Slack) if one is
 // configured, otherwise logs it.

@@ -26,11 +26,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sonderstudio.space"),
   title: {
-    default: "Sonder Studio — Done-For-You Property Media for Real Estate",
+    default: "Sonder Studio — Premium Property Media for Real Estate",
     template: "%s — Sonder Studio",
   },
   description:
-    "We produce immersive 4D AI property tours and premium animated property pages that help real estate agents sell listings faster and capture buyer leads. Done for you, per property.",
+    "We produce immersive 4D AI property tours and premium animated property pages that help real estate agents sell listings faster and capture buyer leads. Produced per property.",
   keywords: [
     "4D AI property tour",
     "real estate video",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Sonder Studio",
-    title: "Sonder Studio — Done-For-You Property Media",
+    title: "Sonder Studio — Premium Property Media",
     description:
       "Immersive 4D AI property tours and premium animated property pages that sell listings faster and capture buyer leads.",
     url: "https://sonderstudio.space",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sonder Studio — Done-For-You Property Media",
+    title: "Sonder Studio — Premium Property Media",
     description:
       "Immersive 4D AI property tours and premium animated property pages that sell listings faster and capture buyer leads.",
     images: ["/media/og-image.jpg"],

@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { visibleTiers } from "@/config/site";
 
-// ── Single-property, done-for-you media intake ──────────────────────────────
+// ── Single-property media intake ────────────────────────────────────────────
 // Collects: agent contact, property address, a link to photos, and the
 // selected tier. Posts to /api/contact (the property-media intake handler).
 //
