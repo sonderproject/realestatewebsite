@@ -85,4 +85,8 @@ Template for `listing-walkthroughs/{property-slug}/PROPERTY.md` — the per-prop
 ### Shot List
 **Purpose:** Audit trail mapping each scene clip back to its source photo + camera move.
 **Contains:** One row per animated room in walkthrough order.
+**Quality check:** Row count equals `scenes/` clip count.
+
+### Build Choices
+**Purpose:** Reproducibility — re-run the same property the same way.
 **Quality check:** All four choices recorded (style, rooms, ratio, engine).
