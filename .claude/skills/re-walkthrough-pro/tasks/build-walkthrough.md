@@ -166,4 +166,3 @@ Output root: `listing-walkthroughs/` at repo root.
 - [ ] Output passes checklists/walkthrough-quality.md
 - [ ] User confirmed the walkthrough matches intent
 </acceptance-criteria>
-</output>
