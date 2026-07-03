@@ -36,6 +36,17 @@ export const site = {
   promise: "We handle everything",
 } as const;
 
+// ── MEDIA ────────────────────────────────────────────────────────────────
+// Real client-supplied assets. Paths are served from /public/media.
+export const media = {
+  // The property walkthrough film — drives the hero + the walkthrough section.
+  walkthrough: "/media/Sonder_walkthrough_3792_Vista_Po_202607011518_202607022138.mp4",
+  // Storyboard of the interactive virtual tour (the Obsidian Estate).
+  virtualTour: "/media/Virtual_tour_of_property_202607022138.jpeg",
+  // Static poster shown before the hero video loads.
+  heroPoster: "/media/hero-poster-v2.jpg",
+} as const;
+
 // ── HERO ───────────────────────────────────────────────────────────────────
 export const hero = {
   eyebrow: "The property experience",
@@ -54,19 +65,22 @@ export const hero = {
 // ── FLOATING SHOWCASE ────────────────────────────────────────────────────
 // Floating, softly-shadowed placeholders. Real assets are supplied later.
 export const showcase = {
-  // TODO(asset): hero cinematic walkthrough reel — property film MP4,
-  // 16:9, muted autoplay loop. Drop at /public/media/showcase/walkthrough.mp4
+  // The real property walkthrough film, looping muted.
   primary: {
-    label: "CINEMATIC WALKTHROUGH — placeholder",
+    label: "Cinematic walkthrough of the property",
     sublabel: "Cinematic video walkthrough",
     aspect: "16 / 9" as const,
+    src: media.walkthrough,
+    kind: "video" as const,
   },
-  // TODO(asset): scroll-animated property website screen-capture, 9:16
-  // portrait scroll capture. Drop at /public/media/showcase/property-site.mp4
+  // Placeholder photo for now — swap for a real scroll capture of the property
+  // website (9:16 portrait) at /public/media/showcase/property-site.mp4.
   secondary: {
-    label: "PROPERTY WEBSITE — placeholder",
+    label: "City skyline at sunset",
     sublabel: "Premium scroll-animated site",
     aspect: "9 / 16" as const,
+    src: "/media/pexels-quintingellar-313765.jpg",
+    kind: "image" as const,
   },
 } as const;
 
@@ -96,6 +110,9 @@ export interface FeaturePlaceholder {
   label: string;
   aspect: string; // CSS aspect-ratio value, e.g. "16 / 9"
   asset: string; // TODO note: expected asset path / spec
+  /** Real media to render in the frame. Omit to show the labeled stand-in. */
+  src?: string;
+  kind?: "image" | "video";
 }
 
 export interface FeatureBlock {
@@ -115,16 +132,20 @@ export const featureBlocks: FeatureBlock[] = [
     body: "Every listing gets its own premium, scroll-animated website — a single-property site where the whole experience comes together. It's built around the home, designed to feel like a luxury product launch, and delivered as one shareable link with a QR code you can put anywhere. We design, build, and host it; you send it everywhere.",
     placeholders: [
       {
-        label: "PROPERTY WEBSITE — placeholder",
+        label: "Waterfront residence exterior",
         aspect: "16 / 10",
-        // TODO(asset): desktop scroll capture of the property website.
+        // Placeholder photo — swap for a real desktop scroll capture of the site.
         asset: "/public/media/features/property-site-desktop.mp4 — 16:10 scroll capture",
+        src: "/media/sonder-edge-waterfront.jpg",
+        kind: "image",
       },
       {
-        label: "MOBILE EXPERIENCE — placeholder",
+        label: "Aerial view of the community",
         aspect: "4 / 5",
-        // TODO(asset): mobile screen capture of the property website.
+        // Placeholder photo — swap for a real mobile screen capture of the site.
         asset: "/public/media/features/property-site-mobile.mp4 — 4:5 mobile capture",
+        src: "/media/pexels-kindelmedia-9936969.jpg",
+        kind: "image",
       },
     ],
   },
@@ -136,10 +157,12 @@ export const featureBlocks: FeatureBlock[] = [
     reverse: true,
     placeholders: [
       {
-        label: "CINEMATIC WALKTHROUGH — placeholder",
+        label: "Cinematic walkthrough of the property",
         aspect: "16 / 9",
-        // TODO(asset): cinematic walkthrough reel, 16:9 MP4. /public/media/features/walkthrough.mp4
-        asset: "/public/media/features/walkthrough.mp4 — 16:9 cinematic walkthrough reel",
+        // The real property walkthrough film, looping muted.
+        asset: media.walkthrough,
+        src: media.walkthrough,
+        kind: "video",
       },
     ],
   },
@@ -150,10 +173,12 @@ export const featureBlocks: FeatureBlock[] = [
     body: "Beyond the film, buyers get an interactive virtual tour they can explore at their own pace, room by room, on any device. It turns a static listing into something a buyer can step into and lose track of time in — the way a great open house feels in person, without the scheduling or the drive.",
     placeholders: [
       {
-        label: "INTERACTIVE VIRTUAL TOUR — placeholder",
+        label: "Interactive virtual tour of the estate",
         aspect: "16 / 10",
-        // TODO(asset): screen capture of the interactive virtual tour UI.
-        asset: "/public/media/features/virtual-tour.mp4 — 16:10 interactive tour capture",
+        // The client's virtual-tour storyboard (the Obsidian Estate).
+        asset: media.virtualTour,
+        src: media.virtualTour,
+        kind: "image",
       },
     ],
   },
@@ -165,16 +190,20 @@ export const featureBlocks: FeatureBlock[] = [
     reverse: true,
     placeholders: [
       {
-        label: "PHOTO GALLERY — placeholder",
+        label: "Skyline at golden hour",
         aspect: "4 / 3",
-        // TODO(asset): enhanced listing photo / gallery. /public/media/features/gallery.jpg
+        // Placeholder photo — swap for a real enhanced listing / gallery photo.
         asset: "/public/media/features/gallery.jpg — 4:3 gallery photo",
+        src: "/media/pexels-quintingellar-313765.jpg",
+        kind: "image",
       },
       {
-        label: "PROPERTY INFO & CONTACT — placeholder",
+        label: "Coastline at dusk",
         aspect: "4 / 5",
-        // TODO(asset): property information + contact module detail.
+        // Placeholder photo — swap for a real property info + contact module detail.
         asset: "/public/media/features/property-info.png — 4:5 info & contact detail",
+        src: "/media/pexels-rdne-8231167.jpg",
+        kind: "image",
       },
     ],
   },

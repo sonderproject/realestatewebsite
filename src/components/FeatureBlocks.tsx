@@ -56,13 +56,19 @@ function Block({ block }: { block: FeatureBlock }) {
         }`}
       >
         {block.placeholders.map((p) => (
-          // TODO(asset): swap each Placeholder for real media — see `asset` note
-          // on this entry in /src/config/site.ts: {p.asset}
+          // Real media renders when `src` is set (see /src/config/site.ts);
+          // otherwise the labeled stand-in shows. Asset spec: {p.asset}
           <div
             key={p.label}
             className="w-full rounded-2xl shadow-xl shadow-navy-deep/50 ring-1 ring-teal/10"
           >
-            <Placeholder label={p.label} aspect={p.aspect} className="rounded-2xl" />
+            <Placeholder
+              label={p.label}
+              aspect={p.aspect}
+              src={p.src}
+              kind={p.kind}
+              className="rounded-2xl"
+            />
           </div>
         ))}
       </motion.div>

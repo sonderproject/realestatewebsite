@@ -1,25 +1,32 @@
 "use client";
 
+import Image from "next/image";
+
 // ─────────────────────────────────────────────────────────────────────────
-// Placeholder — a clearly-labeled stand-in for real product media.
+// Placeholder / media frame.
 //
-// Sonder supplies real assets (tour reels, page captures, staged photos)
-// later. Until then every product visual on the site renders as one of these:
-// a rounded card with a soft teal-tinted border, the correct aspect ratio,
-// and a centered uppercase label like "4D AI TOUR — placeholder".
+// When given a `src`, it renders the real asset (image or looping video)
+// filling a rounded, correctly-proportioned frame. Without a `src`, it falls
+// back to a clearly-labeled stand-in card (soft teal border + centered label)
+// so slots that don't have media yet still read as "asset goes here".
 //
-// Each usage site should sit next to a TODO comment naming the expected asset
-// (those live in /src/config/site.ts alongside the copy).
+// Asset specs for each usage live in /src/config/site.ts alongside the copy.
 // ─────────────────────────────────────────────────────────────────────────
 
 interface PlaceholderProps {
-  /** Centered label, e.g. "4D AI TOUR — placeholder". */
+  /** Label — used as the alt text for real media, or the centered stand-in badge. */
   label: string;
-  /** Optional smaller line under the label. */
+  /** Optional smaller line under the label (stand-in mode only). */
   sublabel?: string;
   /** CSS aspect-ratio value, e.g. "16 / 9". */
   aspect?: string;
   className?: string;
+  /** When set, renders real media instead of the stand-in card. */
+  src?: string;
+  /** Media type for `src`. Defaults to "image". */
+  kind?: "image" | "video";
+  /** next/image sizes hint (image mode). */
+  sizes?: string;
 }
 
 export default function Placeholder({
@@ -27,12 +34,45 @@ export default function Placeholder({
   sublabel,
   aspect = "16 / 9",
   className = "",
+  src,
+  kind = "image",
+  sizes = "(min-width: 768px) 45vw, 90vw",
 }: PlaceholderProps) {
+  const frame = `relative w-full overflow-hidden rounded-2xl border border-teal/20 bg-navy-800/80 ${className}`;
+
+  // ── Real media ──────────────────────────────────────────────────────────
+  if (src) {
+    return (
+      <div className={frame} style={{ aspectRatio: aspect }}>
+        {kind === "video" ? (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label={label}
+          >
+            <source src={src} type="video/mp4" />
+          </video>
+        ) : (
+          <Image src={src} alt={label} fill sizes={sizes} className="object-cover" />
+        )}
+        {/* Inner ring + bottom shade to seat the media into the dark design */}
+        <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
+          style={{ background: "linear-gradient(180deg, transparent, rgba(6,17,29,0.4))" }}
+          aria-hidden
+        />
+      </div>
+    );
+  }
+
+  // ── Labeled stand-in ──────────────────────────────────────────────────────
   return (
-    <div
-      className={`relative w-full overflow-hidden rounded-2xl border border-teal/20 bg-navy-800/80 ${className}`}
-      style={{ aspectRatio: aspect }}
-    >
+    <div className={frame} style={{ aspectRatio: aspect }}>
       {/* Soft inner gradient so the empty card still reads as "media" */}
       <div className="absolute inset-0 bg-gradient-to-br from-navy-700/60 via-navy-800 to-navy-deep" />
 

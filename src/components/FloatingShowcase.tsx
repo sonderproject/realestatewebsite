@@ -36,6 +36,9 @@ export default function FloatingShowcase() {
               label={showcase.primary.label}
               sublabel={showcase.primary.sublabel}
               aspect={showcase.primary.aspect}
+              src={showcase.primary.src}
+              kind={showcase.primary.kind}
+              sizes="(min-width: 768px) 900px, 100vw"
               className="rounded-3xl"
             />
           </motion.div>
@@ -51,6 +54,9 @@ export default function FloatingShowcase() {
                 label={showcase.secondary.label}
                 sublabel={showcase.secondary.sublabel}
                 aspect={showcase.secondary.aspect}
+                src={showcase.secondary.src}
+                kind={showcase.secondary.kind}
+                sizes="(min-width: 768px) 220px, 160px"
                 className="rounded-2xl"
               />
             </div>
