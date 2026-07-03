@@ -17,6 +17,15 @@ import { hero, media } from "@/config/site";
 // moves as fast as they scroll. Once the film has played through, the pin
 // releases and the page continues below. The headline sits over the opening
 // frames and lifts away as the scrub begins.
+//
+// Mobile: iOS/Android won't buffer or paint frames for a paused <video> until
+// playback has been triggered once, so seeking currentTime does nothing and
+// the scrub looks frozen. The effect below "primes" the video — a muted
+// play() immediately paused — on mount and again on the first touch/scroll,
+// which unlocks decoding and makes scrubbing work on phones. Seeks go through
+// fastSeek where available (Safari): the film is all-intra encoded, so
+// nearest-keyframe seeking is still frame-accurate but much cheaper.
+//
 // Honors prefers-reduced-motion: no pin, the film simply autoplays and loops.
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -43,6 +52,33 @@ export default function HeroSection() {
     // Scroll-driven playback replaces autoplay.
     video.pause();
 
+    // Prime the decoder: muted+playsInline play() is allowed without a
+    // gesture on modern mobile browsers, but if it's still blocked (e.g.
+    // Low Power Mode), retry on the first real interaction.
+    let primed = false;
+    const prime = () => {
+      if (primed) return;
+      primed = true;
+      const p = video.play();
+      if (p)
+        p.then(() => video.pause()).catch(() => {
+          primed = false;
+        });
+    };
+    prime();
+    const gestures: (keyof WindowEventMap)[] = [
+      "touchstart",
+      "pointerdown",
+      "scroll",
+    ];
+    gestures.forEach((e) =>
+      window.addEventListener(e, prime, { passive: true })
+    );
+
+    const fastSeek = (
+      video as HTMLVideoElement & { fastSeek?: (t: number) => void }
+    ).fastSeek?.bind(video);
+
     let raf = 0;
     let current = 0;
     const tick = () => {
@@ -55,10 +91,19 @@ export default function HeroSection() {
       if (Math.abs(target.current - current) < 0.0005) current = target.current;
       // Stay a hair inside the ends: seeking to exact duration can blank out.
       const t = Math.min(Math.max(current * duration, 0), duration - 0.05);
-      if (Math.abs(video.currentTime - t) > 0.01) video.currentTime = t;
+      if (Math.abs(video.currentTime - t) > 0.01) {
+        // Don't queue seeks on top of one another — mobile Safari stalls if
+        // a new seek lands while the previous one is still in flight.
+        if (video.seeking) return;
+        if (fastSeek) fastSeek(t);
+        else video.currentTime = t;
+      }
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      gestures.forEach((e) => window.removeEventListener(e, prime));
+    };
   }, [reduce]);
 
   // Headline lifts, fades, and tilts back as the scrub begins.
