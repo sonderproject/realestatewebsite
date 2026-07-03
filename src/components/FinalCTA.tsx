@@ -9,7 +9,7 @@ import { site } from "@/config/site";
 // ── 7 — BOOKING / CONTACT ────────────────────────────────────────────────
 // Closing section. Keeps the Cal.com inline booking embed for agents who want
 // to talk before starting, with a secondary nudge to the self-serve intake.
-// Reskinned to the Sonder navy palette. Shared by the homepage and /photography.
+// Reskinned to the Sonder navy palette.
 export default function FinalCTA() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.05 });
