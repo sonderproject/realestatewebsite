@@ -13,3 +13,7 @@ node_modules/
 # Misc
 .DS_Store
 *.tsbuildinfo
+
+# Local scratch logs
+*.log
+scratch_server.log
