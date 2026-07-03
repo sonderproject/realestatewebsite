@@ -28,6 +28,8 @@ export default function IntakeForm() {
   const [tier, setTier] = useState(initialTier);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const single = visibleTiers.length === 1;
+  const soleTier = visibleTiers[0];
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -103,47 +105,67 @@ export default function IntakeForm() {
         onSubmit={handleSubmit}
         className="mx-auto max-w-2xl rounded-3xl border border-teal/15 bg-navy-800/50 p-6 md:p-9"
       >
-        {/* Tier selection */}
+        {/* Package — a single fixed package today, shown as a summary. If more
+            tiers are switched on in the config, this becomes a chooser. */}
         <fieldset className="mb-8">
           <legend className="mb-3 text-[10px] font-medium uppercase tracking-[0.25em] text-teal">
-            1 · Choose a package
+            1 · Your package
           </legend>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {visibleTiers.map((t) => {
-              const selected = tier === t.id;
-              return (
-                <label
-                  key={t.id}
-                  className={`cursor-pointer rounded-2xl border p-4 transition-colors duration-200 ${
-                    selected
-                      ? "border-teal/60 bg-navy-600/50"
-                      : "border-teal/10 bg-navy-900/40 hover:border-teal/30"
-                  }`}
+          {single && soleTier ? (
+            <div className="rounded-2xl border border-teal/40 bg-navy-600/40 p-5">
+              <div className="flex items-center justify-between">
+                <span
+                  className="text-lg font-normal text-cream"
+                  style={{ fontFamily: "var(--font-display)" }}
                 >
-                  <input
-                    type="radio"
-                    name="tierRadio"
-                    value={t.id}
-                    checked={selected}
-                    onChange={() => setTier(t.id)}
-                    className="sr-only"
-                  />
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="text-lg font-normal text-cream"
-                      style={{ fontFamily: "var(--font-display)" }}
-                    >
-                      {t.name}
-                    </span>
-                    <span className="text-sm font-light text-teal">{t.price}</span>
-                  </div>
-                  <p className="mt-1 text-xs font-light text-cream-faint">
-                    {t.tagline}
-                  </p>
-                </label>
-              );
-            })}
-          </div>
+                  {soleTier.name}
+                </span>
+                <span className="text-base font-light text-teal">
+                  {soleTier.price}
+                </span>
+              </div>
+              <p className="mt-1 text-xs font-light text-cream-faint">
+                {soleTier.tagline}
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {visibleTiers.map((t) => {
+                const selected = tier === t.id;
+                return (
+                  <label
+                    key={t.id}
+                    className={`cursor-pointer rounded-2xl border p-4 transition-colors duration-200 ${
+                      selected
+                        ? "border-teal/60 bg-navy-600/50"
+                        : "border-teal/10 bg-navy-900/40 hover:border-teal/30"
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="tierRadio"
+                      value={t.id}
+                      checked={selected}
+                      onChange={() => setTier(t.id)}
+                      className="sr-only"
+                    />
+                    <div className="flex items-center justify-between">
+                      <span
+                        className="text-lg font-normal text-cream"
+                        style={{ fontFamily: "var(--font-display)" }}
+                      >
+                        {t.name}
+                      </span>
+                      <span className="text-sm font-light text-teal">{t.price}</span>
+                    </div>
+                    <p className="mt-1 text-xs font-light text-cream-faint">
+                      {t.tagline}
+                    </p>
+                  </label>
+                );
+              })}
+            </div>
+          )}
         </fieldset>
 
         {/* Property */}

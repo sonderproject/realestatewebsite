@@ -69,16 +69,16 @@ export default function HomePage() {
       {/* 1 — Hero */}
       <HeroSection />
 
-      {/* 2 — Floating showcase: cinematic AI tour + property experience placeholders */}
+      {/* 2 — Floating showcase: cinematic walkthrough + property website placeholders */}
       <FloatingShowcase />
 
-      {/* 3 — Pill cloud: "One immersive property experience" */}
+      {/* 3 — Pill cloud: "Everything in one experience" */}
       <PillCloud />
 
-      {/* 4 — Feature blocks: Cinematic Tour, Interactive Walkthrough, Property Page, The Launch */}
+      {/* 4 — Feature blocks: Property Website, Cinematic Walkthrough, Virtual Tour, Photos & Info */}
       <FeatureBlocks />
 
-      {/* 5 — Pricing: AI Property Experience $1,500 · Signature (custom, quoted) */}
+      {/* 5 — Pricing: one package — The Property Experience, $1,497 per property */}
       <PricingSection />
 
       {/* 6 — FAQ accordion */}

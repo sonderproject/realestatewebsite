@@ -6,13 +6,13 @@ import Placeholder from "@/components/Placeholder";
 import { showcase } from "@/config/site";
 
 // ── 2 — FLOATING SHOWCASE ───────────────────────────────────────────────────
-// dock.cool's floating product shot, reskinned. A large central AI-tour video
-// placeholder with a smaller property-experience mockup floating over its
-// corner. Soft shadows + a gentle, looping vertical drift for subtle motion.
+// dock.cool's floating product shot, reskinned. A large central cinematic-
+// walkthrough video placeholder with a smaller property-website mockup floating
+// over its corner. Soft shadows + a gentle, looping vertical drift for motion.
 //
 // TODO(asset): replace both Placeholder blocks with real media —
-//   showcase.primary  → cinematic AI tour reel (16:9 MP4, muted autoplay loop)
-//   showcase.secondary→ property-experience screen capture (9:16 portrait)
+//   showcase.primary  → cinematic walkthrough reel (16:9 MP4, muted autoplay loop)
+//   showcase.secondary→ property-website screen capture (9:16 portrait)
 export default function FloatingShowcase() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
@@ -26,7 +26,7 @@ export default function FloatingShowcase() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="relative"
         >
-          {/* Large central AI-tour placeholder — floats up and down slowly */}
+          {/* Large central walkthrough placeholder — floats up and down slowly */}
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
@@ -40,7 +40,7 @@ export default function FloatingShowcase() {
             />
           </motion.div>
 
-          {/* Property-experience mockup — floats over the bottom-right corner */}
+          {/* Property-website mockup — floats over the bottom-right corner */}
           <motion.div
             animate={{ y: [0, 14, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}

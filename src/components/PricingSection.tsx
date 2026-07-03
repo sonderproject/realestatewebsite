@@ -6,9 +6,10 @@ import { motion, useInView } from "framer-motion";
 import { pricing, visibleTiers } from "@/config/site";
 
 // ── 5 — PRICING ────────────────────────────────────────────────────────────
-// dock.cool's centered pricing cards, reskinned. Two per-project, one-time
-// tiers: the AI Property Experience ($1,500, featured) and Signature (custom,
-// quoted). The Experience is the featured hero option.
+// dock.cool's centered pricing cards, reskinned. One package today: the
+// Property Experience ($1,497, per property). Rendered as a single centered
+// card; the layout still supports multiple tiers side by side if more are
+// switched on later.
 //
 // Tiers come from /src/config/site.ts via `visibleTiers`, which already filters
 // out anything with visible:false — so a future monthly/recurring tier can be
@@ -16,6 +17,7 @@ import { pricing, visibleTiers } from "@/config/site";
 export default function PricingSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.2 });
+  const single = visibleTiers.length === 1;
 
   return (
     <section
@@ -46,7 +48,11 @@ export default function PricingSection() {
           </motion.p>
         </div>
 
-        <div className="mx-auto grid max-w-3xl items-start gap-6 md:grid-cols-2">
+        <div
+          className={`mx-auto grid items-start gap-6 ${
+            single ? "max-w-md" : "max-w-3xl md:grid-cols-2"
+          }`}
+        >
           {visibleTiers.map((tier, i) => (
             <motion.div
               key={tier.id}
@@ -55,7 +61,9 @@ export default function PricingSection() {
               transition={{ duration: 0.7, delay: 0.2 + i * 0.12 }}
               className={`relative flex flex-col rounded-3xl p-8 md:p-9 ${
                 tier.featured
-                  ? "border border-teal/40 bg-gradient-to-br from-navy-600 to-navy-800 shadow-2xl shadow-teal/10 md:-translate-y-3"
+                  ? `border border-teal/40 bg-gradient-to-br from-navy-600 to-navy-800 shadow-2xl shadow-teal/10 ${
+                      single ? "" : "md:-translate-y-3"
+                    }`
                   : "border border-teal/10 bg-navy-800/60"
               }`}
             >

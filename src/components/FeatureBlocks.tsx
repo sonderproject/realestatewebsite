@@ -10,8 +10,8 @@ import { featureBlocks, type FeatureBlock } from "@/config/site";
 // the other, alternating sides down the page. Sonder skin. Each block's copy
 // and placeholder specs live in /src/config/site.ts (featureBlocks).
 //
-// The Cinematic AI Tour leads; then the Interactive Walkthrough, the Property
-// Landing Page, and "Make It a Product Launch."
+// The Property Website leads; then the Cinematic Walkthrough, the Interactive
+// Virtual Tour, and Photos & Property Information.
 
 function Block({ block }: { block: FeatureBlock }) {
   const ref = useRef<HTMLDivElement>(null);

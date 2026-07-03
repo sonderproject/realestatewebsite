@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Homepage section anchors.
 const LINKS = [
-  { label: "Experience", href: "/#cinematic-tour" },
+  { label: "Experience", href: "/#property-website" },
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/#contact" },

@@ -7,7 +7,7 @@ import IntakeForm from "@/components/IntakeForm";
 export const metadata: Metadata = {
   title: "Start a Project",
   description:
-    "Send us your property and we'll produce the experience. Pick a package, share the address and photos, and we build the cinematic AI tour, interactive walkthrough, and dedicated landing page.",
+    "Send us your property and we'll produce the experience. Share the address and photos, and we build the premium property website, cinematic walkthrough, and interactive virtual tour.",
 };
 
 export default function GetStartedPage() {
@@ -29,9 +29,10 @@ export default function GetStartedPage() {
             Send us the property.
           </h1>
           <p className="mx-auto max-w-xl text-sm font-light leading-relaxed text-cream-dim md:text-base">
-            Tell us about one listing, share your photos, and pick a package. We
-            produce the complete AI property experience and hand you a single
-            shareable link. No platform to learn, no software to set up.
+            Tell us about one listing and share your photos. We produce the
+            complete property experience — website, cinematic walkthrough, and
+            virtual tour — and hand you a single shareable link. No platform to
+            learn, no software to set up.
           </p>
         </div>
       </section>

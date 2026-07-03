@@ -26,20 +26,20 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sonderstudio.space"),
   title: {
-    default: "Sonder Studio — AI Property Experiences for Luxury Real Estate",
+    default: "Sonder Studio — Premium Property Experiences for Real Estate",
     template: "%s — Sonder Studio",
   },
   description:
-    "Sonder Studio turns a single listing into an immersive AI property experience — a cinematic AI tour, an interactive walkthrough, and a dedicated landing page with lead capture. Not agent websites. One experience per property.",
+    "Sonder Studio gives every listing its own premium, scroll-animated property website — with a cinematic video walkthrough, an interactive virtual tour, and professional property photos and information. One package, one price, per property.",
   keywords: [
-    "AI property tour",
-    "AI property experience",
-    "interactive property walkthrough",
-    "property landing page",
-    "luxury real estate marketing",
+    "property website",
+    "property experience",
+    "cinematic video walkthrough",
+    "interactive virtual tour",
+    "real estate marketing",
     "listing marketing",
-    "buyer lead capture",
     "luxury real estate agents",
+    "single property website",
   ],
   icons: {
     icon: "/icon.png",
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Sonder Studio",
-    title: "Sonder Studio — AI Property Experiences",
+    title: "Sonder Studio — Premium Property Experiences",
     description:
-      "An immersive AI property experience for every listing — cinematic AI tour, interactive walkthrough, and a dedicated landing page that captures buyer leads.",
+      "A premium, scroll-animated property website for every listing — with a cinematic video walkthrough, an interactive virtual tour, and professional photos. One package, one price.",
     url: "https://sonderstudio.space",
     images: [
       { url: "/media/og-image.jpg", width: 1200, height: 630, alt: "Sonder Studio" },
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sonder Studio — AI Property Experiences",
+    title: "Sonder Studio — Premium Property Experiences",
     description:
-      "An immersive AI property experience for every listing — cinematic AI tour, interactive walkthrough, and a dedicated landing page that captures buyer leads.",
+      "A premium, scroll-animated property website for every listing — with a cinematic video walkthrough, an interactive virtual tour, and professional photos. One package, one price.",
     images: ["/media/og-image.jpg"],
   },
 };
