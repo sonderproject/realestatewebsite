@@ -6,9 +6,9 @@ import { faqs } from "@/config/site";
 
 // ── 6 — FAQ ────────────────────────────────────────────────────────────────
 // dock.cool's FAQ accordion, reskinned. Single-open accordion. Entries live in
-// /src/config/site.ts — including the plain-language notes that the 4D tour is
-// a cinematic AI-generated tour (not a Matterport scan) and how lead capture
-// works.
+// /src/config/site.ts — including the plain-language notes that the cinematic
+// tour is an AI-generated film (not a Matterport scan), that we don't build
+// agent websites, and how lead capture works.
 export default function FAQSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.15 });

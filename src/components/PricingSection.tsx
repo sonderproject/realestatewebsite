@@ -6,8 +6,9 @@ import { motion, useInView } from "framer-motion";
 import { pricing, visibleTiers } from "@/config/site";
 
 // ── 5 — PRICING ────────────────────────────────────────────────────────────
-// dock.cool's centered pricing cards, reskinned. Two per-property, one-time
-// tiers (Listing $497, Flagship $997). Flagship is the featured hero option.
+// dock.cool's centered pricing cards, reskinned. Two per-project, one-time
+// tiers: the AI Property Experience ($1,500, featured) and Signature (custom,
+// quoted). The Experience is the featured hero option.
 //
 // Tiers come from /src/config/site.ts via `visibleTiers`, which already filters
 // out anything with visible:false — so a future monthly/recurring tier can be
@@ -58,9 +59,9 @@ export default function PricingSection() {
                   : "border border-teal/10 bg-navy-800/60"
               }`}
             >
-              {tier.featured && (
+              {tier.featured && tier.badge && (
                 <span className="absolute right-7 top-7 rounded-full bg-teal px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-navy-deep">
-                  Most premium
+                  {tier.badge}
                 </span>
               )}
 
@@ -84,7 +85,9 @@ export default function PricingSection() {
                 <span className="pb-1.5 text-xs text-cream-faint">
                   {tier.billing === "recurring"
                     ? `/ ${tier.interval ?? "month"}`
-                    : "one-time · per property"}
+                    : tier.priceUsd === 0
+                    ? "scoped & quoted"
+                    : "one-time · per project"}
                 </span>
               </div>
 

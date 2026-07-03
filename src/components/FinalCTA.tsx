@@ -75,8 +75,8 @@ export default function FinalCTA() {
           className="mx-auto mb-10 max-w-lg text-center text-sm font-light leading-relaxed text-cream-dim md:mb-14"
         >
           Prefer to talk it through first? Book a free intro call — we&apos;ll scope
-          your listing and answer anything about the 4D tour, the property page, or
-          turnaround.
+          your property and answer anything about the AI tour, the interactive
+          walkthrough, or the property experience.
         </motion.p>
 
         {/* Cal.com inline embed — min-h so it auto-expands on mobile */}

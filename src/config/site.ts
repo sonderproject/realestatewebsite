@@ -3,16 +3,23 @@
 // ─────────────────────────────────────────────────────────────────────────
 // Single source of truth for the homepage + core pages.
 //
-// Sonder is a DONE-FOR-YOU service: we produce premium marketing media for a
-// single property, per property — NOT a self-serve SaaS platform. All copy,
-// pricing, deliverables, pills, feature blocks and FAQ entries live here so the
-// pages stay thin and the wording is edited in one place.
+// Sonder Studio builds ONE product: a premium AI Property Experience for a
+// single listing — NOT agent websites, brokerage sites, or a self-serve SaaS
+// platform. We do not build websites for real estate agents; we build a
+// digital experience for every property. Every listing becomes its own
+// interactive marketing asset that lets buyers emotionally experience the home
+// before they ever step inside.
 //
-// Two hero products lead everything:
-//   1. 4D AI Property Tours — immersive, AI-generated cinematic walkthroughs
-//      (on-rails camera, NOT a clickable Matterport dollhouse).
-//   2. Premium Animated Property Landing Pages — a single-property page with
-//      scroll-driven animation that also captures qualified buyer leads.
+// The core deliverable bundles, per property:
+//   • Cinematic AI Property Tour — a directed, AI-generated walkthrough film.
+//   • Interactive AI Walkthrough — a self-paced exploration of the home.
+//   • Dedicated Property Landing Page — gallery, floor plans, map &
+//     neighborhood, features, and a built-in lead-capture form, all under one
+//     shareable link + QR code, fully mobile-optimized.
+//
+// Pricing is per project, starting around $1,500; premium and landmark
+// listings are scoped and quoted on a call. No subscriptions, no revenue
+// share, no commission — we are a premium marketing studio, not a brokerage.
 // ─────────────────────────────────────────────────────────────────────────
 
 export const site = {
@@ -20,66 +27,69 @@ export const site = {
   studio: "Sonder Studio",
   domain: "sonderstudio.space",
   url: "https://sonderstudio.space",
-  tagline: "Premium property media that sells listings faster.",
+  tagline: "AI-powered property experiences for luxury real estate.",
   // Cal.com inline booking embed (kept from the previous build).
   cal: {
     namespace: "sonder-studio",
     link: "dante-valentino/sonder-studio",
   },
-  turnaround: "48-hour turnaround",
+  // Short reassurance lines used under the hero CTA.
+  focus: "One property, one project",
   promise: "We handle everything",
 } as const;
 
 // ── HERO ───────────────────────────────────────────────────────────────────
 export const hero = {
-  eyebrow: "Premium property media",
+  eyebrow: "AI property experiences",
   // Fraunces serif headline. <em> spans are styled as the teal accent.
-  headlineLead: "Turn any listing into an ",
+  headlineLead: "Give every listing its own ",
   headlineEm: "immersive experience",
-  headlineTail: " that sells faster.",
+  headlineTail: ".",
   subhead:
-    "We produce the 4D AI tour, the animated property page, and every piece of marketing media your listing needs — so you win the listing, sell it faster, and capture the buyer leads. You send the address and photos; we deliver the rest.",
-  primaryCta: { label: "Get Started", href: "/get-started" },
+    "Sonder Studio turns a single property into a cinematic AI tour, an interactive walkthrough, and a dedicated landing page — one immersive experience that lets buyers feel the home before they ever step inside. You send the address and photos; we produce the rest.",
+  primaryCta: { label: "Start a Project", href: "/get-started" },
   secondaryCta: { label: "See pricing", href: "#pricing" },
   // Two short reassurance lines under the CTA.
-  reassurances: [site.turnaround, site.promise],
+  reassurances: [site.focus, site.promise],
 } as const;
 
 // ── FLOATING SHOWCASE ────────────────────────────────────────────────────
 // Floating, softly-shadowed placeholders. Real assets are supplied later.
 export const showcase = {
-  // TODO(asset): hero 4D AI tour reel — cinematic on-rails walkthrough MP4,
-  // 16:9, muted autoplay loop. Drop at /public/media/showcase/4d-tour.mp4
+  // TODO(asset): hero cinematic AI tour reel — directed AI walkthrough MP4,
+  // 16:9, muted autoplay loop. Drop at /public/media/showcase/ai-tour.mp4
   primary: {
-    label: "4D AI TOUR — placeholder",
-    sublabel: "Cinematic AI-generated walkthrough",
+    label: "CINEMATIC AI TOUR — placeholder",
+    sublabel: "AI-generated cinematic walkthrough",
     aspect: "16 / 9" as const,
   },
-  // TODO(asset): animated property landing-page screen-capture, 9:16 portrait
-  // scroll capture. Drop at /public/media/showcase/property-page.mp4
+  // TODO(asset): dedicated property experience screen-capture, 9:16 portrait
+  // scroll capture. Drop at /public/media/showcase/property-experience.mp4
   secondary: {
-    label: "ANIMATED PROPERTY PAGE — placeholder",
-    sublabel: "Scroll-animated single-property page",
+    label: "PROPERTY EXPERIENCE — placeholder",
+    sublabel: "Dedicated interactive landing page",
     aspect: "9 / 16" as const,
   },
 } as const;
 
 // ── PILL CLOUD ─────────────────────────────────────────────────────────────
+// Mirrors the AI Property Experience inclusion list — one complete, dedicated
+// experience produced per property.
 export const pillCloud = {
-  heading: "Everything to sell the listing",
+  heading: "One immersive property experience",
   subhead:
-    "One property, one team, one invoice. Every asset below is produced for you.",
+    "Every project is a complete, dedicated experience for a single property — produced end to end, under one shareable link.",
   pills: [
-    "4D AI Tour",
-    "Animated Property Page",
-    "Virtual Staging",
-    "Walkthrough Video",
-    "Photo Enhancement",
-    "Sky Replacement",
-    "Listing Description",
-    "Social Cutdowns",
+    "Cinematic AI Tour",
+    "Interactive Walkthrough",
+    "Property Landing Page",
+    "Photo Gallery",
+    "Floor Plans",
+    "Map & Neighborhood",
+    "Property Features",
     "Lead Capture",
-    "Hosted Page",
+    "Mobile Optimized",
+    "Shareable Link & QR",
   ],
 } as const;
 
@@ -103,30 +113,44 @@ export interface FeatureBlock {
 
 export const featureBlocks: FeatureBlock[] = [
   {
-    id: "four-d-tour",
+    id: "cinematic-tour",
     eyebrow: "The flagship",
-    title: "The 4D Tour",
-    body: "Our signature product: a cinematic, AI-generated walkthrough that glides through the home on a directed camera path — the kind of film that makes a buyer feel the space before they ever book a showing. It is immersive and editorial, not a clunky dollhouse scan. You give us photos; we generate the tour and hand you a share-ready film for the MLS, your socials, and the property page.",
+    title: "The Cinematic AI Tour",
+    body: "Our signature deliverable: a cinematic, AI-generated tour that glides through the home on a directed camera path — the kind of film that makes a buyer feel the space before they ever book a showing. It is immersive and editorial, not a clunky dollhouse scan. You give us photos; we generate the tour and hand you a share-ready film for the MLS, your socials, and the property experience.",
     placeholders: [
       {
-        label: "4D AI TOUR — placeholder",
+        label: "CINEMATIC AI TOUR — placeholder",
         aspect: "16 / 9",
-        // TODO(asset): flagship 4D tour reel, 16:9 MP4. /public/media/features/4d-tour.mp4
-        asset: "/public/media/features/4d-tour.mp4 — 16:9 cinematic tour reel",
+        // TODO(asset): flagship AI tour reel, 16:9 MP4. /public/media/features/ai-tour.mp4
+        asset: "/public/media/features/ai-tour.mp4 — 16:9 cinematic tour reel",
+      },
+    ],
+  },
+  {
+    id: "interactive-walkthrough",
+    eyebrow: "Explore the home",
+    title: "The Interactive Walkthrough",
+    body: "Beyond the film, every experience includes an interactive AI walkthrough — buyers explore the home at their own pace, room by room, on any device. It turns a static listing into something a buyer can step into and lose track of time in, the way a great open house feels in person — without the scheduling, the drive, or the pressure.",
+    reverse: true,
+    placeholders: [
+      {
+        label: "INTERACTIVE WALKTHROUGH — placeholder",
+        aspect: "16 / 10",
+        // TODO(asset): screen capture of the interactive walkthrough UI.
+        asset: "/public/media/features/walkthrough.mp4 — 16:10 interactive walkthrough capture",
       },
     ],
   },
   {
     id: "property-page",
     eyebrow: "Capture the buyer",
-    title: "The Property Page",
-    body: "A premium, single-property website with scroll-driven animation built around your listing — and a lead-capture form wired into the page so interested buyers become contacts in your inbox, not anonymous views. We design, build, and host it; you get a link to drop everywhere and a steady feed of qualified buyer leads.",
-    reverse: true,
+    title: "The Property Landing Page",
+    body: "Every project lives on its own dedicated landing page built around the listing: a high-resolution photo gallery, floor plans, map and neighborhood, property features, and a built-in lead-capture form that turns anonymous views into named, qualified buyer contacts in your inbox. We design, build, and host it; you get a single link to drop everywhere.",
     placeholders: [
       {
-        label: "ANIMATED PROPERTY PAGE — placeholder",
+        label: "PROPERTY LANDING PAGE — placeholder",
         aspect: "16 / 10",
-        // TODO(asset): desktop scroll capture of the animated property page.
+        // TODO(asset): desktop scroll capture of the property landing page.
         asset: "/public/media/features/property-page-desktop.mp4 — 16:10 scroll capture",
       },
       {
@@ -138,68 +162,52 @@ export const featureBlocks: FeatureBlock[] = [
     ],
   },
   {
-    id: "virtual-staging",
-    eyebrow: "Cut staging costs",
-    title: "Stage It Virtually",
-    body: "Physical staging runs thousands per listing and weeks of logistics. We stage your rooms virtually instead — furnishing empty spaces and helping buyers picture life inside a vacant or fixer-upper home — for a fraction of the cost and with same-week turnaround. Show the home at its best without renting a single sofa.",
-    placeholders: [
-      {
-        label: "VIRTUAL STAGING — before · placeholder",
-        aspect: "4 / 3",
-        // TODO(asset): empty-room "before" photo. /public/media/features/staging-before.jpg
-        asset: "/public/media/features/staging-before.jpg — 4:3 empty room",
-      },
-      {
-        label: "VIRTUAL STAGING — after · placeholder",
-        aspect: "4 / 3",
-        // TODO(asset): virtually staged "after" photo. /public/media/features/staging-after.jpg
-        asset: "/public/media/features/staging-after.jpg — 4:3 staged room",
-      },
-    ],
-  },
-  {
-    id: "everything-else",
-    eyebrow: "No loose ends",
-    title: "Everything Else, Handled",
-    body: "Fresh listing? We turn it around fast and complete. Enhanced photography, a written listing description, and short social cutdowns for Reels, TikTok, and Stories — all produced from the same shoot so your marketing looks consistent and goes live the day it should.",
+    id: "the-launch",
+    eyebrow: "A launch, not a listing",
+    title: "Make It a Product Launch",
+    body: "Every experience is mobile-optimized and ships with a shareable link and QR code, so a property can travel from a yard sign to a text message to an Instagram story without losing an ounce of polish. One immersive link carries the whole home. The goal is simple: make every listing feel like a luxury product launch.",
     reverse: true,
     placeholders: [
       {
-        label: "PHOTO ENHANCEMENT — placeholder",
-        aspect: "4 / 3",
-        // TODO(asset): enhanced listing photo. /public/media/features/photo-enhanced.jpg
-        asset: "/public/media/features/photo-enhanced.jpg — 4:3 enhanced photo",
+        label: "MOBILE EXPERIENCE — placeholder",
+        aspect: "9 / 16",
+        // TODO(asset): mobile screen capture of the property experience.
+        asset: "/public/media/features/mobile-experience.mp4 — 9:16 mobile capture",
       },
       {
-        label: "SOCIAL CUTDOWN — placeholder",
-        aspect: "9 / 16",
-        // TODO(asset): vertical social cutdown clip. /public/media/features/social-cutdown.mp4
-        asset: "/public/media/features/social-cutdown.mp4 — 9:16 social clip",
+        label: "SHARE LINK & QR — placeholder",
+        aspect: "4 / 3",
+        // TODO(asset): shareable link + QR code detail. /public/media/features/share-qr.png
+        asset: "/public/media/features/share-qr.png — 4:3 link & QR detail",
       },
     ],
   },
 ];
 
 // ── PRICING ──────────────────────────────────────────────────────────────
-// Per-property, ONE-TIME pricing for now. The shape intentionally supports a
-// future recurring/monthly tier without rework: add an entry with
-// billing: "recurring", interval: "month", visible: true and it renders.
-// Nothing recurring is shown today (all current tiers are one-time).
+// Per-project, ONE-TIME pricing. Every property is a project: when the
+// property sells, the project is complete. The core AI Property Experience
+// starts around $1,500; premium/landmark listings are scoped and quoted.
+//
+// The shape intentionally supports a future recurring tier without rework:
+// add an entry with billing: "recurring", interval: "month", visible: true.
 export type BillingType = "one-time" | "recurring";
 
 export interface PricingTier {
   id: string;
   name: string;
-  /** Display price, e.g. "$497". */
+  /** Display price, e.g. "$1,500" or "Custom". */
   price: string;
-  /** Numeric price in USD, for future logic/sorting. */
+  /** Numeric price in USD, for future logic/sorting. 0 for quoted/custom. */
   priceUsd: number;
   billing: BillingType;
   /** Only used when billing === "recurring". */
   interval?: "month" | "year";
-  /** Toggle a tier on/off without deleting it. Monthly tiers stay false for now. */
+  /** Toggle a tier on/off without deleting it. */
   visible: boolean;
   featured: boolean;
+  /** Optional badge shown on the featured card. */
+  badge?: string;
   tagline: string;
   description: string;
   deliverables: string[];
@@ -209,71 +217,72 @@ export interface PricingTier {
 }
 
 export const pricing = {
-  heading: "One property. One price. Fully produced.",
+  heading: "One property. One experience. One price.",
   subhead:
-    "Pick a package per listing. No subscriptions, no platform to learn — we deliver the media and you get back to selling.",
-  note: "Prices are per property, billed once. Need volume pricing for a brokerage? Book a call.",
+    "Every project is a complete AI property experience, produced end to end and priced per listing — no subscriptions, no platform to learn.",
+  note: "Pricing scales with the property, scope, and custom requirements. Premium and landmark listings are quoted on a call. No revenue share, no commission split — ever.",
   tiers: [
     {
-      id: "listing",
-      name: "Listing",
-      price: "$497",
-      priceUsd: 497,
-      billing: "one-time",
-      visible: true,
-      featured: false,
-      tagline: "Core media for one property",
-      description:
-        "Everything you need to launch a brand-new listing looking premium — fast.",
-      deliverables: [
-        "Walkthrough video",
-        "Photo enhancement",
-        "Virtual staging",
-        "Listing description",
-        "Social cutdowns",
-        "Hosted page",
-      ],
-      cta: { label: "Start a Listing", href: "/get-started?tier=listing" },
-      // TODO(stripe): Stripe Price ID for the $497 one-time Listing package.
-      stripePriceId: null,
-    },
-    {
-      id: "flagship",
-      name: "Flagship",
-      price: "$997",
-      priceUsd: 997,
+      id: "experience",
+      name: "AI Property Experience",
+      price: "$1,500",
+      priceUsd: 1500,
       billing: "one-time",
       visible: true,
       featured: true,
-      tagline: "The full immersive treatment",
+      badge: "The Experience",
+      tagline: "The complete property experience",
       description:
-        "Our hero package: the 4D AI tour and a premium animated property page with built-in lead capture, plus everything in Listing.",
+        "Everything a single listing needs to feel like a luxury product launch — the cinematic AI tour, the interactive walkthrough, and a dedicated landing page with built-in lead capture.",
       deliverables: [
-        "4D AI property tour",
-        "Premium animated property page",
+        "Cinematic AI property tour",
+        "Interactive AI walkthrough",
+        "Dedicated property landing page",
+        "Photo gallery, floor plans & neighborhood",
         "Built-in buyer lead capture",
-        "Everything in Listing",
-        "Priority 48-hour turnaround",
+        "Shareable link & QR code",
       ],
-      cta: { label: "Go Flagship", href: "/get-started?tier=flagship" },
-      // TODO(stripe): Stripe Price ID for the $997 one-time Flagship package.
+      cta: { label: "Start a Project", href: "/get-started?tier=experience" },
+      // TODO(stripe): Stripe Price ID for the $1,500 AI Property Experience.
       stripePriceId: null,
     },
-    // ── FUTURE: recurring/monthly tier ──────────────────────────────────
-    // Example shape for a retainer once it's offered. Keep visible:false so it
-    // does NOT render today. Flip to true (and fill the Stripe ID) to launch.
+    {
+      id: "signature",
+      name: "Signature",
+      price: "Custom",
+      priceUsd: 0,
+      billing: "one-time",
+      visible: true,
+      featured: false,
+      tagline: "For luxury & landmark listings",
+      description:
+        "For premium properties that warrant more: an expanded, bespoke experience scoped to the home, its story, and your marketing. Quoted per project.",
+      deliverables: [
+        "Everything in the Experience",
+        "Extended, bespoke tour & narrative",
+        "Custom design & property branding",
+        "Priority production",
+        "Scoped to the property & your goals",
+      ],
+      cta: { label: "Book a Call", href: "/#contact" },
+      // TODO(stripe): custom/quoted — no fixed Stripe Price ID.
+      stripePriceId: null,
+    },
+    // ── FUTURE: recurring/retainer tier ─────────────────────────────────
+    // Only add once the core product is fully systemized (per the roadmap).
+    // Keep visible:false so it does NOT render until launched.
     // {
-    //   id: "retainer",
-    //   name: "Studio Retainer",
+    //   id: "studio",
+    //   name: "Studio",
     //   price: "$X/mo",
     //   priceUsd: 0,
     //   billing: "recurring",
     //   interval: "month",
     //   visible: false,
     //   featured: false,
-    //   tagline: "Ongoing media for active agents",
-    //   description: "A set number of listings produced every month.",
-    //   deliverables: ["N listings / month", "Priority queue"],
+    //   tagline: "Ongoing experiences for active agents",
+    //   description: "A set number of property experiences produced every month.",
+    //   deliverables: ["N experiences / month", "Priority queue"],
     //   cta: { label: "Talk to us", href: "/#contact" },
     //   stripePriceId: null, // TODO(stripe): recurring Price ID
     // },
@@ -291,32 +300,36 @@ export interface FaqItem {
 
 export const faqs: FaqItem[] = [
   {
-    q: "Is the 4D tour a Matterport scan?",
-    a: "No. The 4D AI tour is a cinematic, AI-generated walkthrough — a directed video that moves through the home on a set camera path, like a film. It is not a Matterport-style dollhouse you click around in. We design it to feel immersive and editorial, and you receive a ready-to-share video, not an interactive scan.",
+    q: "What exactly is an AI property experience?",
+    a: "It's a complete, dedicated experience for one property: a cinematic AI tour, an interactive walkthrough buyers can explore, and a hosted landing page with the photo gallery, floor plans, map and neighborhood, property features, and a lead-capture form — all under one shareable link and QR code. One listing, one immersive experience.",
+  },
+  {
+    q: "Is the tour just a Matterport scan?",
+    a: "No. The cinematic tour is a directed, AI-generated film that moves through the home like a piece of cinema. The interactive walkthrough lets buyers explore at their own pace — but it's a crafted, editorial experience, not a raw dollhouse scan. Everything is designed to feel immersive and premium.",
+  },
+  {
+    q: "Do you build agent or brokerage websites?",
+    a: "No — and that's the point. We don't build agent sites, brokerage sites, or general business websites. We build one immersive experience per property. Keeping the offer focused is how we keep the quality exceptional.",
   },
   {
     q: "How does the lead capture work?",
-    a: "The Flagship property page includes a built-in lead-capture form. When a buyer enters their details to request info or a showing, that contact is sent straight to you (your inbox, and your CRM if you use one) so you can follow up. The page turns anonymous views into named, qualified buyer leads that belong to you.",
+    a: "The property landing page includes a built-in lead-capture form. When a buyer enters their details to request info or a showing, that contact is sent straight to you (your inbox, and your CRM if you use one) so you can follow up. The page turns anonymous views into named, qualified buyer leads that belong to you.",
+  },
+  {
+    q: "What does it cost, and are there any commissions?",
+    a: "Projects start around $1,500 and scale with the property, scope, and custom requirements — premium and landmark listings are quoted on a call. It's a flat, per-project fee: no subscriptions, no revenue share, and no commission split. We're a premium marketing studio, not a brokerage partner.",
   },
   {
     q: "What do I need to send you?",
-    a: "Just the property address, your photos (phone photos are fine to start), and your contact details, plus which package you'd like. You'll do that on the Get Started intake. We handle production from there.",
+    a: "Just the property address, your photos (phone photos are fine to start), your contact details, and which package you'd like. You'll do that on the Get Started intake. We handle production from there.",
   },
   {
-    q: "How fast is turnaround?",
-    a: "Standard turnaround is 48 hours from the moment we have your photos and details. Flagship listings get priority in the queue.",
+    q: "Who owns the final experience?",
+    a: "You do. The tour, walkthrough, page, and every asset are yours to market the listing across the MLS, your website, email, and social for as long as the listing is live.",
   },
   {
-    q: "How is this different from hiring a stager and a videographer?",
-    a: "It's all handled in one place, for one price. Virtual staging replaces costly physical staging — no furniture rental, no scheduling — and you get the tour, the page, the photos, the description, and the social cutdowns as a single package instead of coordinating multiple vendors.",
-  },
-  {
-    q: "Do you work with brokerages and teams?",
-    a: "Yes. Independent agents through large brokerages all use Sonder per listing. If you run a high volume of listings and want a standing arrangement, book a call and we'll scope it.",
-  },
-  {
-    q: "Who owns the final media?",
-    a: "You do. Use the tour, page, photos, and clips across the MLS, your website, email, and social — they're yours to market the listing.",
+    q: "Do you work with luxury agents and developers?",
+    a: "Yes. Luxury and listing agents are who we build for first, along with home builders, property developers, and boutique hospitality. If a property deserves to stand out before a buyer ever schedules a showing, it's a fit.",
   },
 ];
 
@@ -328,30 +341,30 @@ export interface FooterColumn {
 
 export const footer = {
   blurb:
-    "Premium property media. Immersive 4D AI tours and premium animated property pages that help agents sell listings faster and capture buyer leads.",
+    "AI-powered property experiences for luxury real estate. Every listing becomes its own immersive tour, interactive walkthrough, and dedicated landing page — so buyers can feel the home before they step inside.",
   columns: [
     {
-      title: "Products",
+      title: "Experience",
       links: [
-        { label: "4D AI Tour", href: "#four-d-tour" },
+        { label: "Cinematic AI Tour", href: "#cinematic-tour" },
+        { label: "Interactive Walkthrough", href: "#interactive-walkthrough" },
         { label: "Property Page", href: "#property-page" },
-        { label: "Virtual Staging", href: "#virtual-staging" },
-        { label: "Photo & Social", href: "#everything-else" },
+        { label: "The Launch", href: "#the-launch" },
       ],
     },
     {
-      title: "Company",
+      title: "Studio",
       links: [
         { label: "Pricing", href: "#pricing" },
         { label: "FAQ", href: "#faq" },
-        { label: "Get Started", href: "/get-started" },
+        { label: "Start a Project", href: "/get-started" },
         { label: "Book a Call", href: "#contact" },
       ],
     },
     {
       title: "Get in touch",
       links: [
-        { label: "Start a listing", href: "/get-started" },
+        { label: "Start a project", href: "/get-started" },
         { label: "Book a call", href: "#contact" },
       ],
     },

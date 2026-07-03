@@ -69,16 +69,16 @@ export default function HomePage() {
       {/* 1 — Hero */}
       <HeroSection />
 
-      {/* 2 — Floating showcase: 4D tour + animated property page placeholders */}
+      {/* 2 — Floating showcase: cinematic AI tour + property experience placeholders */}
       <FloatingShowcase />
 
-      {/* 3 — Pill cloud: "Everything to sell the listing" */}
+      {/* 3 — Pill cloud: "One immersive property experience" */}
       <PillCloud />
 
-      {/* 4 — Feature blocks: 4D Tour, Property Page, Virtual Staging, Everything Else */}
+      {/* 4 — Feature blocks: Cinematic Tour, Interactive Walkthrough, Property Page, The Launch */}
       <FeatureBlocks />
 
-      {/* 5 — Pricing: Listing $497 · Flagship $997 (per property, one-time) */}
+      {/* 5 — Pricing: AI Property Experience $1,500 · Signature (custom, quoted) */}
       <PricingSection />
 
       {/* 6 — FAQ accordion */}

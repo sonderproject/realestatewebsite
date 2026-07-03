@@ -84,7 +84,7 @@ export default function IntakeForm() {
           <p className="mx-auto max-w-md text-sm font-light leading-relaxed text-cream-dim">
             Thanks for the details. We&apos;ll review your property and reply by
             email shortly to confirm next steps and where to send your full-res
-            photos. Most listings are delivered within 48 hours.
+            photos, then start producing your property experience.
           </p>
           <Link
             href="/"

@@ -10,7 +10,8 @@ import { featureBlocks, type FeatureBlock } from "@/config/site";
 // the other, alternating sides down the page. Sonder skin. Each block's copy
 // and placeholder specs live in /src/config/site.ts (featureBlocks).
 //
-// The 4D Tour leads; then Property Page, Virtual Staging, and Everything Else.
+// The Cinematic AI Tour leads; then the Interactive Walkthrough, the Property
+// Landing Page, and "Make It a Product Launch."
 
 function Block({ block }: { block: FeatureBlock }) {
   const ref = useRef<HTMLDivElement>(null);

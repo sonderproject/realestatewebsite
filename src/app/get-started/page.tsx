@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 import IntakeForm from "@/components/IntakeForm";
 
 export const metadata: Metadata = {
-  title: "Get Started",
+  title: "Start a Project",
   description:
-    "Send us your property and we'll produce the media. Pick a package, share the address and photos, and we deliver — typically within 48 hours.",
+    "Send us your property and we'll produce the experience. Pick a package, share the address and photos, and we build the cinematic AI tour, interactive walkthrough, and dedicated landing page.",
 };
 
 export default function GetStartedPage() {
@@ -30,8 +30,8 @@ export default function GetStartedPage() {
           </h1>
           <p className="mx-auto max-w-xl text-sm font-light leading-relaxed text-cream-dim md:text-base">
             Tell us about one listing, share your photos, and pick a package. We
-            produce the media and deliver it to you — typically within 48 hours.
-            No platform to learn, no software to set up.
+            produce the complete AI property experience and hand you a single
+            shareable link. No platform to learn, no software to set up.
           </p>
         </div>
       </section>
