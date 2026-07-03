@@ -53,16 +53,18 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-6 text-center text-xs font-medium uppercase tracking-[0.4em] text-teal"
+          className="mb-6 flex justify-center"
         >
-          Book a Call
+          <span className="rounded-full border border-cream/10 bg-white/[0.06] px-4 py-1.5 text-xs font-medium text-teal">
+            Book a Call
+          </span>
         </motion.p>
 
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.15 }}
-          className="mb-4 text-center text-4xl font-light leading-[1.0] text-cream md:mb-6 md:text-6xl"
+          className="mb-4 text-center text-4xl font-semibold leading-[1.05] tracking-tight text-cream md:mb-6 md:text-6xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Let&apos;s talk.
@@ -72,7 +74,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.3 }}
-          className="mx-auto mb-10 max-w-lg text-center text-sm font-light leading-relaxed text-cream-dim md:mb-14"
+          className="mx-auto mb-10 max-w-lg text-center text-base leading-relaxed text-cream-dim md:mb-14"
         >
           Prefer to talk it through first? Book a free intro call — we&apos;ll scope
           your property and answer anything about the website, the cinematic
@@ -102,17 +104,17 @@ export default function FinalCTA() {
           className="border-t border-teal/10 pt-10 text-center md:pt-12"
         >
           <p
-            className="mb-2 text-xl font-light text-cream md:text-2xl"
+            className="mb-2 text-xl font-semibold tracking-tight text-cream md:text-2xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Already know what you need?
           </p>
-          <p className="mx-auto mb-6 max-w-xs text-sm font-light leading-relaxed text-cream-faint">
+          <p className="mx-auto mb-6 max-w-xs text-sm leading-relaxed text-cream-faint">
             Send us the property and we&apos;ll get started — no call needed.
           </p>
           <Link
             href="/get-started"
-            className="cta-shine glass-btn-accent inline-block rounded-full px-7 py-3 text-xs font-medium uppercase tracking-[0.15em] text-navy-deep"
+            className="cta-shine glass-btn-accent inline-block rounded-full px-7 py-3 text-sm font-semibold text-navy-deep"
           >
             Get Started →
           </Link>

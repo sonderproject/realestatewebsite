@@ -15,13 +15,13 @@ export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section ref={ref} id="faq" className="relative scroll-mt-24 px-5 py-24 md:px-8 md:py-32">
+    <section ref={ref} id="faq" className="relative scroll-mt-24 px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-3xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-12 text-center text-3xl font-light text-cream md:text-5xl"
+          className="mb-12 text-center text-3xl font-semibold tracking-tight text-cream md:text-5xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Questions, answered
@@ -36,7 +36,7 @@ export default function FAQSection() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }}
-                className="overflow-hidden rounded-2xl border border-teal/15 bg-navy-800/50"
+                className="overflow-hidden rounded-2xl border border-cream/10 bg-white/[0.04]"
               >
                 <button
                   type="button"
@@ -44,7 +44,7 @@ export default function FAQSection() {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                 >
-                  <span className="text-sm font-normal text-cream md:text-base">
+                  <span className="text-base font-medium text-cream">
                     {faq.q}
                   </span>
                   <span
@@ -64,7 +64,7 @@ export default function FAQSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <p className="px-6 pb-6 text-sm font-light leading-relaxed text-cream-dim">
+                      <p className="px-6 pb-6 text-sm leading-relaxed text-cream-dim">
                         {faq.a}
                       </p>
                     </motion.div>

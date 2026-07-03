@@ -105,7 +105,7 @@ export default function Navbar() {
             <a
               key={item.label}
               href={item.href}
-              className="text-xs uppercase tracking-[0.2em] text-cream-dim transition-colors duration-300 hover:text-teal"
+              className="text-sm font-medium text-cream-dim transition-colors duration-300 hover:text-cream"
             >
               {item.label}
             </a>
@@ -115,13 +115,13 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href="/#contact"
-            className="glass-btn rounded-full px-6 py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-cream"
+            className="glass-btn rounded-full px-5 py-2 text-sm font-medium text-cream"
           >
             Book a Call
           </a>
           <Link
             href="/get-started"
-            className="glass-btn-accent rounded-full px-6 py-2.5 text-xs font-medium uppercase tracking-[0.15em] text-navy-deep"
+            className="glass-btn-accent rounded-full px-5 py-2 text-sm font-semibold text-navy-deep"
           >
             Get Started
           </Link>
@@ -177,7 +177,7 @@ export default function Navbar() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="border-b border-teal/10 py-4 text-sm uppercase tracking-[0.2em] text-cream-dim transition-colors duration-300 hover:text-teal"
+                  className="border-b border-teal/10 py-4 text-base font-medium text-cream-dim transition-colors duration-300 hover:text-cream"
                 >
                   {item.label}
                 </a>
@@ -187,14 +187,14 @@ export default function Navbar() {
                 <Link
                   href="/get-started"
                   onClick={() => setMenuOpen(false)}
-                  className="glass-btn-accent rounded-full px-6 py-3.5 text-center text-xs font-medium uppercase tracking-[0.2em] text-navy-deep"
+                  className="glass-btn-accent rounded-full px-6 py-3.5 text-center text-sm font-semibold text-navy-deep"
                 >
                   Get Started →
                 </Link>
                 <a
                   href="/#contact"
                   onClick={() => setMenuOpen(false)}
-                  className="glass-btn rounded-full px-6 py-3.5 text-center text-xs font-medium uppercase tracking-[0.2em] text-cream"
+                  className="glass-btn rounded-full px-6 py-3.5 text-center text-sm font-medium text-cream"
                 >
                   Book a Call
                 </a>

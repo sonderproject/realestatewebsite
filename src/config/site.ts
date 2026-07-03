@@ -57,7 +57,7 @@ export const media = {
 // ── HERO ───────────────────────────────────────────────────────────────────
 export const hero = {
   eyebrow: "The property experience",
-  // Fraunces serif headline. <em> spans are styled as the teal accent.
+  // Headline. <em> spans are styled as the teal accent.
   headlineLead: "Give every listing its own ",
   headlineEm: "immersive experience",
   headlineTail: ".",

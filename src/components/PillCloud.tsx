@@ -12,13 +12,13 @@ export default function PillCloud() {
   const inView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="relative px-5 py-20 md:px-8 md:py-28">
+    <section ref={ref} className="relative px-5 py-24 md:px-8 md:py-36">
       <div className="mx-auto max-w-4xl text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-3xl font-light text-cream md:text-5xl"
+          className="text-3xl font-semibold tracking-tight text-cream md:text-5xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
           {pillCloud.heading}
@@ -28,19 +28,19 @@ export default function PillCloud() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="mx-auto mt-5 max-w-lg text-sm font-light leading-relaxed text-cream-dim"
+          className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-cream-dim"
         >
           {pillCloud.subhead}
         </motion.p>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2.5 md:gap-3">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-2.5 md:gap-3">
           {pillCloud.pills.map((pill, i) => (
             <motion.span
               key={pill}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.05 }}
-              className="rounded-full border border-teal/25 bg-navy-600/40 px-4 py-2 text-xs font-light text-cream-dim transition-colors duration-300 hover:border-teal/60 hover:text-teal md:px-5 md:py-2.5 md:text-sm"
+              className="rounded-full border border-cream/10 bg-white/[0.06] px-4 py-2 text-sm font-medium text-cream-dim backdrop-blur-sm transition-colors duration-300 hover:border-teal/50 hover:text-teal md:px-5 md:py-2.5"
             >
               {pill}
             </motion.span>

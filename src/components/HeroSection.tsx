@@ -168,16 +168,18 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="mb-6 text-[10px] font-medium uppercase tracking-[0.4em] text-teal md:text-xs"
+              className="mb-6 flex justify-center"
             >
-              {hero.eyebrow}
+              <span className="rounded-full border border-cream/15 bg-white/[0.07] px-4 py-1.5 text-xs font-medium text-teal backdrop-blur-md md:text-sm">
+                {hero.eyebrow}
+              </span>
             </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.1 }}
-              className="text-balance text-4xl font-light leading-[1.05] text-cream drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)] md:text-6xl lg:text-7xl"
+              className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-cream drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)] md:text-6xl lg:text-7xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
               {hero.headlineLead}
@@ -189,7 +191,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.25 }}
-              className="mx-auto mt-7 max-w-xl text-pretty text-sm font-light leading-relaxed text-cream-dim drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] md:text-base"
+              className="mx-auto mt-7 max-w-xl text-pretty text-base leading-relaxed text-cream-dim drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] md:text-lg"
             >
               {hero.subhead}
             </motion.p>
@@ -202,13 +204,13 @@ export default function HeroSection() {
             >
               <Link
                 href={hero.primaryCta.href}
-                className="cta-shine glass-btn-accent rounded-full px-8 py-4 text-xs font-medium uppercase tracking-[0.18em] text-navy-deep"
+                className="cta-shine glass-btn-accent rounded-full px-8 py-3.5 text-sm font-semibold text-navy-deep md:text-base"
               >
                 {hero.primaryCta.label} →
               </Link>
               <Link
                 href={hero.secondaryCta.href}
-                className="glass-btn rounded-full px-7 py-4 text-xs font-medium uppercase tracking-[0.18em] text-cream"
+                className="glass-btn rounded-full px-7 py-3.5 text-sm font-medium text-cream md:text-base"
               >
                 {hero.secondaryCta.label}
               </Link>
@@ -219,7 +221,7 @@ export default function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.9, delay: 0.6 }}
-              className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-light text-cream-dim"
+              className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-cream-dim"
             >
               {hero.reassurances.map((line, i) => (
                 <span key={line} className="flex items-center gap-5">

@@ -30,16 +30,18 @@ function Block({ block }: { block: FeatureBlock }) {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={block.reverse ? "md:order-2" : ""}
       >
-        <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.35em] text-teal">
-          {block.eyebrow}
+        <p className="mb-5">
+          <span className="rounded-full border border-cream/10 bg-white/[0.06] px-3 py-1 text-xs font-medium text-teal">
+            {block.eyebrow}
+          </span>
         </p>
         <h3
-          className="text-3xl font-light text-cream md:text-4xl"
+          className="text-3xl font-semibold tracking-tight text-cream md:text-4xl"
           style={{ fontFamily: "var(--font-display)" }}
         >
           {block.title}
         </h3>
-        <p className="mt-5 max-w-md text-sm font-light leading-relaxed text-cream-dim md:text-base">
+        <p className="mt-5 max-w-md text-base leading-relaxed text-cream-dim">
           {block.body}
         </p>
       </motion.div>
@@ -78,8 +80,8 @@ function Block({ block }: { block: FeatureBlock }) {
 
 export default function FeatureBlocks() {
   return (
-    <section className="relative px-5 py-12 md:px-8">
-      <div className="mx-auto flex max-w-5xl flex-col gap-24 md:gap-36">
+    <section className="relative px-5 py-16 md:px-8 md:py-20">
+      <div className="mx-auto flex max-w-5xl flex-col gap-28 md:gap-44">
         {featureBlocks.map((block) => (
           <Block key={block.id} block={block} />
         ))}

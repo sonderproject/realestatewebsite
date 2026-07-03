@@ -46,7 +46,7 @@ export default function Footer() {
                 Studio
               </span>
             </Link>
-            <p className="mt-5 text-sm font-light leading-relaxed text-cream-faint">
+            <p className="mt-5 text-sm leading-relaxed text-cream-faint">
               {footer.blurb}
             </p>
           </div>
@@ -54,7 +54,7 @@ export default function Footer() {
           {/* Link columns */}
           {footer.columns.map((col) => (
             <div key={col.title}>
-              <h4 className="mb-4 text-[10px] font-medium uppercase tracking-[0.25em] text-teal">
+              <h4 className="mb-4 text-sm font-semibold text-cream">
                 {col.title}
               </h4>
               <ul className="flex flex-col gap-2.5">
@@ -62,7 +62,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm font-light text-cream-dim transition-colors duration-300 hover:text-teal"
+                      className="text-sm text-cream-faint transition-colors duration-300 hover:text-cream"
                     >
                       {link.label}
                     </Link>
@@ -75,14 +75,14 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-teal/10 pt-7 md:flex-row">
-          <p className="text-xs font-light tracking-wider text-cream-faint">
+          <p className="text-xs text-cream-faint">
             © 2026 {site.studio}. All rights reserved.
           </p>
           <a
             href={site.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] uppercase tracking-[0.2em] text-cream-faint transition-colors duration-300 hover:text-teal"
+            className="text-xs text-cream-faint transition-colors duration-300 hover:text-cream"
           >
             {site.domain}
           </a>

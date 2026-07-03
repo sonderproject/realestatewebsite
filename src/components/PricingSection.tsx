@@ -23,7 +23,7 @@ export default function PricingSection() {
     <section
       ref={ref}
       id="pricing"
-      className="relative scroll-mt-24 px-5 py-24 md:px-8 md:py-32"
+      className="relative scroll-mt-24 px-5 py-24 md:px-8 md:py-36"
     >
       <div className="aurora opacity-30" />
 
@@ -33,7 +33,7 @@ export default function PricingSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-3xl font-light text-cream md:text-5xl"
+            className="text-3xl font-semibold tracking-tight text-cream md:text-5xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
             {pricing.heading}
@@ -42,7 +42,7 @@ export default function PricingSection() {
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15 }}
-            className="mx-auto mt-5 max-w-xl text-sm font-light leading-relaxed text-cream-dim"
+            className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-cream-dim"
           >
             {pricing.subhead}
           </motion.p>
@@ -68,29 +68,29 @@ export default function PricingSection() {
               }`}
             >
               {tier.featured && tier.badge && (
-                <span className="absolute right-7 top-7 rounded-full bg-teal px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-navy-deep">
+                <span className="absolute right-7 top-7 rounded-full bg-teal px-3 py-1 text-xs font-semibold text-navy-deep">
                   {tier.badge}
                 </span>
               )}
 
               <h3
-                className="text-2xl font-normal text-cream"
+                className="pr-36 text-2xl font-semibold tracking-tight text-cream"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {tier.name}
               </h3>
-              <p className="mt-1 text-xs uppercase tracking-[0.14em] text-cream-faint">
+              <p className="mt-1 text-sm text-cream-faint">
                 {tier.tagline}
               </p>
 
               <div className="mt-6 flex items-end gap-2">
                 <span
-                  className="text-5xl font-light leading-none text-cream"
+                  className="text-5xl font-semibold leading-none tracking-tight text-cream"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {tier.price}
                 </span>
-                <span className="pb-1.5 text-xs text-cream-faint">
+                <span className="pb-1.5 text-sm text-cream-faint">
                   {tier.billing === "recurring"
                     ? `/ ${tier.interval ?? "month"}`
                     : tier.priceUsd === 0
@@ -99,7 +99,7 @@ export default function PricingSection() {
                 </span>
               </div>
 
-              <p className="mt-4 text-sm font-light leading-relaxed text-cream-dim">
+              <p className="mt-4 text-sm leading-relaxed text-cream-dim">
                 {tier.description}
               </p>
 
@@ -107,7 +107,7 @@ export default function PricingSection() {
                 {tier.deliverables.map((d) => (
                   <li key={d} className="flex items-start gap-3 text-sm">
                     <span className="mt-0.5 shrink-0 text-teal">✓</span>
-                    <span className="font-light text-cream-dim">{d}</span>
+                    <span className="text-cream-dim">{d}</span>
                   </li>
                 ))}
               </ul>
@@ -117,7 +117,7 @@ export default function PricingSection() {
                   CTA routes to the property intake at /get-started. */}
               <Link
                 href={tier.cta.href}
-                className={`mt-8 flex w-full items-center justify-center rounded-full px-6 py-3.5 text-xs font-medium uppercase tracking-[0.18em] ${
+                className={`mt-8 flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold ${
                   tier.featured
                     ? "cta-shine glass-btn-accent text-navy-deep"
                     : "glass-btn text-cream"
@@ -133,7 +133,7 @@ export default function PricingSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mx-auto mt-10 max-w-xl text-center text-xs font-light leading-relaxed text-cream-faint"
+          className="mx-auto mt-10 max-w-xl text-center text-sm leading-relaxed text-cream-faint"
         >
           {pricing.note}
         </motion.p>

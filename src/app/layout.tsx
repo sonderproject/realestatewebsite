@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Opener from "@/components/Opener";
 
@@ -7,18 +7,15 @@ import Opener from "@/components/Opener";
 // The variable prop wires these directly into the --font-display / --font-body
 // CSS custom properties used site-wide.
 //
-// Fraunces (serif) drives every headline — the editorial Sonder voice.
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
+// dock.cool-style product voice: one tight-tracked sans (Inter, the closest
+// open substitute for SF Pro) carries both headlines and body — headlines get
+// their character from weight and tracking, not a second family. A single
+// instance defines --font-body; globals.css aliases --font-display to it
+// (two next/font calls with identical options dedupe into one class, so the
+// second variable would silently never be set).
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
@@ -71,7 +68,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" className={inter.variable}>
       <body>
         <Opener />
         {children}

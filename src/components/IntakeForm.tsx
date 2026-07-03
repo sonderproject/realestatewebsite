@@ -78,19 +78,19 @@ export default function IntakeForm() {
             ✓
           </div>
           <h2
-            className="mb-3 text-2xl font-light text-cream"
+            className="mb-3 text-2xl font-semibold tracking-tight text-cream"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Got it — we&apos;re on it.
           </h2>
-          <p className="mx-auto max-w-md text-sm font-light leading-relaxed text-cream-dim">
+          <p className="mx-auto max-w-md text-sm leading-relaxed text-cream-dim">
             Thanks for the details. We&apos;ll review your property and reply by
             email shortly to confirm next steps and where to send your full-res
             photos, then start producing your property experience.
           </p>
           <Link
             href="/"
-            className="glass-btn mt-7 inline-block rounded-full px-7 py-3 text-xs font-medium uppercase tracking-[0.15em] text-cream"
+            className="glass-btn mt-7 inline-block rounded-full px-7 py-3 text-sm font-medium text-cream"
           >
             Back home
           </Link>
@@ -108,23 +108,23 @@ export default function IntakeForm() {
         {/* Package — a single fixed package today, shown as a summary. If more
             tiers are switched on in the config, this becomes a chooser. */}
         <fieldset className="mb-8">
-          <legend className="mb-3 text-[10px] font-medium uppercase tracking-[0.25em] text-teal">
+          <legend className="mb-3 text-sm font-semibold text-teal">
             1 · Your package
           </legend>
           {single && soleTier ? (
             <div className="rounded-2xl border border-teal/40 bg-navy-600/40 p-5">
               <div className="flex items-center justify-between">
                 <span
-                  className="text-lg font-normal text-cream"
+                  className="text-lg font-semibold tracking-tight text-cream"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {soleTier.name}
                 </span>
-                <span className="text-base font-light text-teal">
+                <span className="text-base font-semibold text-teal">
                   {soleTier.price}
                 </span>
               </div>
-              <p className="mt-1 text-xs font-light text-cream-faint">
+              <p className="mt-1 text-xs text-cream-faint">
                 {soleTier.tagline}
               </p>
             </div>
@@ -151,14 +151,14 @@ export default function IntakeForm() {
                     />
                     <div className="flex items-center justify-between">
                       <span
-                        className="text-lg font-normal text-cream"
+                        className="text-lg font-semibold tracking-tight text-cream"
                         style={{ fontFamily: "var(--font-display)" }}
                       >
                         {t.name}
                       </span>
-                      <span className="text-sm font-light text-teal">{t.price}</span>
+                      <span className="text-sm font-semibold text-teal">{t.price}</span>
                     </div>
-                    <p className="mt-1 text-xs font-light text-cream-faint">
+                    <p className="mt-1 text-xs text-cream-faint">
                       {t.tagline}
                     </p>
                   </label>
@@ -170,7 +170,7 @@ export default function IntakeForm() {
 
         {/* Property */}
         <fieldset className="mb-8">
-          <legend className="mb-3 text-[10px] font-medium uppercase tracking-[0.25em] text-teal">
+          <legend className="mb-3 text-sm font-semibold text-teal">
             2 · The property
           </legend>
           <Field
@@ -189,7 +189,7 @@ export default function IntakeForm() {
 
         {/* Agent contact */}
         <fieldset className="mb-8">
-          <legend className="mb-3 text-[10px] font-medium uppercase tracking-[0.25em] text-teal">
+          <legend className="mb-3 text-sm font-semibold text-teal">
             3 · Your details
           </legend>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -209,31 +209,31 @@ export default function IntakeForm() {
             placeholder="(optional)"
           />
           <div className="mt-4">
-            <label className="mb-1.5 block text-xs font-light text-cream-dim">
+            <label className="mb-1.5 block text-sm font-medium text-cream-dim">
               Anything else?
             </label>
             <textarea
               name="notes"
               rows={3}
               placeholder="Vacant / fixer-upper? Deadlines? Special requests?"
-              className="w-full rounded-xl border border-teal/15 bg-navy-900/60 px-4 py-3 text-sm font-light text-cream placeholder:text-cream-faint/60 focus:border-teal/50 focus:outline-none"
+              className="w-full rounded-xl border border-teal/15 bg-navy-900/60 px-4 py-3 text-base text-cream placeholder:text-cream-faint/60 sm:text-sm focus:border-teal/50 focus:outline-none"
             />
           </div>
         </fieldset>
 
         {status === "error" && (
-          <p className="mb-4 text-sm font-light text-red-300">{error}</p>
+          <p className="mb-4 text-sm text-red-300">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="cta-shine glass-btn-accent w-full rounded-full px-6 py-4 text-xs font-medium uppercase tracking-[0.18em] text-navy-deep disabled:opacity-60"
+          className="cta-shine glass-btn-accent w-full rounded-full px-6 py-4 text-sm font-semibold text-navy-deep disabled:opacity-60"
         >
           {status === "submitting" ? "Sending…" : "Submit listing →"}
         </button>
 
-        <p className="mt-5 text-center text-xs font-light leading-relaxed text-cream-faint">
+        <p className="mt-5 text-center text-xs leading-relaxed text-cream-faint">
           Prefer to talk it through first?{" "}
           <Link
             href="/#contact"
@@ -264,7 +264,7 @@ function Field({
 }) {
   return (
     <div className="mt-4 first:mt-0">
-      <label htmlFor={name} className="mb-1.5 block text-xs font-light text-cream-dim">
+      <label htmlFor={name} className="mb-1.5 block text-sm font-medium text-cream-dim">
         {label}
         {required && <span className="ml-1 text-teal">*</span>}
       </label>
@@ -274,7 +274,7 @@ function Field({
         type={type}
         placeholder={placeholder}
         required={required}
-        className="w-full rounded-xl border border-teal/15 bg-navy-900/60 px-4 py-3 text-sm font-light text-cream placeholder:text-cream-faint/60 focus:border-teal/50 focus:outline-none"
+        className="w-full rounded-xl border border-teal/15 bg-navy-900/60 px-4 py-3 text-base text-cream placeholder:text-cream-faint/60 sm:text-sm focus:border-teal/50 focus:outline-none"
       />
     </div>
   );
