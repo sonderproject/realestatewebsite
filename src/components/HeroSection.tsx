@@ -11,6 +11,54 @@ import {
 } from "framer-motion";
 import { hero, media } from "@/config/site";
 
+// dock.cool-style headline: each glyph blurs + rises into place, staggered.
+// Words stay unbreakable; the accent segment keeps the teal color.
+function SplitHeadline({ reduce }: { reduce: boolean | null }) {
+  const segments = [
+    { text: hero.headlineLead, accent: false },
+    { text: hero.headlineEm, accent: true },
+    { text: hero.headlineTail, accent: false },
+  ];
+  const ease = [0.22, 1, 0.36, 1] as const;
+  let i = 0;
+  return (
+    <h1
+      className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-cream drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)] md:text-6xl lg:text-7xl"
+      style={{ fontFamily: "var(--font-display)" }}
+    >
+      {segments.map((seg, si) => (
+        <span key={si} className={seg.accent ? "text-teal" : undefined}>
+          {seg.text.split(/(\s+)/).map((word, wi) => {
+            if (/^\s+$/.test(word)) return <span key={wi}> </span>;
+            return (
+              <span key={wi} className="inline-block whitespace-nowrap">
+                {Array.from(word).map((ch) => {
+                  const idx = i++;
+                  return reduce ? (
+                    <span key={idx} className="inline-block">
+                      {ch}
+                    </span>
+                  ) : (
+                    <motion.span
+                      key={idx}
+                      className="inline-block"
+                      initial={{ opacity: 0, y: "0.35em", filter: "blur(10px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      transition={{ duration: 0.6, delay: 0.15 + idx * 0.028, ease }}
+                    >
+                      {ch}
+                    </motion.span>
+                  );
+                })}
+              </span>
+            );
+          })}
+        </span>
+      ))}
+    </h1>
+  );
+}
+
 // ── 1 — HERO ───────────────────────────────────────────────────────────────
 // Pinned, scroll-scrubbed header film. The hero pins to the viewport while the
 // user's scroll drives the video's playback frame by frame — the footage only
@@ -175,17 +223,7 @@ export default function HeroSection() {
               </span>
             </motion.p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1 }}
-              className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-cream drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)] md:text-6xl lg:text-7xl"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {hero.headlineLead}
-              <em className="not-italic text-teal">{hero.headlineEm}</em>
-              {hero.headlineTail}
-            </motion.h1>
+            <SplitHeadline reduce={reduce} />
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}

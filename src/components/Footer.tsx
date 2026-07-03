@@ -73,8 +73,18 @@ export default function Footer() {
           ))}
         </div>
 
+        {/* Giant fit-to-width wordmark (dock.cool signature) */}
+        <div className="mt-12 overflow-hidden md:mt-16" aria-hidden>
+          <div
+            className="select-none whitespace-nowrap text-center font-semibold leading-[0.78] tracking-[-0.04em] text-teal/[0.07]"
+            style={{ fontFamily: "var(--font-display)", fontSize: "23vw" }}
+          >
+            Sonder
+          </div>
+        </div>
+
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-teal/10 pt-7 md:flex-row">
+        <div className="mt-4 flex flex-col items-center justify-between gap-3 border-t border-teal/10 pt-7 md:flex-row">
           <p className="text-xs text-cream-faint">
             © 2026 {site.studio}. All rights reserved.
           </p>

@@ -16,7 +16,7 @@ export default function FAQSection() {
 
   return (
     <section ref={ref} id="faq" className="relative scroll-mt-24 px-5 py-24 md:px-8 md:py-36">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-5xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -27,7 +27,8 @@ export default function FAQSection() {
           Questions, answered
         </motion.h2>
 
-        <div className="flex flex-col gap-3">
+        {/* dock.cool-style two-column accordion on desktop */}
+        <div className="grid grid-cols-1 items-start gap-3 md:grid-cols-2 md:gap-4">
           {faqs.map((faq, i) => {
             const isOpen = open === i;
             return (
