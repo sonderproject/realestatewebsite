@@ -1,171 +1,211 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
   useScroll,
   useTransform,
+  useMotionValueEvent,
   useReducedMotion,
 } from "framer-motion";
 import { hero, media } from "@/config/site";
 
 // ── 1 — HERO ───────────────────────────────────────────────────────────────
-// Full-bleed cinematic hero: the property video plays behind the headline and
-// scrolls with a 3D parallax. As you scroll past, the footage drifts down and
-// scales (moving slower than the page — the parallax depth cue) while the
-// headline lifts, fades, and tilts back in perspective for a subtle 3D feel.
-// Honors prefers-reduced-motion by holding everything still.
+// Pinned, scroll-scrubbed header film. The hero pins to the viewport while the
+// user's scroll drives the video's playback frame by frame — the footage only
+// moves as fast as they scroll. Once the film has played through, the pin
+// releases and the page continues below. The headline sits over the opening
+// frames and lifts away as the scrub begins.
+// Honors prefers-reduced-motion: no pin, the film simply autoplays and loops.
 export default function HeroSection() {
-  const ref = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const reduce = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
+    target: sectionRef,
+    offset: ["start start", "end end"],
   });
 
-  // Video: drifts down + scales up as you scroll (parallax depth).
-  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1.12, 1.32]);
-  // Content: lifts up, fades, and tilts back in 3D.
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-45%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const contentRotateX = useTransform(scrollYProgress, [0, 1], [0, 12]);
+  // Scrub target (0–1). A rAF loop eases the video's currentTime toward it so
+  // playback stays fluid even when scroll events arrive in bursts.
+  const target = useRef(0);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    target.current = v;
+  });
 
-  const videoStyle = reduce ? undefined : { y: videoY, scale: videoScale };
+  useEffect(() => {
+    if (reduce) return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Scroll-driven playback replaces autoplay.
+    video.pause();
+
+    let raf = 0;
+    let current = 0;
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      const duration = video.duration;
+      if (!Number.isFinite(duration) || duration <= 0 || video.readyState < 2)
+        return;
+      // Ease toward the scroll position; snap when close to avoid micro-seeks.
+      current += (target.current - current) * 0.22;
+      if (Math.abs(target.current - current) < 0.0005) current = target.current;
+      // Stay a hair inside the ends: seeking to exact duration can blank out.
+      const t = Math.min(Math.max(current * duration, 0), duration - 0.05);
+      if (Math.abs(video.currentTime - t) > 0.01) video.currentTime = t;
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [reduce]);
+
+  // Headline lifts, fades, and tilts back as the scrub begins.
+  const contentY = useTransform(scrollYProgress, [0, 0.3], ["0%", "-40%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.22], [1, 0]);
+  const contentRotateX = useTransform(scrollYProgress, [0, 0.3], [0, 12]);
+  // Bottom of the film dissolves into the page as the pin releases.
+  const exitFade = useTransform(scrollYProgress, [0.88, 1], [0, 1]);
+
   const contentStyle = reduce
     ? undefined
     : { y: contentY, opacity: contentOpacity, rotateX: contentRotateX };
 
   return (
+    // Tall track: ~2.5 extra viewport-heights of scroll scrub the 8s film.
     <section
-      ref={ref}
-      className="relative flex h-[100svh] min-h-[600px] w-full items-center justify-center overflow-hidden px-5 md:px-8"
+      ref={sectionRef}
+      className={reduce ? "relative" : "relative h-[350svh]"}
     >
-      {/* Parallax video layer */}
-      <motion.div
-        style={videoStyle}
-        className="absolute inset-0 -z-20 will-change-transform"
-      >
+      <div className="sticky top-0 flex h-[100svh] min-h-[600px] w-full items-center justify-center overflow-hidden px-5 md:px-8">
+        {/* Scroll-scrubbed film */}
         <video
-          className="h-full w-full object-cover"
-          autoPlay
+          ref={videoRef}
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
           muted
-          loop
           playsInline
-          preload="metadata"
-          poster={media.heroPoster}
+          preload="auto"
+          poster={media.headerPoster}
+          autoPlay={!!reduce}
+          loop={!!reduce}
           aria-hidden
         >
-          <source src={media.walkthrough} type="video/mp4" />
+          <source src={media.headerFilm} type="video/mp4" />
+          <source src={media.headerFilmWebm} type="video/webm" />
         </video>
-      </motion.div>
 
-      {/* Legibility overlay: darken under the nav + fade the base into the page */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(6,17,29,0.74) 0%, rgba(10,25,41,0.34) 38%, rgba(10,25,41,0.58) 72%, #0a1929 100%)",
-        }}
-        aria-hidden
-      />
-      {/* Soft brand aurora tint over the footage */}
-      <div className="aurora opacity-25" />
+        {/* Legibility overlay: darken under the nav + ground the base */}
+        <div
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(6,17,29,0.74) 0%, rgba(10,25,41,0.30) 38%, rgba(10,25,41,0.42) 72%, rgba(10,25,41,0.9) 100%)",
+          }}
+          aria-hidden
+        />
+        {/* Soft brand aurora tint over the footage */}
+        <div className="aurora opacity-25" />
+        {/* Fade to page background as the film ends and the pin releases */}
+        <motion.div
+          style={reduce ? { opacity: 0 } : { opacity: exitFade }}
+          className="pointer-events-none absolute inset-0 z-20 bg-navy"
+          aria-hidden
+        />
 
-      {/* Content — tilted in 3D */}
-      <div
-        className="relative z-10 mx-auto w-full max-w-3xl text-center"
-        style={{ perspective: 1200 }}
-      >
-        <motion.div style={contentStyle} className="[transform-style:preserve-3d]">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mb-6 text-[10px] font-medium uppercase tracking-[0.4em] text-teal md:text-xs"
-          >
-            {hero.eyebrow}
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.1 }}
-            className="text-balance text-4xl font-light leading-[1.05] text-cream drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)] md:text-6xl lg:text-7xl"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {hero.headlineLead}
-            <em className="not-italic text-teal">{hero.headlineEm}</em>
-            {hero.headlineTail}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25 }}
-            className="mx-auto mt-7 max-w-xl text-pretty text-sm font-light leading-relaxed text-cream-dim drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] md:text-base"
-          >
-            {hero.subhead}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
-          >
-            <Link
-              href={hero.primaryCta.href}
-              className="cta-shine glass-btn-accent rounded-full px-8 py-4 text-xs font-medium uppercase tracking-[0.18em] text-navy-deep"
+        {/* Content — tilted in 3D */}
+        <div
+          className="relative z-10 mx-auto w-full max-w-3xl text-center"
+          style={{ perspective: 1200 }}
+        >
+          <motion.div style={contentStyle} className="[transform-style:preserve-3d]">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="mb-6 text-[10px] font-medium uppercase tracking-[0.4em] text-teal md:text-xs"
             >
-              {hero.primaryCta.label} →
-            </Link>
-            <Link
-              href={hero.secondaryCta.href}
-              className="glass-btn rounded-full px-7 py-4 text-xs font-medium uppercase tracking-[0.18em] text-cream"
-            >
-              {hero.secondaryCta.label}
-            </Link>
-          </motion.div>
+              {hero.eyebrow}
+            </motion.p>
 
-          {/* Two reassurance lines */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.6 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-light text-cream-dim"
-          >
-            {hero.reassurances.map((line, i) => (
-              <span key={line} className="flex items-center gap-5">
-                {i > 0 && (
-                  <span className="h-1 w-1 rounded-full bg-teal/60" aria-hidden />
-                )}
-                <span className="flex items-center gap-2">
-                  <span className="text-teal">✓</span>
-                  {line}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1 }}
+              className="text-balance text-4xl font-light leading-[1.05] text-cream drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)] md:text-6xl lg:text-7xl"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {hero.headlineLead}
+              <em className="not-italic text-teal">{hero.headlineEm}</em>
+              {hero.headlineTail}
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.25 }}
+              className="mx-auto mt-7 max-w-xl text-pretty text-sm font-light leading-relaxed text-cream-dim drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] md:text-base"
+            >
+              {hero.subhead}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.4 }}
+              className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            >
+              <Link
+                href={hero.primaryCta.href}
+                className="cta-shine glass-btn-accent rounded-full px-8 py-4 text-xs font-medium uppercase tracking-[0.18em] text-navy-deep"
+              >
+                {hero.primaryCta.label} →
+              </Link>
+              <Link
+                href={hero.secondaryCta.href}
+                className="glass-btn rounded-full px-7 py-4 text-xs font-medium uppercase tracking-[0.18em] text-cream"
+              >
+                {hero.secondaryCta.label}
+              </Link>
+            </motion.div>
+
+            {/* Two reassurance lines */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9, delay: 0.6 }}
+              className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-light text-cream-dim"
+            >
+              {hero.reassurances.map((line, i) => (
+                <span key={line} className="flex items-center gap-5">
+                  {i > 0 && (
+                    <span className="h-1 w-1 rounded-full bg-teal/60" aria-hidden />
+                  )}
+                  <span className="flex items-center gap-2">
+                    <span className="text-teal">✓</span>
+                    {line}
+                  </span>
                 </span>
-              </span>
-            ))}
+              ))}
+            </motion.div>
           </motion.div>
+        </div>
+
+        {/* Scroll cue */}
+        <motion.div
+          style={reduce ? undefined : { opacity: contentOpacity }}
+          className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2"
+          aria-hidden
+        >
+          <span className="flex h-9 w-5 items-start justify-center rounded-full border border-cream/40 p-1">
+            <motion.span
+              className="block h-1.5 w-1 rounded-full bg-cream/80"
+              animate={reduce ? undefined : { y: [0, 8, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </span>
         </motion.div>
       </div>
-
-      {/* Scroll cue */}
-      <motion.div
-        style={reduce ? undefined : { opacity: contentOpacity }}
-        className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2"
-        aria-hidden
-      >
-        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-cream/40 p-1">
-          <motion.span
-            className="block h-1.5 w-1 rounded-full bg-cream/80"
-            animate={reduce ? undefined : { y: [0, 8, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </span>
-      </motion.div>
     </section>
   );
 }

@@ -39,7 +39,14 @@ export const site = {
 // ── MEDIA ────────────────────────────────────────────────────────────────
 // Real client-supplied assets. Paths are served from /public/media.
 export const media = {
-  // The property walkthrough film — drives the hero + the walkthrough section.
+  // The header film — scrubbed by scroll in the pinned hero. Scrub-optimized
+  // re-encode (every frame is a keyframe) of the uploaded
+  // Create_property_walkthrough_video so seeking is frame-accurate.
+  headerFilm: "/media/header-scrub.mp4",
+  // VP9 fallback for browsers without H.264 (also all-intra for scrubbing).
+  headerFilmWebm: "/media/header-scrub.webm",
+  headerPoster: "/media/header-scrub-poster.jpg",
+  // The property walkthrough film — drives the walkthrough sections.
   walkthrough: "/media/Sonder_walkthrough_3792_Vista_Po_202607011518_202607022138.mp4",
   // Storyboard of the interactive virtual tour (the Obsidian Estate).
   virtualTour: "/media/Virtual_tour_of_property_202607022138.jpeg",
