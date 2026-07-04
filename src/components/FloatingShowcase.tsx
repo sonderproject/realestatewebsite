@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import Placeholder from "@/components/Placeholder";
 import { showcase } from "@/config/site";
@@ -18,8 +19,24 @@ export default function FloatingShowcase() {
   const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section ref={ref} className="relative px-5 pb-16 md:px-8 md:pb-24">
-      <div className="mx-auto max-w-5xl">
+    <section
+      ref={ref}
+      className="relative px-5 pt-16 pb-16 md:px-8 md:pt-24 md:pb-24"
+    >
+      {/* Full-bleed oceanfront background behind the walkthrough video */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/media/sonder-edge-waterfront.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* Subtle dark overlay so the floating video reads clearly */}
+        <div className="absolute inset-0 bg-black/30" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
