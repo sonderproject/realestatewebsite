@@ -91,7 +91,8 @@ export default function FinalCTA() {
           transition={{ duration: 0.9, delay: 0.3 }}
           className="text-warm-400 text-sm font-light text-center max-w-lg mx-auto leading-relaxed mb-10 md:mb-14"
         >
-          Book a free intro call — we&apos;ll scope your site and answer anything.
+          Book a free intro call — we&apos;ll scope your property experience and
+          answer anything.
         </motion.p>
 
         {/* Primary: Cal.com inline embed
@@ -126,16 +127,16 @@ export default function FinalCTA() {
             className="text-warm-200 text-xl md:text-2xl font-light mb-2"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Already know what you need?
+            Have a property in mind?
           </p>
           <p className="text-warm-500 text-sm font-light mb-6 max-w-xs mx-auto leading-relaxed">
-            Configure your plan and get started instantly — no call needed.
+            Send us the details and we&apos;ll get started — no call needed.
           </p>
           <a
             href="/get-started"
             className="glass-btn-accent inline-block text-white text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
           >
-            Get Started Now →
+            Start a Project →
           </a>
         </motion.div>
       </div>

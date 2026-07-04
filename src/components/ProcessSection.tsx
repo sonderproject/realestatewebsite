@@ -7,27 +7,27 @@ import SectionLabel from "./SectionLabel";
 const steps = [
   {
     number: "01",
-    title: "Discovery",
+    title: "Send us the property",
     description:
-      "We learn your market, your clients, and your goals — then map exactly what your site needs to do.",
+      "Share the property, your media, and the details. Ten minutes, and we have what we need to begin.",
   },
   {
     number: "02",
-    title: "Design",
+    title: "We craft the experience",
     description:
-      "A custom design built around your brand. You see it, shape it, and sign off before a line of code.",
+      "Our studio produces the cinematic film, the interactive walkthrough, and the premium microsite — designed like a luxury product launch.",
   },
   {
     number: "03",
-    title: "Build",
+    title: "We refine together",
     description:
-      "We develop a fast, mobile-first site with your AI assistant, lead capture, and the integrations your business runs on.",
+      "You review the experience and we polish the details until it feels exactly right for the property.",
   },
   {
     number: "04",
-    title: "Launch",
+    title: "Launch & share",
     description:
-      "We go live, train you on it, and stay on to support and refine as your business grows.",
+      "You get one shareable link and a QR code — ready for the MLS, social, listing presentations, and email.",
   },
 ];
 
@@ -51,9 +51,9 @@ export default function ProcessSection() {
           className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05]"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          A clear path from
+          From property to
           <br />
-          <em className="text-gold-dark">first call to launch.</em>
+          <em className="text-gold-dark">launch, in days.</em>
         </h2>
       </motion.div>
 

@@ -28,39 +28,39 @@ export default function CredibilitySection() {
                 className="text-white text-2xl md:text-3xl lg:text-4xl font-light leading-tight max-w-lg"
                 style={{ fontFamily: "var(--font-display)" }}
               >
-                Real estate is the only industry
-                <em className="text-gold-light"> we work in.</em>
+                Property visualization is the only thing
+                <em className="text-gold-light"> we do.</em>
               </p>
             </div>
             <p className="text-warm-400 text-sm font-light leading-relaxed max-w-xs md:text-right">
-              We don&apos;t build websites for restaurants, dentists, or everyone else.
-              We know this industry — and it shows in the work.
+              People buy emotion before they buy square footage. Every property
+              has a story — our job is to help buyers experience it.
             </p>
           </div>
         </div>
 
-        {/* Bottom: 4 specific differentiators */}
+        {/* Bottom: the four principles */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.05]">
           {[
             {
-              stat: "Done-for-you",
-              label: "fully managed",
-              body: "We design, write, build, and maintain it — you never touch code. Not a DIY template you fill in yourself.",
+              stat: "Simplicity",
+              label: "one product",
+              body: "One product. One process. One exceptional outcome. Not a menu of services — a single, focused craft done exceptionally well.",
             },
             {
-              stat: "Sub-2s",
-              label: "mobile load time",
-              body: "A slow site loses visitors before they see a single listing. We engineer for speed — sub-2 second loads, not just a design that looks fast.",
+              stat: "Quality",
+              label: "premium, always",
+              body: "Every project should feel premium. No shortcuts, and no templates that feel generic. If it doesn't feel like a luxury launch, it isn't done.",
             },
             {
-              stat: "We write",
-              label: "the copy too",
-              body: "Most agencies hand you a template and ask you to fill it in. We write every headline, every CTA, every page.",
+              stat: "Innovation",
+              label: "AI with intent",
+              body: "We use AI where it creates a better experience — not simply because it's AI. Technology should disappear behind great design.",
             },
             {
-              stat: "Month 1",
-              label: "to month 12+",
-              body: "We don't disappear after launch. Every month we push updates, refresh your content, and keep your site sharp as your business grows.",
+              stat: "Storytelling",
+              label: "emotion first",
+              body: "Today's buyers discover properties online long before a showing. Presentation shapes perception, and perception creates opportunity.",
             },
           ].map(({ stat, label, body }) => (
             <div key={stat} className="bg-obsidian px-7 py-7 md:px-8 md:py-8 flex flex-col gap-2 hover:bg-white/[0.03] transition-colors duration-300">

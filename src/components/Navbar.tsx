@@ -5,7 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-const LINKS = ["Services", "Pricing", "Contact"];
+const LINKS = [
+  { label: "Experience", href: "#experience" },
+  { label: "Services", href: "#services" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
   // Once the user scrolls past the very top, the bar frosts over and the
@@ -103,34 +108,13 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-7">
           {LINKS.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.href}
+              href={item.href}
               className="text-warm-200 text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
             >
-              {item}
+              {item.label}
             </a>
           ))}
-          {/* Cross-page links — pulsing dot flags these as live products */}
-          <Link
-            href="/ai-assistant"
-            className="flex items-center gap-2 text-gold-light text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-            </span>
-            AI Assistant
-          </Link>
-          <Link
-            href="/photography"
-            className="flex items-center gap-2 text-gold-light text-xs tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-          >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-            </span>
-            Photography
-          </Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -144,7 +128,7 @@ export default function Navbar() {
             href="/get-started"
             className="glass-btn-accent text-white text-xs tracking-[0.15em] uppercase rounded-full px-6 py-2.5 font-medium"
           >
-            Get Started
+            Start a Project
           </Link>
         </div>
 
@@ -195,37 +179,14 @@ export default function Navbar() {
             <div className="flex flex-col px-6 py-5">
               {LINKS.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={item.href}
+                  href={item.href}
                   onClick={() => setMenuOpen(false)}
                   className="border-b border-white/5 py-4 text-warm-100 text-sm tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
-              {/* Cross-page links */}
-              <Link
-                href="/ai-assistant"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 border-b border-white/5 py-4 text-gold-light text-sm tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-                </span>
-                AI Assistant
-              </Link>
-              <Link
-                href="/photography"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center gap-2.5 border-b border-white/5 py-4 text-gold-light text-sm tracking-[0.2em] uppercase hover:text-gold transition-colors duration-300"
-              >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-                </span>
-                Photography
-              </Link>
 
               <div className="flex flex-col gap-3 mt-5">
                 <Link
@@ -233,7 +194,7 @@ export default function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="glass-btn-accent text-white text-xs tracking-[0.2em] uppercase rounded-full px-6 py-3.5 font-medium text-center"
                 >
-                  Get Started →
+                  Start a Project →
                 </Link>
                 <a
                   href="#contact"

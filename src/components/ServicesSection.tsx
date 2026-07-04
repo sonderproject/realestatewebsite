@@ -21,72 +21,49 @@ const services: Array<{
 }> = [
   {
     number: "01",
-    title: "AI Lead Assistant",
-    subtitle: "24 / 7 Intelligence",
+    title: "Property Visualization",
+    subtitle: "Our Core Service",
     description: (
       <>
-        A custom AI trained on your <Kw>listings and market</Kw> — captures,
-        qualifies, scores, and books leads <Kw>around the clock</Kw>. Included in every plan.
+        Everything needed to create one <Kw>premium digital property
+        experience</Kw> — film, walkthrough, and microsite, produced end to end.
       </>
     ),
     isNew: true,
   },
   {
     number: "02",
-    title: "Agent Websites",
-    subtitle: "Custom Sites",
+    title: "AI Cinematic Property Films",
+    subtitle: "The Film",
     description: (
       <>
-        Custom sites for solo agents — <Kw>lead capture</Kw> and{" "}
-        <Kw>conversion-focused design</Kw> that books consultations.
+        We transform property photos and media into <Kw>cinematic marketing
+        films</Kw> — ready for the microsite, social, listing presentations, and email.
       </>
     ),
     isNew: false,
   },
   {
     number: "03",
-    title: "Brokerage Platforms",
-    subtitle: "Company Sites",
+    title: "Interactive Property Experiences",
+    subtitle: "Explore The Home",
     description: (
       <>
-        Full-scale platforms for brokerages — <Kw>MLS-synced listings</Kw>,
-        agent rosters, and the brand authority that wins market share.
+        Immersive <Kw>walkthrough experiences</Kw> buyers can explore online, at
+        their own pace, room by room, on any device.
       </>
     ),
     isNew: false,
   },
   {
     number: "04",
-    title: "Property Portals",
-    subtitle: "Listing Systems",
+    title: "Premium Property Microsites",
+    subtitle: "One Property, One Link",
     description: (
       <>
-        IDX-powered portals built on your brand — your search, your data,
-        no Zillow or third-party templates. Available on <Kw>Apartment and Broker</Kw> plans.
-      </>
-    ),
-    isNew: false,
-  },
-  {
-    number: "05",
-    title: "Brand Identity",
-    subtitle: "Visual Design",
-    description: (
-      <>
-        Logos, <Kw>color systems</Kw>, and brand guidelines that make you
-        the recognizable name in your market.
-      </>
-    ),
-    isNew: false,
-  },
-  {
-    number: "06",
-    title: "Conversion Tools",
-    subtitle: "Lead Capture",
-    description: (
-      <>
-        <Kw>Landing pages</Kw> and lead capture built to convert the traffic
-        you&apos;re already driving — no ad spend or marketing retainer required.
+        A dedicated landing page designed for <Kw>one property</Kw> — gallery,
+        features, floor plans, neighborhood, maps, and lead capture. Not an agent
+        site. Not a brokerage site.
       </>
     ),
     isNew: false,
@@ -106,7 +83,7 @@ export default function ServicesSection() {
         transition={{ duration: 0.9 }}
         className="mb-7 md:mb-11"
       >
-        <SectionLabel index="01" tone="light" className="mb-5">
+        <SectionLabel index="02" tone="light" className="mb-5">
           What We Do
         </SectionLabel>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -114,13 +91,13 @@ export default function ServicesSection() {
             className="text-4xl md:text-5xl lg:text-6xl font-light text-obsidian leading-tight max-w-xl"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Built for Real Estate
+            We specialize in
             <br />
-            <em className="text-gold-dark">Professionals</em>
+            <em className="text-gold-dark">one thing.</em>
           </h2>
           <p className="text-warm-500 text-sm font-light max-w-sm leading-relaxed md:text-right">
-            Premium websites and AI-powered lead capture — purpose-built for
-            agents, apartment communities, and brokerages.
+            Making properties unforgettable online. We combine AI, cinematic
+            storytelling, and interactive design to visualize high-value properties.
           </p>
         </div>
       </motion.div>
@@ -198,6 +175,85 @@ export default function ServicesSection() {
           </motion.div>
         ))}
       </div>
+
+      {/* Every experience includes / What we don't offer */}
+      <div className="mt-12 md:mt-16 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-5 md:gap-6">
+        {/* Included */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="rounded-3xl bg-obsidian p-7 md:p-10 overflow-hidden relative"
+        >
+          <div className="aurora opacity-40" />
+          <div className="relative z-10">
+            <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-5 font-medium">
+              Every experience includes
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+              {INCLUDED.map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <span className="text-gold-light text-sm mt-0.5 shrink-0">✓</span>
+                  <span className="text-warm-200 text-sm font-light leading-snug">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Not offered — the specialization guardrail */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="rounded-3xl border border-sand-200 bg-sand-50 p-7 md:p-10"
+        >
+          <p className="text-warm-500 text-[10px] tracking-[0.4em] uppercase mb-5 font-medium">
+            What we don&apos;t offer
+          </p>
+          <div className="flex flex-col gap-2.5">
+            {NOT_OFFERED.map((item) => (
+              <div key={item} className="flex items-start gap-3">
+                <span className="text-warm-400 text-sm mt-0.5 shrink-0">—</span>
+                <span className="text-warm-600 text-sm font-light leading-snug line-through decoration-warm-300/60">
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="text-gold-dark text-xs font-medium mt-6 tracking-wide">
+            Focus creates expertise.
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 }
+
+// What ships with every Sonder Experience.
+const INCLUDED = [
+  "Cinematic AI property film",
+  "Interactive property walkthrough",
+  "Premium property microsite",
+  "Full photo gallery",
+  "Property features",
+  "Floor plans (when available)",
+  "Neighborhood highlights",
+  "Interactive maps",
+  "Contact & lead capture",
+  "Mobile-optimized experience",
+  "QR code",
+  "Shareable listing link",
+];
+
+// The specialization guardrail — deliberately out of scope.
+const NOT_OFFERED = [
+  "Agent websites",
+  "Brokerage websites",
+  "General business websites",
+  "SEO services",
+  "Social media management",
+  "Advertising services",
+];

@@ -23,19 +23,19 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://sonderstudio.space"),
   title: {
-    default: "Sonder Studio — Premium Web Design for Real Estate",
+    default: "Sonder Studio — Premium Property Visualization",
     template: "%s — Sonder Studio",
   },
   description:
-    "We design and build premium websites and digital experiences for real estate agents, brokerages, and property companies.",
+    "Sonder Studio is a property visualization studio. We turn exceptional properties into immersive digital experiences — cinematic AI films, interactive walkthroughs, and premium microsites that make buyers feel the space before they step inside.",
   keywords: [
-    "real estate web design",
-    "real estate websites",
-    "IDX website",
-    "agent website",
-    "brokerage website",
-    "AI lead assistant",
-    "San Diego web design",
+    "property visualization",
+    "cinematic property film",
+    "interactive property walkthrough",
+    "premium property microsite",
+    "luxury real estate marketing",
+    "AI property film",
+    "immersive property experience",
   ],
   icons: {
     icon: "/icon.png",
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Sonder Studio",
-    title: "Sonder Studio — Premium Web Design for Real Estate",
+    title: "Sonder Studio — Premium Property Visualization",
     description:
-      "Premium websites and AI lead assistants for real estate agents, brokerages, and property companies.",
+      "We make properties unforgettable online. Cinematic AI films, interactive walkthroughs, and premium microsites for exceptional properties.",
     url: "https://sonderstudio.space",
     images: [
       { url: "/media/og-image.jpg", width: 1200, height: 630, alt: "Sonder Studio" },
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sonder Studio — Premium Web Design for Real Estate",
+    title: "Sonder Studio — Premium Property Visualization",
     description:
-      "Premium websites and AI lead assistants for real estate agents, brokerages, and property companies.",
+      "We make properties unforgettable online. Cinematic AI films, interactive walkthroughs, and premium microsites for exceptional properties.",
     images: ["/media/og-image.jpg"],
   },
 };

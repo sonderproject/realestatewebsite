@@ -4,21 +4,15 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import ExperienceSection from "@/components/ExperienceSection";
 import ServicesSection from "@/components/ServicesSection";
-import AIAssistantFeature from "@/components/AIAssistantFeature";
 
 // Below-fold sections — code-split so their JS only downloads after the
-// above-fold content is interactive. GlobeSection gets a min-height
-// placeholder to reduce layout shift while its chunk loads.
-const GlobeSection = dynamic(() => import("@/components/GlobeSection"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen bg-obsidian" />,
-});
+// above-fold content is interactive.
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const CredibilitySection = dynamic(() => import("@/components/CredibilitySection"));
 const SamplesSection = dynamic(() => import("@/components/SamplesSection"));
 const PricingSection = dynamic(() => import("@/components/PricingSection"));
-const PhotographyPromo = dynamic(() => import("@/components/PhotographyPromo"));
 const FinalCTA = dynamic(() => import("@/components/FinalCTA"), { ssr: false });
 const Footer = dynamic(() => import("@/components/Footer"));
 
@@ -81,34 +75,28 @@ export default function HomePage() {
       {/* Fixed nav: transparent over the hero, frosts to glass on scroll */}
       <Navbar />
 
-      {/* 1 — Hero: coastal footage that scrubs frame-by-frame as you scroll */}
+      {/* 1 — Hero: property footage that scrubs frame-by-frame as you scroll */}
       <HeroSection />
 
-      {/* 2 — AI Lead Assistant: headline product spotlight */}
-      <AIAssistantFeature />
+      {/* 2 — The Sonder Experience: core-product spotlight + problem framing */}
+      <ExperienceSection />
 
-      {/* 3 — Services: full offering list, AI first */}
+      {/* 3 — Services: what we do + what's included + what we don't offer */}
       <ServicesSection />
 
-      {/* 4 — Market: interactive San Diego location gallery */}
-      <GlobeSection />
-
-      {/* 5 — Process: how a project runs, first call to launch */}
+      {/* 4 — Process: from property to launch */}
       <ProcessSection />
 
-      {/* 6 — Credibility: why Sonder Studio */}
+      {/* 5 — Why Sonder Studio: the four principles */}
       <CredibilitySection />
 
-      {/* 7 — Samples: reference builds to preview before buying */}
+      {/* 6 — The Work: sample property experiences */}
       <SamplesSection />
 
-      {/* 8 — Pricing: packages */}
+      {/* 7 — Pricing: one value-based experience */}
       <PricingSection />
 
-      {/* 7 — Photography: cross-sell to the Sonder Photography studio */}
-      <PhotographyPromo />
-
-      {/* 8 — Contact: lead-capture form */}
+      {/* 8 — Contact: book a call (Cal embed) */}
       <FinalCTA />
 
       {/* 9 — Footer */}

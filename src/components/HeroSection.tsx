@@ -155,18 +155,18 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-obsidian/40 via-transparent to-transparent" />
 
-        {/* Signature cartographic meta rail — left edge, desktop only.
-            Ties the studio to its San Diego coastline through coordinates. */}
+        {/* Signature meta rail — left edge, desktop only. A quiet brand mark
+            that frames the studio's craft. */}
         <motion.div
           style={{ opacity: hintOpacity }}
           className="hidden md:flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-4"
         >
           <span className="text-warm-300 text-[10px] tracking-[0.35em] uppercase rotate-180 [writing-mode:vertical-rl]">
-            32.7157°N · 117.1611°W
+            Property Visualization
           </span>
           <span className="w-px h-20 bg-gradient-to-b from-transparent via-gold/50 to-transparent" />
           <span className="text-gold-light text-[10px] tracking-[0.35em] uppercase [writing-mode:vertical-rl]">
-            San Diego
+            Sonder Studio
           </span>
         </motion.div>
 
@@ -189,7 +189,7 @@ export default function HeroSection() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
               </span>
               <span className="text-gold-light text-[11px] md:text-xs tracking-[0.3em] uppercase font-semibold">
-                AI Lead Assistant + Premium Websites · San Diego
+                Property Visualization Studio
               </span>
             </motion.div>
 
@@ -200,9 +200,9 @@ export default function HeroSection() {
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-warm-50 leading-[0.9] mb-5 md:mb-8"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Win More Listings.
+              Make them feel it
               <br />
-              <em className="text-shimmer font-normal">Close More Deals.</em>
+              <em className="text-shimmer font-normal">before they arrive.</em>
             </motion.h1>
 
             <motion.p
@@ -211,11 +211,10 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.1 }}
               className="text-warm-100 text-base md:text-lg font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10 [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]"
             >
-              You bring the traffic.{" "}
-              <span className="text-white font-medium">We make sure no lead slips through.</span>{" "}
-              A premium website with a built-in{" "}
-              <span className="text-white font-medium">AI lead assistant</span> that
-              captures, qualifies, and books 24/7 — for agents, apartment communities, and brokerages.
+              We turn exceptional properties into{" "}
+              <span className="text-white font-medium">immersive digital experiences</span> —
+              a cinematic AI film, an interactive walkthrough, and a premium microsite that let buyers{" "}
+              <span className="text-white font-medium">experience the property before they ever step inside.</span>
             </motion.p>
 
             <motion.div
@@ -224,26 +223,19 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.3 }}
               className="flex flex-wrap items-center gap-x-6 gap-y-4"
             >
-              <a
-                href="#pricing"
+              <Link
+                href="/get-started"
                 className="glass-btn-accent group text-white text-xs tracking-[0.2em] uppercase rounded-full px-8 py-3.5 font-medium"
               >
-                View Plans
-              </a>
+                Start a Project
+              </Link>
               <a
-                href="#services"
+                href="#experience"
                 className="text-warm-300 text-xs tracking-[0.3em] uppercase hover:text-warm-50 transition-colors duration-300 flex items-center gap-3"
               >
-                Our Services
+                See the Experience
                 <span className="w-8 h-px bg-current inline-block" />
               </a>
-              <Link
-                href="/photography"
-                className="text-warm-400 text-xs tracking-[0.3em] uppercase hover:text-gold transition-colors duration-300 flex items-center gap-3"
-              >
-                Sonder Photography
-                <span className="w-8 h-px bg-current inline-block" />
-              </Link>
             </motion.div>
           </div>
         </motion.div>

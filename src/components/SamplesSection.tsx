@@ -4,23 +4,23 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 
-// FLAG: Replace both href="#" values below with live demo URLs before launch.
-// These are sample/reference builds — do NOT label them as client sites.
+// FLAG: swap href="#contact" for live experience URLs once flagship builds
+// are public. These are sample/reference experiences — not client work.
 const SAMPLES = [
   {
-    tag: "Agent Plan",
-    title: "View Sample Agent Site",
+    tag: "Luxury Estate",
+    title: "The Obsidian Estate",
     description:
-      "A single-page agent website with lead capture and built-in AI assistant. This is a reference build — not a live client site.",
-    href: "#",
+      "A flagship property experience — cinematic film, interactive walkthrough, and premium microsite for a single luxury estate. Book a call for a private walkthrough.",
+    href: "#contact",
     icon: "◎",
   },
   {
-    tag: "Apartment Plan",
-    title: "View Sample Apartment Site",
+    tag: "New Development",
+    title: "A Development Launch",
     description:
-      "A multi-page apartment community site with vacancy info, floor plans, and leasing inquiry forms. Reference build only.",
-    href: "#",
+      "How a community, townhome, or mixed-use project launches like a luxury product — visualized before a single unit is complete. Preview on request.",
+    href: "#contact",
     icon: "◈",
   },
 ];
@@ -37,20 +37,20 @@ export default function SamplesSection() {
         transition={{ duration: 0.9 }}
         className="mb-10 md:mb-14 max-w-2xl"
       >
-        <SectionLabel index="06" tone="light" className="mb-4">
-          See It Live
+        <SectionLabel index="05" tone="light" className="mb-4">
+          The Work
         </SectionLabel>
         <h2
           className="text-3xl md:text-4xl lg:text-5xl font-light text-obsidian leading-[1.05] mb-4"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          What your site
+          What an experience
           <br />
-          <em className="text-gold-dark">could look like.</em>
+          <em className="text-gold-dark">feels like.</em>
         </h2>
         <p className="text-warm-500 text-sm md:text-base font-light leading-relaxed">
-          Browse sample builds before you commit. These are reference sites —
-          not client work, not paid placements.
+          A look at the kind of property experiences we build. These are sample
+          concepts — not client work, not paid placements.
         </p>
       </motion.div>
 

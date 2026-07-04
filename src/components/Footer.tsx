@@ -4,8 +4,8 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
-// Site-wide footer. Extracted so every page (home, photography, ai-assistant)
-// shares the exact same closing bar without duplicating markup.
+// Site-wide footer. Extracted so every page (home, get-started) shares the
+// exact same closing bar without duplicating markup.
 export default function Footer() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
