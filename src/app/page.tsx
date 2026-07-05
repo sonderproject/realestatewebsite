@@ -9,6 +9,7 @@ import ServicesSection from "@/components/ServicesSection";
 
 // Below-fold sections — code-split so their JS only downloads after the
 // above-fold content is interactive.
+const FloorPlansSection = dynamic(() => import("@/components/FloorPlansSection"));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
 const CredibilitySection = dynamic(() => import("@/components/CredibilitySection"));
 const SamplesSection = dynamic(() => import("@/components/SamplesSection"));
@@ -83,6 +84,9 @@ export default function HomePage() {
 
       {/* 3 — Services: what we do + what's included + what we don't offer */}
       <ServicesSection />
+
+      {/* 3.5 — Interactive 3D Floor Plans: AI visualization showcase */}
+      <FloorPlansSection />
 
       {/* 4 — Process: from property to launch */}
       <ProcessSection />
