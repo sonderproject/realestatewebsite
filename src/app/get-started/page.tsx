@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useCallback, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MediaUploader from "@/components/MediaUploader";
 
 // Project types buyers can pick — maps to the blueprint's ideal clients.
 const PROJECT_TYPES = [
@@ -30,26 +31,16 @@ export default function GetStartedPage() {
     "idle"
   );
   const [error, setError] = useState("");
+  const [photoUrls, setPhotoUrls] = useState<string[]>([]);
+
+  // Stable callback so MediaUploader's effect doesn't re-fire each render.
+  const handleUrls = useCallback((urls: string[]) => setPhotoUrls(urls), []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const name = String(fd.get("name") ?? "");
-    const email = String(fd.get("email") ?? "");
-    const phone = String(fd.get("phone") ?? "");
-    const propertyAddress = String(fd.get("propertyAddress") ?? "");
-    const projectType = String(fd.get("projectType") ?? "");
-    const details = String(fd.get("details") ?? "");
-
-    // Compose a single message the existing /api/contact endpoint forwards.
-    const message = [
-      propertyAddress && `Property: ${propertyAddress}`,
-      phone && `Phone: ${phone}`,
-      details && `\n${details}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    const get = (k: string) => String(fd.get(k) ?? "").trim();
 
     setStatus("sending");
     setError("");
@@ -58,10 +49,23 @@ export default function GetStartedPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name,
-          email,
-          projectType,
-          message: message || "(no details provided)",
+          name: get("name"),
+          email: get("email"),
+          phone: get("phone"),
+          projectType: get("projectType"),
+          propertyAddress: get("propertyAddress"),
+          price: get("price"),
+          beds: get("beds"),
+          baths: get("baths"),
+          sqft: get("sqft"),
+          yearBuilt: get("yearBuilt"),
+          mls: get("mls"),
+          highlights: get("highlights"),
+          neighborhood: get("neighborhood"),
+          timing: get("timing"),
+          photoLink: get("photoLink"),
+          photoUrls,
+          message: get("details"),
         }),
       });
       const json = (await res.json()) as { ok: boolean; error?: string };
@@ -71,7 +75,6 @@ export default function GetStartedPage() {
         return;
       }
       setStatus("sent");
-      form.reset();
     } catch {
       setStatus("error");
       setError("Something went wrong. Please try again.");
@@ -80,6 +83,10 @@ export default function GetStartedPage() {
 
   const field =
     "w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-warm-50 placeholder:text-warm-500 transition-colors focus:border-gold/50 focus:outline-none";
+  const label =
+    "mb-1.5 block text-xs tracking-[0.15em] uppercase text-warm-400";
+  const groupTitle =
+    "text-gold text-[10px] tracking-[0.4em] uppercase font-medium";
 
   return (
     <div className="min-h-screen bg-obsidian">
@@ -101,11 +108,12 @@ export default function GetStartedPage() {
             className="text-4xl md:text-5xl lg:text-6xl font-light text-warm-50 leading-[1.0] mb-5"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Tell us about the property.
+            Tell us everything.
           </h1>
-          <p className="text-warm-400 text-sm md:text-base font-light leading-relaxed max-w-xl">
-            Share the property and a few details, and we&apos;ll come back with next
-            steps and a quote. Projects start at $1,500+.{" "}
+          <p className="text-warm-300 text-base md:text-lg font-normal leading-relaxed max-w-xl">
+            The more you share, the more we can build without ever needing a
+            call. Send the property details and upload as many photos and videos
+            as you have — we take it from there. Projects start at $1,500+.{" "}
             <Link
               href="/#contact"
               className="text-gold-light hover:text-gold underline underline-offset-2 transition-colors duration-200"
@@ -118,7 +126,7 @@ export default function GetStartedPage() {
 
       {/* ── Form + included ──────────────────────────────────────────── */}
       <section className="px-5 pb-20 md:px-16 md:pb-28">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6 md:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6 md:gap-8 items-start">
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -136,69 +144,117 @@ export default function GetStartedPage() {
                 >
                   Got it — we&apos;re on it.
                 </h2>
-                <p className="text-warm-400 text-sm font-light leading-relaxed max-w-md mx-auto">
-                  We&apos;ll review the property and get back to you within one
-                  business day. Want to talk sooner?{" "}
-                  <Link
-                    href="/#contact"
-                    className="text-gold-light hover:text-gold underline underline-offset-2"
-                  >
-                    Book a call.
-                  </Link>
+                <p className="text-warm-300 text-sm font-normal leading-relaxed max-w-md mx-auto">
+                  We have everything we need to get started and will reach out
+                  within one business day. Thanks for the detail — it&apos;s
+                  exactly what makes a great experience.
                 </p>
               </div>
             ) : (
               <form
                 onSubmit={onSubmit}
-                className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8"
+                className="flex flex-col gap-8 rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8"
               >
-                <div className="grid gap-5 md:grid-cols-2">
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs tracking-[0.15em] uppercase text-warm-400">
-                      Your name *
-                    </span>
-                    <input name="name" required autoComplete="name" className={field} placeholder="Jordan Ellis" />
+                {/* Your details */}
+                <div>
+                  <p className={`${groupTitle} mb-4`}>Your details</p>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <label className="block">
+                      <span className={label}>Your name *</span>
+                      <input name="name" required autoComplete="name" className={field} placeholder="Jordan Ellis" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>Email *</span>
+                      <input name="email" type="email" required autoComplete="email" className={field} placeholder="you@email.com" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>Phone</span>
+                      <input name="phone" type="tel" autoComplete="tel" className={field} placeholder="(555) 000-0000" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>Project type</span>
+                      <select name="projectType" defaultValue={PROJECT_TYPES[0]} className={field}>
+                        {PROJECT_TYPES.map((t) => (
+                          <option key={t} value={t} className="bg-obsidian">
+                            {t}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </div>
+                </div>
+
+                {/* The property */}
+                <div className="border-t border-white/10 pt-8">
+                  <p className={`${groupTitle} mb-4`}>The property</p>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <label className="block md:col-span-2">
+                      <span className={label}>Property address</span>
+                      <input name="propertyAddress" className={field} placeholder="3792 Vista Point, La Jolla, CA" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>List price</span>
+                      <input name="price" className={field} placeholder="$4,850,000" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>MLS # (if listed)</span>
+                      <input name="mls" className={field} placeholder="Optional" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>Beds</span>
+                      <input name="beds" inputMode="numeric" className={field} placeholder="5" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>Baths</span>
+                      <input name="baths" inputMode="decimal" className={field} placeholder="6" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>Square footage</span>
+                      <input name="sqft" inputMode="numeric" className={field} placeholder="7,200" />
+                    </label>
+                    <label className="block">
+                      <span className={label}>Year built</span>
+                      <input name="yearBuilt" inputMode="numeric" className={field} placeholder="2022" />
+                    </label>
+                    <label className="block md:col-span-2">
+                      <span className={label}>Standout features</span>
+                      <textarea name="highlights" rows={3} className={field} placeholder="Infinity pool, chef's kitchen, primary suite & spa, home theater, smart-home system…" />
+                    </label>
+                    <label className="block md:col-span-2">
+                      <span className={label}>Neighborhood &amp; lifestyle</span>
+                      <textarea name="neighborhood" rows={2} className={field} placeholder="What's nearby, the setting, the lifestyle a buyer is really buying into." />
+                    </label>
+                    <label className="block md:col-span-2">
+                      <span className={label}>Launch timing / deadline</span>
+                      <input name="timing" className={field} placeholder="Going live in 3 weeks, coming-soon, flexible…" />
+                    </label>
+                  </div>
+                </div>
+
+                {/* Photos & media */}
+                <div className="border-t border-white/10 pt-8">
+                  <p className={`${groupTitle} mb-1.5`}>Photos &amp; media</p>
+                  <p className="text-warm-400 text-sm font-light leading-relaxed mb-4">
+                    Upload everything you have — photos, phone videos, drone
+                    footage, floor plans. There&apos;s no limit, and more is
+                    always better.
+                  </p>
+
+                  <MediaUploader onChange={handleUrls} />
+
+                  <label className="mt-5 block">
+                    <span className={label}>Or paste a folder link</span>
+                    <input name="photoLink" type="url" className={field} placeholder="Dropbox, Google Drive, or WeTransfer link" />
                   </label>
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs tracking-[0.15em] uppercase text-warm-400">
-                      Email *
-                    </span>
-                    <input name="email" type="email" required autoComplete="email" className={field} placeholder="you@email.com" />
-                  </label>
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs tracking-[0.15em] uppercase text-warm-400">
-                      Phone
-                    </span>
-                    <input name="phone" type="tel" autoComplete="tel" className={field} placeholder="(555) 000-0000" />
-                  </label>
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs tracking-[0.15em] uppercase text-warm-400">
-                      Project type
-                    </span>
-                    <select name="projectType" defaultValue={PROJECT_TYPES[0]} className={field}>
-                      {PROJECT_TYPES.map((t) => (
-                        <option key={t} value={t} className="bg-obsidian">
-                          {t}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label className="block md:col-span-2">
-                    <span className="mb-1.5 block text-xs tracking-[0.15em] uppercase text-warm-400">
-                      Property address
-                    </span>
-                    <input name="propertyAddress" className={field} placeholder="3792 Vista Point" />
-                  </label>
-                  <label className="block md:col-span-2">
-                    <span className="mb-1.5 block text-xs tracking-[0.15em] uppercase text-warm-400">
-                      Anything we should know?
-                    </span>
-                    <textarea name="details" rows={4} className={field} placeholder="Launch timing, standout features, links to photos or video…" />
+
+                  <label className="mt-5 block">
+                    <span className={label}>Anything else we should know?</span>
+                    <textarea name="details" rows={3} className={field} placeholder="The story of the home, who it's for, or anything that would help us." />
                   </label>
                 </div>
 
                 {status === "error" && (
-                  <p role="alert" className="mt-4 text-sm text-red-400">
+                  <p role="alert" className="text-sm text-red-400">
                     {error}
                   </p>
                 )}
@@ -206,7 +262,7 @@ export default function GetStartedPage() {
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="glass-btn-accent mt-6 flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-xs tracking-[0.2em] uppercase font-semibold text-white disabled:opacity-60"
+                  className="glass-btn-accent flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-xs tracking-[0.2em] uppercase font-semibold text-white disabled:opacity-60"
                 >
                   {status === "sending" ? "Sending…" : "Send project details →"}
                 </button>
@@ -219,7 +275,7 @@ export default function GetStartedPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.22 }}
-            className="rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8"
+            className="lg:sticky lg:top-28 rounded-3xl border border-white/10 bg-white/[0.02] p-6 md:p-8"
           >
             <p className="text-gold text-[10px] tracking-[0.4em] uppercase mb-5 font-medium">
               Every experience includes
