@@ -203,29 +203,27 @@ export default function ServicesSection() {
           </div>
         </motion.div>
 
-        {/* Not offered — the specialization guardrail */}
+        {/* Cinematic walkthrough film — autoplay, muted, looping */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="rounded-3xl border border-sand-200 bg-sand-50 p-7 md:p-10"
+          className="relative min-h-[300px] overflow-hidden rounded-3xl border border-sand-200 bg-obsidian shadow-lg"
         >
-          <p className="text-warm-500 text-[10px] tracking-[0.4em] uppercase mb-5 font-medium">
-            What we don&apos;t offer
-          </p>
-          <div className="flex flex-col gap-2.5">
-            {NOT_OFFERED.map((item) => (
-              <div key={item} className="flex items-start gap-3">
-                <span className="text-warm-400 text-sm mt-0.5 shrink-0">—</span>
-                <span className="text-warm-600 text-sm font-light leading-snug line-through decoration-warm-300/60">
-                  {item}
-                </span>
-              </div>
-            ))}
-          </div>
-          <p className="text-gold-dark text-xs font-medium mt-6 tracking-wide">
-            Focus creates expertise.
-          </p>
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label="Cinematic walkthrough of a property"
+          >
+            <source
+              src="/media/Sonder_walkthrough_3792_Vista_Po_202607011518_202607042302.mp4"
+              type="video/mp4"
+            />
+          </video>
         </motion.div>
       </div>
     </section>
@@ -246,14 +244,4 @@ const INCLUDED = [
   "Mobile-optimized experience",
   "QR code",
   "Shareable listing link",
-];
-
-// The specialization guardrail — deliberately out of scope.
-const NOT_OFFERED = [
-  "Agent websites",
-  "Brokerage websites",
-  "General business websites",
-  "SEO services",
-  "Social media management",
-  "Advertising services",
 ];
