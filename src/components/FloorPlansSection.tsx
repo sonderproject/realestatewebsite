@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
 const FEATURES = [
@@ -50,14 +49,18 @@ export default function FloorPlansSection() {
           className="group"
         >
           <div className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/60 ring-1 ring-white/[0.06] transition-transform duration-500 ease-out hover:-translate-y-1">
-            <Image
-              src="/media/floorplan-oceanfront.jpg"
-              alt="Interactive 3D floor plan of a luxury oceanfront residence with AI virtual staging."
-              width={1536}
-              height={1024}
-              sizes="(min-width: 1024px) 55vw, 100vw"
+            <video
               className="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-            />
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/media/floorplan-oceanfront.jpg"
+              aria-label="Animated interactive 3D floor plan walkthrough of a luxury property."
+            >
+              <source src="/media/floorplan-walkthrough.mp4" type="video/mp4" />
+            </video>
           </div>
         </motion.div>
 
