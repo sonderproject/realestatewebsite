@@ -74,7 +74,7 @@ export default function ExperienceSection() {
             Every listing starts to{" "}
             <em className="font-normal text-gold-light">look the same.</em>
           </h2>
-          <p className="mx-auto max-w-2xl text-base font-light leading-relaxed text-warm-300 md:text-lg">
+          <p className="mx-auto max-w-2xl text-lg font-normal leading-relaxed text-warm-200 md:text-xl">
             So we build something buyers can&apos;t scroll past: one premium
             digital experience for a single property — a cinematic film, an
             interactive walkthrough, and a dedicated microsite that create an
