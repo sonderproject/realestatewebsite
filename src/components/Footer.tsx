@@ -11,7 +11,7 @@ export default function Footer() {
   const inView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
-    <footer ref={ref} className="bg-obsidian px-5 md:px-16 pb-10 md:pb-14">
+    <footer ref={ref} className="bg-transparent px-5 md:px-16 pb-10 md:pb-14 pt-10 md:pt-16">
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}

@@ -27,7 +27,7 @@ export default function FinalCTA() {
     <section
       ref={ref}
       id="contact"
-      className="relative bg-gradient-to-b from-ocean-deep via-obsidian to-obsidian py-16 px-5 md:py-28 md:px-16 overflow-hidden"
+      className="relative bg-transparent py-16 px-5 md:py-28 md:px-16 overflow-hidden"
     >
       {/* Living aurora — ties the closing section to the signature dark panels */}
       <div className="aurora opacity-70" />

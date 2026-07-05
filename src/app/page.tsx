@@ -96,11 +96,50 @@ export default function HomePage() {
       {/* 7 — Pricing: one value-based experience */}
       <PricingSection />
 
-      {/* 8 — Contact: book a call (Cal embed) */}
-      <FinalCTA />
+      {/* 8 + 9 — Contact + Footer share a looping video background that fades
+          in around the middle of the calendar and runs to the bottom of the
+          page. FinalCTA and Footer render transparent so it shows through. */}
+      <div className="relative">
+        {/* Base = the contact section's original background, so the top of
+            this block matches the section above it exactly. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ocean-deep via-obsidian to-obsidian"
+        />
 
-      {/* 9 — Footer */}
-      <Footer />
+        {/* Looping video — occupies the lower portion (≈ from the middle of
+            the calendar down), blended into the dark background at its top. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[46%] overflow-hidden">
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden
+          >
+            <source
+              src="/media/kling_20260704_VIDEO_keep_the_c_3153_0.mp4"
+              type="video/mp4"
+            />
+          </video>
+          {/* Gentle darken so the copy stays readable over the footage */}
+          <div className="absolute inset-0 bg-obsidian/35" />
+          {/* Seamless blend into the dark background above the video */}
+          <div className="absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-obsidian via-obsidian/80 to-transparent md:h-72" />
+          {/* Keep the footer legible at the very bottom */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-obsidian/85 to-transparent" />
+        </div>
+
+        {/* Content sits above the video */}
+        <div className="relative z-10">
+          {/* Contact: book a call (Cal embed) */}
+          <FinalCTA />
+          {/* Footer */}
+          <Footer />
+        </div>
+      </div>
     </main>
   );
 }
