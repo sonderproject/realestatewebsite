@@ -42,32 +42,48 @@ export default function HeroSection() {
   const textY = useTransform(smoothProgress, [0, 0.4], [0, -40]);
   const hintOpacity = useTransform(smoothProgress, [0, 0.12], [1, 0]);
 
-  // Draw a frame to the canvas with object-fit: cover behaviour.
-  const draw = (idx: number) => {
+  // Draw the hero at a *fractional* frame position, crossfading between the
+  // two nearest frames (object-fit: cover) so the scrub reads as continuous
+  // motion instead of stepping between the 120 discrete frames.
+  const draw = (f: number) => {
     const canvas = canvasRef.current;
-    const img = imagesRef.current[idx];
-    if (!canvas || !img || !img.complete || !img.naturalWidth) return;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
+
     const cw = canvas.width;
     const ch = canvas.height;
-    const ir = img.naturalWidth / img.naturalHeight;
     const cr = cw / ch;
-    let dw: number, dh: number, dx: number, dy: number;
-    if (cr > ir) {
-      dw = cw;
-      dh = cw / ir;
-      dx = 0;
-      dy = (ch - dh) / 2;
-    } else {
-      dh = ch;
-      dw = ch * ir;
-      dx = (cw - dw) / 2;
-      dy = 0;
-    }
-    ctx.drawImage(img, dx, dy, dw, dh);
+
+    const paint = (img: HTMLImageElement | undefined, alpha: number) => {
+      if (!img || !img.complete || !img.naturalWidth) return;
+      const ir = img.naturalWidth / img.naturalHeight;
+      let dw: number, dh: number, dx: number, dy: number;
+      if (cr > ir) {
+        dw = cw;
+        dh = cw / ir;
+        dx = 0;
+        dy = (ch - dh) / 2;
+      } else {
+        dh = ch;
+        dw = ch * ir;
+        dx = (cw - dw) / 2;
+        dy = 0;
+      }
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(img, dx, dy, dw, dh);
+    };
+
+    const lo = Math.floor(f);
+    const hi = Math.min(FRAME_COUNT - 1, lo + 1);
+    const t = f - lo;
+    // Base frame is fully opaque; the next frame fades in over it by the
+    // fractional amount, giving a smooth sub-frame blend.
+    paint(imagesRef.current[lo], 1);
+    if (t > 0.001) paint(imagesRef.current[hi], t);
+    ctx.globalAlpha = 1;
   };
 
   // Preload the right frame set for the device + keep the canvas sized.
@@ -123,15 +139,17 @@ export default function HeroSection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Map scroll position to a frame.
+  // Map scroll position to a fractional frame. Keeping the fractional value
+  // (instead of rounding) lets draw() crossfade between frames for a smoother
+  // scrub, while the value still tracks scroll instantly (no added lag).
   useEffect(() => {
     const unsub = scrollYProgress.on("change", (v) => {
       const p = Math.min(v / PIN_FRACTION, 1);
-      const idx = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(p * (FRAME_COUNT - 1))));
-      if (idx === frameRef.current) return;
-      frameRef.current = idx;
+      const f = Math.max(0, Math.min(FRAME_COUNT - 1, p * (FRAME_COUNT - 1)));
+      if (Math.abs(f - frameRef.current) < 0.004) return;
+      frameRef.current = f;
       cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => draw(idx));
+      rafRef.current = requestAnimationFrame(() => draw(f));
     });
     return () => unsub();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -154,6 +172,9 @@ export default function HeroSection() {
         {/* Cinematic gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-obsidian/40 via-transparent to-transparent" />
+        {/* Stronger bottom fade to solid obsidian so the footage blends
+            seamlessly into the section below (no hard edge). */}
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent to-obsidian" />
 
         {/* Signature meta rail — left edge, desktop only. A quiet brand mark
             that frames the studio's craft. */}
