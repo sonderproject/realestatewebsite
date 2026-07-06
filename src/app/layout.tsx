@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     template: "%s — Sonder Studio",
   },
   description:
-    "Sonder Studio is a property visualization studio. We turn exceptional properties into immersive digital experiences — cinematic AI films, interactive walkthroughs, and premium microsites that make buyers feel the space before they step inside.",
+    "Sonder Studio is a property visualization studio. We create immersive digital experiences — a cinematic property film, an interactive 3D floor plan, and a luxury property story — that build emotional connection before a buyer ever steps inside.",
   keywords: [
     "property visualization",
     "cinematic property film",
-    "interactive property walkthrough",
-    "premium property microsite",
+    "interactive 3D floor plan",
+    "premium digital property experience",
     "luxury real estate marketing",
-    "AI property film",
+    "luxury property story",
     "immersive property experience",
   ],
   icons: {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     siteName: "Sonder Studio",
     title: "Sonder Studio — Premium Property Visualization",
     description:
-      "We make properties unforgettable online. Cinematic AI films, interactive walkthroughs, and premium microsites for exceptional properties.",
+      "We make properties unforgettable online — a cinematic film, an interactive 3D floor plan, and a luxury property story for exceptional properties.",
     url: "https://sonderstudio.space",
     images: [
       { url: "/media/og-image.jpg", width: 1200, height: 630, alt: "Sonder Studio" },
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sonder Studio — Premium Property Visualization",
     description:
-      "We make properties unforgettable online. Cinematic AI films, interactive walkthroughs, and premium microsites for exceptional properties.",
+      "We make properties unforgettable online — a cinematic film, an interactive 3D floor plan, and a luxury property story for exceptional properties.",
     images: ["/media/og-image.jpg"],
   },
 };

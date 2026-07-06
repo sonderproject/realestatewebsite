@@ -11,6 +11,7 @@ import ServicesSection from "@/components/ServicesSection";
 // above-fold content is interactive.
 const FloorPlansSection = dynamic(() => import("@/components/FloorPlansSection"));
 const ProcessSection = dynamic(() => import("@/components/ProcessSection"));
+const WhatsIncludedSection = dynamic(() => import("@/components/WhatsIncludedSection"));
 const CredibilitySection = dynamic(() => import("@/components/CredibilitySection"));
 const SamplesSection = dynamic(() => import("@/components/SamplesSection"));
 const PricingSection = dynamic(() => import("@/components/PricingSection"));
@@ -97,7 +98,10 @@ export default function HomePage() {
       {/* 6 — The Work: sample property experiences */}
       <SamplesSection />
 
-      {/* 7 — Pricing: one value-based experience */}
+      {/* 7 — What's Included: the eight components of one product */}
+      <WhatsIncludedSection />
+
+      {/* 8 — Pricing: one premium value-based offer */}
       <PricingSection />
 
       {/* 8 + 9 — Contact + Footer share a looping video background that fades

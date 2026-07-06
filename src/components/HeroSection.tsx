@@ -232,10 +232,10 @@ export default function HeroSection() {
               transition={{ duration: 1, delay: 1.1 }}
               className="text-warm-100 text-base md:text-lg font-light tracking-wide max-w-xl leading-relaxed mb-8 md:mb-10 [text-shadow:0_1px_12px_rgba(0,0,0,0.6)]"
             >
-              We turn exceptional properties into{" "}
+              We create{" "}
               <span className="text-white font-medium">immersive digital experiences</span> —
-              a cinematic AI film, an interactive walkthrough, and a premium microsite that let buyers{" "}
-              <span className="text-white font-medium">experience the property before they ever step inside.</span>
+              a cinematic film, an interactive 3D floor plan, and a written property story that{" "}
+              <span className="text-white font-medium">build emotional connection before a buyer ever steps inside.</span>
             </motion.p>
 
             <motion.div

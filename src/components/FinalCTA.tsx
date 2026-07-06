@@ -63,6 +63,25 @@ export default function FinalCTA() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Premium value statement — above the CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1 }}
+          className="mx-auto mb-14 max-w-3xl text-center md:mb-20"
+        >
+          <p
+            className="text-2xl md:text-3xl lg:text-4xl font-light leading-[1.25] text-warm-100"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Luxury properties deserve more than a listing. The Sonder Experience™
+            transforms exceptional properties into{" "}
+            <em className="text-gold-light">immersive digital experiences</em>{" "}
+            that make buyers excited to schedule a private showing.
+          </p>
+          <span className="mx-auto mt-10 block h-px w-24 bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+        </motion.div>
+
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}

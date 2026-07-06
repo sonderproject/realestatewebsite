@@ -7,27 +7,21 @@ import SectionLabel from "./SectionLabel";
 const steps = [
   {
     number: "01",
-    title: "Send us the property",
+    title: "Upload your listing assets",
     description:
-      "Share the property, your media, and the details. Ten minutes, and we have what we need to begin.",
+      "Photos, property details, an optional floor plan, and your agent info. Ten minutes, and we have everything we need.",
   },
   {
     number: "02",
-    title: "We craft the experience",
+    title: "Our production engine creates the experience",
     description:
-      "Our studio produces the cinematic film, the interactive walkthrough, and the premium microsite — designed like a luxury product launch.",
+      "We produce the cinematic film, the interactive 3D floor plan, the property story, and the premium digital experience for the home.",
   },
   {
     number: "03",
-    title: "We refine together",
+    title: "Quality review, final polish, launch",
     description:
-      "You review the experience and we polish the details until it feels exactly right for the property.",
-  },
-  {
-    number: "04",
-    title: "Launch & share",
-    description:
-      "You get one shareable link and a QR code — ready for the MLS, social, listing presentations, and email.",
+      "We review every detail and polish the final experience, then hand you one shareable link and QR code — ready to launch.",
   },
 ];
 
@@ -78,7 +72,7 @@ export default function ProcessSection() {
         </motion.div>
 
         {/* Steps — frosted glass panels */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {steps.map((step, i) => (
             <motion.div
               key={step.number}

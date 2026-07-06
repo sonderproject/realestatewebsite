@@ -201,14 +201,14 @@ We price based on value—not production time.
 
 Typical projects begin around:
 
-**Starting at $1,500+**
+**Starting at $1,497 per property**
 
 Larger projects are quoted individually depending on:
 
-- Property size
-- Scope
-- Deliverables
-- Custom visualization
+- Property size & complexity
+- Custom features
+- Development projects
+- Luxury estates
 - Development marketing requirements
 
 ---

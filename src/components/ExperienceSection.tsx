@@ -12,18 +12,18 @@ const EXPERIENCE_VIDEO = "/media/Create_property_walkthrough_video_202607022205.
 const PILLARS = [
   {
     icon: "✦",
-    label: "Cinematic AI film",
-    body: "A directed property film that moves through the home like a piece of cinema — built to make buyers feel it.",
+    label: "Cinematic property film",
+    body: "A directed film that moves through the home like a piece of cinema — built to make buyers feel it.",
   },
   {
     icon: "◎",
-    label: "Interactive walkthrough",
-    body: "An immersive experience buyers explore at their own pace, room by room, on any device.",
+    label: "Interactive 3D floor plan",
+    body: "An explorable 3D plan that lets buyers understand the layout, flow, and scale at their own pace, on any device.",
   },
   {
     icon: "✓",
-    label: "Premium microsite",
-    body: "A dedicated site for one property — gallery, features, neighborhood, and lead capture, under one shareable link.",
+    label: "Premium digital experience",
+    body: "A dedicated experience for one property — story, gallery, and lead capture, under one shareable link.",
   },
 ];
 
@@ -75,10 +75,10 @@ export default function ExperienceSection() {
             <em className="font-normal text-gold-light">look the same.</em>
           </h2>
           <p className="mx-auto max-w-2xl text-lg font-normal leading-relaxed text-warm-200 md:text-xl">
-            So we build something buyers can&apos;t scroll past: one premium
+            So we build something buyers can&apos;t scroll past: a complete
             digital experience for a single property — a cinematic film, an
-            interactive walkthrough, and a dedicated microsite that create an
-            emotional connection before the first showing.
+            interactive 3D floor plan, and a written property story that build
+            emotional connection before a buyer ever steps inside.
           </p>
         </motion.div>
 

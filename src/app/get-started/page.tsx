@@ -18,12 +18,12 @@ const PROJECT_TYPES = [
 
 // What every experience includes — shown alongside the form for reassurance.
 const INCLUDED = [
-  "Cinematic AI property film",
-  "Interactive property walkthrough",
-  "Premium property microsite",
-  "Full gallery, features & floor plans",
-  "Neighborhood, maps & lead capture",
-  "Shareable link & QR code",
+  "Cinematic property film",
+  "Premium digital property experience",
+  "Interactive 3D floor plan",
+  "Luxury property story & curated gallery",
+  "Mobile-first design & lead capture",
+  "Shareable property link + QR code",
 ];
 
 export default function GetStartedPage() {
@@ -113,7 +113,7 @@ export default function GetStartedPage() {
           <p className="text-warm-300 text-base md:text-lg font-normal leading-relaxed max-w-xl">
             The more you share, the more we can build without ever needing a
             call. Send the property details and upload as many photos and videos
-            as you have — we take it from there. Projects start at $1,500+.{" "}
+            as you have — we take it from there. Starting at $1,497 per property.{" "}
             <Link
               href="/#contact"
               className="text-gold-light hover:text-gold underline underline-offset-2 transition-colors duration-200"

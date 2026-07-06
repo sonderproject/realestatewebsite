@@ -11,7 +11,7 @@ const SAMPLES = [
     tag: "Luxury Estate",
     title: "The Obsidian Estate",
     description:
-      "A flagship property experience — cinematic film, interactive walkthrough, and premium microsite for a single luxury estate. Book a call for a private walkthrough.",
+      "A flagship property experience — cinematic film, interactive 3D floor plan, and premium digital experience for a single luxury estate. Request a private preview.",
     href: "#contact",
     icon: "◎",
   },

@@ -33,8 +33,8 @@ export default function CredibilitySection() {
               </p>
             </div>
             <p className="text-warm-400 text-sm font-light leading-relaxed max-w-xs md:text-right">
-              People buy emotion before they buy square footage. Every property
-              has a story — our job is to help buyers experience it.
+              People don&apos;t fall in love with square footage. They fall in love
+              with how a property makes them feel.
             </p>
           </div>
         </div>

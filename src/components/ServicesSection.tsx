@@ -26,44 +26,44 @@ const services: Array<{
     description: (
       <>
         Everything needed to create one <Kw>premium digital property
-        experience</Kw> — film, walkthrough, and microsite, produced end to end.
+        experience</Kw> — film, 3D floor plan, and story, produced end to end.
       </>
     ),
     isNew: true,
   },
   {
     number: "02",
-    title: "AI Cinematic Property Films",
+    title: "Cinematic Property Films",
     subtitle: "The Film",
     description: (
       <>
-        We transform property photos and media into <Kw>cinematic marketing
-        films</Kw> — ready for the microsite, social, listing presentations, and email.
+        We transform property photos and media into a <Kw>cinematic film</Kw> —
+        ready for the experience, social, listing presentations, and email.
       </>
     ),
     isNew: false,
   },
   {
     number: "03",
-    title: "Interactive Property Experiences",
+    title: "Interactive 3D Floor Plans",
     subtitle: "Explore The Home",
     description: (
       <>
-        Immersive <Kw>walkthrough experiences</Kw> buyers can explore online, at
-        their own pace, room by room, on any device.
+        An <Kw>interactive 3D floor plan</Kw> buyers can explore online — layout,
+        flow, and scale, at their own pace, on any device.
       </>
     ),
     isNew: false,
   },
   {
     number: "04",
-    title: "Premium Property Microsites",
+    title: "Premium Property Experiences",
     subtitle: "One Property, One Link",
     description: (
       <>
-        A dedicated landing page designed for <Kw>one property</Kw> — gallery,
-        features, floor plans, neighborhood, maps, and lead capture. Not an agent
-        site. Not a brokerage site.
+        A digital experience built for <Kw>one property</Kw> — story, gallery, and
+        lead capture, under one shareable link. Not an agent site. Not a
+        brokerage site.
       </>
     ),
     isNew: false,
@@ -96,8 +96,9 @@ export default function ServicesSection() {
             <em className="text-gold-dark">one thing.</em>
           </h2>
           <p className="text-warm-500 text-sm font-light max-w-sm leading-relaxed md:text-right">
-            Making properties unforgettable online. We combine AI, cinematic
-            storytelling, and interactive design to visualize high-value properties.
+            Making properties unforgettable online — built for luxury and
+            residential listing agents. One complete experience, produced for a
+            single property.
           </p>
         </div>
       </motion.div>
@@ -230,18 +231,14 @@ export default function ServicesSection() {
   );
 }
 
-// What ships with every Sonder Experience.
+// The Sonder Experience™ — included in every build.
 const INCLUDED = [
-  "Cinematic AI property film",
-  "Interactive property walkthrough",
-  "Premium property microsite",
-  "Full photo gallery",
-  "Property features",
-  "Floor plans (when available)",
-  "Neighborhood highlights",
-  "Interactive maps",
-  "Contact & lead capture",
-  "Mobile-optimized experience",
-  "QR code",
-  "Shareable listing link",
+  "Cinematic property film",
+  "Premium digital property experience",
+  "Interactive 3D floor plan",
+  "Luxury property story, written for the home",
+  "Curated property gallery",
+  "Mobile-first design",
+  "Lead capture — request info or a private showing",
+  "Shareable property link + QR code",
 ];
