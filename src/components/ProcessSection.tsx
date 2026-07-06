@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import SectionLabel from "./SectionLabel";
 
@@ -41,14 +40,18 @@ export default function ProcessSection() {
       ref={ref}
       className="relative overflow-hidden py-12 px-5 md:py-20 md:px-16"
     >
-      {/* Oceanfront estate background — different crop from the Services section */}
-      <Image
-        src="/media/services-oceanfront.jpg"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover object-[50%_70%]"
-      />
+      {/* Property loop background video — full section, behind the content */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover object-center"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden
+      >
+        <source src="/media/section-4-property-loop.mp4" type="video/mp4" />
+      </video>
       {/* Legibility overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-obsidian/88 via-obsidian/62 to-obsidian/90" />
       <div className="absolute inset-0 bg-obsidian/25" />
