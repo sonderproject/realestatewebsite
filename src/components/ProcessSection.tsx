@@ -44,7 +44,10 @@ export default function ProcessSection() {
         preload="metadata"
         aria-hidden
       >
-        <source src="/media/section-4-property-loop.mp4" type="video/mp4" />
+        <source
+          src="/media/kling_20260707_VIDEO_Take_Image_222_0%20(1).mov"
+          type="video/quicktime"
+        />
       </video>
       {/* Legibility overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-obsidian/88 via-obsidian/62 to-obsidian/90" />
