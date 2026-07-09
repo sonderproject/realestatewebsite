@@ -201,7 +201,7 @@ We price based on value—not production time.
 
 Typical projects begin around:
 
-**Starting at $1,497 per property**
+**Starting at $2,497 per property**
 
 Larger projects are quoted individually depending on:
 

@@ -113,7 +113,7 @@ export default function GetStartedPage() {
           <p className="text-warm-300 text-base md:text-lg font-normal leading-relaxed max-w-xl">
             The more you share, the more we can build without ever needing a
             call. Send the property details and upload as many photos and videos
-            as you have — we take it from there. Starting at $1,497 per property.{" "}
+            as you have — we take it from there. Starting at $2,497 per property.{" "}
             <Link
               href="/#contact"
               className="text-gold-light hover:text-gold underline underline-offset-2 transition-colors duration-200"

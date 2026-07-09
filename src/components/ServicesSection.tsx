@@ -239,6 +239,7 @@ const INCLUDED = [
   "Luxury property story, written for the home",
   "Curated property gallery",
   "Mobile-first design",
-  "Lead capture — request info or a private showing",
+  "Built-in lead capture form",
+  "90-day hosting included",
   "Shareable property link + QR code",
 ];
