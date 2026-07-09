@@ -8,9 +8,11 @@ type Plan = {
   name: string;
   featured: boolean;
   badge?: string;
-  priceMain: string;
+  priceOriginal: string; // founding anchor — rendered struck-through
+  priceMain: string; // founding rate — dominant number
   priceUnit?: string;
-  priceSetup?: string;
+  setupOriginal?: string; // struck-through setup anchor
+  setupMain?: string; // discounted setup number
   subtext: string;
   description: string;
   includes: string[];
@@ -22,7 +24,8 @@ const PLANS: Plan[] = [
   {
     name: "One-Time Project",
     featured: false,
-    priceMain: "$2,497",
+    priceOriginal: "$2,497",
+    priceMain: "$497",
     priceUnit: "one-time",
     subtext: "Per property • Live in 48 hours",
     description:
@@ -46,9 +49,11 @@ const PLANS: Plan[] = [
     name: "Studio Plan",
     featured: true,
     badge: "Most Popular",
-    priceMain: "$1,497",
+    priceOriginal: "$1,497",
+    priceMain: "$997",
     priceUnit: "/month",
-    priceSetup: "+ $2,497 one-time setup",
+    setupOriginal: "$2,497",
+    setupMain: "$497",
     subtext: "3-month minimum • 1 property per month • Each live in 48 hours",
     description:
       "An always-on production partner for top-producing agents. After onboarding, every new listing becomes a Digital Property Experience — live in 48 hours, no queue — with hosting included for all active properties while subscribed.",
@@ -66,9 +71,11 @@ const PLANS: Plan[] = [
   {
     name: "Developer Plan",
     featured: false,
-    priceMain: "$4,997",
+    priceOriginal: "$4,997",
+    priceMain: "$1,497",
     priceUnit: "/month",
-    priceSetup: "+ $2,497 one-time setup",
+    setupOriginal: "$2,497",
+    setupMain: "$1,997",
     subtext: "3-month minimum • Up to 3 properties per month • Each live in 48 hours",
     description:
       "Built for developers, builders, architects, and investment groups managing multiple active projects. After onboarding, receive up to three new Digital Property Experiences every month — each live in 48 hours — with hosting across all active projects.",
@@ -87,7 +94,7 @@ const PLANS: Plan[] = [
 ];
 
 const DISCLOSURES =
-  "All subscription plans begin with a required one-time $2,497 onboarding and production fee. This includes brand calibration, production workflow setup, and creation of your first Digital Property Experience. Monthly billing begins after onboarding. Unused monthly allocations do not roll over. Subscriptions require a 3-month minimum commitment. The $497 reel credit applies once, toward a full Digital Property Experience.";
+  "All subscription plans begin with a required one-time onboarding and production fee, discounted at the founding rate shown above. This includes brand calibration, production workflow setup, and creation of your first Digital Property Experience. Monthly billing begins after onboarding. Unused monthly allocations do not roll over. Subscriptions require a 3-month minimum commitment. The $497 reel credit applies once, toward a full Digital Property Experience.";
 
 export default function PricingSection() {
   const ref = useRef<HTMLElement>(null);
@@ -196,9 +203,12 @@ export default function PricingSection() {
                 {plan.name}
               </h3>
 
-              {/* Price */}
+              {/* Price — founding discount: anchor struck through, founding rate dominant */}
               <div className="mt-4 mb-1">
-                <div className="flex items-end gap-1.5">
+                <p className={`mb-2 text-[10px] tracking-[0.2em] uppercase font-semibold ${plan.featured ? "text-gold-light" : "text-gold-dark"}`}>
+                  Founding rate — limited
+                </p>
+                <div className="flex items-end gap-2 flex-wrap">
                   <span
                     className={`text-4xl md:text-5xl font-light leading-none ${plan.featured ? "text-white" : "text-obsidian"}`}
                     style={{ fontFamily: "var(--font-display)" }}
@@ -210,10 +220,20 @@ export default function PricingSection() {
                       {plan.priceUnit}
                     </span>
                   )}
+                  <span
+                    className={`text-xl pb-1 font-light line-through ${plan.featured ? "text-surf-200/80" : "text-warm-400"}`}
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {plan.priceOriginal}
+                  </span>
                 </div>
-                {plan.priceSetup && (
+                {plan.setupMain && (
                   <p className={`text-xs mt-1.5 ${plan.featured ? "text-surf-200" : "text-warm-600"}`}>
-                    {plan.priceSetup}
+                    +{" "}
+                    <span className={`line-through ${plan.featured ? "text-surf-200/70" : "text-warm-400"}`}>
+                      {plan.setupOriginal}
+                    </span>{" "}
+                    <span className="font-semibold">{plan.setupMain}</span> one-time setup
                   </p>
                 )}
               </div>
